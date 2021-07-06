@@ -13,9 +13,8 @@ import java.util.*
 
 
 //адаптер для ресайклвью данных ТКС на фрагменте Today
-class TCSmainAdapter(curTCS: List<CurrencyTCS>) :
+class TCSmainAdapter(private val curTCS: List<CurrencyTCS>) :
     RecyclerView.Adapter<TCSmainAdapter.CurrTCSHolder>() {
-    val curTCS = curTCS
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrTCSHolder {
         val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.tinkoff_main_recycle, parent, false)

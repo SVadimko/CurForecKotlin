@@ -7,5 +7,5 @@ class MOEXResponse {
 
 class MOEXCandles {
     lateinit var data: List<List<Any>>
-    lateinit var columns: List<String>
+    //lateinit var columns: List<String>
 }

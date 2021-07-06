@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
@@ -33,7 +33,7 @@ private const val GBP_SELL = "gbpsell"
 class NowFragment : Fragment() {
 
     private val nowViewModel: NowViewModel by lazy {
-        ViewModelProviders.of(this).get(NowViewModel::class.java)
+        ViewModelProvider(this).get(NowViewModel::class.java)
     }
     private var _binding: FragmentNowBinding? = null
 

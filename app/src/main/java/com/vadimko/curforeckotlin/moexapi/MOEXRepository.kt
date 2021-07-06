@@ -1,7 +1,5 @@
 package com.vadimko.curforeckotlin.moexapi
 
-import androidx.lifecycle.MutableLiveData
-import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import com.vadimko.curforeckotlin.ui.today.TodayViewModel
 import okhttp3.OkHttpClient
@@ -33,25 +31,21 @@ class MOEXRepository {
     }
 
     fun getMOEX(request: String, from: String, till: String, interval: String, todayArch: Boolean) {
-        lateinit var currentRequest: Call<MOEXResponse>
-        if (!todayArch) {
-            currentRequest =
-                moexApi.getMOEXForec(request, from, till, interval)
+        val currentRequest: Call<MOEXResponse> = if (!todayArch) {
+            moexApi.getMOEXForec(request, from, till, interval)
         } else {
-            currentRequest =
-                moexApi.getMOEXForec(request, from, till, "24")
+            moexApi.getMOEXForec(request, from, till, "24")
         }
         currentRequest.enqueue(object : Callback<MOEXResponse> {
             override fun onResponse(call: Call<MOEXResponse>, response: Response<MOEXResponse>) {
-                //TODO("Not yet implemented")
                 val moexResponse: MOEXResponse? = response.body()
                 val moexCandles: MOEXCandles? = moexResponse?.candles
-                val moexcolumns = moexCandles?.columns
+                //val moexcolumns = moexCandles?.columns
                 val moexdata = moexCandles?.data
                 val moexcurrency: MutableList<CurrencyMOEX> = mutableListOf()
                 moexcurrency.clear()
                 moexdata?.forEach { it ->
-                    var currencyMoex: CurrencyMOEX = CurrencyMOEX(
+                    val currencyMoex = CurrencyMOEX(
                         it[6] as String,
                         it[0] as Double,
                         it[3] as Double,

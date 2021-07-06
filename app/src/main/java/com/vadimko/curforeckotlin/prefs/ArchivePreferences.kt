@@ -1,12 +1,9 @@
 package com.vadimko.curforeckotlin.prefs
 
 import android.content.Context
-import android.os.Build
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.DateConverter
-import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 //сохранение/загрузка состояния выбранного времени для фрагмента Arhive
 object ArchivePreferences {
@@ -56,26 +53,5 @@ object ArchivePreferences {
         val data8 = sp.getString("tillMOEX", result[0][1])!!
         val data9 = sp.getString("intervalARMOEX", "24")!!
         return listOf(data0, data1, data2, data3, data4, data5, data6, data7, data8, data9)
-    }
-
-    private fun dateConverter(context: Context): ArrayList<Array<String>> {
-        val from = System.currentTimeMillis() - 604800000
-        val till = System.currentTimeMillis()
-        val result = ArrayList<Array<String>>()
-        val jdf = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            SimpleDateFormat("yyyy-MM-dd", context.resources.configuration.locales[0])
-        } else {
-            SimpleDateFormat("yyyy-MM-dd", context.resources.configuration.locale)
-        }
-        val res = arrayOf(jdf.format(from), jdf.format(till))
-        result.add(0, res)
-        val jdf2 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            SimpleDateFormat("dd/MM/yyyy", context.resources.configuration.locales[0])
-        } else {
-            SimpleDateFormat("dd/MM/yyyy", context.resources.configuration.locale)
-        }
-        val res2 = arrayOf(jdf2.format(from), jdf2.format(till))
-        result.add(1, res2)
-        return result
     }
 }

@@ -15,9 +15,8 @@ import java.util.*
 
 
 //адаптер для ресайклвью данных ЦБ на фрагменте Today
-class CBmainAdapter(curCB: List<CurrencyCBjs>) :
+class CBmainAdapter(private val curCB: List<CurrencyCBjs>) :
     RecyclerView.Adapter<CBmainAdapter.CurrCBHolder>() {
-    private val curCB = curCB
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrCBHolder {
         val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.cbrf_main_recycle, parent, false)
@@ -49,7 +48,7 @@ class CBmainAdapter(curCB: List<CurrencyCBjs>) :
 
         private lateinit var valute: CurrencyCBjs
 
-        @SuppressLint("ResourceAsColor")
+        @SuppressLint("ResourceAsColor", "SetTextI18n")
         fun bindActivity(valute: CurrencyCBjs) {
             this.valute = valute
 

@@ -29,7 +29,7 @@ class AppWidget : AppWidgetProvider() {
         updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(appWidgetId))
         pIntent = PendingIntent.getBroadcast(context, appWidgetId, updateIntent, 0)
         views.setOnClickPendingIntent(R.id.refresh_Widget, pIntent)
-        val temp = WidgetUpdater(context, appWidgetManager, appWidgetId)
+        WidgetUpdater(context, appWidgetManager, appWidgetId)
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }
 

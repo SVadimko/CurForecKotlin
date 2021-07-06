@@ -8,7 +8,6 @@ import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.work.*
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
@@ -65,12 +64,12 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
     private var custCur = ""
 
     private val archiveViewModel: ArchiveViewModel by lazy {
-        ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
+        //ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
+        ViewModelProvider(this).get(ArchiveViewModel::class.java)
     }
 
     private lateinit var root: View
 
-    private lateinit var arhiveViewModel: ArchiveViewModel
     private var _binding: FragmentArchiveBinding? = null
 
     private val binding get() = _binding!!
@@ -91,8 +90,6 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        arhiveViewModel =
-            ViewModelProvider(this).get(ArchiveViewModel::class.java)
 
         _binding = FragmentArchiveBinding.inflate(inflater, container, false)
         root = binding.root
@@ -161,9 +158,9 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
         }
         val c = Calendar.getInstance()
         c.time = fromDate
-        fromTv.text = fromDate.let { longToDate(it) }
+        fromTv.text = longToDate(fromDate)
         c.time = tillDate
-        tillTv.text = tillDate.let { longToDate(it) }
+        tillTv.text = longToDate(tillDate)
         checkDates()
         return root
     }

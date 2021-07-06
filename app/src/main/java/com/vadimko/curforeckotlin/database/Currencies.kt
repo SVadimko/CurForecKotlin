@@ -11,5 +11,4 @@ data class Currencies(
     var usdBuy: Double = 0.0, var usdSell: Double = 0.0,
     var eurBuy: Double = 0.0, var eurSell: Double = 0.0,
     var gbpBuy: Double = 0.0, var gbpSell: Double = 0.0, var dt: String = ""
-) {
-}
+)

@@ -19,7 +19,7 @@ class WMA(inp: MutableList<Float>, a: Int) {
 
         val inputLenght = input.size
         val outputLenght = output.size
-        var inputTmp = 0.0f
+        var inputTmp: Float
         forecast.add(input[input.size - 1])
         //формула вычисления прогноза (тут на три значения вперед)
         for (i in inputLenght until inputLenght + amount) {
@@ -39,7 +39,7 @@ class WMA(inp: MutableList<Float>, a: Int) {
         averageError = err / outputLenght
     }
 
-
+/*
     fun getWMA(): MutableList<Float> {
         return output
     }
@@ -47,6 +47,7 @@ class WMA(inp: MutableList<Float>, a: Int) {
     fun getInputWForecast(): MutableList<Float> {
         return input
     }
+    */
 
     fun getForecast(): MutableList<Float> {
         return forecast

@@ -12,7 +12,7 @@ class TCSPayload {
 class TCSRates {
     lateinit var category: String
     lateinit var fromCurrency: fromCurrency
-    lateinit var toCurrency: toCurrency
+    //lateinit var toCurrency: toCurrency
     var buy =0.0
     var sell =0.0
 }
@@ -21,6 +21,6 @@ class TCSLastUpdate {
     var milliseconds: Long = 0L
 }
 
-data class toCurrency(val name:String = "")
+//data class toCurrency(val name:String = "")
 
 data class fromCurrency (val name:String = "")

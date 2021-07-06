@@ -8,7 +8,6 @@ import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
@@ -90,7 +89,7 @@ class CalcFragment : Fragment() {
     private lateinit var listWidgetData: List<Currencies>
 
     private val calcViewModel: CalcViewModel by lazy {
-        ViewModelProviders.of(this).get(CalcViewModel::class.java)
+        ViewModelProvider(this).get(CalcViewModel::class.java)
     }
 
     private var _binding: FragmentCalcBinding? = null

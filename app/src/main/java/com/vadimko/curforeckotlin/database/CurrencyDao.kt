@@ -1,7 +1,6 @@
 package com.vadimko.curforeckotlin.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 @Dao

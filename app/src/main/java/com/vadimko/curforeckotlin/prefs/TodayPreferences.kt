@@ -1,12 +1,9 @@
 package com.vadimko.curforeckotlin.prefs
 
 import android.content.Context
-import android.os.Build
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.DateConverter
-import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 //сохранение/загрузка состояния спиннеров для графика на фрагменте Today
 object TodayPreferences {
@@ -47,28 +44,5 @@ object TodayPreferences {
         val data6 = sp.getString("perSP", "0")!!
         val data7 = sp.getString("ratSP", "0")!!
         return listOf(data1, data2, data3, data4, data5, data6, data7)
-    }
-
-    private fun dateConverter(days: Long, context: Context): ArrayList<Array<String>> {
-        val result = ArrayList<Array<String>>()
-        val timeMilli = System.currentTimeMillis()
-        val timeWeekAgo = timeMilli - 86400000 * days
-        val dateRes1 = Date(timeMilli)
-        val dateRes2 = Date(timeWeekAgo)
-        val jdf = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            SimpleDateFormat("yyyy-MM-dd", context.resources.configuration.locales[0])
-        } else {
-            SimpleDateFormat("yyyy-MM-dd", context.resources.configuration.locale)
-        }
-        val res = arrayOf(jdf.format(dateRes2), jdf.format(dateRes1))
-        result.add(0, res)
-        val jdf2 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            SimpleDateFormat("dd/MM/yyyy", context.resources.configuration.locales[0])
-        } else {
-            SimpleDateFormat("dd/MM/yyyy", context.resources.configuration.locale)
-        }
-        val res2 = arrayOf(jdf2.format(dateRes2), jdf2.format(dateRes1))
-        result.add(1, res2)
-        return result
     }
 }

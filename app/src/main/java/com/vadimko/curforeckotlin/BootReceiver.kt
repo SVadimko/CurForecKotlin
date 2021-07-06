@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import androidx.annotation.RequiresApi
 
 //бутресивер для запуска сервиса автообновления курса валют Тиньков после перезагрузки, если в настройках приложения выбрано автообновление
 class BootReceiver : BroadcastReceiver() {

@@ -1,6 +1,5 @@
 package com.vadimko.curforeckotlin
 
-import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import androidx.appcompat.app.AppCompatActivity

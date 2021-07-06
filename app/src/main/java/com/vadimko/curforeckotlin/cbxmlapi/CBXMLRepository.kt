@@ -1,6 +1,7 @@
 package com.vadimko.curforeckotlin.cbxmlapi
 
 
+import android.annotation.SuppressLint
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -45,7 +46,7 @@ class CBXMLRepository {
                 val cBXMLResponse = response.body()
                 val listRec = cBXMLResponse?.record
                 listRec?.forEach { it ->
-                    val offCur = it.Value;
+                    val offCur = it.Value
                     val dateTime = it.Date
                     val dateTimeConv = dateFormat(dateTime)
                     listData.add(CurrencyCBarhive(offCur, dateTime, dateTimeConv))
@@ -54,15 +55,16 @@ class CBXMLRepository {
             }
 
             override fun onFailure(call: Call<MOEXXMLResponse>, t: Throwable) {
-                t.printStackTrace();
+                t.printStackTrace()
             }
         })
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun dateFormat(datesOFF: String): String {
         val dateConvert = SimpleDateFormat("dd.MM.yyyy").parse(datesOFF)
         val jdf = SimpleDateFormat("yyyy-MM-dd")
-        return jdf.format(dateConvert)
+        return jdf.format(dateConvert!!)
     }
 }

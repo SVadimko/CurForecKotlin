@@ -12,7 +12,7 @@ class ArchiveWorker(context: Context, workerParams: WorkerParameters) :
         val request = inputData.getString("request")
         val from = inputData.getString("from")
         val till = inputData.getString("till")
-        val interval = inputData.getString("interval")
+        //val interval = inputData.getString("interval")
         if (request != null) {
             if (from != null) {
                 if (till != null) {

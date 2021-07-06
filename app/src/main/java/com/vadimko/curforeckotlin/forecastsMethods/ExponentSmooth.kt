@@ -1,6 +1,7 @@
 package com.vadimko.curforeckotlin.forecastsMethods
 
 import java.text.NumberFormat
+import kotlin.math.abs
 
 //прогноз методом экспоненциального взвешивания
 class ExponentSmooth(inp: MutableList<Float>) {
@@ -35,7 +36,7 @@ class ExponentSmooth(inp: MutableList<Float>) {
 
     private fun calculateUo1() {
         var summ = 0f
-        for (i in input.indices) summ = summ + input[i]
+        for (i in input.indices) summ += input[i]
         uo1 = summ / input.size
     }
 
@@ -67,9 +68,9 @@ class ExponentSmooth(inp: MutableList<Float>) {
     private fun calculateErr(inp: MutableList<Float>, out: MutableList<Float>): Float {
         var err = 0f
         for (i in inp.indices) {
-            err = err + Math.abs(inp[i] - out[i]) / inp[i] * 100
+            err += abs(inp[i] - out[i]) / inp[i] * 100
         }
-        err = err / inp.size
+        err /= inp.size
         return err
     }
 
@@ -88,11 +89,12 @@ class ExponentSmooth(inp: MutableList<Float>) {
         return err1
     }
 
-    fun getSmooth2(): MutableList<Float> {
+    /*fun getSmooth2(): MutableList<Float> {
         val res = output2
         res.removeAt(res.size - 1)
         return res
     }
+    */
 
 
 }
