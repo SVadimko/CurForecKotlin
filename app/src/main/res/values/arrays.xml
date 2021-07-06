@@ -1,0 +1,51 @@
+<resources>
+    <string-array name="currency">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBR</item>
+    </string-array>
+    <string-array name="period">
+        <item>1 day</item>
+        <item>2 days</item>
+        <item>3 days</item>
+        <item>4 days</item>
+        <item>5 days</item>
+    </string-array>
+
+    <string-array name="rate">
+        <item>1 minute</item>
+        <item>10 minutes</item>
+        <item>60 minutes</item>
+    </string-array>
+
+    <string-array name="archiveperiod">
+        <item>7 days</item>
+        <item>15 days</item>
+        <item>30 days</item>
+        <item>60 days</item>
+        <item>90 days</item>
+        <item>120 days</item>
+        <item>240 days</item>
+        <item>1 year</item>
+        <item>2 years</item>
+    </string-array>
+
+    <string-array name="update_times">
+        <item>1 minute</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>60 minutes</item>
+    </string-array>
+
+    <string-array name="update_values">
+        <item>1_min</item>
+        <item>5_min</item>
+        <item>10_min</item>
+        <item>15_min</item>
+        <item>30_min</item>
+        <item>60_min</item>
+    </string-array>
+
+</resources>

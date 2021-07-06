@@ -1,0 +1,61 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory app:title="@string/update_header">
+
+        <ListPreference
+                app:key="update_per"
+                app:title="@string/update_period"
+
+                app:entries="@array/update_times"
+                app:entryValues="@array/update_values"
+                app:defaultValue="15_min"
+                app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+                app:key="updateon"
+                app:title="@string/update_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/notify_header">
+
+        <SwitchPreferenceCompat
+                app:key="notify"
+                app:summary=""
+                android:dependency="updateon"
+                app:summaryOn="@string/notify_on"
+                app:summaryOff="@string/notify_off"
+                app:title="@string/notify_enable" />
+        <ListPreference
+                app:key="currency"
+                app:dependency="notify"
+                app:title="@string/currency1"
+                app:entries="@array/currency"
+                app:entryValues="@array/currency"
+                app:defaultValue="USD"
+                app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+                app:key="buymore"
+                app:dependency="notify"
+                android:inputType="numberPassword"
+                android:defaultValue="30.0"
+                app:title="@string/buy1"
+                app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+                app:key="sellmore"
+                app:dependency="notify"
+                android:defaultValue="100"
+                android:inputType="numberDecimal|number"
+                app:title="@string/sell1"
+                app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/widget_header">
+        <SwitchPreferenceCompat
+                app:key="widgeton"
+                app:title="@string/widget_title" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

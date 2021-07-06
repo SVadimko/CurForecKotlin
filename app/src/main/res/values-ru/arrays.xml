@@ -1,0 +1,51 @@
+<resources>
+    <string-array name="currency">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBR</item>
+    </string-array>
+    <string-array name="period">
+        <item>1 день</item>
+        <item>2 дня</item>
+        <item>3 дня</item>
+        <item>4 дня</item>
+        <item>5 дней</item>
+    </string-array>
+
+    <string-array name="rate">
+        <item>1 минута</item>
+        <item>10 минут</item>
+        <item>60 минут</item>
+    </string-array>
+
+    <string-array name="archiveperiod">
+        <item>7 дней</item>
+        <item>15 дней</item>
+        <item>30 дней</item>
+        <item>60 дней</item>
+        <item>90 дней</item>
+        <item>120 дней</item>
+        <item>240 дней</item>
+        <item>1 год</item>
+        <item>2 года</item>
+    </string-array>
+
+    <string-array name="update_times">
+        <item>1 минута</item>
+        <item>5 минут</item>
+        <item>10 минут</item>
+        <item>15 минут</item>
+        <item>30 минут</item>
+        <item>60 минут</item>
+    </string-array>
+
+    <string-array name="update_values">
+        <item>1_min</item>
+        <item>5_min</item>
+        <item>10_min</item>
+        <item>15_min</item>
+        <item>30_min</item>
+        <item>60_min</item>
+    </string-array>
+
+</resources>

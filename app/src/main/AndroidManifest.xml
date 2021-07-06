@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.vadimko.curforeckotlin">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.QUICKBOOT_POWERON" />
+
+    <application
+            android:name=".CurrenciesApplication"
+            android:allowBackup="true"
+            android:icon="@drawable/logo"
+            android:label="@string/app_name"
+            android:requestLegacyExternalStorage="true"
+            android:roundIcon="@drawable/logo"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.CurForecKotlin">
+
+
+        <receiver android:name=".widget.AppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/app_widget_info" />
+        </receiver>
+        <receiver android:name=".BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.REBOOT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+                android:name=".SettingsActivity"
+                android:label="@string/title_activity_settings"
+                android:parentActivityName=".MainActivity" />
+
+        <service
+                android:name=".TCSupdateService"
+                android:enabled="true"
+                android:exported="true" />
+
+        <activity
+                android:name=".MainActivity"
+                android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

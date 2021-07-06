@@ -1,0 +1,35 @@
+<resources>
+    <!-- Base application theme. -->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.NoActionBar">-->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
+    <style name="Button.White" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/colorRed</item>
+    </style>
+
+   <!-- <style name="PreferenceTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorAccent">@color/MainTextColor</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <item name="android:background">@color/FragBackColor</item>
+        <item name="android:textColorPrimary">@color/ToolNavbarColor</item>
+        <item name="android:textColorSecondary">@color/colorYellow</item>
+        <item name="android:textColor">@color/ToolNavbarColor</item>
+    </style>-->
+
+</resources>

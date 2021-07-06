@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Тиньков курсы валют</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_test">Test</string>
+    <string name="lastupdateTCS">"Обновлено: "</string>
+    <string name="na_string">N/A</string>
+    <string name="title_now">Сейчас</string>
+    <string name="title_week">Сегодня</string>
+    <string name="showbutton">Показать</string>
+
+    <string name="statlink_candl">https://iss.moex.com/iss/engines/currency/markets/selt/boards/CETS/securities/</string>
+    <string name="statlink2">https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=</string>
+    <string name="title_archive">Архив</string>
+
+    <string name="incorrect_number">Введите корректное значение для конвертации!</string>
+    <string name="title_calc">Калькулятор</string>
+    <string name="title_activity_settings">Настройки</string>
+
+
+    <string name="update_header">Автообновление курсов</string>
+    <string name="update_title">Обновлять</string>
+    <string name="update_period">Период обновления</string>
+    <string name="action_settings">Настройки</string>
+    <string name="notify_header">Настройка уведомлений</string>
+    <string name="notify_enable">Активировать</string>
+    <string name="notify_on">Уведомление включено</string>
+    <string name="notify_off">Уведомление выключено</string>
+    <string name="currency1">Валюта</string>
+
+    <string name="sell1">Продажа дешевле, руб (0- выключить)</string>
+    <string name="buy1">Покупка дороже, руб  (0-выключить)</string>
+    <string name="widget_header">График по информации с виджета</string>
+    <string name="widget_title">Отображать</string>
+    <string name="title_today">Сегодня</string>
+
+    <string name="ARCFRAGcursCBGraphLabel">ЦБ</string>
+    <string name="ARCFRAGforecDayGraph"> Прогноз день </string>
+    <string name="ARCFRAGaverage"> Среднее арифметическое</string>
+    <string name="ARCFRAGmovAverForecGraph"> Прогноз ср.скольз.Ошибка: </string>
+    <string name="ARCFRAGexponWeighGraph"> Экспоненциально взвешанная</string>
+    <string name="ARCFRAGexponWeighForecGraph"> Прогноз эксп. взв. Ошибка: </string>
+    <string name="ARCFRAGleastSqMeth"> Метод наименьших квадратов</string>
+    <string name="ARCFRAGleastSqMethGraph"> Прогноз наим.квадр. Ошибка: </string>
+    <string name="ARCFRAGshowbutton">Показать</string>
+    <string name="ARCFRAGError">Ошибка в выборе дат!</string>
+
+    <string name="CALCFRAGbuy">Купить</string>
+    <string name="CALCFRAGsell">Продать</string>
+    <string name="CALCFRAGdatafrautoup">Данные по валютам с автообновления</string>
+    <string name="CALCFRAGdatafrwidget">Данные по валютам с обновления виджета</string>
+    <string name="CALCFRAGbuying">Покупка</string>
+    <string name="CALCFRAGselling">Продажа</string>
+
+    <string name="NOWFRAGsource">источник</string>
+    <string name="TODAYFRAGchoosediffinterval">Выберите меньший временной интервал (1–10мин)</string>
+
+    <string name="TODAYFRAGMMVB">MOEX</string>
+    <string name="tcsfrom">ТКС от</string>
+    <string name="CBtill">ЦБ на </string>
+
+    <string name="namechannel">Слежка за курсом</string>
+    <string name="descriptionchannel">Уведомления о изменении курса</string>
+
+    <string name="curr">Вал.</string>
+    <string name="buy">Покупка</string>
+    <string name="sell">Продажа</string>
+    <string name="cbrf">ЦБРФ</string>
+    <string name="ARCFRAGfrom">от</string>
+    <string name="ARCFRAGtill">до</string>
+    <string name="choosedwarm">График Московской биржи отображает период не более 2х лет!</string>
+    <string name="buycourse">Курс покупки</string>
+    <string name="higher">выше</string>
+    <string name="sellcourse">Курс продажи</string>
+    <string name="lower">ниже</string>
+    <string name="attention">Внимание!</string>
+    <string name="noconnection">Отсутствует интернет соединение!</string>
+
+</resources>

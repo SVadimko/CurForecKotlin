@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Tinkoff exchange rates</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_test">Test</string>
+    <string name="lastupdateTCS">"Updated: "</string>
+    <string name="na_string">N/A</string>
+    <string name="title_now">Now</string>
+    <string name="title_week">Week</string>
+    <string name="showbutton">Show</string>
+
+    <string name="statlink_candl">https://iss.moex.com/iss/engines/currency/markets/selt/boards/CETS/securities/</string>
+    <string name="statlink2">https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=</string>
+    <string name="title_archive">Archive</string>
+
+    <string name="incorrect_number">Input correct value to convert!</string>
+    <string name="title_calc">Calculator</string>
+    <string name="title_activity_settings">Settings</string>
+
+
+    <string name="update_header">Autoupdate courses</string>
+    <string name="update_title">Enable</string>
+    <string name="update_period">Update period</string>
+    <string name="action_settings">Settings</string>
+    <string name="notify_header">Notifications configure</string>
+    <string name="notify_enable">Enable</string>
+    <string name="notify_on">Notifications ON</string>
+    <string name="notify_off">Notifications OFF</string>
+    <string name="currency1">Currency</string>
+
+    <string name="sell1">Sell low then, rub (0- off)</string>
+    <string name="buy1">Buy high then, rub  (0-off)</string>
+    <string name="widget_header">Graph by widget info</string>
+    <string name="widget_title">Show</string>
+    <string name="title_today">Today</string>
+
+
+
+    <string name="ARCFRAGcursCBGraphLabel">Central bank</string>
+    <string name="ARCFRAGforecDayGraph"> Forecast day</string>
+    <string name="ARCFRAGaverage"> Average</string>
+    <string name="ARCFRAGmovAverForecGraph"> Moving average forecast. Error : </string>
+    <string name="ARCFRAGexponWeighGraph"> Exponentially weighted </string>
+    <string name="ARCFRAGexponWeighForecGraph"> Exp weighted forecast. Error: </string>
+    <string name="ARCFRAGleastSqMeth"> Least square method </string>
+    <string name="ARCFRAGleastSqMethGraph"> Less sq meth forecast. Error: </string>
+    <string name="ARCFRAGshowbutton">Show graph</string>
+    <string name="ARCFRAGError">Choose corret dates!</string>
+
+    <string name="CALCFRAGbuy">Buy</string>
+    <string name="CALCFRAGsell">Sell</string>
+    <string name="CALCFRAGdatafrautoup">Data from autoupdate</string>
+    <string name="CALCFRAGdatafrwidget">Data from widget updates</string>
+    <string name="CALCFRAGbuying">Buying</string>
+    <string name="CALCFRAGselling">Selling</string>
+    <string name="NOWFRAGsource">source</string>
+    <string name="TODAYFRAGchoosediffinterval">Choose less time interval</string>
+    <string name="TODAYFRAGMMVB">MOEX</string>
+    <string name="tcsfrom">TCS from</string>
+    <string name="CBtill">CB till</string>
+    <string name="namechannel">Volute monitoring</string>
+    <string name="descriptionchannel">Notify of changing course</string>
+
+    <string name="curr">Cur.</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
+    <string name="cbrf">Official</string>
+    <string name="ARCFRAGfrom">from</string>
+    <string name="ARCFRAGtill">till</string>
+    <string name="choosedwarm">MOEX graph can show maximum 2 years period</string>
+    <string name="buycourse">Buying</string>
+    <string name="higher">higher then</string>
+    <string name="sellcourse">Selling</string>
+    <string name="lower">lower then</string>
+    <string name="attention">Attention!</string>
+    <string name="noconnection">There is no internet connection!</string>
+
+
+</resources>
