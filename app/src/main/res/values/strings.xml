@@ -41,12 +41,12 @@
     <string name="ARCFRAGforecDayGraph"> Forecast day</string>
     <string name="ARCFRAGaverage"> Average</string>
     <string name="ARCFRAGmovAverForecGraph"> Moving average forecast. Error : </string>
-    <string name="ARCFRAGexponWeighGraph"> Exponentially weighted </string>
-    <string name="ARCFRAGexponWeighForecGraph"> Exp weighted forecast. Error: </string>
+    <string name="ARCFRAGexponWeighGraph"> Exponential smoothing </string>
+    <string name="ARCFRAGexponWeighForecGraph"> Exp smoothing forecast. Error: </string>
     <string name="ARCFRAGleastSqMeth"> Least square method </string>
     <string name="ARCFRAGleastSqMethGraph"> Less sq meth forecast. Error: </string>
     <string name="ARCFRAGshowbutton">Show graph</string>
-    <string name="ARCFRAGError">Choose corret dates!</string>
+    <string name="ARCFRAGError">Choose correct dates!</string>
 
     <string name="CALCFRAGbuy">Buy</string>
     <string name="CALCFRAGsell">Sell</string>

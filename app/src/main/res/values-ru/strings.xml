@@ -39,7 +39,7 @@
     <string name="ARCFRAGforecDayGraph"> Прогноз день </string>
     <string name="ARCFRAGaverage"> Среднее арифметическое</string>
     <string name="ARCFRAGmovAverForecGraph"> Прогноз ср.скольз.Ошибка: </string>
-    <string name="ARCFRAGexponWeighGraph"> Экспоненциально взвешанная</string>
+    <string name="ARCFRAGexponWeighGraph"> Экспоненциальное сглаживание</string>
     <string name="ARCFRAGexponWeighForecGraph"> Прогноз эксп. взв. Ошибка: </string>
     <string name="ARCFRAGleastSqMeth"> Метод наименьших квадратов</string>
     <string name="ARCFRAGleastSqMethGraph"> Прогноз наим.квадр. Ошибка: </string>
