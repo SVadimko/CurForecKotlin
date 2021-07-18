@@ -12,10 +12,10 @@
             android:allowBackup="true"
             android:fullBackupContent="true"
             android:name=".CurrenciesApplication"
-            android:icon="@drawable/logo"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:requestLegacyExternalStorage="true"
-            android:roundIcon="@drawable/logo"
+            android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.CurForecKotlin">
 
