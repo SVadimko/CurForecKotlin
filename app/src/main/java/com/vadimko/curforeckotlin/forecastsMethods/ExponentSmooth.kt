@@ -95,6 +95,4 @@ class ExponentSmooth(inp: MutableList<Float>) {
         return res
     }
     */
-
-
 }

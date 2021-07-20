@@ -6,8 +6,8 @@ import kotlin.math.abs
 //рассчет прогноза метода меньших квадратов
 class LessSquare(inp: MutableList<Float>) {
     private var input: MutableList<Float> = inp
-    var output: MutableList<Float> = mutableListOf()
-    var forecast: MutableList<Float> = mutableListOf()
+    private var output: MutableList<Float> = mutableListOf()
+    private var forecast: MutableList<Float> = mutableListOf()
     //val count = 0
     private var inputSumm = 0f
     private var timeSumm = 0f
@@ -16,7 +16,7 @@ class LessSquare(inp: MutableList<Float>) {
     private var alpha: Float = 0f
     private var beta: Float = 0f
     private var errTmp = 0f
-    var err: String = "0"
+    private var err: String = "0"
 
     fun calc() {
         calculateInputSumm()

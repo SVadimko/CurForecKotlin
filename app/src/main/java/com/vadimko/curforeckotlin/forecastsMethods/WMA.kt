@@ -8,7 +8,7 @@ class WMA(inp: MutableList<Float>, a: Int) {
     private var forecast: MutableList<Float> = mutableListOf()
     private var averageError: Float? = null
     private var amount = a
-    var count = 0
+    private var count = 0
 
 
     fun calc() {
@@ -58,4 +58,5 @@ class WMA(inp: MutableList<Float>, a: Int) {
         numberFormat.maximumFractionDigits = 2
         return numberFormat.format(averageError)
     }
+
 }
