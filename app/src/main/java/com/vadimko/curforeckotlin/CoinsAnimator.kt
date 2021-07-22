@@ -109,7 +109,6 @@ class CoinsAnimator(val mScale: Float, val mDisplaySize: Rect, val mRootLayout: 
                     animationLayout.setMargins(0, (-150 * mScale).toInt(), 0, 0)
                     imageView.requestLayout()
                 }
-
             }
             imageView.requestLayout()
             val place2 = Random().nextInt(10) + 20
