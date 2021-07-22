@@ -17,13 +17,13 @@ class MOEXRepository {
 
     init {
         val okHttpClientBuilder = OkHttpClient.Builder()
-
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BASIC
         okHttpClientBuilder.addInterceptor(logging)
 
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://iss.moex.com/iss/engines/currency/markets/selt/boards/CETS/securities/")
+            .baseUrl("https://iss.moex.com/iss/engines/currency/" +
+                    "markets/selt/boards/CETS/securities/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClientBuilder.build())
             .build()

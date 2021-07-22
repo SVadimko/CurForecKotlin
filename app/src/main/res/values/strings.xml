@@ -75,6 +75,7 @@
     <string name="lower">lower then</string>
     <string name="attention">Attention!</string>
     <string name="noconnection">There is no internet connection!</string>
+    <string name="official_course">Official course</string>
 
 
 </resources>

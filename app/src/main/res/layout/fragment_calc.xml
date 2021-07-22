@@ -40,7 +40,7 @@
                                 android:layout_weight="3"
                                 android:textColor="@color/MainTextColor"
                                 android:layout_height="wrap_content"
-                                android:text="Калькулятор"
+                                android:text="@string/title_calc"
                                 android:textSize="26sp"
                                 android:layout_margin="5dp"
                                 android:gravity="center" />
@@ -76,7 +76,7 @@
                                     android:textColor="@color/MainTextColor"
                                     android:layout_height="wrap_content"
                                     android:gravity="center_horizontal"
-                                    android:text="КУПИТЬ $" />
+                                    android:text="@string/buy" />
 
                             <RadioButton
                                     android:id="@+id/sell"
@@ -86,7 +86,7 @@
                                     android:gravity="center_horizontal"
                                     android:layout_marginStart="10dp"
                                     android:layout_height="wrap_content"
-                                    android:text="ПРОДАТЬ $" />
+                                    android:text="@string/sell" />
 
                         </RadioGroup>
                     </LinearLayout>

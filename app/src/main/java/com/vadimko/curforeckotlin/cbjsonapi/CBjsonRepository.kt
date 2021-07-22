@@ -2,6 +2,8 @@ package com.vadimko.curforeckotlin.cbjsonapi
 
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,9 +14,15 @@ class CBjsonRepository {
     private val cBjsonApi: CBjsonApi
 
     init {
+        val okHttpClientBuilder = OkHttpClient.Builder()
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BASIC
+        okHttpClientBuilder.addInterceptor(logging)
+
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://www.cbr-xml-daily.ru/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClientBuilder.build())
             .build()
         cBjsonApi = retrofit.create(CBjsonApi::class.java)
     }

@@ -76,5 +76,6 @@
     <string name="lower">ниже</string>
     <string name="attention">Внимание!</string>
     <string name="noconnection">Отсутствует интернет соединение!</string>
+    <string name="official_course">Официальный курс</string>
 
 </resources>

@@ -2,6 +2,8 @@ package com.vadimko.curforeckotlin.tcsapi
 
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -10,11 +12,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class TCSRepository {
     private val tcsApi: TCSApi
-
     init {
+        val okHttpClientBuilder = OkHttpClient.Builder()
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BASIC
+        okHttpClientBuilder.addInterceptor(logging)
+
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://www.tinkoff.ru/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClientBuilder.build())
             .build()
         tcsApi = retrofit.create(TCSApi::class.java)
     }
@@ -56,6 +63,4 @@ class TCSRepository {
             }
         })
     }
-
-
 }

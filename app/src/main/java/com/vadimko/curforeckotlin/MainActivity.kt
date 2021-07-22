@@ -1,5 +1,6 @@
 package com.vadimko.curforeckotlin
 
+import android.app.Activity
 import android.app.ActivityManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -143,4 +144,5 @@ class MainActivity : AppCompatActivity() {
         if (caps?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) != true)
             Toast.makeText(this, getString(R.string.noconnection), Toast.LENGTH_LONG).show()
     }
+
 }

@@ -16,9 +16,7 @@ class CBXMLRepository {
     private val cbXMLAPI: CBXMLAPI
 
     init {
-
         val okHttpClientBuilder = OkHttpClient.Builder()
-
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BASIC
         okHttpClientBuilder.addInterceptor(logging)
