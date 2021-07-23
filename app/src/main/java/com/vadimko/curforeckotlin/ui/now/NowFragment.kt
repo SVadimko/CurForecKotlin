@@ -28,15 +28,6 @@ import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import com.vadimko.curforeckotlin.updateWorkers.NowWorker
 
 
-/*
-private const val USD_BUY = "usdbuy"
-private const val USD_SELL = "usdsell"
-private const val EUR_BUY = "eurbuy"
-private const val EUR_SELL = "eursell"
-private const val GBP_BUY = "gbpbuy"
-private const val GBP_SELL = "gbpsell"
-*/
-
 class NowFragment : Fragment() {
 
     private val nowViewModel: NowViewModel by lazy {
@@ -180,7 +171,7 @@ class NowFragment : Fragment() {
     private fun getDisplayParams() {
         rect = Rect()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val windowMetrics: WindowMetrics =  activity?.windowManager!!.currentWindowMetrics
+            val windowMetrics: WindowMetrics = activity?.windowManager!!.currentWindowMetrics
             val windowInsets = windowMetrics.windowInsets
             val insets: Insets = windowInsets.getInsetsIgnoringVisibility(
                 WindowInsets.Type.navigationBars()
@@ -204,8 +195,8 @@ class NowFragment : Fragment() {
         val displayMetrics = context?.resources?.displayMetrics
         if (displayMetrics != null) {
             mScale = displayMetrics.density
-            displayBottom=displayMetrics.heightPixels
-            displayRight=displayMetrics.widthPixels
+            displayBottom = displayMetrics.heightPixels
+            displayRight = displayMetrics.widthPixels
         }
     }
 }

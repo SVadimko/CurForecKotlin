@@ -161,7 +161,7 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
         fromTv.text = longToDate(fromDate)
         c.time = tillDate
         tillTv.text = longToDate(tillDate)
-        checkDates()
+        checkDates(fromDate,tillDate)
         return root
     }
 
@@ -212,7 +212,7 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
             }
         }
 
-        if (checkDates()) {
+        if (checkDates(fromDate, tillDate)) {
             val result: ArrayList<Array<String>> =
                 DateConverter.getFromTillDate(fromDate, tillDate, requireContext())
             jsonDate = result[0]
@@ -230,9 +230,9 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
 
     //проверяем корректность введенных дат
-    private fun checkDates(): Boolean {
-        val tillLong = tillDate.time
-        val fromLong = fromDate.time
+    private fun checkDates(from:Date, till:Date): Boolean {
+        val tillLong = till.time
+        val fromLong = from.time
         if (tillLong - fromLong > 63072000000)
             Toast.makeText(context, getString(string.choosedwarm), Toast.LENGTH_LONG).show()
         return (tillDate.compareTo(fromDate)) > 0
