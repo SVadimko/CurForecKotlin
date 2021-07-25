@@ -69,6 +69,8 @@ TCSUpdateService - сервис, запускаемый для автообно�
 Bootreceiver - broadcast receiver для получения информации, после перезагрузки, было ли у пользователя активировано автообновление курсов
 запускающий сервис TCSUpdateService, если оно было активировано
 
+CoinsAnimator - вспомогательный класс для запуска анимации монет при обновлении курса
+
 
  The application uses the api Tinkov Bank, the Central Bank of Russia and the Moscow Exchange to view the exchange rates of these companies.
 Based on the data of the Moscow Exchange, a forecast is made for further changes in the exchange rate.
@@ -136,7 +138,7 @@ TCSUpdateService - a service launched for auto-update of Tinkov Bank rates
 
 Bootreceiver - broadcast receiver to receive information, after reboot, whether the user had enabled autoupdate courses. If it was enabled- TCSUpdateService starts  
 
-    
+CoinsAnimator - a helper class for triggering animation of coins when the rate is updated    
  
   
 
