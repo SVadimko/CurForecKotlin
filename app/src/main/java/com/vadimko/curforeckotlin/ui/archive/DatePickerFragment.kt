@@ -9,6 +9,7 @@ import java.util.*
 
 private const val ARG_DATE = "date"
 private const val ARG_FROMTILL = "fromtill"
+
 open class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
 
@@ -20,19 +21,19 @@ open class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetList
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
         val frtl = arguments?.getSerializable(ARG_FROMTILL) as Boolean
-        val dateListener = DatePickerDialog.OnDateSetListener {
-                _: DatePicker, year: Int, month: Int, day: Int ->
-            c.set(Calendar.YEAR,year)
-            c.set(Calendar.MONTH,month)
-            c.set(Calendar.DAY_OF_MONTH,day)
-            val resultDate : Date = c.time
-            targetFragment?.let { fragment ->
-                (fragment as Callbacks).onDateSelected(resultDate, frtl)
+        val dateListener =
+            DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, day: Int ->
+                c.set(Calendar.YEAR, year)
+                c.set(Calendar.MONTH, month)
+                c.set(Calendar.DAY_OF_MONTH, day)
+                val resultDate: Date = c.time
+                targetFragment?.let { fragment ->
+                    (fragment as Callbacks).onDateSelected(resultDate, frtl)
+                }
             }
-        }
 
         val date = arguments?.getSerializable(ARG_DATE) as Date
-        c.time=date
+        c.time = date
         val initialYear = c.get(Calendar.YEAR)
         val initialMonth = c.get(Calendar.MONTH)
         val initialDay = c.get(Calendar.DAY_OF_MONTH)
@@ -41,7 +42,8 @@ open class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetList
             dateListener,
             initialYear,
             initialMonth,
-            initialDay)
+            initialDay
+        )
         datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
         datePickerDialog.datePicker.minDate = 1323388800000
         return datePickerDialog
@@ -51,16 +53,14 @@ open class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetList
     }
 
     companion object {
-        fun newInstance(date: Date, frommtill:Boolean): DatePickerFragment {
+        fun newInstance(date: Date, fromTill: Boolean): DatePickerFragment {
             val args = Bundle().apply {
                 putSerializable(ARG_DATE, date)
-                putSerializable(ARG_FROMTILL, frommtill)
+                putSerializable(ARG_FROMTILL, fromTill)
             }
             return DatePickerFragment().apply {
                 arguments = args
             }
         }
     }
-
-
 }

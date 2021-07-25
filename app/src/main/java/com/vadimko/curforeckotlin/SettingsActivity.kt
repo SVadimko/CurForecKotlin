@@ -41,13 +41,6 @@ class SettingsActivity : AppCompatActivity() {
                     updatePeriod?.isEnabled = !some
                     true
                 }
-
-            //если версия SDK ниже O запрет на запуск фореграунд сервиса
-            /*if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
-                updateSwitch?.isChecked = false
-                updateSwitch?.isEnabled = false
-                updatePeriod?.isEnabled = false
-            }*/
         }
     }
 }

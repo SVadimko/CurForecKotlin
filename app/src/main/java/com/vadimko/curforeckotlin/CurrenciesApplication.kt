@@ -1,11 +1,12 @@
 package com.vadimko.curforeckotlin
 
 import android.app.Application
+import android.content.Context
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 
-class CurrenciesApplication: Application() {
+class CurrenciesApplication : Application() {
     override fun onCreate() {
-        super.onCreate()
         CurrenciesRepository.initialize(this)
+        super.onCreate()
     }
 }

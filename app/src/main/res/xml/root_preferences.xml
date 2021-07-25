@@ -63,6 +63,7 @@
         <SwitchPreferenceCompat
                 app:key="onRefreshAnimation"
                 app:summary=""
+                android:defaultValue="true"
                 app:summaryOn="@string/animation_on"
                 app:summaryOff="@string/animation_off"
                 app:title="@string/notify_enable" />

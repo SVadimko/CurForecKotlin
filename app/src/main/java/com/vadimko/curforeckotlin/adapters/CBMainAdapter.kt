@@ -19,7 +19,7 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
     RecyclerView.Adapter<CBMainAdapter.CurrCBHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrCBHolder {
         //val view: View = LayoutInflater.from(parent.context)
-            //.inflate(R.layout.cbrf_main_recycle, parent, false)
+        //.inflate(R.layout.cbrf_main_recycle, parent, false)
         val binding = CbrfMainRecycleBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
         //return CurrCBHolder(view)
@@ -38,17 +38,23 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
 
 
     //inner class CurrCBHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-    inner class CurrCBHolder(binding: CbrfMainRecycleBinding) : RecyclerView.ViewHolder(binding.cardView),
+    inner class CurrCBHolder(binding: CbrfMainRecycleBinding) :
+        RecyclerView.ViewHolder(binding.cardView),
         View.OnClickListener {
-        private val cardView= binding.cardView
+        private val cardView = binding.cardView
+
         //var imageView = cardView.findViewById<View>(R.id.flag) as ImageView
         private var imageView = binding.flag//cardView.findViewById<View>(R.id.flag) as ImageView
+
         //private var arrow = cardView.findViewById<View>(R.id.arrow) as ImageView
         private var arrow = binding.arrow
+
         //private var currTv = cardView.findViewById<View>(R.id.curr) as TextView
         private var currTv = binding.curr
+
         //private var valTv = cardView.findViewById<View>(R.id.value) as TextView
         private var valTv = binding.value
+
         //private var valWasTv = cardView.findViewById<View>(R.id.val_was) as TextView
         private var valWasTv = binding.valWas
 
@@ -63,7 +69,12 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
             this.valute = valute
 
             currTv.text = valute.curr
-            valTv.text = String.format(Locale.US, "%.2f", valute.value)
+            if ((valute.curr == "UAH")||(valute.curr =="TRY")) {
+
+                valTv.text = String.format(Locale.US, "%.3f", valute.value)
+            } else{
+                valTv.text = String.format(Locale.US, "%.2f", valute.value)
+            }
             if (valute.value_was != 0.0) {
                 arrow.visibility = View.VISIBLE
                 if (valute.value > valute.value_was) {
@@ -76,10 +87,17 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
                     valWasTv.setTextColor(Color.rgb(60, 220, 78))
                     arrow.setImageResource(R.drawable.arrdown)
                 }
-                valWasTv.text = " (" + String.format(
-                    Locale.US, "%+.2f",
-                    -valute.value_was + valute.value
-                ) + ")"
+                if ((valute.curr == "UAH")||(valute.curr =="TRY")) {
+                    valWasTv.text = " (" + String.format(
+                        Locale.US, "%+.3f",
+                        -valute.value_was + valute.value
+                    ) + ")"
+                } else {
+                    valWasTv.text = " (" + String.format(
+                        Locale.US, "%+.2f",
+                        -valute.value_was + valute.value
+                    ) + ")"
+                }
                 imageView.setImageResource(valute.flag)
             } else {
                 valTv.setTextColor(R.color.colorRed)

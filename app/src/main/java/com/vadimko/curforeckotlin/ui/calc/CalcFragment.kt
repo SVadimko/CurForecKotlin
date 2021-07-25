@@ -47,7 +47,6 @@ class CalcFragment : Fragment() {
     private lateinit var eqSign: TextView
     private lateinit var currValue: EditText
     private lateinit var curSigna: TextView
-    private lateinit var calculate: Button
     private var usdBuy: Double = 0.0
     private var usdSell: Double = 0.0
     private var eurBuy: Double = 0.0
@@ -89,22 +88,6 @@ class CalcFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    /*companion object {
-        fun newInstance(list: List<Double>): CalcFragment {
-            val args = Bundle().apply {
-                putSerializable(USD_BUY, list[0])
-                putSerializable(USD_SELL, list[1])
-                putSerializable(EUR_BUY, list[2])
-                putSerializable(EUR_SELL, list[3])
-                putSerializable(GBP_BUY, list[4])
-                putSerializable(GBP_SELL, list[5])
-            }
-            return CalcFragment().apply {
-                arguments = args
-            }
-        }
-    }*/
-
     private lateinit var viewModel: CalcViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,17 +101,12 @@ class CalcFragment : Fragment() {
     ): View {
         _binding = FragmentCalcBinding.inflate(inflater, container, false)
         root = binding.root
-        //root = inflater.inflate(R.layout.fragment_calc, container, false)
-        //viewAccept = root.findViewById(R.id.viewaccept)
         viewAccept = binding.viewaccept
-        //viewAcceptWidget = root.findViewById(R.id.viewacceptWidget)
         viewAcceptWidget = binding.viewacceptWidget
         viewChild = inflater.inflate(R.layout.layoutgraph, container, false)
         viewChildWidget = inflater.inflate(R.layout.layoutgraph, container, false)
 
-        //curSigna = root.findViewById(R.id.cur_sign)
         curSigna = binding.cursign
-        //currSpinner = root.findViewById(R.id.currency_calc)
         currSpinner = binding.currencycalc
         val currAdapter = ArrayAdapter(
             requireContext(),
@@ -165,22 +143,14 @@ class CalcFragment : Fragment() {
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
             }
         }
-        //eqSign = root.findViewById(R.id.eq_tv)
         eqSign = binding.eqtv
-        //toBuy = root.findViewById(R.id.buy)
         toBuy = binding.buy
-        //toSell = root.findViewById(R.id.sell)
         toSell = binding.sell
-        //currValue = root.findViewById(R.id.curr_value)
         currValue = binding.currvaluecalc
         currValue.requestFocus()
-        //currValue.setText("0")
-        //rubValue = root.findViewById(R.id.rub_value)
         rubValue = binding.rubvaluecalc
 
-        //calculate = root.findViewById(R.id.calcul)
         binding.calcul.setOnClickListener {
-            //calculating()
             calcViewModel.calculating(
                 currSpinner.selectedItemPosition,
                 dataToCalc,
@@ -190,11 +160,7 @@ class CalcFragment : Fragment() {
             )
         }
         binding.calcul.isEnabled = true
-        /*calculate.apply {
-            setOnClickListener {
-                calculating()
-            }
-        }*/
+
         toSell.apply {
             setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
@@ -202,8 +168,7 @@ class CalcFragment : Fragment() {
                     currValue.isEnabled = true
                     rubValue.isEnabled = false
                     currValue.requestFocus()
-                    //calculate.isEnabled = true
-                    //currValue.setText("")
+                    binding.calcul.isEnabled = true
                     rubValue.text = ""
                 }
             }
@@ -215,8 +180,7 @@ class CalcFragment : Fragment() {
                     currValue.isEnabled = true
                     rubValue.isEnabled = false
                     currValue.requestFocus()
-                    //calculate.isEnabled = true
-                    //currValue.setText("")
+                    binding.calcul.isEnabled = true
                     rubValue.text = ""
                 }
             }
@@ -247,11 +211,7 @@ class CalcFragment : Fragment() {
             PreferenceManager.getDefaultSharedPreferences(context).getBoolean("updateon", false)
         if (pref) {
             calcViewModel.getDataList().observe(viewLifecycleOwner, {
-                //val pref =
-                //PreferenceManager.getDefaultSharedPreferences(context).getBoolean("updateon", false)
-                //if (pref) {
                 extractGraphData(it)
-                //}
             })
         }
         //если в настройках активен пункт показывать информацию с виджета курса- извлекаем данные из подписки на сохраненные в БД на устройстве курсы валют,
@@ -260,12 +220,7 @@ class CalcFragment : Fragment() {
             PreferenceManager.getDefaultSharedPreferences(context).getBoolean("widgeton", false)
         if (pref) {
             calcViewModel.livedataTKS.observe(viewLifecycleOwner, {
-                //val pref =
-                    //PreferenceManager.getDefaultSharedPreferences(context)
-                        //.getBoolean("widgeton", false)
-                //if (pref) {
-                    extractWidgetGraphData(it)
-                //}
+                extractWidgetGraphData(it)
                 listWidgetData = it
             })
         }
@@ -279,42 +234,6 @@ class CalcFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(CalcViewModel::class.java)
     }
 
-    //отвечает за визуальные изменения панели калькулятора
-    private fun calculating() {
-        var result: Double
-        var convertValue: Double
-        var buyValue = 0.0
-        var sellValue = 0.0
-        try {
-            when (currSpinner.selectedItemPosition) {
-                0 -> {
-                    buyValue = usdBuy
-                    sellValue = usdSell
-                }
-                1 -> {
-                    buyValue = eurBuy
-                    sellValue = eurSell
-                }
-                2 -> {
-                    buyValue = gbpBuy
-                    sellValue = gbpSell
-                }
-            }
-            if (toBuy.isChecked) {
-                convertValue = currValue.text.toString().toDouble()
-                result = convertValue * sellValue
-                rubValue.text = String.format(Locale.US, "%.2f", result)
-            }
-            if (toSell.isChecked) {
-                convertValue = currValue.text.toString().toDouble()
-                result = convertValue * buyValue
-                rubValue.text = String.format(Locale.US, "%.2f", result)
-            }
-        } catch (ex: NumberFormatException) {
-            Toast.makeText(context, R.string.incorrect_number, Toast.LENGTH_SHORT).show()
-            currValue.requestFocus()
-        }
-    }
 
     //извлекаем последние данные курса валют Тиньков
     private fun getData(dataList: List<CurrencyTCS>) {

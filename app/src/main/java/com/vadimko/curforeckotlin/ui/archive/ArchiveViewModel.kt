@@ -73,12 +73,10 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
             xmlDate = result[1]
             startArchiveWorker(xmlDate[0], xmlDate[1], xmlCurr)
             startArchiveMOEXWorker(jsonCurr, jsonDate[0], jsonDate[1])
-            // context?.let {
             ArchivePreferences.savePrefs(
                 context, fromDate.time, tillDate.time, choosen, xmlCurr,
                 xmlDate[0], xmlDate[1], jsonCurr, jsonDate[0], jsonDate[1], "24"
             )
-            //}
         } else Toast.makeText(context, context.getString(R.string.ARCFRAGError), Toast.LENGTH_LONG)
             .show()
     }

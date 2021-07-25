@@ -56,14 +56,11 @@ class TodayFragment : Fragment() {
     private lateinit var perSpinner: Spinner
     private lateinit var rateSpinner: Spinner
 
-    private var recCur = ""
-    private var recDay = "0"
 
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-
         super.onCreate(savedInstanceState)
     }
 
@@ -79,7 +76,6 @@ class TodayFragment : Fragment() {
 
         val loadPrefs = context?.let { TodayPreferences.loadPrefs(it) }
 
-        //currSpinner = root.findViewById(R.id.currchoose)
         currSpinner = binding.currchoose
         val currAdapter = ArrayAdapter(
             requireContext(),
@@ -87,7 +83,6 @@ class TodayFragment : Fragment() {
             resources.getStringArray(R.array.currency)
         )
         currAdapter.setDropDownViewResource(R.layout.spinner_layout_main)
-        // currAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         currSpinner.apply {
             adapter = currAdapter
             setSelection(loadPrefs?.get(4)!!.toInt(), true)
@@ -102,7 +97,6 @@ class TodayFragment : Fragment() {
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
             }
         }
-        //perSpinner = root.findViewById(R.id.period_choose)
         perSpinner = binding.periodchoose
         val perAdapter = ArrayAdapter(
             requireContext(),
@@ -119,8 +113,6 @@ class TodayFragment : Fragment() {
                     position: Int, id: Long
                 ) {
                     choosenPeriod = perSpinner.getItemAtPosition(position) as String
-
-
                     if ((position > 0) and (rateSpinner.selectedItemPosition == 0))
                         rateSpinner.setSelection(1)
                 }
@@ -128,7 +120,6 @@ class TodayFragment : Fragment() {
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
             }
         }
-        //rateSpinner = root.findViewById(R.id.ratechoose)
         rateSpinner = binding.ratechoose
         val rateAdapter = ArrayAdapter(
             requireContext(),
@@ -154,7 +145,6 @@ class TodayFragment : Fragment() {
             }
         }
 
-        //val button = root.findViewById<View>(R.id.buildgraph) as Button
         val showGraphButton = binding.buildgraph
         showGraphButton.apply {
             setOnClickListener {
@@ -162,12 +152,12 @@ class TodayFragment : Fragment() {
                 choosen[0] = currSpinner.selectedItemPosition
                 choosen[1] = perSpinner.selectedItemPosition
                 choosen[2] = rateSpinner.selectedItemPosition
-                //createRequestStrings(choosen)
                 todayViewModel.createRequestStrings(
                     choosen,
                     currSpinner.selectedItemPosition,
                     perSpinner.selectedItemPosition,
-                    rateSpinner.selectedItemPosition)
+                    rateSpinner.selectedItemPosition
+                )
             }
         }
         return root
@@ -206,95 +196,6 @@ class TodayFragment : Fragment() {
 
     }
 
-    //выбор параметров запроса в зависимости от состояний спиннера
-    /*private fun createRequestStrings(choosen: IntArray) {
-        var jsonCurr = ""
-        val jsonDate: Array<String>
-        var recDays = 0L
-        var rates = 0
-        when (choosen[0]) {
-            0 -> {
-                jsonCurr = "USD000000TOD"
-                recCur = "USD"
-            }
-            1 -> {
-                jsonCurr = "EUR_RUB__TOD"
-                recCur = "EUR"
-            }
-            2 -> {
-                jsonCurr = "GBPRUB_TOD"
-                recCur = "GBP"
-            }
-        }
-        when (choosen[1]) {
-            0 -> {
-                recDays = 1
-                recDay = "1 день"
-            }
-            1 -> {
-                recDays = 2
-                recDay = "2 дня"
-            }
-            2 -> {
-                recDays = 3
-                recDay = "3 дня"
-            }
-            3 -> {
-                recDays = 4
-                recDay = "4 дня"
-            }
-            4 -> {
-                recDays = 5
-                recDay = "5 дней"
-            }
-        }
-        when (choosen[2]) {
-            0 -> rates = 1
-            1 -> rates = 10
-            2 -> rates = 60
-        }
-        val till = Date(System.currentTimeMillis())
-        val from = Date(System.currentTimeMillis() - 86400000 * recDays)
-        //val result = dateConverter(recDays)
-        val result = DateConverter.getFromTillDate(from, till, requireContext())
-        jsonDate = result[0]
-        startTodayWorker(jsonCurr, jsonDate[0], jsonDate[1], rates.toString())
-        context?.let {
-            TodayPreferences.savePrefs(
-                it,
-                jsonCurr,
-                jsonDate[0],
-                jsonDate[1],
-                rates.toString(),
-                currSpinner.selectedItemPosition,
-                perSpinner.selectedItemPosition,
-                rateSpinner.selectedItemPosition
-            )
-        }
-    }
-
-
-    //конфигурируем и запускаем воркер для обновления данных за указанный период
-    private fun startTodayWorker(request: String, from: String, till: String, interval: String) {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val data =
-            workDataOf("request" to request, "from" to from, "till" to till, "interval" to interval)
-        //val data2 = workDataOf("from" to from)
-        //val data3 = workDataOf("till" to till)
-        //val data4 = workDataOf("interval" to interval)
-        val workManager = context?.let { WorkManager.getInstance(it) }
-        val myWorkRequest = OneTimeWorkRequest.Builder(
-            TodayWorker::class.java//,
-        )
-            .setConstraints(constraints)
-            .setInputData(data)
-            .build()
-        workManager?.enqueue(myWorkRequest)
-    }*/
-
     //извлекаем полученные данные
     private fun extractData(dataList: List<CurrencyMOEX>) {
         dates.clear()
@@ -313,9 +214,14 @@ class TodayFragment : Fragment() {
             warprice.add(it.warprice)
             datesForecast.add(it.dates)
         }
-
         for (i in 1 until 3) {
-            datesForecast.add("${getString(R.string.forec)} ${rateSpinner.getItemAtPosition(rateSpinner.selectedItemPosition)}")
+            datesForecast.add(
+                "${getString(R.string.forec)} ${
+                    rateSpinner.getItemAtPosition(
+                        rateSpinner.selectedItemPosition
+                    )
+                }"
+            )
         }
         createComboChartForecast()
 
@@ -323,7 +229,6 @@ class TodayFragment : Fragment() {
 
     //создаем комбинированный график для свечей и линии
     private fun createComboChartForecast() {
-        //comboChartForec = root.findViewById(R.id.candlforec)
         comboChartForec = binding.candlforec
         comboChartForec.clear()
         comboChartForec.setDrawGridBackground(false)
@@ -385,7 +290,6 @@ class TodayFragment : Fragment() {
             )
         comboChartForec.animateX(animationLong)
         comboChartForec.setPinchZoom(true)
-
         if (datesForecast.size > 6) {
             fillComboChartForecast((currSpinner.selectedItem as String))
         } else {

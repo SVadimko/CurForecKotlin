@@ -10,9 +10,7 @@
             android:name="com.vadimko.curforeckotlin.ui.now.NowFragment"
             tools:layout="@layout/fragment_now"
             android:label="@string/title_now">
-        <action
-                android:id="@+id/action_now_calc"
-                app:destination="@id/navigation_calc" />
+
     </fragment>
 
     <fragment

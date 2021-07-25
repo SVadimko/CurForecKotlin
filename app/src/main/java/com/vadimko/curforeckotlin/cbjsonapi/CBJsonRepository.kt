@@ -10,7 +10,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class CBjsonRepository {
+class CBJsonRepository {
     private val cBjsonApi: CBjsonApi
 
     init {
@@ -70,9 +70,9 @@ class CBjsonRepository {
                 val curUSD = CurrencyCBjs(valueUSD, previousUSD, dateWas, flagUSD, "USD")
                 val curEUR = CurrencyCBjs(valueEUR, previousEUR, dateWas, flagEUR, "EUR")
                 val curGBP = CurrencyCBjs(valueGBP, previousGBP, dateWas, flagGBP, "GBP")
-                val curBYN = CurrencyCBjs(valueBYN, previousBYN, dateWas, flagBYN, "UAH")
+                val curBYN = CurrencyCBjs(valueBYN, previousBYN, dateWas, flagBYN, "BYN")
                 val curTRY = CurrencyCBjs(valueTRY / 10, previousTRY / 10, dateWas, flagTRY, "TRY")
-                val curUAH = CurrencyCBjs(valueUAH / 10, previousUAH / 10, dateWas, flagUAH, "BYN")
+                val curUAH = CurrencyCBjs(valueUAH / 10, previousUAH / 10, dateWas, flagUAH, "UAH")
 
                 val cbCurr: List<CurrencyCBjs> =
                     listOf(curUSD, curEUR, curGBP, curBYN, curTRY, curUAH)

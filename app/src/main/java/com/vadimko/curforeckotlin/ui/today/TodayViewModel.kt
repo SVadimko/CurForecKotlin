@@ -15,24 +15,18 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
     private val context = getApplication<Application>()
     private var recCur = ""
     private var recDay = "0"
-    //private val _text = MutableLiveData<String>().apply {
-    //    value = "This is home Fragment"
-    //}
-    //val text: LiveData<String> = _text
 
 
     fun getData(): MutableLiveData<List<CurrencyMOEX>> {
         if (data.value?.size == null) {
             data = MutableLiveData()
             val loadedPrefs = TodayPreferences.loadPrefs(getApplication())
-            //Log.wtf("PREFSTODAY", "${loadedPrefs.component1()} ${loadedPrefs.component2()} ${loadedPrefs.component3()} ${loadedPrefs.component4()}" )
             loadDataMOEX(
                 loadedPrefs.component1(),
                 loadedPrefs.component2(),
                 loadedPrefs.component3(),
                 loadedPrefs.component4()
             )
-            //TodayViewModel.loadDataMOEX(request)
         }
         return data
     }
@@ -90,7 +84,6 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
         }
         val till = Date(System.currentTimeMillis())
         val from = Date(System.currentTimeMillis() - 86400000 * recDays)
-        //val result = dateConverter(recDays)
         val result = DateConverter.getFromTillDate(from, till, context)
         jsonDate = result[0]
         startTodayWorker(jsonCurr, jsonDate[0], jsonDate[1], rates.toString())
@@ -115,9 +108,6 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
 
         val data =
             workDataOf("request" to request, "from" to from, "till" to till, "interval" to interval)
-        //val data2 = workDataOf("from" to from)
-        //val data3 = workDataOf("till" to till)
-        //val data4 = workDataOf("interval" to interval)
         val workManager =  WorkManager.getInstance(context)
         val myWorkRequest = OneTimeWorkRequest.Builder(
             TodayWorker::class.java//,
@@ -131,16 +121,11 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
         var data: MutableLiveData<List<CurrencyMOEX>> = MutableLiveData<List<CurrencyMOEX>>()
 
-        //var dataCB: MutableLiveData<List<CurrencyCBjs>> =MutableLiveData<List<CurrencyCBjs>>()
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
 
             val moexRepository = MOEXRepository()
             moexRepository.getMOEX(request, from, till, interval, false)
 
         }
-        // fun loadDataCB() {
-        //    val cbjsonrepository: CBjsonRepository = CBjsonRepository()
-        //   cbjsonrepository.getCurrentCB()
-        // }
     }
 }

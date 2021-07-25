@@ -19,7 +19,6 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-//import com.vadimko.curforeckotlin.DateConverter
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.R.*
 import com.vadimko.curforeckotlin.SettingsActivity
@@ -30,8 +29,6 @@ import com.vadimko.curforeckotlin.forecastsMethods.LessSquare
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
 import com.vadimko.curforeckotlin.moexapi.CurrencyMOEX
 import com.vadimko.curforeckotlin.prefs.ArchivePreferences
-//import com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker
-//import com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -61,7 +58,6 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
     private var choosenCurrency = ""
     private lateinit var currSpinner: Spinner
 
-    //private var custCur = ""
 
     private val archiveViewModel: ArchiveViewModel by lazy {
         //ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
@@ -102,7 +98,6 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
             fromDate = Date(loadPrefs[0].toLong())
         }
 
-        //currSpinner = root.findViewById(R.id.currchoose)
         currSpinner = binding.currchoose
         val currAdapter = ArrayAdapter(
             requireContext(),
@@ -124,21 +119,17 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
             }
         }
-        //val buttonShow = root.findViewById<Button>(R.id.buildgraph)
         val buttonGraphBuild = binding.buildgraph
         buttonGraphBuild.apply {
             setOnClickListener {
                 val choosen = currSpinner.selectedItemPosition
-                //createRequestStrings(choosen)
                 archiveViewModel.createRequestStrings(
                     choosen,
                     fromDate,
                     tillDate,
-                    //currSpinner.selectedItemPosition
                 )
             }
         }
-        //fromTv = root.findViewById(R.id.from)
         fromTv = binding.from
         fromTv.apply {
             setOnClickListener {
@@ -152,7 +143,6 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
                 newFragment.show(this@ArchiveFragment.parentFragmentManager, "datePicker")
             }
         }
-        //tillTv = root.findViewById(R.id.till)
         tillTv = binding.till
         tillTv.apply {
             setOnClickListener {
@@ -171,7 +161,6 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
         fromTv.text = longToDate(fromDate)
         c.time = tillDate
         tillTv.text = longToDate(tillDate)
-        //checkDates(fromDate,tillDate)
         return root
     }
 
@@ -198,100 +187,6 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
             }
         })
     }
-
-    //в зависимости от выбранных значений спиннеров формируем части запроса к сайтам
-   /* private fun createRequestStrings(choosen: Int) {
-        var jsonCurr = ""
-        var xmlCurr = ""
-        val jsonDate: Array<String>
-        val xmlDate: Array<String>
-        when (choosen) {
-            0 -> {
-                jsonCurr = "USD000000TOD"
-                xmlCurr = "R01235"
-                custCur = "USD"
-            }
-            1 -> {
-                jsonCurr = "EUR_RUB__TOD"
-                xmlCurr = "R01239"
-                custCur = "EUR"
-            }
-            2 -> {
-                jsonCurr = "GBPRUB_TOD"
-                xmlCurr = "R01035"
-                custCur = "GBP"
-            }
-        }
-
-        if (checkDates(fromDate, tillDate)) {
-            val result: ArrayList<Array<String>> =
-                DateConverter.getFromTillDate(fromDate, tillDate, requireContext())
-            jsonDate = result[0]
-            xmlDate = result[1]
-            startArchiveWorker(xmlDate[0], xmlDate[1], xmlCurr)
-            startArchiveMOEXWorker(jsonCurr, jsonDate[0], jsonDate[1])
-            context?.let {
-                ArchivePreferences.savePrefs(
-                    it, fromDate.time, tillDate.time, currSpinner.selectedItemPosition, xmlCurr,
-                    xmlDate[0], xmlDate[1], jsonCurr, jsonDate[0], jsonDate[1], "24"
-                )
-            }
-        } else Toast.makeText(context, getString(string.ARCFRAGError), Toast.LENGTH_LONG).show()
-    }
-
-
-    //проверяем корректность введенных дат
-    private fun checkDates(from: Date, till: Date): Boolean {
-        val tillLong = till.time
-        val fromLong = from.time
-        if (tillLong - fromLong > 63072000000)
-            Toast.makeText(context, getString(string.choosedwarm), Toast.LENGTH_LONG).show()
-        return (tillDate.compareTo(fromDate)) > 0
-    }*/
-
-    //запуск воркера для получения данных с сайта ЦБ
-   /* private fun startArchiveWorker(from: String, till: String, request: String) {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            //.setRequiresCharging(true)
-            .build()
-
-        val data =
-            workDataOf("request" to request, "from" to from, "till" to till)
-
-        val workManager = context?.let { WorkManager.getInstance(it) }
-        val myWorkRequest = OneTimeWorkRequest.Builder(
-            ArchiveWorker::class.java//,
-            //15,
-            //TimeUnit.MINUTES,
-            //15,
-            //TimeUnit.MINUTES
-        )
-            .setConstraints(constraints)
-            .setInputData(data)
-            .build()
-        workManager?.enqueue(myWorkRequest)
-    }
-
-
-    //запуск воркера для получения данныъ с сайта Московской биржи
-    private fun startArchiveMOEXWorker(request: String, from: String, till: String) {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val data =
-            workDataOf("request" to request, "from" to from, "till" to till)
-
-        val workManager = context?.let { WorkManager.getInstance(it) }
-        val myWorkRequest = OneTimeWorkRequest.Builder(
-            ArchiveMOEXWorker::class.java//,
-        )
-            .setConstraints(constraints)
-            .setInputData(data)
-            .build()
-        workManager?.enqueue(myWorkRequest)
-    }*/
 
     //экстракция полученных от московской биржи данных для построения графика
     private fun extractDataMOEX(dataListMOEX: List<CurrencyMOEX>) {
@@ -342,7 +237,6 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
     //создание и задание параметров графика ЦБ
     private fun createClearCbrfGraph() {
-        //linearCbrf = root.findViewById(R.id.chartcbrf)
         linearCbrf = binding.chartcbrf
         linearCbrf.clear()
         linearCbrf.setDrawGridBackground(false)
@@ -423,7 +317,6 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
     //создаем график для МБ
     private fun createLinearSetForecast() {
-        //linearChartForec = root.findViewById(R.id.linearforec)
         linearChartForec = binding.linearforec
         linearChartForec.clear()
         linearChartForec.notifyDataSetChanged()
@@ -651,7 +544,6 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
             tillDate = date
         }
     }
-
 
     private fun longToDate(date: Date): String {
         val jdf = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
