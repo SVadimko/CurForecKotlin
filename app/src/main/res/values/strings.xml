@@ -80,6 +80,9 @@
     <string name="forec">Forecast</string>
     <string name="underscore">______</string>
     <string name="underscore2">_________</string>
+    <string name="refresh_animation">On refresh animation</string>
+    <string name="animation_on">animation enabled</string>
+    <string name="animation_off">animation disabled</string>
 
 
 </resources>

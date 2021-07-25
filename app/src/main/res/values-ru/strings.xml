@@ -81,5 +81,8 @@
     <string name="forec">Прогноз</string>
     <string name="underscore">______</string>
     <string name="underscore2">_________</string>
+    <string name="refresh_animation">Анимация при обновлении курсов</string>
+    <string name="animation_on">Анимация включена</string>
+    <string name="animation_off">Анимация выключена</string>
 
 </resources>

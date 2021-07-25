@@ -58,4 +58,14 @@
                 app:title="@string/widget_title" />
 
     </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/refresh_animation">
+        <SwitchPreferenceCompat
+                app:key="onRefreshAnimation"
+                app:summary=""
+                app:summaryOn="@string/animation_on"
+                app:summaryOff="@string/animation_off"
+                app:title="@string/notify_enable" />
+
+    </PreferenceCategory>
 </PreferenceScreen>

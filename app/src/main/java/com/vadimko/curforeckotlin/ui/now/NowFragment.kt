@@ -12,6 +12,7 @@ import android.view.*
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -63,16 +64,12 @@ class NowFragment : Fragment() {
         //tcsRecycle = root.findViewById(R.id.recycletinkoff)
         tcsRecycle.layoutManager = LinearLayoutManager(context)
 
-
-
-
         cbRecycle = binding.recyclecbrf
         //cbRecycle = root.findViewById(R.id.recyclecbrf)
         cbRecycle.layoutManager = LinearLayoutManager(context)
 
         frameLayout = binding.framelay
         //frameLayout = root.findViewById(R.id.framelay)
-
 
         /*swipeRefreshLayout = root.findViewById<SwipeRefreshLayout>(R.id.swipe)
         swipeRefreshLayout.apply {
