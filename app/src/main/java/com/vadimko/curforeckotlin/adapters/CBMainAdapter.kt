@@ -12,15 +12,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.cbjsonapi.CurrencyCBjs
 import java.util.*
-
+import com.vadimko.curforeckotlin.databinding.CbrfMainRecycleBinding
 
 //адаптер для ресайклвью данных ЦБ на фрагменте Today
-class CBmainAdapter(private val curCB: List<CurrencyCBjs>) :
-    RecyclerView.Adapter<CBmainAdapter.CurrCBHolder>() {
+class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
+    RecyclerView.Adapter<CBMainAdapter.CurrCBHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrCBHolder {
-        val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.cbrf_main_recycle, parent, false)
-        return CurrCBHolder(view)
+        //val view: View = LayoutInflater.from(parent.context)
+            //.inflate(R.layout.cbrf_main_recycle, parent, false)
+        val binding = CbrfMainRecycleBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
+        //return CurrCBHolder(view)
+        return CurrCBHolder(binding)
 
     }
 
@@ -33,14 +36,21 @@ class CBmainAdapter(private val curCB: List<CurrencyCBjs>) :
         return curCB.size
     }
 
-    inner class CurrCBHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+
+    //inner class CurrCBHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    inner class CurrCBHolder(binding: CbrfMainRecycleBinding) : RecyclerView.ViewHolder(binding.cardView),
         View.OnClickListener {
-        private val cardView: CardView = itemView.findViewById(R.id.card_view)
-        var imageView = cardView.findViewById<View>(R.id.flag) as ImageView
-        private var arrow = cardView.findViewById<View>(R.id.arrow) as ImageView
-        private var currTv = cardView.findViewById<View>(R.id.curr) as TextView
-        private var valTv = cardView.findViewById<View>(R.id.value) as TextView
-        private var valWasTv = cardView.findViewById<View>(R.id.val_was) as TextView
+        private val cardView= binding.cardView
+        //var imageView = cardView.findViewById<View>(R.id.flag) as ImageView
+        private var imageView = binding.flag//cardView.findViewById<View>(R.id.flag) as ImageView
+        //private var arrow = cardView.findViewById<View>(R.id.arrow) as ImageView
+        private var arrow = binding.arrow
+        //private var currTv = cardView.findViewById<View>(R.id.curr) as TextView
+        private var currTv = binding.curr
+        //private var valTv = cardView.findViewById<View>(R.id.value) as TextView
+        private var valTv = binding.value
+        //private var valWasTv = cardView.findViewById<View>(R.id.val_was) as TextView
+        private var valWasTv = binding.valWas
 
         init {
             cardView.setOnClickListener(this)

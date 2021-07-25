@@ -125,19 +125,19 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
                 call: Call<CBjsonResponse>,
                 response: Response<CBjsonResponse>
             ) {
-                val cBjsonResponse: CBjsonResponse? = response.body()
-                val date: String? = cBjsonResponse?.Date
+                val cBJsonResponse: CBjsonResponse? = response.body()
+                val date: String? = cBJsonResponse?.Date
                 val dateSplit = date?.split("T")?.toTypedArray()
                 val timeSplit = dateSplit?.get(1)?.split("+")?.toTypedArray()
                 val dateWas = timeSplit!![0] + " " + dateSplit[0]
-                val valuteResponse = cBjsonResponse.Valute
-                val USD: CBjsonValute = valuteResponse.USD
-                val EUR: CBjsonValute = valuteResponse.EUR
-                val valueUSD = USD.Value
-                val valueEUR = EUR.Value
+                val valuteResponse = cBJsonResponse.Valute
+                val uSD: CBjsonValute = valuteResponse.USD
+                val eUR: CBjsonValute = valuteResponse.EUR
+                val valueUSD = uSD.Value
+                val valueEUR = eUR.Value
 
-                val previousUSD = USD.Previous
-                val previousEUR = EUR.Previous
+                val previousUSD = uSD.Previous
+                val previousEUR = eUR.Previous
 
                 val views = RemoteViews(mContext.packageName, R.layout.main_widget)
                 if (valueUSD <= previousUSD) views.setTextColor(

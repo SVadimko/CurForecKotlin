@@ -65,7 +65,7 @@
                         android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:id="@+id/curr_choose" />
+                        android:id="@+id/currchoose" />
 
                 <Button
                         android:layout_width="0dp"
@@ -78,7 +78,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_height="wrap_content"
                         android:text="@string/ARCFRAGshowbutton"
-                        android:id="@+id/build_graph" />
+                        android:id="@+id/buildgraph" />
 
             </LinearLayout>
 
@@ -88,7 +88,7 @@
                     android:orientation="vertical">
 
                 <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/chart_cbrf"
+                        android:id="@+id/chartcbrf"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
                         android:forceDarkAllowed="false"

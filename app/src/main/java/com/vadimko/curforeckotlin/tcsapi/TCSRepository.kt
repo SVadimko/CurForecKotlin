@@ -1,6 +1,7 @@
 package com.vadimko.curforeckotlin.tcsapi
 
 import com.vadimko.curforeckotlin.R
+import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -56,6 +57,7 @@ class TCSRepository {
                 else{
                     val currentTCS: List<CurrencyTCS> = listOf(usdTCS,eurTCS,gbpTCS)
                     NowViewModel.data.postValue(currentTCS)
+                    CalcViewModel.data.postValue(currentTCS)
                 }
             }
 

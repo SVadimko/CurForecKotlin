@@ -9,7 +9,6 @@ import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.work.*
 import com.github.mikephil.charting.charts.CombinedChart
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
 import com.github.mikephil.charting.components.Description
@@ -19,14 +18,12 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.vadimko.curforeckotlin.DateConverter
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.SettingsActivity
 import com.vadimko.curforeckotlin.databinding.FragmentTodayBinding
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
 import com.vadimko.curforeckotlin.moexapi.CurrencyMOEX
 import com.vadimko.curforeckotlin.prefs.TodayPreferences
-import com.vadimko.curforeckotlin.updateWorkers.TodayWorker
 import java.util.*
 
 
@@ -82,7 +79,8 @@ class TodayFragment : Fragment() {
 
         val loadPrefs = context?.let { TodayPreferences.loadPrefs(it) }
 
-        currSpinner = root.findViewById(R.id.curr_choose)
+        //currSpinner = root.findViewById(R.id.currchoose)
+        currSpinner = binding.currchoose
         val currAdapter = ArrayAdapter(
             requireContext(),
             R.layout.spinner_layout_main,
@@ -104,7 +102,8 @@ class TodayFragment : Fragment() {
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
             }
         }
-        perSpinner = root.findViewById(R.id.period_choose)
+        //perSpinner = root.findViewById(R.id.period_choose)
+        perSpinner = binding.periodchoose
         val perAdapter = ArrayAdapter(
             requireContext(),
             R.layout.spinner_layout_main,
@@ -129,7 +128,8 @@ class TodayFragment : Fragment() {
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
             }
         }
-        rateSpinner = root.findViewById(R.id.rate_choose)
+        //rateSpinner = root.findViewById(R.id.ratechoose)
+        rateSpinner = binding.ratechoose
         val rateAdapter = ArrayAdapter(
             requireContext(),
             R.layout.spinner_layout_main,
@@ -154,14 +154,20 @@ class TodayFragment : Fragment() {
             }
         }
 
-        val button = root.findViewById<View>(R.id.build_graph) as Button
-        button.apply {
+        //val button = root.findViewById<View>(R.id.buildgraph) as Button
+        val showGraphButton = binding.buildgraph
+        showGraphButton.apply {
             setOnClickListener {
                 val choosen = IntArray(3)
                 choosen[0] = currSpinner.selectedItemPosition
                 choosen[1] = perSpinner.selectedItemPosition
                 choosen[2] = rateSpinner.selectedItemPosition
-                createRequestStrings(choosen)
+                //createRequestStrings(choosen)
+                todayViewModel.createRequestStrings(
+                    choosen,
+                    currSpinner.selectedItemPosition,
+                    perSpinner.selectedItemPosition,
+                    rateSpinner.selectedItemPosition)
             }
         }
         return root
@@ -195,12 +201,13 @@ class TodayFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
+
     }
 
     //выбор параметров запроса в зависимости от состояний спиннера
-    private fun createRequestStrings(choosen: IntArray) {
+    /*private fun createRequestStrings(choosen: IntArray) {
         var jsonCurr = ""
         val jsonDate: Array<String>
         var recDays = 0L
@@ -249,7 +256,7 @@ class TodayFragment : Fragment() {
         val till = Date(System.currentTimeMillis())
         val from = Date(System.currentTimeMillis() - 86400000 * recDays)
         //val result = dateConverter(recDays)
-        val result = DateConverter.getFromTillDate(from,till,requireContext())
+        val result = DateConverter.getFromTillDate(from, till, requireContext())
         jsonDate = result[0]
         startTodayWorker(jsonCurr, jsonDate[0], jsonDate[1], rates.toString())
         context?.let {
@@ -286,7 +293,7 @@ class TodayFragment : Fragment() {
             .setInputData(data)
             .build()
         workManager?.enqueue(myWorkRequest)
-    }
+    }*/
 
     //извлекаем полученные данные
     private fun extractData(dataList: List<CurrencyMOEX>) {
@@ -308,7 +315,7 @@ class TodayFragment : Fragment() {
         }
 
         for (i in 1 until 3) {
-            datesForecast.add("Прогноз + ${rateSpinner.getItemAtPosition(rateSpinner.selectedItemPosition)}")
+            datesForecast.add("${getString(R.string.forec)} ${rateSpinner.getItemAtPosition(rateSpinner.selectedItemPosition)}")
         }
         createComboChartForecast()
 
@@ -316,7 +323,8 @@ class TodayFragment : Fragment() {
 
     //создаем комбинированный график для свечей и линии
     private fun createComboChartForecast() {
-        comboChartForec = root.findViewById(R.id.candlforec)
+        //comboChartForec = root.findViewById(R.id.candlforec)
+        comboChartForec = binding.candlforec
         comboChartForec.clear()
         comboChartForec.setDrawGridBackground(false)
         comboChartForec.description.isEnabled = true
@@ -485,6 +493,4 @@ class TodayFragment : Fragment() {
         set1.shadowColorSameAsCandle = true
         return CandleData(set1)
     }
-
-
 }

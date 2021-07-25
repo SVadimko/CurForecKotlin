@@ -10,22 +10,18 @@ import android.os.Bundle
 import android.util.Size
 import android.view.*
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.work.*
 import com.vadimko.curforeckotlin.*
 import com.vadimko.curforeckotlin.R
-import com.vadimko.curforeckotlin.adapters.CBmainAdapter
-import com.vadimko.curforeckotlin.adapters.TCSmainAdapter
+import com.vadimko.curforeckotlin.adapters.CBMainAdapter
+import com.vadimko.curforeckotlin.adapters.TCSMainAdapter
 import com.vadimko.curforeckotlin.cbjsonapi.CurrencyCBjs
 import com.vadimko.curforeckotlin.databinding.FragmentNowBinding
 import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
-import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
-import com.vadimko.curforeckotlin.updateWorkers.NowWorker
 
 
 class NowFragment : Fragment() {
@@ -63,21 +59,36 @@ class NowFragment : Fragment() {
         _binding = FragmentNowBinding.inflate(inflater, container, false)
         root = binding.root
 
-        tcsRecycle = root.findViewById(R.id.recycletinkoff)
+        tcsRecycle = binding.recycletinkoff
+        //tcsRecycle = root.findViewById(R.id.recycletinkoff)
         tcsRecycle.layoutManager = LinearLayoutManager(context)
 
-        cbRecycle = root.findViewById(R.id.recyclecbrf)
+
+
+
+        cbRecycle = binding.recyclecbrf
+        //cbRecycle = root.findViewById(R.id.recyclecbrf)
         cbRecycle.layoutManager = LinearLayoutManager(context)
 
-        frameLayout = root.findViewById(R.id.framelay)
+        frameLayout = binding.framelay
+        //frameLayout = root.findViewById(R.id.framelay)
 
-        swipeRefreshLayout = root.findViewById<SwipeRefreshLayout>(R.id.swipe)
+
+        /*swipeRefreshLayout = root.findViewById<SwipeRefreshLayout>(R.id.swipe)
         swipeRefreshLayout.apply {
             setOnRefreshListener {
                 startWorker()
                 val coinsAnimator = CoinsAnimator(mScale, rect, frameLayout, mContext)
                 coinsAnimator.weatherAnimationSnow()
             }
+        }*/
+        swipeRefreshLayout = binding.swipe
+        swipeRefreshLayout.setOnRefreshListener{
+            //startWorker()
+            nowViewModel.startWorker()
+            ////nowViewModel.startAnimations(mScale, rect, frameLayout)
+            //val coinsAnimator = CoinsAnimator(mScale, rect, frameLayout, requireContext())
+            //coinsAnimator.weatherAnimationSnow()
         }
         return root
     }
@@ -90,19 +101,22 @@ class NowFragment : Fragment() {
         nowViewModel.getData().observe(viewLifecycleOwner, { forecTCS ->
             forecTCS?.let {
                 setupAdapterTCS(forecTCS)
-                val lastChk = root.findViewById<TextView>(R.id.lastchk)
-                lastChk.text =
+                //val lastChk = root.findViewById<TextView>(R.id.lastchk)
+                binding.lastchk.text =
+                //lastChk.text =
                     "${getString(R.string.lastupdateTCS)} ${forecTCS[0].curr} ${getString(R.string.NOWFRAGsource)} tinkoff.ru"
                 //fillBundle(forecTCS)
-                CalcViewModel.data.postValue(forecTCS)
+                //CalcViewModel.data.postValue(forecTCS)
+                nowViewModel.startAnimations(mScale, rect, frameLayout)
             }
         })
         //подписка на данные получаемые с сервера Тиньков
         nowViewModel.getData2().observe(viewLifecycleOwner, { forecCB ->
             forecCB?.let {
                 setupAdapterCB(forecCB)
-                val lastChck = root.findViewById<TextView>(R.id.lastchk_cbrf)
-                lastChck.text =
+                //val lastChck = root.findViewById<TextView>(R.id.lastchkcbrf)
+                binding.lastchkcbrf.text =
+                //lastChck.text =
                     "${getString(R.string.lastupdateTCS)} ${forecCB[0].datetime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
                 swipeRefreshLayout.isRefreshing = false
             }
@@ -111,12 +125,13 @@ class NowFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
+
     }
 
     //конфигурирование и запуск воркера для обновления данных о курсах
-    private fun startWorker() {
+   /* private fun startWorker() {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             //.setRequiresCharging(true)
@@ -132,14 +147,14 @@ class NowFragment : Fragment() {
             //.setInputData(randomData)
             .build()
         workManager?.enqueue(myWorkRequest)
-    }
+    }*/
 
     private fun setupAdapterTCS(tcsForec: List<CurrencyTCS>) {
-        tcsRecycle.adapter = TCSmainAdapter(tcsForec)
+        tcsRecycle.adapter = TCSMainAdapter(tcsForec)
     }
 
     private fun setupAdapterCB(cbForec: List<CurrencyCBjs>) {
-        cbRecycle.adapter = CBmainAdapter(cbForec)
+        cbRecycle.adapter = CBMainAdapter(cbForec)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -155,9 +170,11 @@ class NowFragment : Fragment() {
                 return true
             }
             R.id.refresh -> {
-                startWorker()
-                val coinsAnimator = CoinsAnimator(mScale, rect, frameLayout, mContext)
-                coinsAnimator.weatherAnimationSnow()
+                //startWorker()
+                nowViewModel.startWorker()
+                ////nowViewModel.startAnimations(mScale, rect, frameLayout)
+                //val coinsAnimator = CoinsAnimator(mScale, rect, frameLayout, requireContext())
+                //coinsAnimator.weatherAnimationSnow()
             }
         }
         return super.onOptionsItemSelected(item)

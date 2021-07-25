@@ -29,14 +29,6 @@ import com.vadimko.curforeckotlin.databinding.FragmentCalcBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-/*
-private const val USD_BUY = "usdbuy"
-private const val USD_SELL = "usdsell"
-private const val EUR_BUY = "eurbuy"
-private const val EUR_SELL = "eursell"
-private const val GBP_BUY = "gbpbuy"
-private const val GBP_SELL = "gbpsell"
-*/
 
 class CalcFragment : Fragment() {
     private lateinit var linearTCs: LineChart
@@ -44,8 +36,8 @@ class CalcFragment : Fragment() {
     private lateinit var root: View
     private lateinit var viewAccept: LinearLayout
     private lateinit var viewAcceptWidget: LinearLayout
-    private  var viewChild: View? = null
-    private  var viewChildWidget: View? = null
+    private var viewChild: View? = null
+    private var viewChildWidget: View? = null
     private lateinit var currSpinner: Spinner
     private lateinit var currGrafSpinner: Spinner
     private lateinit var currGrafSpinnerWidget: Spinner
@@ -62,6 +54,7 @@ class CalcFragment : Fragment() {
     private var eurSell: Double = 0.0
     private var gbpBuy: Double = 0.0
     private var gbpSell: Double = 0.0
+    private lateinit var dataToCalc: List<CurrencyTCS>
 
 
     val datesTime: MutableList<String> = mutableListOf()
@@ -94,7 +87,6 @@ class CalcFragment : Fragment() {
 
     private var _binding: FragmentCalcBinding? = null
 
-
     private val binding get() = _binding!!
 
     /*companion object {
@@ -126,14 +118,18 @@ class CalcFragment : Fragment() {
     ): View {
         _binding = FragmentCalcBinding.inflate(inflater, container, false)
         root = binding.root
-        root = inflater.inflate(R.layout.fragment_calc, container, false)
-        viewAccept = root.findViewById(R.id.viewaccept)
-        viewAcceptWidget = root.findViewById(R.id.viewacceptWidget)
+        //root = inflater.inflate(R.layout.fragment_calc, container, false)
+        //viewAccept = root.findViewById(R.id.viewaccept)
+        viewAccept = binding.viewaccept
+        //viewAcceptWidget = root.findViewById(R.id.viewacceptWidget)
+        viewAcceptWidget = binding.viewacceptWidget
         viewChild = inflater.inflate(R.layout.layoutgraph, container, false)
         viewChildWidget = inflater.inflate(R.layout.layoutgraph, container, false)
 
-        curSigna = root.findViewById(R.id.cur_sign)
-        currSpinner = root.findViewById(R.id.currency_calc)
+        //curSigna = root.findViewById(R.id.cur_sign)
+        curSigna = binding.cursign
+        //currSpinner = root.findViewById(R.id.currency_calc)
+        currSpinner = binding.currencycalc
         val currAdapter = ArrayAdapter(
             requireContext(),
             R.layout.spinner_layout,
@@ -165,21 +161,40 @@ class CalcFragment : Fragment() {
                         }
                     }
                 }
+
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
             }
         }
-        eqSign = root.findViewById(R.id.eq_tv)
-        toBuy = root.findViewById(R.id.buy)
-        toSell = root.findViewById(R.id.sell)
-        currValue = root.findViewById(R.id.curr_value)
-        rubValue = root.findViewById(R.id.rub_value)
+        //eqSign = root.findViewById(R.id.eq_tv)
+        eqSign = binding.eqtv
+        //toBuy = root.findViewById(R.id.buy)
+        toBuy = binding.buy
+        //toSell = root.findViewById(R.id.sell)
+        toSell = binding.sell
+        //currValue = root.findViewById(R.id.curr_value)
+        currValue = binding.currvaluecalc
+        currValue.requestFocus()
+        //currValue.setText("0")
+        //rubValue = root.findViewById(R.id.rub_value)
+        rubValue = binding.rubvaluecalc
 
-        calculate = root.findViewById(R.id.calcul)
-        calculate.apply {
+        //calculate = root.findViewById(R.id.calcul)
+        binding.calcul.setOnClickListener {
+            //calculating()
+            calcViewModel.calculating(
+                currSpinner.selectedItemPosition,
+                dataToCalc,
+                toBuy.isChecked,
+                toSell.isChecked,
+                currValue.text.toString()
+            )
+        }
+        binding.calcul.isEnabled = true
+        /*calculate.apply {
             setOnClickListener {
                 calculating()
             }
-        }
+        }*/
         toSell.apply {
             setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
@@ -187,8 +202,8 @@ class CalcFragment : Fragment() {
                     currValue.isEnabled = true
                     rubValue.isEnabled = false
                     currValue.requestFocus()
-                    calculate.isEnabled = true
-                    currValue.setText("")
+                    //calculate.isEnabled = true
+                    //currValue.setText("")
                     rubValue.text = ""
                 }
             }
@@ -200,8 +215,8 @@ class CalcFragment : Fragment() {
                     currValue.isEnabled = true
                     rubValue.isEnabled = false
                     currValue.requestFocus()
-                    calculate.isEnabled = true
-                    currValue.setText("")
+                    //calculate.isEnabled = true
+                    //currValue.setText("")
                     rubValue.text = ""
                 }
             }
@@ -223,26 +238,39 @@ class CalcFragment : Fragment() {
         calcViewModel.getData().observe(viewLifecycleOwner, { forecTCS ->
             forecTCS?.let {
                 getData(forecTCS)
+                dataToCalc = forecTCS
             }
         })
         //если в настройках активен пункт автообновление курса- извлекаем данные из подписки на сохраненные на устройстве курсы валют,
         //которые сохраняются при каждом автообновлении
-        calcViewModel.getDataList().observe(viewLifecycleOwner, {
-            val pref =
-                PreferenceManager.getDefaultSharedPreferences(context).getBoolean("updateon", false)
-            if (pref) {
+        var pref =
+            PreferenceManager.getDefaultSharedPreferences(context).getBoolean("updateon", false)
+        if (pref) {
+            calcViewModel.getDataList().observe(viewLifecycleOwner, {
+                //val pref =
+                //PreferenceManager.getDefaultSharedPreferences(context).getBoolean("updateon", false)
+                //if (pref) {
                 extractGraphData(it)
-            }
-        })
+                //}
+            })
+        }
         //если в настройках активен пункт показывать информацию с виджета курса- извлекаем данные из подписки на сохраненные в БД на устройстве курсы валют,
         //которые сохраняются при каждом обновлении виджета
-        calcViewModel.livedataTKS.observe(viewLifecycleOwner, {
-            val pref =
-                PreferenceManager.getDefaultSharedPreferences(context).getBoolean("widgeton", false)
-            if (pref) {
-                extractWidgetGraphData(it)
-            }
-            listWidgetData = it
+        pref =
+            PreferenceManager.getDefaultSharedPreferences(context).getBoolean("widgeton", false)
+        if (pref) {
+            calcViewModel.livedataTKS.observe(viewLifecycleOwner, {
+                //val pref =
+                    //PreferenceManager.getDefaultSharedPreferences(context)
+                        //.getBoolean("widgeton", false)
+                //if (pref) {
+                    extractWidgetGraphData(it)
+                //}
+                listWidgetData = it
+            })
+        }
+        calcViewModel.rubValue.observe(viewLifecycleOwner, {
+            rubValue.text = it
         })
     }
 
@@ -674,8 +702,9 @@ class CalcFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
+
     }
 
 }

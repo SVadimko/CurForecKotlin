@@ -19,7 +19,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.vadimko.curforeckotlin.DateConverter
+//import com.vadimko.curforeckotlin.DateConverter
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.R.*
 import com.vadimko.curforeckotlin.SettingsActivity
@@ -30,8 +30,8 @@ import com.vadimko.curforeckotlin.forecastsMethods.LessSquare
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
 import com.vadimko.curforeckotlin.moexapi.CurrencyMOEX
 import com.vadimko.curforeckotlin.prefs.ArchivePreferences
-import com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker
-import com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker
+//import com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker
+//import com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -61,7 +61,7 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
     private var choosenCurrency = ""
     private lateinit var currSpinner: Spinner
 
-    private var custCur = ""
+    //private var custCur = ""
 
     private val archiveViewModel: ArchiveViewModel by lazy {
         //ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
@@ -102,7 +102,8 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
             fromDate = Date(loadPrefs[0].toLong())
         }
 
-        currSpinner = root.findViewById(R.id.curr_choose)
+        //currSpinner = root.findViewById(R.id.currchoose)
+        currSpinner = binding.currchoose
         val currAdapter = ArrayAdapter(
             requireContext(),
             layout.spinner_layout_main,
@@ -123,14 +124,22 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
             }
         }
-        val buttonShow = root.findViewById<Button>(R.id.build_graph)
-        buttonShow.apply {
+        //val buttonShow = root.findViewById<Button>(R.id.buildgraph)
+        val buttonGraphBuild = binding.buildgraph
+        buttonGraphBuild.apply {
             setOnClickListener {
                 val choosen = currSpinner.selectedItemPosition
-                createRequestStrings(choosen)
+                //createRequestStrings(choosen)
+                archiveViewModel.createRequestStrings(
+                    choosen,
+                    fromDate,
+                    tillDate,
+                    //currSpinner.selectedItemPosition
+                )
             }
         }
-        fromTv = root.findViewById(R.id.from)
+        //fromTv = root.findViewById(R.id.from)
+        fromTv = binding.from
         fromTv.apply {
             setOnClickListener {
                 val c = Calendar.getInstance()
@@ -143,7 +152,8 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
                 newFragment.show(this@ArchiveFragment.parentFragmentManager, "datePicker")
             }
         }
-        tillTv = root.findViewById(R.id.till)
+        //tillTv = root.findViewById(R.id.till)
+        tillTv = binding.till
         tillTv.apply {
             setOnClickListener {
                 val c = Calendar.getInstance()
@@ -161,13 +171,14 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
         fromTv.text = longToDate(fromDate)
         c.time = tillDate
         tillTv.text = longToDate(tillDate)
-        checkDates(fromDate,tillDate)
+        //checkDates(fromDate,tillDate)
         return root
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -189,7 +200,7 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
     }
 
     //в зависимости от выбранных значений спиннеров формируем части запроса к сайтам
-    private fun createRequestStrings(choosen: Int) {
+   /* private fun createRequestStrings(choosen: Int) {
         var jsonCurr = ""
         var xmlCurr = ""
         val jsonDate: Array<String>
@@ -230,16 +241,16 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
 
     //проверяем корректность введенных дат
-    private fun checkDates(from:Date, till:Date): Boolean {
+    private fun checkDates(from: Date, till: Date): Boolean {
         val tillLong = till.time
         val fromLong = from.time
         if (tillLong - fromLong > 63072000000)
             Toast.makeText(context, getString(string.choosedwarm), Toast.LENGTH_LONG).show()
         return (tillDate.compareTo(fromDate)) > 0
-    }
+    }*/
 
     //запуск воркера для получения данных с сайта ЦБ
-    private fun startArchiveWorker(from: String, till: String, request: String) {
+   /* private fun startArchiveWorker(from: String, till: String, request: String) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             //.setRequiresCharging(true)
@@ -280,7 +291,7 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
             .setInputData(data)
             .build()
         workManager?.enqueue(myWorkRequest)
-    }
+    }*/
 
     //экстракция полученных от московской биржи данных для построения графика
     private fun extractDataMOEX(dataListMOEX: List<CurrencyMOEX>) {
@@ -331,7 +342,8 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
     //создание и задание параметров графика ЦБ
     private fun createClearCbrfGraph() {
-        linearCbrf = root.findViewById(R.id.chart_cbrf)
+        //linearCbrf = root.findViewById(R.id.chartcbrf)
+        linearCbrf = binding.chartcbrf
         linearCbrf.clear()
         linearCbrf.setDrawGridBackground(false)
         linearCbrf.description.isEnabled = true
@@ -411,7 +423,8 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
     //создаем график для МБ
     private fun createLinearSetForecast() {
-        linearChartForec = root.findViewById(R.id.linearforec)
+        //linearChartForec = root.findViewById(R.id.linearforec)
+        linearChartForec = binding.linearforec
         linearChartForec.clear()
         linearChartForec.notifyDataSetChanged()
         linearChartForec.invalidate()

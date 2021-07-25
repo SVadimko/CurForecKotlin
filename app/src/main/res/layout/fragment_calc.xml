@@ -72,7 +72,7 @@
                                     android:textSize="20sp"
                                     android:layout_width="match_parent"
                                     android:layout_marginEnd="10dp"
-                                    android:pointerIcon="crosshair"
+                                    android:pointerIcon="hand"
                                     android:textColor="@color/MainTextColor"
                                     android:layout_height="wrap_content"
                                     android:gravity="center_horizontal"
@@ -105,7 +105,7 @@
                                 android:textSize="35sp"
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/digital"
-                                android:hint="______"
+                                android:hint="@string/underscore"
                                 android:textColor="@color/colorCalc2"
                                 android:background="@color/colorCalc"
                                 android:gravity="center"
@@ -113,9 +113,8 @@
                                 android:layout_marginStart="5dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
-                                android:id="@+id/curr_value"
-                                android:inputType="numberDecimal"
-                                tools:targetApi="q" />
+                                android:id="@+id/currvaluecalc"
+                                android:inputType="numberDecimal"/>
 
                         <TextView
                                 android:layout_width="0dp"
@@ -127,7 +126,7 @@
                                 android:textColor="@color/colorCalc2"
                                 android:background="@color/colorCalc"
                                 android:gravity="center_vertical"
-                                android:id="@+id/cur_sign"
+                                android:id="@+id/cursign"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_height="35dp"
@@ -144,7 +143,7 @@
 
                                 android:background="@color/colorCalc"
                                 android:gravity="center"
-                                android:id="@+id/eq_tv"
+                                android:id="@+id/eqtv"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_height="35dp"
@@ -165,8 +164,8 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_height="35dp"
-                                android:hint="_________"
-                                android:id="@+id/rub_value" />
+                                android:hint="@string/underscore2"
+                                android:id="@+id/rubvaluecalc" />
 
                         <TextView
                                 android:layout_width="0dp"
@@ -202,7 +201,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="90dp"
-                                android:id="@+id/currency_calc" />
+                                android:id="@+id/currencycalc" />
 
 
                         <Button

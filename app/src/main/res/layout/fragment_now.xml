@@ -152,7 +152,7 @@
                                     android:textColor="@color/white"
                                     android:autoLink="web"
                                     android:layout_marginBottom="5dp"
-                                    android:id="@+id/lastchk_cbrf" />
+                                    android:id="@+id/lastchkcbrf" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 

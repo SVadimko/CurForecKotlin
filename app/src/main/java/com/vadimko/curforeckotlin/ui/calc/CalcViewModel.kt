@@ -1,14 +1,22 @@
 package com.vadimko.curforeckotlin.ui.calc
 
+import android.app.Application
+import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.Saver
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsapi.TCSRepository
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import java.util.*
 
-class CalcViewModel : ViewModel() {
+class CalcViewModel(application: Application) : AndroidViewModel(application) {
+    private val context = getApplication<Application>()
 
     fun getData(): MutableLiveData<List<CurrencyTCS>> {
         if (data.value?.size == null) {
@@ -24,13 +32,65 @@ class CalcViewModel : ViewModel() {
         return data2
     }
 
+    var rubValue: MutableLiveData<String> = MutableLiveData<String>()
+
     //получение информации о курсах из базы данных, которая дополняется каждый раз при обновлении виджета
     val livedataTKS = CurrenciesRepository.get().getCurrencies()
+
+    fun calculating(
+        currSpinnerPos: Int,
+        dataList: List<CurrencyTCS>,
+        toBuy: Boolean,
+        toSell: Boolean,
+        currValue: String
+    ) {
+        val usdBuy = dataList[0].buy!!
+        val usdSell = dataList[0].sell!!
+        val eurBuy = dataList[1].buy!!
+        val eurSell = dataList[1].sell!!
+        val gbpBuy = dataList[2].buy!!
+        val gbpSell = dataList[2].sell!!
+        var result: Double
+        var convertValue: Double
+        var buyValue = 0.0
+        var sellValue = 0.0
+        try {
+            when (currSpinnerPos) {
+                0 -> {
+                    buyValue = usdBuy
+                    sellValue = usdSell
+                }
+                1 -> {
+                    buyValue = eurBuy
+                    sellValue = eurSell
+                }
+                2 -> {
+                    buyValue = gbpBuy
+                    sellValue = gbpSell
+                }
+            }
+            if (toBuy) {
+                convertValue = currValue.toDouble()
+                result = convertValue * sellValue
+                rubValue.postValue(String.format(Locale.US, "%.2f", result))
+            }
+            if (toSell) {
+                convertValue = currValue.toDouble()
+                result = convertValue * buyValue
+                rubValue.postValue(String.format(Locale.US, "%.2f", result))
+            }
+        } catch (ex: NumberFormatException) {
+            Toast.makeText(context, R.string.incorrect_number, Toast.LENGTH_SHORT).show()
+            //currValue.requestFocus()
+        }
+
+    }
 
     companion object {
         //данные о курсах, которые используются при рассчете значений калькулятора
         var data: MutableLiveData<List<CurrencyTCS>> = NowViewModel.data
         fun loadDataTCS() {
+
             val tcsRepository = TCSRepository()
             tcsRepository.getCurrentTCS()
         }

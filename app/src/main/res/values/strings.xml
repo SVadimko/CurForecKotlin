@@ -76,6 +76,10 @@
     <string name="attention">Attention!</string>
     <string name="noconnection">There is no internet connection!</string>
     <string name="official_course">Official course</string>
+    <string name="refreshed">Refreshed!</string>
+    <string name="forec">Forecast</string>
+    <string name="underscore">______</string>
+    <string name="underscore2">_________</string>
 
 
 </resources>
