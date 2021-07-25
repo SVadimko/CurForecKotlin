@@ -3,12 +3,10 @@ package com.vadimko.curforeckotlin.ui.now
 import android.app.Application
 import android.graphics.Rect
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.CoinsAnimator
-import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.cbjsonapi.CBJsonRepository
 import com.vadimko.curforeckotlin.cbjsonapi.CurrencyCBjs
 import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
