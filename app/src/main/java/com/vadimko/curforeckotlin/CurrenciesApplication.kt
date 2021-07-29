@@ -8,7 +8,6 @@ class CurrenciesApplication : Application() {
     init {
         instance = this
     }
-
     override fun onCreate() {
         CurrenciesRepository.initialize(this)
         super.onCreate()

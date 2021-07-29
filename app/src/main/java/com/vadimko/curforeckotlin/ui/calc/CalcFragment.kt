@@ -365,7 +365,8 @@ class CalcFragment : Fragment() {
                 setOnClickListener {
                     Saver().deleteTcsLast()
                     attachGraph()
-                    CalcViewModel.data2.postValue(Saver().loadTcsLast()
+                    CalcViewModel.data2.postValue(
+                        Saver().loadTcsLast()
                     )
                 }
             }
