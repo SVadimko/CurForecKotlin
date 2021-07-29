@@ -1,12 +1,9 @@
 package com.vadimko.curforeckotlin.ui.calc
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.Saver
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
@@ -101,7 +98,7 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
 
         fun loadGraphData() {
             val saver = Saver()
-            data2.postValue(saver.loadTcslast())
+            data2.postValue(saver.loadTcsLast())
         }
     }
 }

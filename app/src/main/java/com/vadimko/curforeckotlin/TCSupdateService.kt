@@ -139,8 +139,8 @@ class TCSupdateService : Service() {
                     } else {
                         currentTCS = mutableListOf(usdTCS, eurTCS, gbpTCS)
                         val saver = Saver()
-                        saver.saveTCSlast(currentTCS)
-                        CalcViewModel.data2.postValue(saver.loadTcslast())
+                        saver.saveTcsLast(currentTCS)
+                        CalcViewModel.data2.postValue(saver.loadTcsLast())
                         val usdBuy = String.format("%.2f", currentTCS[0].buy)
                         val usdSell = String.format("%.2f", currentTCS[0].sell)
                         val eurBuy = String.format("%.2f", currentTCS[1].buy)
@@ -167,7 +167,7 @@ class TCSupdateService : Service() {
     }
 
 
-    private fun buildForegroundNotification(s: String, s2: String): Notification? {
+    private fun buildForegroundNotification(s: String, s2: String): Notification {
         val b = NotificationCompat.Builder(this, CHANNEL_ID)
         b.setOngoing(true)
             .setUsesChronometer(true)

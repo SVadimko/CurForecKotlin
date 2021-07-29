@@ -7,12 +7,13 @@ import java.io.*
 
 //вспомогательный класс для сохранения/загрузки данных автообновления курса
 class Saver {
+    val path: String = CurrenciesApplication.applicationContext().filesDir.path
 
-     fun saveTCSlast(newdata:MutableList<CurrencyTCS>) {
-         val temp: MutableList<MutableList<CurrencyTCS>> = loadTcslast()
-        temp.add(newdata)
+    fun saveTcsLast(newData: MutableList<CurrencyTCS>) {
+        val temp: MutableList<MutableList<CurrencyTCS>> = loadTcsLast()
+        temp.add(newData)
         try {
-            ObjectOutputStream(FileOutputStream("/data/user/0/com.vadimko.curforeckotlin/files" + "TCSlast.sav")).use { it ->
+            ObjectOutputStream(FileOutputStream(path + "TCSlast.sav")).use {
                 it.writeObject(temp)
                 CalcViewModel.loadGraphData()
             }
@@ -21,22 +22,22 @@ class Saver {
         }
     }
 
-     fun loadTcslast(): MutableList<MutableList<CurrencyTCS>> {
-        var temp: MutableList<MutableList<CurrencyTCS>> = mutableListOf()
+    fun loadTcsLast(): MutableList<MutableList<CurrencyTCS>> {
+        var tcsList: MutableList<MutableList<CurrencyTCS>> = mutableListOf()
         try {
-            ObjectInputStream(FileInputStream("/data/user/0/com.vadimko.curforeckotlin/files" + "TCSlast.sav")).use { it ->
-                temp = it.readObject() as MutableList<MutableList<CurrencyTCS>>
+            ObjectInputStream(FileInputStream(path + "TCSlast.sav")).use {
+                tcsList = it.readObject() as MutableList<MutableList<CurrencyTCS>>
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
-        return temp
+        return tcsList
     }
 
-    fun deleteTcslast(){
+    fun deleteTcsLast() {
         val temp: List<CurrencyTCS> = listOf()
         try {
-            ObjectOutputStream(FileOutputStream("/data/user/0/com.vadimko.curforeckotlin/files" + "TCSlast.sav")).use { it ->
+            ObjectOutputStream(FileOutputStream(path + "TCSlast.sav")).use {
                 it.writeObject(temp)
             }
         } catch (ex: IOException) {

@@ -363,9 +363,10 @@ class CalcFragment : Fragment() {
             val trashCan = viewChild!!.findViewById<ImageView>(R.id.trashcan)
             trashCan.apply {
                 setOnClickListener {
-                    Saver().deleteTcslast()
+                    Saver().deleteTcsLast()
                     attachGraph()
-                    CalcViewModel.data2.postValue(Saver().loadTcslast())
+                    CalcViewModel.data2.postValue(Saver().loadTcsLast()
+                    )
                 }
             }
         } else {
