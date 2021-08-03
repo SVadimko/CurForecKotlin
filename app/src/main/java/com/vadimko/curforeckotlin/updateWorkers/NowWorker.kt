@@ -5,7 +5,10 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
 
-//воркер для запуска во вьюмодел запросов загрузки данных ЦБ и Тиньков на текущий момент
+/**
+ * worker for calling throw viewModel request for Tinkov and CB data
+ */
+
 class NowWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
     override fun doWork(): Result {
         NowViewModel.loadDataTCS()

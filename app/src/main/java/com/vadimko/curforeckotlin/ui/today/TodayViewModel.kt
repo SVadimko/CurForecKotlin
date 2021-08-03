@@ -11,6 +11,10 @@ import com.vadimko.curforeckotlin.moexapi.MOEXRepository
 import com.vadimko.curforeckotlin.updateWorkers.TodayWorker
 import java.util.*
 
+/**
+ * viewModel for Today fragment
+ */
+
 class TodayViewModel(application: Application) : AndroidViewModel(application) {
     private val context = getApplication<Application>()
     private var recCur = ""
@@ -100,7 +104,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-    //конфигурируем и запускаем воркер для обновления данных за указанный период
+    //configure and launch worker for requested days
     private fun startTodayWorker(request: String, from: String, till: String, interval: String) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)

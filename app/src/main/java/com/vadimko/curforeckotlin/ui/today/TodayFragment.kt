@@ -26,6 +26,9 @@ import com.vadimko.curforeckotlin.moexapi.CurrencyMOEX
 import com.vadimko.curforeckotlin.prefs.TodayPreferences
 import java.util.*
 
+/**
+ * Today fragment representing chart for latest 1-5 days
+ */
 
 class TodayFragment : Fragment() {
 
@@ -182,7 +185,7 @@ class TodayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //подписываемся на данные с МБ
+        //subscribe to data from the MOEX in TodayViewModel
         todayViewModel.getData().observe(viewLifecycleOwner, { forecMOEX ->
             forecMOEX?.let {
                 extractData(forecMOEX)
@@ -196,7 +199,7 @@ class TodayFragment : Fragment() {
 
     }
 
-    //извлекаем полученные данные
+    //extract received from viewModel data
     private fun extractData(dataList: List<CurrencyMOEX>) {
         dates.clear()
         open.clear()
@@ -227,7 +230,7 @@ class TodayFragment : Fragment() {
 
     }
 
-    //создаем комбинированный график для свечей и линии
+    //create a combined candlestick and line chart
     private fun createComboChartForecast() {
         comboChartForec = binding.candlforec
         comboChartForec.clear()
@@ -301,7 +304,7 @@ class TodayFragment : Fragment() {
         }
     }
 
-    //функция, вызывающая функции заполнения графика данными
+    //calling functions for filling the chart with data
     private fun fillComboChartForecast(s: String) {
         val data = CombinedData()
         data.setData(generateLineData(s))
@@ -310,7 +313,7 @@ class TodayFragment : Fragment() {
         comboChartForec.invalidate()
     }
 
-    //функция заполнения линейного графика данными
+    //filling linear chart with values
     private fun generateLineData(s: String): LineData {
         val dataSets: MutableList<ILineDataSet> = mutableListOf()
         val entries:
@@ -367,7 +370,7 @@ class TodayFragment : Fragment() {
         return LineData(dataSets)
     }
 
-    //функция заполнения графика свечей
+    //filling candle chart with values
     private fun generateCandleData(s: String): CandleData {
         yValsCandleStick2.clear()
         for (i in 0 until open.size) {

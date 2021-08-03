@@ -1,5 +1,10 @@
 package com.vadimko.curforeckotlin.tcsapi
 
+
+/**
+ * splitting JSON response into classes
+ */
+
 class TCSResponse {
     lateinit var payload: TCSPayload
 }

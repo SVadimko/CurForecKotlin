@@ -7,7 +7,10 @@ import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "currencies-database"
 
-//репозиторий для работы с базой данных
+/**
+ * repository for work with DataBase
+ */
+
 class CurrenciesRepository private constructor(context: Context) {
     private val executor = Executors.newSingleThreadExecutor()
     private val database: CurrenciesDataBase = Room.databaseBuilder(

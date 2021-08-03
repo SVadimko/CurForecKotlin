@@ -5,7 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 
-//бутресивер для запуска сервиса автообновления курса валют Тиньков после перезагрузки, если в настройках приложения выбрано автообновление
+/**
+ * bootreceiver for starting the service of auto-update of the exchange rate Tinkov after reboot, if auto-update is selected in the application settings
+ */
+
 class BootReceiver : BroadcastReceiver() {
     lateinit var mContext: Context
 

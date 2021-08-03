@@ -5,7 +5,10 @@ import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.DateConverter
 import java.util.*
 
-//сохранение/загрузка состояния спиннеров для графика на фрагменте Today
+/**
+ * save/load in prefs spinner conditions on Today fragment
+ */
+
 object TodayPreferences {
 
     fun savePrefs(

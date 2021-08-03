@@ -5,6 +5,9 @@ import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * data class used to store rates from the Tinkov bank
+ */
 
 data class CurrencyTCS(
     var flag: Int,

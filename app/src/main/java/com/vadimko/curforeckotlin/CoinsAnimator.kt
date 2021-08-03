@@ -16,6 +16,10 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import java.util.*
 
+/**
+ * class for creating animation after courses updated
+ */
+
 class CoinsAnimator(val mScale: Float, val mDisplaySize: Rect, val mRootLayout: FrameLayout, val context: Context) {
     var count = 0
     private val coinsArrayImage = intArrayOf(

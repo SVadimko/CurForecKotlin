@@ -3,11 +3,15 @@ package com.vadimko.curforeckotlin.forecastsMethods
 import java.text.NumberFormat
 import kotlin.math.abs
 
-//рассчет прогноза метода меньших квадратов
+/**
+ *  calculate forecast using method of Less Square
+ */
+
 class LessSquare(inp: MutableList<Float>) {
     private var input: MutableList<Float> = inp
     private var output: MutableList<Float> = mutableListOf()
     private var forecast: MutableList<Float> = mutableListOf()
+
     //val count = 0
     private var inputSumm = 0f
     private var timeSumm = 0f
@@ -79,7 +83,7 @@ class LessSquare(inp: MutableList<Float>) {
         }
     }
 
-    //рассчитываем ошибку метода
+    //calculating methods error
     private fun calculateError() {
         for (i in input.indices) {
             errTmp += abs(input[i] - output[i]) / input[i] * 100
@@ -90,7 +94,7 @@ class LessSquare(inp: MutableList<Float>) {
         return output
     }
 
-    //получаем прогноз
+    //get forecast value
     fun getForecastVal(): MutableList<Float> {
         return forecast
     }

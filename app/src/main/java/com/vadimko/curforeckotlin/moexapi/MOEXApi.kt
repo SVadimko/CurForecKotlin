@@ -6,7 +6,10 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 
-//интерфейс запроса к сайту мосбиржи
+/**
+ *interface for requesting MOEX data with a response in JSON format
+ */
+
 interface MOEXApi {
     @GET("{req}/candles.json")
     fun getMOEXForec(

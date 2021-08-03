@@ -4,8 +4,10 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * interface for requesting Central Bank data with a response in XML format
+ */
 
-//интерфейс запроса к данным ЦБ в формате XML
 interface CBXMLAPI {
 
     @GET("XML_dynamic.asp")

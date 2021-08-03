@@ -5,6 +5,10 @@ import android.text.InputType
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.*
 
+/**
+ * SettingsActivity class
+ */
+
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

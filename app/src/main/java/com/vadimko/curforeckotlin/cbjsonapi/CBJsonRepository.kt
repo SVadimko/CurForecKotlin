@@ -10,6 +10,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * request using Retrofit to https://www.cbr-xml-daily.ru/
+ */
 class CBJsonRepository {
     private val cBjsonApi: CBjsonApi
 

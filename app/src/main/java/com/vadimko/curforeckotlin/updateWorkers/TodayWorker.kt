@@ -5,7 +5,10 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.vadimko.curforeckotlin.ui.today.TodayViewModel
 
-//воркер для передачи во вьюмодел параметров для запроса данных МБ на период до недели
+/**
+ * worker for calling throw viewModel request for courses data for 1-5 days
+ */
+
 class TodayWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
     override fun doWork(): Result {
         val request = inputData.getString("request")

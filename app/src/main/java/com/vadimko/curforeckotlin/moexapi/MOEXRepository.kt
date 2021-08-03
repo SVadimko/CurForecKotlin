@@ -10,6 +10,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * request using Retrofit to https://iss.moex.com/iss/engines/currency/
+ */
 
 class MOEXRepository {
 
@@ -22,8 +25,10 @@ class MOEXRepository {
         okHttpClientBuilder.addInterceptor(logging)
 
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://iss.moex.com/iss/engines/currency/" +
-                    "markets/selt/boards/CETS/securities/")
+            .baseUrl(
+                "https://iss.moex.com/iss/engines/currency/" +
+                        "markets/selt/boards/CETS/securities/"
+            )
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClientBuilder.build())
             .build()

@@ -1,5 +1,9 @@
 package com.vadimko.curforeckotlin.cbjsonapi
 
+/**
+ * splitting the nested JSON response into classes
+ */
+
 class CBjsonResponse {
     var Date: String = ""
     //var Timestamp: String = ""

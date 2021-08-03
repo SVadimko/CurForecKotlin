@@ -5,24 +5,21 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.cbjsonapi.CurrencyCBjs
 import java.util.*
 import com.vadimko.curforeckotlin.databinding.CbrfMainRecycleBinding
 
-//адаптер для ресайклвью данных ЦБ на фрагменте Today
+/**
+ * adapter for RecycleView for CentralBank data on Today fragment
+ */
+
 class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
     RecyclerView.Adapter<CBMainAdapter.CurrCBHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrCBHolder {
-        //val view: View = LayoutInflater.from(parent.context)
-        //.inflate(R.layout.cbrf_main_recycle, parent, false)
         val binding = CbrfMainRecycleBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-        //return CurrCBHolder(view)
         return CurrCBHolder(binding)
 
     }
@@ -37,25 +34,19 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
     }
 
 
-    //inner class CurrCBHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
     inner class CurrCBHolder(binding: CbrfMainRecycleBinding) :
         RecyclerView.ViewHolder(binding.cardView),
         View.OnClickListener {
         private val cardView = binding.cardView
 
-        //var imageView = cardView.findViewById<View>(R.id.flag) as ImageView
-        private var imageView = binding.flag//cardView.findViewById<View>(R.id.flag) as ImageView
+        private var imageView = binding.flag
 
-        //private var arrow = cardView.findViewById<View>(R.id.arrow) as ImageView
         private var arrow = binding.arrow
 
-        //private var currTv = cardView.findViewById<View>(R.id.curr) as TextView
         private var currTv = binding.curr
 
-        //private var valTv = cardView.findViewById<View>(R.id.value) as TextView
         private var valTv = binding.value
 
-        //private var valWasTv = cardView.findViewById<View>(R.id.val_was) as TextView
         private var valWasTv = binding.valWas
 
         init {
@@ -69,37 +60,43 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
             this.valute = valute
 
             currTv.text = valute.curr
-            if ((valute.curr == "UAH")||(valute.curr =="TRY")) {
+            if ((valute.curr == "UAH") || (valute.curr == "TRY")) {
 
                 valTv.text = String.format(Locale.US, "%.3f", valute.value)
-            } else{
+            } else {
                 valTv.text = String.format(Locale.US, "%.2f", valute.value)
             }
-            if (valute.value_was != 0.0) {
+            if (valute.valueWas != 0.0) {
                 arrow.visibility = View.VISIBLE
-                if (valute.value > valute.value_was) {
+                // change the color of the current course and set the corresponding arrow depending on
+                // direction of rate growth
+                if (valute.value > valute.valueWas) {
                     valTv.setTextColor(Color.RED)
                     valWasTv.setTextColor(Color.RED)
                     arrow.setImageResource(R.drawable.arrup)
                 }
-                if (valute.value < valute.value_was) {
+                if (valute.value < valute.valueWas) {
                     valTv.setTextColor(Color.rgb(60, 220, 78))
                     valWasTv.setTextColor(Color.rgb(60, 220, 78))
                     arrow.setImageResource(R.drawable.arrdown)
                 }
-                if ((valute.curr == "UAH")||(valute.curr =="TRY")) {
+
+                // Grivna and Lira are returned in a ratio of 1 to 10 to rubles, so for them we increase
+                // number of decimal places
+                if ((valute.curr == "UAH") || (valute.curr == "TRY")) {
                     valWasTv.text = " (" + String.format(
                         Locale.US, "%+.3f",
-                        -valute.value_was + valute.value
+                        -valute.valueWas + valute.value
                     ) + ")"
                 } else {
                     valWasTv.text = " (" + String.format(
                         Locale.US, "%+.2f",
-                        -valute.value_was + valute.value
+                        -valute.valueWas + valute.value
                     ) + ")"
                 }
                 imageView.setImageResource(valute.flag)
             } else {
+                //in case the previous value of the course is undefined
                 valTv.setTextColor(R.color.colorRed)
                 arrow.visibility = View.INVISIBLE
                 valWasTv.setText(R.string.na_string)

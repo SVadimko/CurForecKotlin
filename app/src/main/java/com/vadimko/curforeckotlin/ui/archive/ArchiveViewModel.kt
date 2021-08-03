@@ -17,19 +17,23 @@ import com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker
 import java.util.*
 import kotlin.collections.ArrayList
 
+/**
+ * viewModel for Archive fragment
+ */
+
 class ArchiveViewModel(application: Application) : AndroidViewModel(application) {
     private val context = getApplication<Application>()
     private var custCur = ""
 
-    fun getData(): MutableLiveData<List<CurrencyCBarhive>> {
-        if (data.value?.size == null) {
+    fun getDataCB(): MutableLiveData<List<CurrencyCBarhive>> {
+        if (dataCB.value?.size == null) {
             val archPr = ArchivePreferences.loadPrefs(getApplication())
             loadCBArhieve(archPr[4], archPr[5], archPr[3])
         }
-        return data
+        return dataCB
     }
 
-    fun getData2(): MutableLiveData<List<CurrencyMOEX>> {
+    fun getDataMOEX(): MutableLiveData<List<CurrencyMOEX>> {
         if (dataMOEX.value?.size == null) {
             val archPr = ArchivePreferences.loadPrefs(getApplication())
             loadDataMOEX(
@@ -42,7 +46,8 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
         return dataMOEX
     }
 
-    //в зависимости от выбранных значений спиннеров формируем части запроса к сайтам
+
+    //depending on the selected values of the spinners, we form parts of the request to the server
     fun createRequestStrings(choosen: Int, fromDate: Date, tillDate: Date) {
         var jsonCurr = ""
         var xmlCurr = ""
@@ -81,7 +86,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
             .show()
     }
 
-    //проверяем корректность введенных дат
+    //checking choosen dates for correct
     private fun checkDates(from: Date, till: Date): Boolean {
         val tillLong = till.time
         val fromLong = from.time
@@ -91,7 +96,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
         return (till.compareTo(from)) > 0
     }
 
-    //запуск воркера для получения данных с сайта ЦБ
+    //launch worker to get data from CB
     private fun startArchiveWorker(from: String, till: String, request: String) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -116,7 +121,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
     }
 
 
-    //запуск воркера для получения данных с сайта Московской биржи
+    //launch worker to get data from MOEX
     private fun startArchiveMOEXWorker(request: String, from: String, till: String) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -136,20 +141,16 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
     }
 
     companion object {
-        //лайвдата данных от ЦБ
-        var data: MutableLiveData<List<CurrencyCBarhive>> =
+        var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
             MutableLiveData<List<CurrencyCBarhive>>()
 
-        //лайвдата данных от МБ
         var dataMOEX: MutableLiveData<List<CurrencyMOEX>> = MutableLiveData<List<CurrencyMOEX>>()
 
-        ////функциия вызова загрузки данных ЦБ
         fun loadCBArhieve(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
             val cbxmlRepository = CBXMLRepository()
             cbxmlRepository.getXMLarchive(date_req1, date_req2, VAL_NM_RQ)
         }
 
-        //функция вызова загрузки данных МБ
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
             val moexRepository = MOEXRepository()
             moexRepository.getMOEX(request, from, till, interval, true)

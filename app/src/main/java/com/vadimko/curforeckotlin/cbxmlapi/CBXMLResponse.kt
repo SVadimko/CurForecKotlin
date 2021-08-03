@@ -5,6 +5,10 @@ import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
+/**
+ * splitting response into classes
+ */
+
 @Root(name = "ValCurs", strict = false)
 data class MOEXXMLResponse(
     @field:ElementList(name = "Record", inline = true)

@@ -5,7 +5,10 @@ import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.DateConverter
 import java.util.*
 
-//сохранение/загрузка состояния выбранного времени для фрагмента Arhive
+/**
+ * save/load prefs of choosen datas for Archive fragment
+ */
+
 object ArchivePreferences {
 
     fun savePrefs(

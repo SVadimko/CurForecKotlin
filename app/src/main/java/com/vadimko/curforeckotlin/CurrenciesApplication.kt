@@ -4,6 +4,10 @@ import android.app.Application
 import android.content.Context
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 
+/**
+ * creating application context singlton and init DataBase
+ */
+
 class CurrenciesApplication : Application() {
     init {
         instance = this

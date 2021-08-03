@@ -12,6 +12,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.text.SimpleDateFormat
 
+/**
+ * request using Retrofit to https://www.cbr.ru/scripts/
+ */
+
 class CBXMLRepository {
     private val cbXMLAPI: CBXMLAPI
 
@@ -49,7 +53,7 @@ class CBXMLRepository {
                     val dateTimeConv = dateFormat(dateTime)
                     listData.add(CurrencyCBarhive(offCur, dateTime, dateTimeConv))
                 }
-                ArchiveViewModel.data.postValue(listData)
+                ArchiveViewModel.dataCB.postValue(listData)
             }
 
             override fun onFailure(call: Call<MOEXXMLResponse>, t: Throwable) {

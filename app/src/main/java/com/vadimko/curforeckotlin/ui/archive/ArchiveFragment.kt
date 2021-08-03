@@ -35,6 +35,11 @@ import kotlin.collections.ArrayList
 
 private const val REQUEST_DATE = 0
 
+/**
+ * Archive fragment representing courses for the interval selected by the user
+ */
+
+
 class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
 
@@ -172,23 +177,23 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //подписываемся на данные с сайта ЦБ
-        archiveViewModel.getData().observe(viewLifecycleOwner, { archiveCB ->
+        //subscribe to data from the Central Bank in ArchiveViewModel
+        archiveViewModel.getDataCB().observe(viewLifecycleOwner, { archiveCB ->
             archiveCB?.let {
                 histCBRF = it as MutableList<CurrencyCBarhive>
                 extractDataCB(archiveCB)
             }
 
         })
-        //подписываемся на данные с московской биржи
-        archiveViewModel.getData2().observe(viewLifecycleOwner, { archiveMOEX ->
+        //subscribe to data from the MOEX in ArchiveViewModel
+        archiveViewModel.getDataMOEX().observe(viewLifecycleOwner, { archiveMOEX ->
             archiveMOEX?.let {
                 extractDataMOEX(archiveMOEX)
             }
         })
     }
 
-    //экстракция полученных от московской биржи данных для построения графика
+    //extraction of data received from MOEX for graph building
     private fun extractDataMOEX(dataListMOEX: List<CurrencyMOEX>) {
         dates.clear()
         open.clear()
@@ -214,28 +219,28 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
         redrawMoex()
     }
 
-    //экстракция полученных от ЦБ данных для построения графика
+    //extraction of data received from CB for graph building
     private fun extractDataCB(dataListCB: List<CurrencyCBarhive>) {
         datesCB.clear()
         dataListCB.forEach {
-            datesCB.add(it.datetime_conv)
+            datesCB.add(it.datetimeConv)
         }
         redrawCB(dataListCB)
     }
 
-    //перерисовка графика ЦБ
+    //redraw CB chart
     private fun redrawCB(dataListCB: List<CurrencyCBarhive>) {
         createClearCbrfGraph()
         fillClearCbrfGraph(currSpinner.selectedItem as String, dataListCB)
     }
 
-    //перерисовка графика МБ
+    //redraw MOEX chart
     private fun redrawMoex() {
         createLinearSetForecast()
         fillLinearSetForecast(currSpinner.selectedItem as String)
     }
 
-    //создание и задание параметров графика ЦБ
+    //creating and setting the parameters of the CB chart
     private fun createClearCbrfGraph() {
         linearCbrf = binding.chartcbrf
         linearCbrf.clear()
@@ -293,12 +298,12 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
     }
 
 
-    //заполняем график ЦБ данными
+    //filling CB chart with data
     private fun fillClearCbrfGraph(s: String, dataListCB: List<CurrencyCBarhive>) {
         val dataSets = ArrayList<ILineDataSet>()
         val entries = ArrayList<Entry>()
         for (i in dataListCB.indices) {
-            val str: String = dataListCB[i].offcur.replace(',', '.')
+            val str: String = dataListCB[i].offCur.replace(',', '.')
             entries.add(Entry(i.toFloat(), str.toFloat()))
         }
         val d = LineDataSet(entries, "$s ${getString(string.ARCFRAGcursCBGraphLabel)}")
@@ -315,7 +320,7 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
         linearCbrf.invalidate()
     }
 
-    //создаем график для МБ
+    //creating and setting the parameters of the MOEX chart
     private fun createLinearSetForecast() {
         linearChartForec = binding.linearforec
         linearChartForec.clear()
@@ -373,7 +378,7 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
         l.textColor = resources.getColor(color.white, requireActivity().application.theme)
     }
 
-    //заполняем график МБ данными
+    //filling MOEX chart with data
     private fun fillLinearSetForecast(s: String) {
         val dataSets: MutableList<ILineDataSet> = mutableListOf()
         val entries: MutableList<Entry> = mutableListOf()
@@ -390,12 +395,12 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
         val temp = ExponentSmooth(warpFlt)
         temp.calc()
-        val smooth1: MutableList<Float> = temp.getSmooth1()
+        val smooth1: MutableList<Float> = temp.getSmooth()
         for (i in smooth1.indices) {
             entries2.add(Entry(i.toFloat(), smooth1[i]))
         }
         val entries3: MutableList<Entry> = mutableListOf()
-        val forecast1: MutableList<Float> = temp.getForecast1()
+        val forecast1: MutableList<Float> = temp.getForecast()
         for (i in forecast1.indices) {
             entries3.add(
                 Entry(
@@ -474,7 +479,7 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
         val d3 =
             LineDataSet(
                 entries3,
-                "$s  ${getString(string.ARCFRAGexponWeighForecGraph)} ${temp.getErrSmppth1()}%"
+                "$s  ${getString(string.ARCFRAGexponWeighForecGraph)} ${temp.getErrSmooth()}%"
             )
         d3.enableDashedLine(10f, 10f, 0f)
         d3.lineWidth = 2.5f

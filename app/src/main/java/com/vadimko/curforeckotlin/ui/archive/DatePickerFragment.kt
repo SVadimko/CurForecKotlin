@@ -10,6 +10,10 @@ import java.util.*
 private const val ARG_DATE = "date"
 private const val ARG_FROMTILL = "fromtill"
 
+/**
+ * DatePickerFragment for choosing dates on archive fragment
+ */
+
 open class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
 

@@ -20,6 +20,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * perform request to servers to get Tinkov and CB data
+ */
+
 class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWidgetID: Int) {
     private val tcsApi: TCSApi
     private val cBjsonApi: CBjsonApi

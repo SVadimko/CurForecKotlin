@@ -1,5 +1,10 @@
 package com.vadimko.curforeckotlin.moexapi
 
+
+/**
+ * splitting response into classes
+ */
+
 class MOEXResponse {
     lateinit var candles: MOEXCandles
 }

@@ -12,6 +12,10 @@ import com.vadimko.curforeckotlin.tcsapi.TCSRepository
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
 import java.util.*
 
+/**
+ * viewModel for Calc fragment
+ */
+
 class CalcViewModel(application: Application) : AndroidViewModel(application) {
     private val context = getApplication<Application>()
 
@@ -31,7 +35,8 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
 
     var rubValue: MutableLiveData<String> = MutableLiveData<String>()
 
-    //получение информации о курсах из базы данных, которая дополняется каждый раз при обновлении виджета
+    //getting information about courses from the database,
+    // which is updated every time the widget is updated
     val livedataTKS = CurrenciesRepository.get().getCurrencies()
 
     fun calculating(
@@ -84,7 +89,7 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     companion object {
-        //данные о курсах, которые используются при рассчете значений калькулятора
+        //course data used to calculate the calculator values
         var data: MutableLiveData<List<CurrencyTCS>> = NowViewModel.data
         fun loadDataTCS() {
 
@@ -92,7 +97,7 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
             tcsRepository.getCurrentTCS()
         }
 
-        //данные о курсах, сохранненые в результате автообновления
+        //course data saved as a result of auto-update
         var data2: MutableLiveData<List<List<CurrencyTCS>>> =
             MutableLiveData<List<List<CurrencyTCS>>>()
 

@@ -15,6 +15,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+/**
+ * viewModel for Now fragment
+ */
+
 class NowViewModel(application: Application) : AndroidViewModel(application) {
     private val context = getApplication<Application>()
 
@@ -32,13 +36,13 @@ class NowViewModel(application: Application) : AndroidViewModel(application) {
         return dataCB
     }
 
-    //конфигурирование и запуск воркера для обновления данных о курсах
+    //configure and launch worker for update Tinkov and CB data
     fun startWorker() {
         loadDataTCS()
         loadDataCB()
     }
 
-    //запуск анимации после обновления курсов
+    //starting animation after updating courses
     fun startAnimations(mScale: Float, mDisplaySize: Rect, mRootLayout: FrameLayout) {
         val onRefreshAnimation =
             PreferenceManager.getDefaultSharedPreferences(context)
@@ -51,10 +55,8 @@ class NowViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     companion object {
-        //лайвдата, получаемая с сайта тиньков
         var data: MutableLiveData<List<CurrencyTCS>> = MutableLiveData<List<CurrencyTCS>>()
 
-        //лайвдата, получаемая с сайта ЦБ
         var dataCB: MutableLiveData<List<CurrencyCBjs>> = MutableLiveData<List<CurrencyCBjs>>()
 
         fun loadDataTCS() {

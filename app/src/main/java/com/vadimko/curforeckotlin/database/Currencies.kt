@@ -4,7 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-//файл БД
+/**
+ * DataBase file
+ */
+
 @Entity
 data class Currencies(
     @PrimaryKey val id: UUID = UUID.randomUUID(),

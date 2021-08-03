@@ -11,6 +11,10 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * request using Retrofit to https://www.tinkoff.ru/api/v1/
+ */
+
 class TCSRepository {
     private val tcsApi: TCSApi
     init {

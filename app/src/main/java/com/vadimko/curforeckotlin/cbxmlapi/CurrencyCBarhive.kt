@@ -1,7 +1,10 @@
 package com.vadimko.curforeckotlin.cbxmlapi
 
+/**
+ * data class used to store archive rates from the Central Bank
+ */
 data class CurrencyCBarhive(
-    var offcur: String = "",
-    var datetime: String = "",
-    var datetime_conv: String = ""
+    var offCur: String = "",
+    var dateTime: String = "",
+    var datetimeConv: String = ""
 )

@@ -21,6 +21,9 @@ import com.vadimko.curforeckotlin.cbjsonapi.CurrencyCBjs
 import com.vadimko.curforeckotlin.databinding.FragmentNowBinding
 import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
 
+/**
+ * Now fragment representing current courses of Tinkov and Central Bank
+ */
 
 class NowFragment : Fragment() {
 
@@ -87,7 +90,7 @@ class NowFragment : Fragment() {
             forecCB?.let {
                 setupAdapterCB(forecCB)
                 binding.lastchkcbrf.text =
-                    "${getString(R.string.lastupdateTCS)} ${forecCB[0].datetime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
+                    "${getString(R.string.lastupdateTCS)} ${forecCB[0].dateTime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
                 swipeRefreshLayout.isRefreshing = false
             }
         })

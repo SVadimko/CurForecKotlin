@@ -20,13 +20,13 @@ class ExponentSmoothTest {
 
     @Test
     fun calcExponentSmoothTest() {
-        assertEquals(exponentSmooth.getForecast1(), forec)
+        assertEquals(exponentSmooth.getForecast(), forec)
     }
 
     @Test
     fun calcErrorSmoothTest(){
         val error = "0"
-        assertEquals(exponentSmooth.getErrSmppth1(), error)
+        assertEquals(exponentSmooth.getErrSmooth(), error)
     }
 
     @After

@@ -5,7 +5,10 @@ import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import java.io.*
 
 
-//вспомогательный класс для сохранения/загрузки данных автообновления курса
+/**
+ * util class for save/load auto update data
+ */
+
 class Saver {
     val path: String = CurrenciesApplication.applicationContext().filesDir.path
 
@@ -22,6 +25,7 @@ class Saver {
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun loadTcsLast(): MutableList<MutableList<CurrencyTCS>> {
         var tcsList: MutableList<MutableList<CurrencyTCS>> = mutableListOf()
         try {

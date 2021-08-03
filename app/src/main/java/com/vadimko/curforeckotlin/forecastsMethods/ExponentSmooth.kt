@@ -3,30 +3,26 @@ package com.vadimko.curforeckotlin.forecastsMethods
 import java.text.NumberFormat
 import kotlin.math.abs
 
-//прогноз методом экспоненциального взвешивания
+/**
+ * forecast using exponential weighting
+ */
+
 class ExponentSmooth(inp: MutableList<Float>) {
     private var input: MutableList<Float> = inp
     private var output: MutableList<Float> = mutableListOf()
-    private var output2: MutableList<Float> = mutableListOf()
     private var forecast: MutableList<Float> = mutableListOf()
-    private var forecast2: MutableList<Float> = mutableListOf()
     private var alpha = 0f
     private var uo1 = 0f
-    private var uo2 = 0f
     private var err1: String? = null
-    private var err2: String? = null
 
 
     fun calc() {
         calculateAlpha()
         calculateUo1()
-        calculateUo2()
         calculateSmooth1()
-        calculateSmooth2()
         val numberFormat = NumberFormat.getInstance()
         numberFormat.maximumFractionDigits = 2
         err1 = numberFormat.format(calculateErr(input, output).toDouble())
-        err2 = numberFormat.format(calculateErr(input, output2).toDouble())
     }
 
 
@@ -40,9 +36,6 @@ class ExponentSmooth(inp: MutableList<Float>) {
         uo1 = summ / input.size
     }
 
-    private fun calculateUo2() {
-        uo2 = input[0]
-    }
 
     private fun calculateSmooth1() {
         output.clear()
@@ -54,17 +47,7 @@ class ExponentSmooth(inp: MutableList<Float>) {
         forecast.add(output[output.size - 1])
     }
 
-    private fun calculateSmooth2() {
-        output2.clear()
-        output2.add(0, uo2)
-        for (i in 1 until input.size + 1) {
-            output2.add(i, input[i - 1] * alpha + (1 - alpha) * output2[i - 1])
-        }
-        forecast2.add(output2[output2.size - 2])
-        forecast2.add(output2[output2.size - 1])
-    }
-
-    //вычисление ошибки
+    //calculating error in percent
     private fun calculateErr(inp: MutableList<Float>, out: MutableList<Float>): Float {
         var err = 0f
         for (i in inp.indices) {
@@ -74,25 +57,19 @@ class ExponentSmooth(inp: MutableList<Float>) {
         return err
     }
 
-    fun getSmooth1(): MutableList<Float> {
+    fun getSmooth(): MutableList<Float> {
         val res = output
         res.removeAt(res.size - 1)
         return res
     }
 
-    //получаем прогноз
-    fun getForecast1(): MutableList<Float> {
+    //get forecast
+    fun getForecast(): MutableList<Float> {
         return forecast
     }
 
-    fun getErrSmppth1(): String? {
+    fun getErrSmooth(): String? {
         return err1
     }
 
-    /*fun getSmooth2(): MutableList<Float> {
-        val res = output2
-        res.removeAt(res.size - 1)
-        return res
-    }
-    */
 }

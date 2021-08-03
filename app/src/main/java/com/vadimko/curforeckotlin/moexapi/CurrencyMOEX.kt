@@ -1,5 +1,8 @@
 package com.vadimko.curforeckotlin.moexapi
 
+/**
+ * data class used to store rates from the MOEX
+ */
 
 data class CurrencyMOEX(
     val dates: String = "",

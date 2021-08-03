@@ -1,6 +1,5 @@
 package com.vadimko.curforeckotlin
 
-import android.app.Activity
 import android.app.ActivityManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,7 +9,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -23,6 +21,9 @@ import androidx.work.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vadimko.curforeckotlin.databinding.ActivityMainBinding
 
+/**
+ * MainActivity class
+ */
 
 private const val CHANNEL_ID = "11"
 

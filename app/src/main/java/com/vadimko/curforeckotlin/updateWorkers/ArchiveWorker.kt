@@ -5,7 +5,10 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 
-//воркер для передачи во вьюмодел параметров для запроса архивных данных ЦБ
+/**
+ * worker for calling throw viewModel request for CB data
+ */
+
 class ArchiveWorker(context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams) {
     override fun doWork(): Result {

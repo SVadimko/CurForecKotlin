@@ -25,8 +25,10 @@ private const val CHANNEL_ID = "11"
 var NOTIFICATION_ID = 5555
 private const val notificationId = 11
 
+/**
+ * service for auto-updating the rates of the Tinkov bank
+ */
 
-//сервис автообновления курса банка тиньков
 class TCSupdateService : Service() {
     private val tcsApi: TCSApi
 
@@ -72,11 +74,13 @@ class TCSupdateService : Service() {
     }
 
     private fun updateTask() {
-        period = PreferenceManager.getDefaultSharedPreferences(this)
-            .getString("update_per", "15_min")?.split("_")?.get(0)?.toLong()!!
+        //period = PreferenceManager.getDefaultSharedPreferences(this)
+            //.getString("update_per", "15_min")?.split("_")?.get(0)?.toLong()!!
         Thread {
             var allRequest = 1
             while (true) {
+                period = PreferenceManager.getDefaultSharedPreferences(this)
+                    .getString("update_per", "15_min")?.split("_")?.get(0)?.toLong()!!
                 if (checkConnection()) getCurrentTCS()
                 for (y in 0 until period * 12) {
                     try {

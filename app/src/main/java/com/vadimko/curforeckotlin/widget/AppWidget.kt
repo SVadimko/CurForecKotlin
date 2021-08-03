@@ -11,7 +11,7 @@ import com.vadimko.curforeckotlin.MainActivity
 import com.vadimko.curforeckotlin.R
 
 /**
- * Implementation of App Widget functionality.
+ * Widget with manual update button and starting main activity
  */
 class AppWidget : AppWidgetProvider() {
     private fun updateAppWidget(
