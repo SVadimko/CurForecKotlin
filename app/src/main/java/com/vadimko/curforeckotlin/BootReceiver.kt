@@ -23,7 +23,7 @@ class BootReceiver : BroadcastReceiver() {
 
     private fun startUpdater() {
         try {
-            val serviceIntent = Intent(mContext, TCSupdateService::class.java)
+            val serviceIntent = Intent(mContext, TCSUpdateService::class.java)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 //val serviceIntent = Intent(mContext, TCSupdateService::class.java)
                 mContext.startForegroundService(serviceIntent)

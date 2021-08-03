@@ -29,7 +29,7 @@ private const val notificationId = 11
  * service for auto-updating the rates of the Tinkov bank
  */
 
-class TCSupdateService : Service() {
+class TCSUpdateService : Service() {
     private val tcsApi: TCSApi
 
     var period: Long = 5

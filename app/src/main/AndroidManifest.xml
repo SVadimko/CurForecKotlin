@@ -44,7 +44,7 @@
                 android:parentActivityName=".MainActivity" />
 
         <service
-                android:name=".TCSupdateService"
+                android:name=".TCSUpdateService"
                 android:enabled="true"
                 android:exported="false" />
 

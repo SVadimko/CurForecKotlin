@@ -58,11 +58,11 @@ class MainActivity : AppCompatActivity() {
     private fun checkAutoUpdate() {
         val pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
             .getBoolean("updateon", false)
-        if (!isServiceAlive(TCSupdateService::class.java) and pref) {
+        if (!isServiceAlive(TCSUpdateService::class.java) and pref) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(Intent(this@MainActivity, TCSupdateService::class.java))
+                startForegroundService(Intent(this@MainActivity, TCSUpdateService::class.java))
             } else {
-                val i = Intent(this@MainActivity, TCSupdateService::class.java)
+                val i = Intent(this@MainActivity, TCSUpdateService::class.java)
                 this@MainActivity.startService(i)
             }
         }
