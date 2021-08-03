@@ -32,7 +32,7 @@ private const val notificationId = 11
 class TCSUpdateService : Service() {
     private val tcsApi: TCSApi
 
-    var period: Long = 5
+    private var period: Long = 5
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()

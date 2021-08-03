@@ -20,7 +20,12 @@ import java.util.*
  * class for creating animation after courses updated
  */
 
-class CoinsAnimator(val mScale: Float, val mDisplaySize: Rect, val mRootLayout: FrameLayout, val context: Context) {
+class CoinsAnimator(
+    val mScale: Float,
+    val mDisplaySize: Rect,
+    val mRootLayout: FrameLayout,
+    val context: Context
+) {
     var count = 0
     private val coinsArrayImage = intArrayOf(
         R.drawable.coin,
@@ -32,7 +37,7 @@ class CoinsAnimator(val mScale: Float, val mDisplaySize: Rect, val mRootLayout: 
     private val mAllImageViews = ArrayList<View>()
     private val timer = Timer()
 
-    fun weatherAnimationSnow(){
+    fun weatherAnimationSnow() {
         timer.schedule(ExeTimerTask(), 0, 100)
     }
 

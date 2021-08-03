@@ -60,7 +60,12 @@ class MainActivity : AppCompatActivity() {
             .getBoolean("updateon", false)
         if (!isServiceAlive(TCSUpdateService::class.java) and pref) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(Intent(this@MainActivity, TCSUpdateService::class.java))
+                startForegroundService(
+                    Intent(
+                        this@MainActivity,
+                        TCSUpdateService::class.java
+                    )
+                )
             } else {
                 val i = Intent(this@MainActivity, TCSUpdateService::class.java)
                 this@MainActivity.startService(i)
