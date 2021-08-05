@@ -14,6 +14,9 @@ import androidx.core.app.TaskStackBuilder
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.tcsapi.*
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -142,9 +145,10 @@ class TCSUpdateService : Service() {
                         getCurrentTCS()
                     } else {
                         currentTCS = mutableListOf(usdTCS, eurTCS, gbpTCS)
-                        val saver = Saver()
-                        saver.saveTcsLast(currentTCS)
-                        CalcViewModel.data2.postValue(saver.loadTcsLast())
+                        GlobalScope.launch(Dispatchers.IO) {
+                            Saver().saveTcsLast(currentTCS)
+                            CalcViewModel.data2.postValue(Saver().loadTcsLast())
+                        }
                         val usdBuy = String.format("%.2f", currentTCS[0].buy)
                         val usdSell = String.format("%.2f", currentTCS[0].sell)
                         val eurBuy = String.format("%.2f", currentTCS[1].buy)

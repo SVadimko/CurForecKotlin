@@ -19,6 +19,7 @@ class Saver {
             ObjectOutputStream(FileOutputStream(path + "TCSlast.sav")).use {
                 it.writeObject(temp)
                 CalcViewModel.loadGraphData()
+                it.close()
             }
         } catch (ex: IOException) {
             ex.printStackTrace()
@@ -31,6 +32,7 @@ class Saver {
         try {
             ObjectInputStream(FileInputStream(path + "TCSlast.sav")).use {
                 tcsList = it.readObject() as MutableList<MutableList<CurrencyTCS>>
+                it.close()
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
@@ -43,6 +45,7 @@ class Saver {
         try {
             ObjectOutputStream(FileOutputStream(path + "TCSlast.sav")).use {
                 it.writeObject(temp)
+                it.close()
             }
         } catch (ex: IOException) {
             ex.printStackTrace()

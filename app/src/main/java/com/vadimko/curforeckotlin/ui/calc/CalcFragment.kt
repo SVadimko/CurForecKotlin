@@ -26,6 +26,9 @@ import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
 import com.vadimko.curforeckotlin.databinding.FragmentCalcBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -91,8 +94,6 @@ class CalcFragment : Fragment() {
     private var _binding: FragmentCalcBinding? = null
 
     private val binding get() = _binding!!
-
-    private lateinit var viewModel: CalcViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -238,11 +239,6 @@ class CalcFragment : Fragment() {
         })
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CalcViewModel::class.java)
-    }
-
 
     // retrieve the latest Tinkov currency rate data
     private fun getData(dataList: List<CurrencyTCS>) {
@@ -376,11 +372,13 @@ class CalcFragment : Fragment() {
             val trashCan = viewChild!!.findViewById<ImageView>(R.id.trashcan)
             trashCan.apply {
                 setOnClickListener {
-                    Saver().deleteTcsLast()
-                    attachGraph()
-                    CalcViewModel.data2.postValue(
-                        Saver().loadTcsLast()
-                    )
+                    GlobalScope.launch(Dispatchers.IO) {
+                        Saver().deleteTcsLast()
+                        attachGraph()
+                        CalcViewModel.data2.postValue(
+                            Saver().loadTcsLast()
+                        )
+                    }
                 }
             }
         } else {

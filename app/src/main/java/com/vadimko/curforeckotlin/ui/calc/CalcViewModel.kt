@@ -10,6 +10,9 @@ import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsapi.TCSRepository
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 /**
@@ -102,8 +105,9 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
             MutableLiveData<List<List<CurrencyTCS>>>()
 
         fun loadGraphData() {
-            val saver = Saver()
-            data2.postValue(saver.loadTcsLast())
+            GlobalScope.launch(Dispatchers.IO) {
+                data2.postValue(Saver().loadTcsLast())
+            }
         }
     }
 }
