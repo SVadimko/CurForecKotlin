@@ -8,7 +8,6 @@ import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.work.*
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
@@ -33,14 +32,15 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-private const val REQUEST_DATE = 0
+ const val FROM_DATE_PICKER = "fromDatePicker"
+ const val TILL_DATE_PICKER = "tillDatePicker"
 
 /**
  * Archive fragment representing courses for the interval selected by the user
  */
 
 
-class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
+class ArchiveFragment : Fragment(){
 
 
     private lateinit var linearCbrf: LineChart
@@ -65,7 +65,6 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
 
     private val archiveViewModel: ArchiveViewModel by lazy {
-        //ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
         ViewModelProvider(this).get(ArchiveViewModel::class.java)
     }
 
@@ -83,7 +82,9 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
+
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -142,10 +143,8 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
                 c.time = fromDate
                 val newFragment = DatePickerFragment.newInstance(
                     c.time,
-                    false
                 )
-                newFragment.setTargetFragment(this@ArchiveFragment, REQUEST_DATE)
-                newFragment.show(this@ArchiveFragment.parentFragmentManager, "datePicker")
+                newFragment.show(parentFragmentManager, FROM_DATE_PICKER)
             }
         }
         tillTv = binding.till
@@ -155,10 +154,8 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
                 c.time = tillDate
                 val newFragment = DatePickerFragment.newInstance(
                     c.time,
-                    true
                 )
-                newFragment.setTargetFragment(this@ArchiveFragment, REQUEST_DATE)
-                newFragment.show(this@ArchiveFragment.parentFragmentManager, "datePicker")
+                newFragment.show(parentFragmentManager, TILL_DATE_PICKER)
             }
         }
         val c = Calendar.getInstance()
@@ -177,6 +174,16 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        parentFragmentManager
+            .setFragmentResultListener("fromDate", this) { _, bundle ->
+            fromDate = bundle.get("bundleKey") as Date
+            fromTv.text = longToDate(fromDate)
+        }
+        parentFragmentManager
+            .setFragmentResultListener("tillDate", this) { _, bundle ->
+            tillDate = bundle.get("bundleKey") as Date
+            tillTv.text = longToDate(tillDate)
+        }
         //subscribe to data from the Central Bank in ArchiveViewModel
         archiveViewModel.getDataCB().observe(viewLifecycleOwner, { archiveCB ->
             archiveCB?.let {
@@ -537,7 +544,7 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onDateSelected(date: Date, frommtill: Boolean) {
+    /*override fun onDateSelected(date: Date, frommtill: Boolean) {
         val c = Calendar.getInstance()
         c.time = date
         if (!frommtill) {
@@ -548,7 +555,7 @@ class ArchiveFragment : Fragment(), DatePickerFragment.Callbacks {
             tillTv.text = longToDate(date)
             tillDate = date
         }
-    }
+    }*/
 
     private fun longToDate(date: Date): String {
         val jdf = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

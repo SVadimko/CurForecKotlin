@@ -63,7 +63,7 @@ class CalcFragment : Fragment() {
     private lateinit var dataToCalc: List<CurrencyTCS>
 
 
-    val datesTime: MutableList<String> = mutableListOf()
+    private val datesTime: MutableList<String> = mutableListOf()
     private val usdData: MutableList<CurrencyTCS> = mutableListOf()
     private val usdDataBuy: MutableList<Double> = mutableListOf()
     private val usdDataSell: MutableList<Double> = mutableListOf()
@@ -74,7 +74,7 @@ class CalcFragment : Fragment() {
     private val gbpDataBuy: MutableList<Double> = mutableListOf()
     private val gbpDataSell: MutableList<Double> = mutableListOf()
 
-    val datesTimeW: MutableList<String> = mutableListOf()
+    private val datesTimeW: MutableList<String> = mutableListOf()
     private val usdDataW: MutableList<CurrencyTCS> = mutableListOf()
     private val usdDataBuyW: MutableList<Double> = mutableListOf()
     private val usdDataSellW: MutableList<Double> = mutableListOf()

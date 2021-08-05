@@ -4,38 +4,30 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.DatePicker
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import java.util.*
 
 private const val ARG_DATE = "date"
-private const val ARG_FROMTILL = "fromtill"
 
 /**
  * DatePickerFragment for choosing dates on archive fragment
  */
 
-open class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
-
-
-    interface Callbacks {
-        fun onDateSelected(date: Date, frommtill: Boolean)
-
-    }
+open class DatePickerFragment : DialogFragment(){
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
-        val frtl = arguments?.getSerializable(ARG_FROMTILL) as Boolean
         val dateListener =
             DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, day: Int ->
                 c.set(Calendar.YEAR, year)
                 c.set(Calendar.MONTH, month)
                 c.set(Calendar.DAY_OF_MONTH, day)
                 val resultDate: Date = c.time
-                targetFragment?.let { fragment ->
-                    (fragment as Callbacks).onDateSelected(resultDate, frtl)
-                }
+                val requestKey: String = if(this.tag.equals(FROM_DATE_PICKER)) "fromDate"
+                else "tillDate"
+                    parentFragmentManager.setFragmentResult(requestKey, bundleOf("bundleKey" to resultDate))
             }
-
         val date = arguments?.getSerializable(ARG_DATE) as Date
         c.time = date
         val initialYear = c.get(Calendar.YEAR)
@@ -53,14 +45,10 @@ open class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetList
         return datePickerDialog
     }
 
-    override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-    }
-
     companion object {
-        fun newInstance(date: Date, fromTill: Boolean): DatePickerFragment {
+        fun newInstance(date: Date): DatePickerFragment {
             val args = Bundle().apply {
                 putSerializable(ARG_DATE, date)
-                putSerializable(ARG_FROMTILL, fromTill)
             }
             return DatePickerFragment().apply {
                 arguments = args
