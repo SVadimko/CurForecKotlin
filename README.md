@@ -22,6 +22,8 @@ https://4pda.to/forum/index.php?showtopic=1028182
 Курс валют Тиньков банка  и Центрального банка можно отобразить на виджете, на рабочем столе.
 Встроенный калькулятор подскажет сколько будет стоить купить или продать заданную сумму валюты.
 
+Ссылка на задокументированный код: https://github.com/SVadimko/CurForecKotlin/tree/master/documentation/html
+
 Краткое описание классов приложения:
 
 /adapters/
@@ -104,6 +106,8 @@ The forecast is based on three different calculation methods:
 The application also allows you to monitor the exchange rate of Tinkov Bank at a specified interval and notify the user if the rate exceeds / falls below the specified value.
 The exchange rates of Tinkov Bank and the Central Bank can be displayed on the widget, on the desktop.
 The built-in calculator will tell you how much it will cost to buy or sell a given amount of currency.
+
+Link to code documentation: https://github.com/SVadimko/CurForecKotlin/tree/master/documentation/html
 
 A short description of the application classes:
 
