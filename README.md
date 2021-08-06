@@ -3,9 +3,9 @@ https://www.dropbox.com/sh/gghev7swiyrj6ts/AAAjaacuxPoph740sb5WQeZta?dl=0  ил�
 https://4pda.to/forum/index.php?showtopic=1028182
 
 ![alt text](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
-![alt text2](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
-![alt text3](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
-![alt text4](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
+![alt text2](https://ds-blobs-2.cdn.devapps.ru/23309035.jpg)
+![alt text3](https://ds-blobs-2.cdn.devapps.ru/23309039.jpg)
+![alt text4](https://ds-blobs-2.cdn.devapps.ru/23309041.jpg)
 
 Приложение использует апи тиньков банка, центрального банка России и Московской биржи для просмотра курса валют этих компаний.
 На основании данных Московской биржи строится прогноз на дальнейшее изменение курса валют. 
