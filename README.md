@@ -1,4 +1,4 @@
-<h1 align="center">Курсы валют Тиньков</h1></br>
+<h1 align="center">Тиньков курсы валют</h1></br>
 Ссылка на скачивание собранного APK и скриншоты приложения:
 https://www.dropbox.com/sh/gghev7swiyrj6ts/AAAjaacuxPoph740sb5WQeZta?dl=0  или 
 https://4pda.to/forum/index.php?showtopic=1028182
@@ -96,6 +96,7 @@ Bootreceiver - broadcast receiver для получения информации
 
 CoinsAnimator - вспомогательный класс для запуска анимации монет при обновлении курса
 
+<h1 align="center">Tinkoff exchange rates</h1></br>
 
  The application uses the api Tinkov Bank, the Central Bank of Russia and the Moscow Exchange to view the exchange rates of these companies.
 Based on the data of the Moscow Exchange, a forecast is made for further changes in the exchange rate.
