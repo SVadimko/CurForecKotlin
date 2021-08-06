@@ -2,10 +2,10 @@
 https://www.dropbox.com/sh/gghev7swiyrj6ts/AAAjaacuxPoph740sb5WQeZta?dl=0  или 
 https://4pda.to/forum/index.php?showtopic=1028182
 
-![alt text](_ugACTai6dwNyX3WlbIT_amt7xIWhQNLFYJNq0KcbgJdppEBbDNLDwiWPr4y0vMzy7U28Ju95_90HJ1K_JerkNiuNf6xuYJv5RfOT2cL9kmooKbPv-DYBIACP9_Da2HE8dJ9QRSM3jytxphLZkXXScLAIbzMFrDw72lWKalwTToPZ44G85-cEeaBmd9ZM6Iz3LOJ4NNYvT7aaTS-z0VSfBVBtIOE12Aw0L2JE-jAKHigNOiVxh0AkX2v7VKaRtkGhE7fcUXfGsIRm6VAi7Pu1d-ZNS98PgZGsCzn5yZv76DbeQ5nwV6s8wDh19fYnn9N2P9HWaFRc0FkI8uvmO2jPHwwzw/p.jpeg?fv_content=true&size_mode=5)
-![alt text2](https://previews.dropbox.com/p/thumb/ABNk6fCCrggHNefx4LcHUd3jFz8EnGgN0HB75mhkXl_bXmYDAkYQoKeNQiKOqpymNVDTLfT9wX61AJntlCxl-MY5755V4qF5cPC5ukTf3Y1XPqwyHuQqHlpgMKnS85I-sVd9dhph16TGFfhhlXVGDUCWO6Vdgof5XRR31tqpNFBDBZjdJmqPknPy1U1Ym8DUULCNRcr-UqiFUIoXKUY_toP4qay8GE0nRGzlKHlnjYDV5TftYBbYMDjygKXI2RFE68tsIJD-wDUM9TY7hlXSNB4TjbrDLkfngh251jkBs8zwUWrylfhBkwdUbHiZrgbrOHTLbYDAPCIKOHYvepCqrQkR_U6SwEpVN4VFxGhkJuHgIg/p.jpeg?fv_content=true&size_mode=5)
-![alt text3](https://www.dropbox.com/s/rgnlmdh1ikajy2b/Screenshot_2021-07-01-10-21-34-778_com.vadimko.curforeckotlin.jpg)
-![alt text4](https://www.dropbox.com/s/pg6fzg1azfuwln0/Screenshot_2021-07-01-10-23-31-421_com.vadimko.curforeckotlin.jpg)
+![alt text](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
+![alt text2](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
+![alt text3](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
+![alt text4](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
 
 Приложение использует апи тиньков банка, центрального банка России и Московской биржи для просмотра курса валют этих компаний.
 На основании данных Московской биржи строится прогноз на дальнейшее изменение курса валют. 
