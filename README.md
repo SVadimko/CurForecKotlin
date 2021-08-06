@@ -1,3 +1,4 @@
+<h1 align="center">Курсы валют Тиньков</h1></br>
 Ссылка на скачивание собранного APK и скриншоты приложения:
 https://www.dropbox.com/sh/gghev7swiyrj6ts/AAAjaacuxPoph740sb5WQeZta?dl=0  или 
 https://4pda.to/forum/index.php?showtopic=1028182
@@ -5,7 +6,9 @@ https://4pda.to/forum/index.php?showtopic=1028182
 ![alt text](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
 ![alt text2](https://ds-blobs-2.cdn.devapps.ru/23309035.jpg)
 ![alt text3](https://ds-blobs-2.cdn.devapps.ru/23309039.jpg)
+<p align="center">
 ![alt text4](https://ds-blobs-2.cdn.devapps.ru/23309041.jpg)
+</p>
 
 Приложение использует апи тиньков банка, центрального банка России и Московской биржи для просмотра курса валют этих компаний.
 На основании данных Московской биржи строится прогноз на дальнейшее изменение курса валют. 
@@ -19,6 +22,7 @@ https://4pda.to/forum/index.php?showtopic=1028182
 Встроенный калькулятор подскажет сколько будет стоить купить или продать заданную сумму валюты.
 
 Краткое описание классов приложения:
+
 /adapters/
 CBmainAdapter, TCSmainAdapter - классы адаптеров для recycleview фрагмента NowFragment 
 
@@ -44,18 +48,31 @@ WMA - рассчет прогноза методом средней скольз
 ArchivePreferences, TodayPreferences - классы для сохранения и чтения пользовательского выбора для фрагментов ArhiveFragment  и TodayFragment
 
 /ui/ - набор package, отвечающих за UI, состоит из:
+
 /archive/
+
 ArchiveFragment - фрагмент, отвечающий за экран Архив
+
 ArchiveViewModel - реализация viewmodel для соответствующего фрагмента
+
 DatePickerFragment - фрагмент выбора дат для экрана Архив
+
 /calc/
+
 CalcFragment - фрагмент, отвечающий за экран Калькулятор
+
 CalcModel - реализация viewmodel для соответствующего фрагмента
+
 /now/
+
 NowFragment - фрагмент, отвечающий за экран Сейчас
+
 NowModel - реализация viewmodel для соответствующего фрагмента
+
 /today/
+
 TodayFragment - фрагмент, отвечающий за экран Сегодня
+
 TodayModel - реализация viewmodel для соответствующего фрагмента
 
 /updateWorkers/ - workers для обновления информации о курсах валют для соответствующих фрагментов
@@ -88,6 +105,7 @@ The exchange rates of Tinkov Bank and the Central Bank can be displayed on the w
 The built-in calculator will tell you how much it will cost to buy or sell a given amount of currency.
 
 A short description of the application classes:
+
 / adapters /
 CBmainAdapter, TCSmainAdapter - adapter classes for recycleview NowFragment
 
