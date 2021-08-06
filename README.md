@@ -3,12 +3,12 @@
 https://www.dropbox.com/sh/gghev7swiyrj6ts/AAAjaacuxPoph740sb5WQeZta?dl=0  или 
 https://4pda.to/forum/index.php?showtopic=1028182
 
-![alt text](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
-![alt text2](https://ds-blobs-2.cdn.devapps.ru/23309035.jpg)
-![alt text3](https://ds-blobs-2.cdn.devapps.ru/23309039.jpg)
+![alt text](https://github.com/SVadimko/CurForecKotlin/blob/master/assets/1.jpg)
+![alt text2](https://github.com/SVadimko/CurForecKotlin/blob/master/assets/2.jpg)
+![alt text3](https://github.com/SVadimko/CurForecKotlin/blob/master/assets/3.jpg)
 <p align="center">
 
-![alt text4](https://4pda.to/forum/dl/post/23309041/Screenshot_…07-01-10-21-34-778_com.vadimko.curforeckotlin.jpg)
+![alt text4](https://github.com/SVadimko/CurForecKotlin/blob/master/assets/4.jpg)
 </p>
 
 Приложение использует апи тиньков банка, центрального банка России и Московской биржи для просмотра курса валют этих компаний.
