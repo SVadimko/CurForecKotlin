@@ -3,15 +3,11 @@
 https://www.dropbox.com/sh/gghev7swiyrj6ts/AAAjaacuxPoph740sb5WQeZta?dl=0  или 
 https://4pda.to/forum/index.php?showtopic=1028182
 
-![alt text](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
-![alt text2](https://ds-blobs-2.cdn.devapps.ru/23309035.jpg)
-![alt text3](https://ds-blobs-2.cdn.devapps.ru/23309039.jpg)
-<p align="center">
+![screenshot1](https://4pda.to/forum/dl/post/23309034/Screenshot_…07-01-10-21-08-349_com.vadimko.curforeckotlin.jpg)
+![screenshot2](https://4pda.to/forum/dl/post/23309043/Screenshot_…07-01-09-55-37-523_com.vadimko.curforeckotlin.jpg)
+![screenshot3](https://4pda.to/forum/dl/post/23309039/Screenshot_…07-01-10-23-31-421_com.vadimko.curforeckotlin.jpg)
+![screenshot4](https://4pda.to/forum/dl/post/23309041/Screenshot_…07-01-10-21-34-778_com.vadimko.curforeckotlin.jpg)
 
-![alt text4](https://ds-blobs-2.cdn.devapps.ru/23309041.jpg)
-![alt text5](https://4pda.to/forum/dl/post/23309041/Screenshot_…07-01-10-21-34-778_com.vadimko.curforeckotlin.jpg)
-
-</p>
 
 Приложение использует апи тиньков банка, центрального банка России и Московской биржи для просмотра курса валют этих компаний.
 На основании данных Московской биржи строится прогноз на дальнейшее изменение курса валют. 
