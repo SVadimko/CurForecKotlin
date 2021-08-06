@@ -7,6 +7,7 @@ https://4pda.to/forum/index.php?showtopic=1028182
 ![alt text2](https://ds-blobs-2.cdn.devapps.ru/23309035.jpg)
 ![alt text3](https://ds-blobs-2.cdn.devapps.ru/23309039.jpg)
 <p align="center">
+
 ![alt text4](https://4pda.to/forum/dl/post/23309041/Screenshot_…07-01-10-21-34-778_com.vadimko.curforeckotlin.jpg)
 </p>
 
