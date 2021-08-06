@@ -4,7 +4,6 @@ https://www.dropbox.com/sh/gghev7swiyrj6ts/AAAjaacuxPoph740sb5WQeZta?dl=0  ил�
 https://4pda.to/forum/index.php?showtopic=1028182
 
 ![alt text](https://ds-blobs-2.cdn.devapps.ru/23309034.jpg)
-![alt text5](https://previews.dropbox.com/p/thumb/ABP3_X8w8kH9Hvm1yb2-_ugACTai6dwNyX3WlbIT_amt7xIWhQNLFYJNq0KcbgJdppEBbDNLDwiWPr4y0vMzy7U28Ju95_90HJ1K_JerkNiuNf6xuYJv5RfOT2cL9kmooKbPv-DYBIACP9_Da2HE8dJ9QRSM3jytxphLZkXXScLAIbzMFrDw72lWKalwTToPZ44G85-cEeaBmd9ZM6Iz3LOJ4NNYvT7aaTS-z0VSfBVBtIOE12Aw0L2JE-jAKHigNOiVxh0AkX2v7VKaRtkGhE7fcUXfGsIRm6VAi7Pu1d-ZNS98PgZGsCzn5yZv76DbeQ5nwV6s8wDh19fYnn9N2P9HWaFRc0FkI8uvmO2jPHwwzw/p.jpeg?fv_content=true&size_mode=5)
 ![alt text2](https://ds-blobs-2.cdn.devapps.ru/23309035.jpg)
 ![alt text3](https://ds-blobs-2.cdn.devapps.ru/23309039.jpg)
 <p align="center">
