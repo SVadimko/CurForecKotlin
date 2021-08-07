@@ -69,4 +69,15 @@
                 app:title="@string/notify_enable" />
 
     </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/fonts">
+
+        <DropDownPreference
+                android:entries="@array/fonts"
+                android:entryValues="@array/fonts"
+                android:key="font"
+                android:defaultValue="@string/digital"
+                android:title="@string/font"
+                app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
 </PreferenceScreen>

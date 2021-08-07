@@ -2,14 +2,19 @@ package com.vadimko.curforeckotlin.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Typeface
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.cbjsonapi.CurrencyCBjs
 import java.util.*
 import com.vadimko.curforeckotlin.databinding.CbrfMainRecycleBinding
+import com.vadimko.curforeckotlin.prefs.NowPreference
 
 /**
  * adapter for RecycleView for CentralBank data on Today fragment
@@ -57,11 +62,25 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
 
         @SuppressLint("ResourceAsColor", "SetTextI18n")
         fun bindActivity(valute: CurrencyCBjs) {
+            val textParams = NowPreference.getTexParams()
+            val typefaceTv = textParams[0] as Typeface
+            val textSizeInt = textParams[1] as Float
+
+            valTv.apply {
+                typeface = typefaceTv
+                textSize = textSizeInt
+            }
+            valWasTv.apply {
+                typeface = typefaceTv
+                textSize = textSizeInt
+            }
+
             this.valute = valute
-
             currTv.text = valute.curr
-            if ((valute.curr == "UAH") || (valute.curr == "TRY")) {
 
+            // Grivna and Lira are returned in a ratio of 1 to 10 to rubles, so for them we increase
+            // number of decimal places
+            if ((valute.curr == "UAH") || (valute.curr == "TRY")) {
                 valTv.text = String.format(Locale.US, "%.3f", valute.value)
             } else {
                 valTv.text = String.format(Locale.US, "%.2f", valute.value)
@@ -84,15 +103,15 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
                 // Grivna and Lira are returned in a ratio of 1 to 10 to rubles, so for them we increase
                 // number of decimal places
                 if ((valute.curr == "UAH") || (valute.curr == "TRY")) {
-                    valWasTv.text = " (" + String.format(
+                    valWasTv.text = String.format(
                         Locale.US, "%+.3f",
                         -valute.valueWas + valute.value
-                    ) + ")"
+                    )
                 } else {
-                    valWasTv.text = " (" + String.format(
+                    valWasTv.text = String.format(
                         Locale.US, "%+.2f",
                         -valute.valueWas + valute.value
-                    ) + ")"
+                    )
                 }
                 imageView.setImageResource(valute.flag)
             } else {
@@ -102,10 +121,23 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
                 valWasTv.setText(R.string.na_string)
                 imageView.setImageResource(valute.flag)
             }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                TextViewCompat.setAutoSizeTextTypeWithDefaults(
+                    valTv,
+                    TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM
+                )
+                TextViewCompat.setAutoSizeTextTypeWithDefaults(
+                    valWasTv,
+                    TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM
+                )
+                TextViewCompat.setAutoSizeTextTypeWithDefaults(
+                    currTv,
+                    TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM
+                )
+            }
         }
 
         override fun onClick(v: View?) {
         }
-
     }
 }

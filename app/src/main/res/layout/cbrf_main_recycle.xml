@@ -28,7 +28,7 @@
 
         <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1.5"
+                android:layout_weight="1.2"
                 android:layout_height="wrap_content"
                 android:text="USD"
                 android:id="@+id/curr"
@@ -49,14 +49,14 @@
 
         <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1.7"
+                android:layout_weight="1.9"
                 android:layout_height="30dp"
                 android:textAlignment="center"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:fontFamily="@font/digital"
                 android:textColor="@color/colorRed"
                 android:background="@color/colorDigBack"
-                android:textSize="35sp"
                 android:text="70.0"
                 android:id="@+id/value"
                 android:layout_margin="5dp"
@@ -64,13 +64,13 @@
 
         <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2.3"
+                android:layout_weight="2.4"
                 android:layout_height="30dp"
                 android:fontFamily="@font/digital"
                 android:textAlignment="center"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:background="@color/colorDigBack"
-                android:textSize="35sp"
                 android:text="70.0"
                 android:id="@+id/val_was"
                 android:layout_margin="5dp"/>

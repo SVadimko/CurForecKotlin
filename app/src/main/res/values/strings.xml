@@ -83,6 +83,9 @@
     <string name="refresh_animation">On refresh animation</string>
     <string name="animation_on">animation enabled</string>
     <string name="animation_off">animation disabled</string>
+    <string name="fonts">Font selector</string>
+    <string name="font">Current font</string>
+    <string name="digital">Digital</string>
 
 
 </resources>

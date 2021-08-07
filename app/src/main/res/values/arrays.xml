@@ -48,4 +48,10 @@
         <item>60_min</item>
     </string-array>
 
+    <string-array name="fonts">
+        <item>Digital</item>
+        <item>Tahoma</item>
+        <item>NotoSerif</item>
+    </string-array>
+
 </resources>

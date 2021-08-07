@@ -84,5 +84,8 @@
     <string name="refresh_animation">Анимация при обновлении курсов</string>
     <string name="animation_on">Анимация включена</string>
     <string name="animation_off">Анимация выключена</string>
+    <string name="fonts">Выбор шрифта</string>
+    <string name="font">Текущий шрифт</string>
+    <string name="digital">Digital</string>
 
 </resources>

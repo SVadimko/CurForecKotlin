@@ -1,16 +1,18 @@
 package com.vadimko.curforeckotlin.adapters
 
+import android.graphics.Typeface
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
 import java.util.*
 import com.vadimko.curforeckotlin.databinding.TinkoffMainRecycleBinding
+import android.widget.TextView
+import androidx.core.widget.TextViewCompat
+import com.vadimko.curforeckotlin.prefs.NowPreference
+
 
 /**
  * adapter for RecycleView for Tinkov bank data on Today fragment
@@ -42,6 +44,7 @@ class TCSMainAdapter(private val curTCS: List<CurrencyTCS>) :
     inner class CurrTCSHolder(binding: TinkoffMainRecycleBinding) :
         RecyclerView.ViewHolder(binding.cardView),
         View.OnClickListener {
+
         //private val cardView: CardView = itemView.findViewById(R.id.card_view)
         private val cardView = binding.cardView
 
@@ -64,14 +67,42 @@ class TCSMainAdapter(private val curTCS: List<CurrencyTCS>) :
         private lateinit var valute: CurrencyTCS
 
         fun bindActivity(valute: CurrencyTCS) {
+            val textParams = NowPreference.getTexParams()
+            val typefaceTv = textParams[0] as Typeface
+            val textSizeInt = textParams[1] as Float
+
             this.valute = valute
             currTv.text = valute.name
-            buyTv.text = String.format(Locale.US, "%.2f", valute.buy)
-            cellTv.text = String.format(Locale.US, "%.2f", valute.sell)
+            buyTv.apply {
+                text = String.format(Locale.US, "%.2f", valute.buy)
+                typeface = typefaceTv
+                textSize = textSizeInt
+            }
+            cellTv.apply {
+                text = String.format(Locale.US, "%.2f", valute.sell)
+                typeface = typefaceTv
+                textSize = textSizeInt
+
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                TextViewCompat.setAutoSizeTextTypeWithDefaults(
+                    buyTv,
+                    TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM
+                )
+                TextViewCompat.setAutoSizeTextTypeWithDefaults(
+                    cellTv,
+                    TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM
+                )
+                TextViewCompat.setAutoSizeTextTypeWithDefaults(
+                    currTv,
+                    TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM
+                )
+            }
             imageView.setImageResource(valute.flag)
         }
 
         override fun onClick(v: View?) {
         }
+
     }
 }
