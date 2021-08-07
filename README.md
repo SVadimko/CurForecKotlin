@@ -55,7 +55,9 @@ LessSquare - рассчет прогноза методом наименьших
 WMA - рассчет прогноза методом средней скользящей
 
 /prefs/ 
-ArchivePreferences, TodayPreferences - классы для сохранения и чтения пользовательского выбора для фрагментов ArhiveFragment  и TodayFragment
+ArchivePreferences, TodayPreferences  - классы для сохранения и чтения пользовательского выбора для фрагментов ArhiveFragment  и TodayFragment
+
+NowPreference - класс, читающий пользовательский выбор шрифта для изменения шрифта для значений валют фрагмента NowFragment
 
 /ui/ - набор package, отвечающих за UI, состоит из:
 
@@ -143,6 +145,8 @@ WMA - calculating the forecast by the moving average method
 
 / prefs /
 ArchivePreferences, TodayPreferences - classes for saving and reading custom selection for ArhiveFragment and TodayFragment fragments
+
+NowPreference - a class that reads a custom font selection to change the font for currency values in NowFragment
 
 / ui / the set of packages responsible for the UI, consists of:
 / archive /
