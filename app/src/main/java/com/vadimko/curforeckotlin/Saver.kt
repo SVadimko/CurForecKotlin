@@ -1,7 +1,10 @@
 package com.vadimko.curforeckotlin
 
+import android.content.Context
 import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.io.*
 
 
@@ -9,8 +12,12 @@ import java.io.*
  * util class for save/load auto update data
  */
 
-class Saver {
-    val path: String = CurrenciesApplication.applicationContext().filesDir.path
+object Saver: KoinComponent {
+
+    private val context: Context by inject()
+
+    //private val path: String = CurrenciesApplication.applicationContext().filesDir.path
+    private val path: String = context.filesDir.path
 
     fun saveTcsLast(newData: MutableList<CurrencyTCS>) {
         val temp: MutableList<MutableList<CurrencyTCS>> = loadTcsLast()

@@ -26,9 +26,9 @@ import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
 import com.vadimko.curforeckotlin.databinding.FragmentCalcBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -373,11 +373,10 @@ class CalcFragment : Fragment() {
             trashCan.apply {
                 setOnClickListener {
                     GlobalScope.launch(Dispatchers.IO) {
-                        Saver().deleteTcsLast()
-                        attachGraph()
-                        CalcViewModel.data2.postValue(
-                            Saver().loadTcsLast()
-                        )
+                        val mutex = Mutex()
+                        mutex.withLock { Saver.deleteTcsLast() }
+                        withContext(Dispatchers.Main) { attachGraph() }
+                        mutex.withLock { CalcViewModel.data2.postValue(Saver.loadTcsLast()) }
                     }
                 }
             }
@@ -421,13 +420,18 @@ class CalcFragment : Fragment() {
             val title = viewChildWidget!!.findViewById<TextView>(R.id.title)
             title.text = getString(R.string.CALCFRAGdatafrwidget)
             val trashCan = viewChildWidget!!.findViewById<ImageView>(R.id.trashcan)
+            //TODO refactor
             trashCan.apply {
                 setOnClickListener {
                     val currenciesRepository = CurrenciesRepository.get()
                     currenciesRepository.clearCurrencies(listWidgetData)
-                    attachWidgetGraph()
-                    createGraph(1, viewChildWidget!!, datesTimeW)
-                    fillWidgetTCsGraph()
+                    viewAcceptWidget.removeAllViews()
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(600)
+                        attachWidgetGraph()
+                        createGraph(1, viewChildWidget!!, datesTimeW)
+                        fillWidgetTCsGraph()
+                    }
                 }
             }
         } else {

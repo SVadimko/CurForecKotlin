@@ -1,35 +1,45 @@
 package com.vadimko.curforeckotlin.prefs
 
+import android.content.Context
 import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.CurrenciesApplication
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-object NowPreference {
-    fun getTexParams(): List<Any> {
+object NowPreference: KoinComponent {
+
+    private val context: Context by inject()
+
+    fun getTextParams(): List<Any> {
         val typefaceTv: Typeface
         val textSizeFlt: Float
         val fontSelector =
-            PreferenceManager.getDefaultSharedPreferences(CurrenciesApplication.applicationContext())
+            //PreferenceManager.getDefaultSharedPreferences(CurrenciesApplication.applicationContext())
+            PreferenceManager.getDefaultSharedPreferences(context)
                 .getString("font", "")
         when (fontSelector) {
             "Tahoma" -> {
                 typefaceTv = ResourcesCompat.getFont(
-                    CurrenciesApplication.applicationContext(),
+                    //CurrenciesApplication.applicationContext(),
+                    context,
                     com.vadimko.curforeckotlin.R.font.tahoma
                 )!!
                 textSizeFlt = 23F
             }
             "NotoSerif" -> {
                 typefaceTv = ResourcesCompat.getFont(
-                    CurrenciesApplication.applicationContext(),
+                    //CurrenciesApplication.applicationContext(),
+                    context,
                     com.vadimko.curforeckotlin.R.font.notoserif
                 )!!
                 textSizeFlt = 23F
             }
             else -> {
                 typefaceTv = ResourcesCompat.getFont(
-                    CurrenciesApplication.applicationContext(),
+                    //CurrenciesApplication.applicationContext(),
+                    context,
                     com.vadimko.curforeckotlin.R.font.digital
                 )!!
                 textSizeFlt = 30F

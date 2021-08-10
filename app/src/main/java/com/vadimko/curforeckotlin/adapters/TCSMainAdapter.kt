@@ -67,7 +67,7 @@ class TCSMainAdapter(private val curTCS: List<CurrencyTCS>) :
         private lateinit var valute: CurrencyTCS
 
         fun bindActivity(valute: CurrencyTCS) {
-            val textParams = NowPreference.getTexParams()
+            val textParams = NowPreference.getTextParams()
             val typefaceTv = textParams[0] as Typeface
             val textSizeInt = textParams[1] as Float
 

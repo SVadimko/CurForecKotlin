@@ -106,7 +106,7 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
 
         fun loadGraphData() {
             GlobalScope.launch(Dispatchers.IO) {
-                data2.postValue(Saver().loadTcsLast())
+                data2.postValue(Saver.loadTcsLast())
             }
         }
     }

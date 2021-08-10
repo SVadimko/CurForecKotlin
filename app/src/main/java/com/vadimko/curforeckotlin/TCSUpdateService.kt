@@ -17,6 +17,8 @@ import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,7 +80,7 @@ class TCSUpdateService : Service() {
 
     private fun updateTask() {
         //period = PreferenceManager.getDefaultSharedPreferences(this)
-            //.getString("update_per", "15_min")?.split("_")?.get(0)?.toLong()!!
+        //.getString("update_per", "15_min")?.split("_")?.get(0)?.toLong()!!
         Thread {
             var allRequest = 1
             while (true) {
@@ -146,8 +148,13 @@ class TCSUpdateService : Service() {
                     } else {
                         currentTCS = mutableListOf(usdTCS, eurTCS, gbpTCS)
                         GlobalScope.launch(Dispatchers.IO) {
-                            Saver().saveTcsLast(currentTCS)
-                            CalcViewModel.data2.postValue(Saver().loadTcsLast())
+                            //save(currentTCS)
+                            //load()
+                            val mutex = Mutex()
+                            mutex.withLock { Saver.saveTcsLast(currentTCS) }
+                            mutex.withLock { CalcViewModel.data2.postValue(Saver.loadTcsLast()) }
+                            //Saver.saveTcsLast(currentTCS)
+                            //CalcViewModel.data2.postValue(Saver.loadTcsLast())
                         }
                         val usdBuy = String.format("%.2f", currentTCS[0].buy)
                         val usdSell = String.format("%.2f", currentTCS[0].sell)
@@ -287,4 +294,15 @@ class TCSUpdateService : Service() {
         val caps = connectivityManager.getNetworkCapabilities(currentNetwork)
         return caps?.hasCapability(NET_CAPABILITY_INTERNET) ?: false
     }
+
+    /* private val mutex = Mutex()
+
+     private suspend fun save(currentTCS: MutableList<CurrencyTCS>) {
+         mutex.withLock() { Saver.saveTcsLast(currentTCS) }
+     }
+
+     private suspend fun load() {
+         mutex.withLock() { CalcViewModel.data2.postValue(Saver.loadTcsLast()) }
+     }
+ */
 }

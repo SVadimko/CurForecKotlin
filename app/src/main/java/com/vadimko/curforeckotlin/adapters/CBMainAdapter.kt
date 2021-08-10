@@ -62,7 +62,7 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
 
         @SuppressLint("ResourceAsColor", "SetTextI18n")
         fun bindActivity(valute: CurrencyCBjs) {
-            val textParams = NowPreference.getTexParams()
+            val textParams = NowPreference.getTextParams()
             val typefaceTv = textParams[0] as Typeface
             val textSizeInt = textParams[1] as Float
 
