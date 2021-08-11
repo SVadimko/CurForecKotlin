@@ -3,21 +3,20 @@ package com.vadimko.curforeckotlin.widget
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import android.widget.RemoteViews
+import com.vadimko.curforeckotlin.DateConverter
 import com.vadimko.curforeckotlin.R
-import com.vadimko.curforeckotlin.cbjsonapi.CBjsonApi
-import com.vadimko.curforeckotlin.cbjsonapi.CBjsonResponse
-import com.vadimko.curforeckotlin.cbjsonapi.CBjsonValute
+import com.vadimko.curforeckotlin.cbjsonApi.CBjsonApi
+import com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse
+import com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute
 import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
-import com.vadimko.curforeckotlin.tcsapi.*
+import com.vadimko.curforeckotlin.tcsApi.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -76,7 +75,7 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
                             eurSell = sellEUR!!,
                             gbpBuy = buyGBP!!,
                             gbpSell = sellGBP!!,
-                            dt = longToTime(dt!!)
+                            dt = DateConverter.longToDateWithTime(dt!!)
                         )
                     )
                     val views = RemoteViews(mContext.packageName, R.layout.main_widget)
@@ -106,10 +105,8 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
                     )
                     views.setTextViewText(
                         R.id.dt,
-                        //"ТКС  от " + " " + longToTime(
-                        "${mContext.resources.getString(R.string.tcsfrom)} " + " " + longToTime(
-                            dt
-                        )
+                        "${mContext.resources.getString(R.string.tcsfrom)} " + " "
+                                + DateConverter.longToDateWithTime(dt)
                     )
                     mappWidgetManager.updateAppWidget(mappWidgetID, views)
                 }
@@ -117,8 +114,6 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
 
             override fun onFailure(call: Call<TCSResponse>, t: Throwable) {
             }
-
-
         })
     }
 
@@ -180,19 +175,5 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
             override fun onFailure(call: Call<CBjsonResponse>, t: Throwable) {
             }
         })
-    }
-
-    private fun longToTime(time: Long): String {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            SimpleDateFormat("HH:mm:ss dd.MM.yyyy", mContext.resources.configuration.locales[0]).format(
-                Date(
-                    time
-                )
-            )
-        } else {
-            return SimpleDateFormat("HH:mm:ss dd.MM.yyyy", mContext.resources.configuration.locale).format(
-                Date(time)
-            )
-        }
     }
 }

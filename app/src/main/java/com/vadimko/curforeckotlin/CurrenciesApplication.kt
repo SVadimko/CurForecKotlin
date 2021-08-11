@@ -3,15 +3,18 @@ package com.vadimko.curforeckotlin
 import android.app.Application
 import android.content.Context
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
-import com.vadimko.curforeckotlin.prefs.NowPreference
+import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
+import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
+import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import com.vadimko.curforeckotlin.ui.today.TodayViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.GlobalContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 /**
- * creating application context singleton and init DataBase
+ * start KOIN, init DataBase and creating application context singleton(not used)
  */
 
 class CurrenciesApplication : Application() {
@@ -21,16 +24,15 @@ class CurrenciesApplication : Application() {
 
     private val appModule = module {
 
-        //single<HelloRepository> { HelloRepositoryImpl() }
-
-        //factory { MySimplePresenter(get()) }
-
-       // single { ClassToInject(androidContext()) }
-
         single {Saver}
 
-        //single {NowPreference() }
+        viewModel { CalcViewModel(get()) }
 
+        viewModel { NowViewModel(get()) }
+
+        viewModel { TodayViewModel(get()) }
+
+        viewModel { ArchiveViewModel(get()) }
     }
 
 
@@ -44,6 +46,7 @@ class CurrenciesApplication : Application() {
         }
     }
 
+    //Singleton of app context
     companion object {
         private var instance: CurrenciesApplication? = null
 

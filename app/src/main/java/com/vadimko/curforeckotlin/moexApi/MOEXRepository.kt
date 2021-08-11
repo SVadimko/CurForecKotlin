@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin.moexapi
+package com.vadimko.curforeckotlin.moexApi
 
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import com.vadimko.curforeckotlin.ui.today.TodayViewModel

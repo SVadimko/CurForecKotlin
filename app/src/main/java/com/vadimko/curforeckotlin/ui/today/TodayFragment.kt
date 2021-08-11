@@ -8,7 +8,6 @@ import android.view.*
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.charts.CombinedChart
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
 import com.github.mikephil.charting.components.Description
@@ -22,8 +21,9 @@ import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.SettingsActivity
 import com.vadimko.curforeckotlin.databinding.FragmentTodayBinding
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
-import com.vadimko.curforeckotlin.moexapi.CurrencyMOEX
+import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.prefs.TodayPreferences
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 /**
@@ -44,9 +44,11 @@ class TodayFragment : Fragment() {
     private lateinit var comboChartForec: CombinedChart
     private val yValsCandleStick2 = ArrayList<CandleEntry>()
 
-    private val todayViewModel: TodayViewModel by lazy {
+ /*   private val todayViewModel: TodayViewModel by lazy {
         ViewModelProvider(this).get(TodayViewModel::class.java)
-    }
+    }*/
+
+    private val todayViewModel by viewModel<TodayViewModel>()
 
     private lateinit var root: View
 

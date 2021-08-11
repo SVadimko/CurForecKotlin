@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin.tcsapi
+package com.vadimko.curforeckotlin.tcsApi
 
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel

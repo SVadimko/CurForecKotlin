@@ -7,10 +7,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.CoinsAnimator
-import com.vadimko.curforeckotlin.cbjsonapi.CBJsonRepository
-import com.vadimko.curforeckotlin.cbjsonapi.CurrencyCBjs
-import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
-import com.vadimko.curforeckotlin.tcsapi.TCSRepository
+import com.vadimko.curforeckotlin.cbjsonApi.CBJsonRepository
+import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
+import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
+import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

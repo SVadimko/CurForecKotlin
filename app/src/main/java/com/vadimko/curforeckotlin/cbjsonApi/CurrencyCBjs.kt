@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin.cbjsonapi
+package com.vadimko.curforeckotlin.cbjsonApi
 
 /**
  * data class used to store rates from the Central Bank

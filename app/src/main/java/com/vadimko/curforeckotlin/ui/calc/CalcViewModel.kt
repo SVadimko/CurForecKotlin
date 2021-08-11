@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.Saver
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
-import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
-import com.vadimko.curforeckotlin.tcsapi.TCSRepository
+import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
+import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

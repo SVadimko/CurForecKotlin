@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin.cbxmlapi
+package com.vadimko.curforeckotlin.cbxmlApi
 
 /**
  * data class used to store archive rates from the Central Bank

@@ -12,7 +12,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.TaskStackBuilder
 import androidx.preference.PreferenceManager
-import com.vadimko.curforeckotlin.tcsapi.*
+import com.vadimko.curforeckotlin.tcsApi.*
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

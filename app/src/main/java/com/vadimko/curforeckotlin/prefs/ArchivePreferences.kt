@@ -43,7 +43,7 @@ object ArchivePreferences {
         val from = Date(System.currentTimeMillis() - 604800000)
         val till = Date(System.currentTimeMillis())
         //val result = dateConverter(context)
-        val result = DateConverter.getFromTillDate(from, till, context)
+        val result = DateConverter.getFromTillDate(from, till)
         val sp = PreferenceManager.getDefaultSharedPreferences(context)
         val data0 = sp.getLong("fromARDate", System.currentTimeMillis() - 604800000).toString()
         val data1 = sp.getLong("tillARDate", System.currentTimeMillis()).toString()

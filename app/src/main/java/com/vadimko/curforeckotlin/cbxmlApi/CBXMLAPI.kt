@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin.cbxmlapi
+package com.vadimko.curforeckotlin.cbxmlApi
 
 import retrofit2.Call
 import retrofit2.http.GET

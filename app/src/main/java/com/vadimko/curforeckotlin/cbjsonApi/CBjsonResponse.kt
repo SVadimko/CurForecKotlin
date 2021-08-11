@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin.cbjsonapi
+package com.vadimko.curforeckotlin.cbjsonApi
 
 /**
  * splitting the nested JSON response into classes

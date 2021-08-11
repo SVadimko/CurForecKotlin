@@ -37,7 +37,7 @@ object TodayPreferences {
         //val result = dateConverter(1, context)
         val till = Date(System.currentTimeMillis())
         val from = Date(System.currentTimeMillis() - 86400000 * 1)
-        val result = DateConverter.getFromTillDate(from, till, context)
+        val result = DateConverter.getFromTillDate(from, till)
         val sp = PreferenceManager.getDefaultSharedPreferences(context)
         val data1 = sp.getString("request", "USD000000TOD")!!
         val data2 = sp.getString("fromDate", result[0][0])!!

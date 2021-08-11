@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.vadimko.curforeckotlin.R
-import com.vadimko.curforeckotlin.cbjsonapi.CurrencyCBjs
+import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
 import java.util.*
 import com.vadimko.curforeckotlin.databinding.CbrfMainRecycleBinding
 import com.vadimko.curforeckotlin.prefs.NowPreference

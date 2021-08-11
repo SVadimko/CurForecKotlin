@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin.moexapi
+package com.vadimko.curforeckotlin.moexApi
 
 /**
  * data class used to store rates from the MOEX

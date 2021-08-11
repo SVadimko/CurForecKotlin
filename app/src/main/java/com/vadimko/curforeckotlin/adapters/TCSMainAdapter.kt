@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
+import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import java.util.*
 import com.vadimko.curforeckotlin.databinding.TinkoffMainRecycleBinding
 import android.widget.TextView

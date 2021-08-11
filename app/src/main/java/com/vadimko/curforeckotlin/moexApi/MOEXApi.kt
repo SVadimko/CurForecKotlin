@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin.moexapi
+package com.vadimko.curforeckotlin.moexApi
 
 import retrofit2.Call
 import retrofit2.http.GET

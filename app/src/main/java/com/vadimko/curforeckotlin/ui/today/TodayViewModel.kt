@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.work.*
 import com.vadimko.curforeckotlin.DateConverter
 import com.vadimko.curforeckotlin.prefs.TodayPreferences
-import com.vadimko.curforeckotlin.moexapi.CurrencyMOEX
-import com.vadimko.curforeckotlin.moexapi.MOEXRepository
+import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
+import com.vadimko.curforeckotlin.moexApi.MOEXRepository
 import com.vadimko.curforeckotlin.updateWorkers.TodayWorker
 import java.util.*
 
@@ -88,7 +88,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
         }
         val till = Date(System.currentTimeMillis())
         val from = Date(System.currentTimeMillis() - 86400000 * recDays)
-        val result = DateConverter.getFromTillDate(from, till, context)
+        val result = DateConverter.getFromTillDate(from, till)
         jsonDate = result[0]
         startTodayWorker(jsonCurr, jsonDate[0], jsonDate[1], rates.toString())
         TodayPreferences.savePrefs(

@@ -2,12 +2,10 @@ package com.vadimko.curforeckotlin.ui.calc
 
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
@@ -19,18 +17,18 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.vadimko.curforeckotlin.DateConverter
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.Saver
 import com.vadimko.curforeckotlin.SettingsActivity
 import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
-import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
+import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.databinding.FragmentCalcBinding
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import java.text.SimpleDateFormat
-import java.util.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Calc fragment representing calculator and chart of widget update data and auto update data
@@ -87,9 +85,11 @@ class CalcFragment : Fragment() {
 
     private lateinit var listWidgetData: List<Currencies>
 
-    private val calcViewModel: CalcViewModel by lazy {
+  /*  private val calcViewModel: CalcViewModel by lazy {
         ViewModelProvider(this).get(CalcViewModel::class.java)
-    }
+    }*/
+
+    private val calcViewModel by viewModel<CalcViewModel>()
 
     private var _binding: FragmentCalcBinding? = null
 
@@ -229,10 +229,10 @@ class CalcFragment : Fragment() {
             PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean("widgeton", false)
         if (pref) {
-            calcViewModel.livedataTKS.observe(viewLifecycleOwner, {
+            calcViewModel.livedataTKS.observe(viewLifecycleOwner) {
                 extractWidgetGraphData(it)
                 listWidgetData = it
-            })
+            }
         }
         calcViewModel.rubValue.observe(viewLifecycleOwner, {
             rubValue.text = it
@@ -248,23 +248,6 @@ class CalcFragment : Fragment() {
         eurSell = dataList[1].sell!!
         gbpBuy = dataList[1].buy!!
         gbpSell = dataList[1].sell!!
-    }
-
-
-    private fun longToTime(time: Long): String {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            SimpleDateFormat("HH:mm:ss dd.MM.yyyy", resources.configuration.locales[0])
-                .format(
-                    Date(
-                        time
-                    )
-                )
-        } else {
-            return SimpleDateFormat("HH:mm:ss dd.MM.yyyy", resources.configuration.locale)
-                .format(
-                    Date(time)
-                )
-        }
     }
 
     // retrieve data to show a graph of values obtained as a result of auto-update service
@@ -284,7 +267,7 @@ class CalcFragment : Fragment() {
             usdData.add(it[0])
             it[0].buy?.let { it1 -> usdDataBuy.add(it1) }
             it[0].sell?.let { it1 -> usdDataSell.add(it1) }
-            it[0].datetime?.let { it1 -> datesTime.add(longToTime(it1)) }
+            it[0].datetime?.let { it1 -> datesTime.add(DateConverter.longToDateWithTime(it1)) }
             eurData.add(it[1])
             it[1].buy?.let { it1 -> eurDataBuy.add(it1) }
             it[1].sell?.let { it1 -> eurDataSell.add(it1) }

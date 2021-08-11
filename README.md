@@ -36,16 +36,16 @@ https://4pda.to/forum/index.php?showtopic=1028182
 /adapters/
 CBmainAdapter, TCSmainAdapter - классы адаптеров для recycleview фрагмента NowFragment 
 
-/cbjsonapi/ - набор классов для запроса данных о валютах с помощью Retrofit с сайта Центрального Банка (на текущий и прошедший дни)
+/cbjsonApi/ - набор классов для запроса данных о валютах с помощью Retrofit с сайта Центрального Банка (на текущий и прошедший дни)
 для фрагмента NowFragment с ответом в формате Json 
 
-/cbxmlapi/ - набор классов для запроса данных о валютах с помощью Retrofit с сайта Центрального Банка (на указанный пользователем период)
+/cbxmlApi/ - набор классов для запроса данных о валютах с помощью Retrofit с сайта Центрального Банка (на указанный пользователем период)
 для ArchiveFragment с ответом в формате Xml
 
-/moexapi/ - набор классов для запроса данных о валютах с помощью Retrofit с сайта Московской биржи (на указанный пользователем период)
+/moexApi/ - набор классов для запроса данных о валютах с помощью Retrofit с сайта Московской биржи (на указанный пользователем период)
 для фрагментов TodayFragment и ArhiveFragment  с ответом в формате Json
 
-/tcsapi/ - набор классов для запроса данных о валютах с помощью Retrofit с сайта Тиньков (на текущий момент) для фрагмента NowFragment с ответом в формате Json
+/tcsApi/ - набор классов для запроса данных о валютах с помощью Retrofit с сайта Тиньков (на текущий момент) для фрагмента NowFragment с ответом в формате Json
 
 /database/ - набор классов для работы с Sql базой данных с помощью Room (запись в базу данных результатов обновления валют виджета приложения)
 
@@ -89,7 +89,7 @@ TodayModel - реализация viewmodel для соответствующе�
 
 /updateWorkers/ - workers для обновления информации о курсах валют для соответствующих фрагментов
 
-CurrenciesApplication - Application класс (инициализация CurrenciesRepository для работы с базой данных и создание синглтона контекста приложения)
+CurrenciesApplication - Application класс (инициализация CurrenciesRepository для работы с базой данных и запуск KOIN(DI), создание синглтона контекста приложения)
 
 DateConverter - вспомогательный класс с функциями форматирования даты в нужные форматы для формирования запроса к серверам
 Saver - вспомогательный класс для сохранения/загрузки данных о курсах Тиньков банка, получаемых сервисом TCSUpdateService
@@ -124,16 +124,16 @@ A short description of the application classes:
 / adapters /
 CBmainAdapter, TCSmainAdapter - adapter classes for recycleview NowFragment
 
-/ cbjsonapi / - a set of classes for requesting data about currencies using Retrofit from the Central Bank website (for the current and past days)
+/ cbjsonApi / - a set of classes for requesting data about currencies using Retrofit from the Central Bank website (for the current and past days)
 for the NowFragment fragment with a response in Json format
 
-/ cbxmlapi / - a set of classes for requesting data on currencies using Retrofit from the Central Bank website (for a user-specified period)
+/ cbxmlApi / - a set of classes for requesting data on currencies using Retrofit from the Central Bank website (for a user-specified period)
 for ArchiveFragment with a response in Xml format
 
-/ moexapi / - a set of classes for requesting currency data using Retrofit from the Moscow Exchange website (for a user-specified period)
+/ moexApi / - a set of classes for requesting currency data using Retrofit from the Moscow Exchange website (for a user-specified period)
 for TodayFragment and ArhiveFragment fragments with a response in Json format
 
-/ tcsapi / - a set of classes for requesting data about currencies using Retrofit from the Tinkov website (at the moment)
+/ tcsApi / - a set of classes for requesting data about currencies using Retrofit from the Tinkov website (at the moment)
 for a NowFragment fragment with a response in Json format
 
 / database / - a set of classes for working with Sql database using Room (recording the results of updating the currencies of the application widget into the database)
@@ -165,7 +165,7 @@ TodayModel - the viewmodel implementation for the corresponding fragment
 
 / updateWorkers / - workers to update the exchange rate information for the relevant snippets
 
-CurrenciesApplication - Application class (initializing CurrenciesRepository for working with the database and create singleton of application context) 
+CurrenciesApplication - Application class (initializing CurrenciesRepository for working with the database, start KOIN(DI) and create singleton of application context) 
 
 DateConverter - a helper class with functions for formatting dates in the required formats to form a request to servers
 Saver - an auxiliary class for saving / loading data on Tinkov bank rates received by the TCSUpdateService service

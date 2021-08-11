@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -17,9 +16,10 @@ import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.SettingsActivity
 import com.vadimko.curforeckotlin.adapters.CBMainAdapter
 import com.vadimko.curforeckotlin.adapters.TCSMainAdapter
-import com.vadimko.curforeckotlin.cbjsonapi.CurrencyCBjs
+import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
 import com.vadimko.curforeckotlin.databinding.FragmentNowBinding
-import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
+import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Now fragment representing current courses of Tinkov and Central Bank
@@ -27,9 +27,12 @@ import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
 
 class NowFragment : Fragment() {
 
-    private val nowViewModel: NowViewModel by lazy {
+ /*   private val nowViewModel: NowViewModel by lazy {
         ViewModelProvider(this).get(NowViewModel::class.java)
-    }
+    }*/
+
+    private val nowViewModel by viewModel<NowViewModel>()
+
     private var _binding: FragmentNowBinding? = null
 
     private val binding get() = _binding!!

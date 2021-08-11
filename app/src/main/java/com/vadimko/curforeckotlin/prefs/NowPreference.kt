@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
 import androidx.preference.PreferenceManager
-import com.vadimko.curforeckotlin.CurrenciesApplication
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

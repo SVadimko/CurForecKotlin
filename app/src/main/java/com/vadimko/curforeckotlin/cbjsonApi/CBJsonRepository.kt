@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin.cbjsonapi
+package com.vadimko.curforeckotlin.cbjsonApi
 
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.ui.now.NowViewModel

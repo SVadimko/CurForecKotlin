@@ -1,7 +1,7 @@
 package com.vadimko.curforeckotlin
 
 import android.content.Context
-import com.vadimko.curforeckotlin.tcsapi.CurrencyTCS
+import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

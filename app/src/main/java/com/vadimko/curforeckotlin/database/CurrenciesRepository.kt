@@ -29,6 +29,7 @@ class CurrenciesRepository private constructor(context: Context) {
     fun insertCurrencies(currencies: Currencies) {
         executor.execute {
             currencyDao.addCurrencies(currencies)
+
         }
     }
 

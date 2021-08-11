@@ -2,12 +2,10 @@ package com.vadimko.curforeckotlin.ui.archive
 
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
@@ -18,17 +16,18 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.vadimko.curforeckotlin.DateConverter
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.R.*
 import com.vadimko.curforeckotlin.SettingsActivity
-import com.vadimko.curforeckotlin.cbxmlapi.CurrencyCBarhive
+import com.vadimko.curforeckotlin.cbxmlApi.CurrencyCBarhive
 import com.vadimko.curforeckotlin.databinding.FragmentArchiveBinding
 import com.vadimko.curforeckotlin.forecastsMethods.ExponentSmooth
 import com.vadimko.curforeckotlin.forecastsMethods.LessSquare
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
-import com.vadimko.curforeckotlin.moexapi.CurrencyMOEX
+import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.prefs.ArchivePreferences
-import java.text.SimpleDateFormat
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -64,9 +63,11 @@ class ArchiveFragment : Fragment(){
     private lateinit var currSpinner: Spinner
 
 
-    private val archiveViewModel: ArchiveViewModel by lazy {
+   /* private val archiveViewModel: ArchiveViewModel by lazy {
         ViewModelProvider(this).get(ArchiveViewModel::class.java)
-    }
+    }*/
+
+    private val archiveViewModel by viewModel<ArchiveViewModel>()
 
     private lateinit var root: View
 
@@ -160,9 +161,9 @@ class ArchiveFragment : Fragment(){
         }
         val c = Calendar.getInstance()
         c.time = fromDate
-        fromTv.text = longToDate(fromDate)
+        fromTv.text = DateConverter.dateWithOutTimeFormat(fromDate)
         c.time = tillDate
-        tillTv.text = longToDate(tillDate)
+        tillTv.text = DateConverter.dateWithOutTimeFormat(tillDate)
         return root
     }
 
@@ -177,12 +178,12 @@ class ArchiveFragment : Fragment(){
         parentFragmentManager
             .setFragmentResultListener("fromDate", this) { _, bundle ->
             fromDate = bundle.get("bundleKey") as Date
-            fromTv.text = longToDate(fromDate)
+            fromTv.text = DateConverter.dateWithOutTimeFormat(fromDate)
         }
         parentFragmentManager
             .setFragmentResultListener("tillDate", this) { _, bundle ->
             tillDate = bundle.get("bundleKey") as Date
-            tillTv.text = longToDate(tillDate)
+            tillTv.text = DateConverter.dateWithOutTimeFormat(tillDate)
         }
         //subscribe to data from the Central Bank in ArchiveViewModel
         archiveViewModel.getDataCB().observe(viewLifecycleOwner, { archiveCB ->
@@ -557,13 +558,5 @@ class ArchiveFragment : Fragment(){
         }
     }*/
 
-    private fun longToDate(date: Date): String {
-        val jdf = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            SimpleDateFormat("dd/MM/yyyy", resources.configuration.locales[0])
-        } else {
-            SimpleDateFormat("dd/MM/yyyy", resources.configuration.locale)
-        }
-        return jdf.format(date)
-    }
 }
 

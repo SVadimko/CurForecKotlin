@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin.tcsapi
+package com.vadimko.curforeckotlin.tcsApi
 
 import android.annotation.SuppressLint
 import java.io.Serializable
