@@ -4,7 +4,7 @@ import java.text.NumberFormat
 import kotlin.math.abs
 
 /**
- * forecast using exponential weighting
+ * Forecast using exponential weighting
  */
 
 class ExponentSmooth(inp: MutableList<Float>) {
@@ -36,7 +36,6 @@ class ExponentSmooth(inp: MutableList<Float>) {
         uo1 = summ / input.size
     }
 
-
     private fun calculateSmooth1() {
         output.clear()
         output.add(0, uo1)
@@ -47,7 +46,9 @@ class ExponentSmooth(inp: MutableList<Float>) {
         forecast.add(output[output.size - 1])
     }
 
-    //calculating error in percent
+    /**
+     * calculating error in percent
+     */
     private fun calculateErr(inp: MutableList<Float>, out: MutableList<Float>): Float {
         var err = 0f
         for (i in inp.indices) {
@@ -57,17 +58,25 @@ class ExponentSmooth(inp: MutableList<Float>) {
         return err
     }
 
+    /**
+     * @return data for smooth graph value
+     */
     fun getSmooth(): MutableList<Float> {
         val res = output
         res.removeAt(res.size - 1)
         return res
     }
 
-    //get forecast
+    /**
+     * @return forecast
+     */
     fun getForecast(): MutableList<Float> {
         return forecast
     }
 
+    /**
+     * @return error of calculating
+     */
     fun getErrSmooth(): String? {
         return err1
     }

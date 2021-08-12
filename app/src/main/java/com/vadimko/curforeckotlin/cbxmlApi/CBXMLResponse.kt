@@ -6,7 +6,7 @@ import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
 /**
- * splitting response into classes
+ * Splitting response into classes
  */
 
 @Root(name = "ValCurs", strict = false)

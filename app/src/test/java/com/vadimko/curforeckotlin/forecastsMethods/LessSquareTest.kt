@@ -1,10 +1,9 @@
 package com.vadimko.curforeckotlin.forecastsMethods
 
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-
-import org.junit.Assert.*
 
 class LessSquareTest {
     lateinit var lessSquare: LessSquare
@@ -23,7 +22,7 @@ class LessSquareTest {
     }
 
     @Test
-    fun calcErrorLessSquare(){
+    fun calcErrorLessSquare() {
         val error = "0"
         assertEquals(error, lessSquare.getErrVal())
     }

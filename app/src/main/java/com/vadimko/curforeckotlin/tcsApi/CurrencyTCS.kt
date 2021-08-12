@@ -6,7 +6,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * data class used to store rates from the Tinkov bank
+ * Data class used to store rates from the Tinkov bank
+ * @param flag resource id for image of country currency
+ * @param datetime date and time for [sell] and [buy] values
+ * @param sell sell value
+ * @param buy buy value
+ * @param name name of currency
  */
 
 data class CurrencyTCS(

@@ -9,14 +9,13 @@ import java.io.*
 
 
 /**
- * util class for save/load auto update data
+ * Util class for save/load autoupdate data
  */
 
-object Saver: KoinComponent {
+object Saver : KoinComponent {
 
     private val context: Context by inject()
 
-    //private val path: String = CurrenciesApplication.applicationContext().filesDir.path
     private val path: String = context.filesDir.path
 
     fun saveTcsLast(newData: MutableList<CurrencyTCS>) {

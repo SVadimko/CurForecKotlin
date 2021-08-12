@@ -1,7 +1,6 @@
 package com.vadimko.curforeckotlin.ui.now
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Build
@@ -12,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.vadimko.curforeckotlin.CoinsAnimator
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.SettingsActivity
 import com.vadimko.curforeckotlin.adapters.CBMainAdapter
@@ -27,9 +27,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NowFragment : Fragment() {
 
- /*   private val nowViewModel: NowViewModel by lazy {
-        ViewModelProvider(this).get(NowViewModel::class.java)
-    }*/
+    /*   private val nowViewModel: NowViewModel by lazy {
+           ViewModelProvider(this).get(NowViewModel::class.java)
+       }*/
 
     private val nowViewModel by viewModel<NowViewModel>()
 
@@ -40,12 +40,10 @@ class NowFragment : Fragment() {
     private lateinit var tcsRecycle: RecyclerView
     private lateinit var cbRecycle: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-
     private var mScale: Float = 0f
     private lateinit var rect: Rect
     private var displayRight = 0
     private var displayBottom = 0
-    private lateinit var mContext: Context
     private lateinit var frameLayout: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,10 +57,8 @@ class NowFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentNowBinding.inflate(inflater, container, false)
         root = binding.root
-
         tcsRecycle = binding.recycletinkoff
         tcsRecycle.layoutManager = LinearLayoutManager(context)
         cbRecycle = binding.recyclecbrf
@@ -70,7 +66,7 @@ class NowFragment : Fragment() {
         frameLayout = binding.framelay
         swipeRefreshLayout = binding.swipe
         swipeRefreshLayout.setOnRefreshListener {
-            nowViewModel.startWorker()
+            nowViewModel.startRefresh()
         }
         return root
     }
@@ -79,16 +75,23 @@ class NowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getDisplayParams()
-        //подписка на данные получаемые с сервера ЦБ
+        /**
+         * observe data receiving from Central bank bank throught [NowViewModel]
+         */
         nowViewModel.getData().observe(viewLifecycleOwner, { forecTCS ->
             forecTCS?.let {
                 setupAdapterTCS(forecTCS)
                 binding.lastchk.text =
                     "${getString(R.string.lastupdateTCS)} ${forecTCS[0].curr} ${getString(R.string.NOWFRAGsource)} tinkoff.ru"
+                /**
+                 * launching [CoinsAnimator] through [NowViewModel]
+                 */
                 nowViewModel.startAnimations(mScale, rect, frameLayout)
             }
         })
-        //подписка на данные получаемые с сервера Тиньков
+        /**
+         * observe data receiving from Tinkov bank throught [NowViewModel]
+         */
         nowViewModel.getData2().observe(viewLifecycleOwner, { forecCB ->
             forecCB?.let {
                 setupAdapterCB(forecCB)
@@ -126,17 +129,15 @@ class NowFragment : Fragment() {
                 return true
             }
             R.id.refresh -> {
-                nowViewModel.startWorker()
+                nowViewModel.startRefresh()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onAttach(context: Context) {
-        mContext = context
-        super.onAttach(context)
-    }
-
+    /**
+     * get display params for launching [CoinsAnimator] through [NowViewModel]
+     */
     private fun getDisplayParams() {
         rect = Rect()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

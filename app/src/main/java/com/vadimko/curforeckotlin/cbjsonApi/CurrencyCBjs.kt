@@ -1,7 +1,12 @@
 package com.vadimko.curforeckotlin.cbjsonApi
 
 /**
- * data class used to store rates from the Central Bank
+ * Data class used to store rates from the Central Bank
+ * @param value actual value of currency
+ * @param valueWas past value of currency
+ * @param dateTime time and date for actual value of currency
+ * @param flag code that used to get access to the image of flag
+ * @param curr name of currency
  */
 
 data class CurrencyCBjs(

@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'org.jetbrains.dokka'
+    id 'org.jetbrains.dokka' version "1.5.0"
 }
 
 apply plugin: 'kotlin-kapt'
@@ -40,33 +40,32 @@ android {
 
 tasks.dokkaHtml.configure {
     outputDirectory.set(file("../documentation/html"))
+    dokkaSourceSets {
+        configureEach {
+            includes.from("PACKAGES.MD")
+        }
+    }
 }
 
-tasks.dokkaJavadoc.configure {
+/*tasks.dokkaJavadoc.configure {
     outputDirectory.set(file("../documentation/javadoc"))
 }
 
 tasks.dokkaGfm.configure {
     outputDirectory.set(file("../documentation/gfm"))
-}
+}*/
 
 tasks.withType(dokkaHtml.getClass()).configureEach {
+
     pluginsMapConfiguration.set(
             ["org.jetbrains.dokka.base.DokkaBase": """{ "separateInheritedMembers": true}"""]
     )
 }
 
-dokkaHtml.configure {
-    dokkaSourceSets {
-        named("main") {
-            skipDeprecated.set(true)
-        }
-    }
-}
-
 
 repositories {
     maven { url 'https://jitpack.io' }
+    google()
     mavenCentral()
     jcenter()
 }
@@ -135,5 +134,8 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
 
     implementation "io.insert-koin:koin-core:$koin_version"
+
+    //implementation 'com.android.tools.build:gradle:7.0.0'
+    //implementation 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21'
 
 }

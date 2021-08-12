@@ -16,7 +16,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 /**
- * viewModel for Now fragment
+ * ViewModel for Now fragment
  */
 
 class NowViewModel(application: Application) : AndroidViewModel(application) {
@@ -36,25 +36,34 @@ class NowViewModel(application: Application) : AndroidViewModel(application) {
         return dataCB
     }
 
-    //configure and launch worker for update Tinkov and CB data
-    fun startWorker() {
+    /**
+     * launching coroutines to get Tinkov and CB
+     */
+    fun startRefresh() {
         loadDataTCS()
         loadDataCB()
     }
 
-    //starting animation after updating courses
+    /**
+     * start animation after updating courses with [CoinsAnimator]
+     */
     fun startAnimations(mScale: Float, mDisplaySize: Rect, mRootLayout: FrameLayout) {
         val onRefreshAnimation =
             PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean("onRefreshAnimation", true)
         if (onRefreshAnimation) {
             val coinsAnimator = CoinsAnimator(mScale, mDisplaySize, mRootLayout, context)
-            coinsAnimator.weatherAnimationSnow()
+            coinsAnimator.coinsAnimate()
         }
         //Toast.makeText(context, R.string.refreshed, Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * @property data MutableLiveData contains list of actual currency values [CurrencyTCS] from Tinkov through [TCSRepository]
+     * @property dataCB MutableLiveData contains list of actual currency values [CurrencyCBjs] from CB through [CBJsonRepository]
+     */
     companion object {
+
         var data: MutableLiveData<List<CurrencyTCS>> = MutableLiveData<List<CurrencyTCS>>()
 
         var dataCB: MutableLiveData<List<CurrencyCBjs>> = MutableLiveData<List<CurrencyCBjs>>()

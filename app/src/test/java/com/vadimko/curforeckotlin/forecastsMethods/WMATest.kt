@@ -1,12 +1,9 @@
 package com.vadimko.curforeckotlin.forecastsMethods
 
-import android.util.Log
 import org.junit.After
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
-import java.text.NumberFormat
+import org.junit.Test
 
 class WMATest {
     lateinit var wmaTest: WMA

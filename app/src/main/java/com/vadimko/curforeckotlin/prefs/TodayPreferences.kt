@@ -3,16 +3,19 @@ package com.vadimko.curforeckotlin.prefs
 import android.content.Context
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.DateConverter
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.util.*
 
 /**
- * save/load in prefs spinner conditions on Today fragment
+ * Save/load in prefs spinner conditions on Today fragment
  */
 
-object TodayPreferences {
+object TodayPreferences : KoinComponent {
+
+    private val context: Context by inject()
 
     fun savePrefs(
-        context: Context,
         request: String,
         from: String,
         till: String,
@@ -33,8 +36,7 @@ object TodayPreferences {
         preferencesEditor.apply()
     }
 
-    fun loadPrefs(context: Context): List<String> {
-        //val result = dateConverter(1, context)
+    fun loadPrefs(): List<String> {
         val till = Date(System.currentTimeMillis())
         val from = Date(System.currentTimeMillis() - 86400000 * 1)
         val result = DateConverter.getFromTillDate(from, till)

@@ -14,7 +14,8 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 /**
- * start KOIN, init DataBase and creating application context singleton(not used)
+ * Start KOIN, init DataBase and creating application context singleton(not used)
+ * @property appModule KOIN module for inject dependencies
  */
 
 class CurrenciesApplication : Application() {
@@ -24,7 +25,7 @@ class CurrenciesApplication : Application() {
 
     private val appModule = module {
 
-        single {Saver}
+        single { Saver }
 
         viewModel { CalcViewModel(get()) }
 

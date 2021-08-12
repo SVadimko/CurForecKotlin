@@ -6,7 +6,8 @@ import androidx.work.WorkerParameters
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
 
 /**
- * worker for calling throw viewModel request for Tinkov and CB data
+ * Worker for calling throw viewModel request for Tinkov and CB data (not used,
+ * replaced by coroutines in [NowViewModel])
  */
 
 class NowWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {

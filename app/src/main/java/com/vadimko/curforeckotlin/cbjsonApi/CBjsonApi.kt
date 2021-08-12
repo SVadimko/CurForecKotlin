@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 /**
- *interface for requesting Central Bank data with a response in JSON format
+ * Interface for requesting Central Bank data with a response in JSON format
  */
 
 interface CBjsonApi {

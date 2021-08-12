@@ -16,32 +16,40 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 /**
- * viewModel for Calc fragment
+ * ViewModel for Calc fragment
  */
 
 class CalcViewModel(application: Application) : AndroidViewModel(application) {
     private val context = getApplication<Application>()
 
     fun getData(): MutableLiveData<List<CurrencyTCS>> {
-        if (data.value?.size == null) {
+        if (dataForCalc.value?.size == null) {
             loadDataTCS()
         }
-        return data
+        return dataForCalc
     }
 
     fun getDataList(): MutableLiveData<List<List<CurrencyTCS>>> {
-        if (data2.value?.size == null) {
+        if (dataAutoUpdate.value?.size == null) {
             loadGraphData()
         }
-        return data2
+        return dataAutoUpdate
     }
 
+    /**
+     * @property rubValue contains ruble result for buying and selling which calcs in [calculating]
+     */
     var rubValue: MutableLiveData<String> = MutableLiveData<String>()
 
-    //getting information about courses from the database,
-    // which is updated every time the widget is updated
-    val livedataTKS = CurrenciesRepository.get().getCurrencies()
+    /**
+     * @property liveDataTKS getting information about courses from the database,
+     * which is updated every time the widget is updated
+     */
+    val liveDataTKS = CurrenciesRepository.get().getCurrencies()
 
+    /**
+     * fun perform result of calculating for buing and selling currency
+     */
     fun calculating(
         currSpinnerPos: Int,
         dataList: List<CurrencyTCS>,
@@ -91,22 +99,30 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
+    /**
+     * @property dataForCalc currency data used for calculating values
+     * @property dataAutoUpdate currency data saved as a result of auto-update
+     */
     companion object {
-        //course data used to calculate the calculator values
-        var data: MutableLiveData<List<CurrencyTCS>> = NowViewModel.data
-        fun loadDataTCS() {
+        var dataForCalc: MutableLiveData<List<CurrencyTCS>> = NowViewModel.data
 
+        /**
+         * load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
+         */
+        fun loadDataTCS() {
             val tcsRepository = TCSRepository()
             tcsRepository.getCurrentTCS()
         }
 
-        //course data saved as a result of auto-update
-        var data2: MutableLiveData<List<List<CurrencyTCS>>> =
+        var dataAutoUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
             MutableLiveData<List<List<CurrencyTCS>>>()
 
+        /**
+         * load currencies values from storage through [Saver] to [dataAutoUpdate]
+         */
         fun loadGraphData() {
             GlobalScope.launch(Dispatchers.IO) {
-                data2.postValue(Saver.loadTcsLast())
+                dataAutoUpdate.postValue(Saver.loadTcsLast())
             }
         }
     }

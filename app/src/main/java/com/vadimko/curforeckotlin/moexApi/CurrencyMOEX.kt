@@ -1,7 +1,13 @@
 package com.vadimko.curforeckotlin.moexApi
 
 /**
- * data class used to store rates from the MOEX
+ * Data class used to store rates from the MOEX
+ * @param dates date and time of currency values
+ * @param open value at opening
+ * @param low low value at this time
+ * @param high high value at this time
+ * @param close value at closing
+ * @param warprice weighted average value
  */
 
 data class CurrencyMOEX(

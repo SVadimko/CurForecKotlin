@@ -3,16 +3,19 @@ package com.vadimko.curforeckotlin.prefs
 import android.content.Context
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.DateConverter
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.util.*
 
 /**
- * save/load prefs of choosen datas for Archive fragment
+ * Save/load request to server of choosen data on Archive fragment
  */
 
-object ArchivePreferences {
+object ArchivePreferences : KoinComponent {
+
+    private val context: Context by inject()
 
     fun savePrefs(
-        context: Context,
         from: Long,
         till: Long,
         currSelecter: Int,
@@ -39,10 +42,9 @@ object ArchivePreferences {
         preferencesEditor.apply()
     }
 
-    fun loadPrefs(context: Context): List<String> {
+    fun loadPrefs(): List<String> {
         val from = Date(System.currentTimeMillis() - 604800000)
         val till = Date(System.currentTimeMillis())
-        //val result = dateConverter(context)
         val result = DateConverter.getFromTillDate(from, till)
         val sp = PreferenceManager.getDefaultSharedPreferences(context)
         val data0 = sp.getLong("fromARDate", System.currentTimeMillis() - 604800000).toString()

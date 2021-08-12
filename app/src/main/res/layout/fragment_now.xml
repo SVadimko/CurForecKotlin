@@ -156,10 +156,10 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                  <View
+                    <View
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:orientation="vertical"/>
+                            android:orientation="vertical" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -3,7 +3,7 @@ package com.vadimko.curforeckotlin.forecastsMethods
 import java.text.NumberFormat
 
 /**
- * calculate forecat using weighted moving average method (WMA)
+ * Calculate forecat using weighted moving average method (WMA)
  */
 class WMA(inp: MutableList<Float>, a: Int) {
     private var input: MutableList<Float> = inp
@@ -13,26 +13,25 @@ class WMA(inp: MutableList<Float>, a: Int) {
     private var amount = a
     private var count = 0
 
-
+    /**
+     * calculate forecast (3 values ahead) [forecast]
+     * calculate error of method [averageError]
+     */
     fun calc() {
         for (i in 1 until input.size - 1) {
             output.add((input[i - 1] + input[i] + input[i + 1]) / 3)
             count++
         }
-
         val inputLenght = input.size
         val outputLenght = output.size
         var inputTmp: Float
         forecast.add(input[input.size - 1])
-        //calculate forecast (3 values ahead)
         for (i in inputLenght until inputLenght + amount) {
             inputTmp =
                 (input[i - 1] + input[i - 2] + input[i - 3]) / 3 + (input[i - 1] - input[i - 2]) / 3
             input.add(i, inputTmp)
             forecast.add(inputTmp)
         }
-
-        //calculate error of method
         var err = 0.0f
         for (i in 0 until outputLenght) {
             err = err + 100 * Math.abs(input[i] - output[i]) / input[i]
@@ -50,10 +49,16 @@ class WMA(inp: MutableList<Float>, a: Int) {
     }
     */
 
+    /**
+     * @return calculated forecast
+     */
     fun getForecast(): MutableList<Float> {
         return forecast
     }
 
+    /**
+     * @return formatted error value of calculating
+     */
     fun getAverageErr(): String? {
         val numberFormat = NumberFormat.getInstance()
         numberFormat.maximumFractionDigits = 2

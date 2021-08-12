@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Build
 
 /**
- * bootreceiver for starting the service of auto-update of the exchange rate Tinkov after reboot,
+ * Bootreceiver for starting the service of auto-update of the exchange rate Tinkov after reboot,
  * if auto-update is selected in the application settings
  */
 
@@ -22,6 +22,9 @@ class BootReceiver : BroadcastReceiver() {
             startUpdater()
     }
 
+    /**
+     * depends on android version start foreground or background
+     */
     private fun startUpdater() {
         try {
             val serviceIntent = Intent(mContext, TCSUpdateService::class.java)

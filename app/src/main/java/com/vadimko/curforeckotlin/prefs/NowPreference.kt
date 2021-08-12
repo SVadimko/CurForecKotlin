@@ -7,15 +7,20 @@ import androidx.preference.PreferenceManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-object NowPreference: KoinComponent {
+/**
+ * Util class to load font prefs
+ */
+object NowPreference : KoinComponent {
 
     private val context: Context by inject()
 
+    /**
+     * @return typefaceTv and textsize
+     */
     fun getTextParams(): List<Any> {
         val typefaceTv: Typeface
         val textSizeFlt: Float
         val fontSelector =
-            //PreferenceManager.getDefaultSharedPreferences(CurrenciesApplication.applicationContext())
             PreferenceManager.getDefaultSharedPreferences(context)
                 .getString("font", "")
         when (fontSelector) {

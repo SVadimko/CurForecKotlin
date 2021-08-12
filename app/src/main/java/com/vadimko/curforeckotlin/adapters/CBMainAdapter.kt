@@ -12,12 +12,20 @@ import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
-import java.util.*
 import com.vadimko.curforeckotlin.databinding.CbrfMainRecycleBinding
 import com.vadimko.curforeckotlin.prefs.NowPreference
+import com.vadimko.curforeckotlin.tcsApi.TCSRepository
+import com.vadimko.curforeckotlin.ui.now.NowFragment
+import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import java.util.*
 
 /**
- * adapter for RecycleView for CentralBank data on Today fragment
+ * Adapter class for RecycleView for CentralBank data on [NowFragment]
+ *
+ * @param curCB take list of [CurrencyCBjs] that got from
+ * [NowViewModel] through
+ * [TCSRepository] Retrofit
+ *
  */
 
 class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
@@ -38,6 +46,10 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
         return curCB.size
     }
 
+    /**
+     * inner class ViewHolder
+     *
+     */
 
     inner class CurrCBHolder(binding: CbrfMainRecycleBinding) :
         RecyclerView.ViewHolder(binding.cardView),

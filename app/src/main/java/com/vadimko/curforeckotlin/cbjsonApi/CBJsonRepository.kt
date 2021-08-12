@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
- * request using Retrofit to https://www.cbr-xml-daily.ru/
+ * Request using Retrofit to https://www.cbr-xml-daily.ru/
  */
 class CBJsonRepository {
     private val cBjsonApi: CBjsonApi
@@ -30,9 +30,13 @@ class CBJsonRepository {
         cBjsonApi = retrofit.create(CBjsonApi::class.java)
     }
 
+
     fun getCurrentCB() {
         val currentRequest: Call<CBjsonResponse> = cBjsonApi.getCBForec()
         currentRequest.enqueue(object : Callback<CBjsonResponse> {
+            /**
+             * get list of [CurrencyCBjs] and post it to [NowViewModel.dataCB]
+             */
             override fun onResponse(
                 call: Call<CBjsonResponse>,
                 response: Response<CBjsonResponse>

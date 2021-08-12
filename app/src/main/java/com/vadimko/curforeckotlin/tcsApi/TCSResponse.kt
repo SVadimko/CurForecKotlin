@@ -2,7 +2,7 @@ package com.vadimko.curforeckotlin.tcsApi
 
 
 /**
- * splitting JSON response into classes
+ * Splitting JSON response into classes
  */
 
 class TCSResponse {
@@ -17,9 +17,10 @@ class TCSPayload {
 class TCSRates {
     lateinit var category: String
     lateinit var fromCurrency: fromCurrency
+
     //lateinit var toCurrency: toCurrency
-    var buy =0.0
-    var sell =0.0
+    var buy = 0.0
+    var sell = 0.0
 }
 
 class TCSLastUpdate {
@@ -28,4 +29,4 @@ class TCSLastUpdate {
 
 //data class toCurrency(val name:String = "")
 
-data class fromCurrency (val name:String = "")
+data class fromCurrency(val name: String = "")

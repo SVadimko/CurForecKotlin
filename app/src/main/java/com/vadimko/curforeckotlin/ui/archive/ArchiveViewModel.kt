@@ -12,13 +12,14 @@ import com.vadimko.curforeckotlin.cbxmlApi.CurrencyCBarhive
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
 import com.vadimko.curforeckotlin.prefs.ArchivePreferences
+import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB
+import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataCB
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
- * viewModel for Archive fragment
+ * ViewModel for Archive fragment
  */
 
 class ArchiveViewModel(application: Application) : AndroidViewModel(application) {
@@ -27,7 +28,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
 
     fun getDataCB(): MutableLiveData<List<CurrencyCBarhive>> {
         if (dataCB.value?.size == null) {
-            val archPr = ArchivePreferences.loadPrefs(getApplication())
+            val archPr = ArchivePreferences.loadPrefs()
             loadCBArhieve(archPr[4], archPr[5], archPr[3])
         }
         return dataCB
@@ -35,7 +36,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
 
     fun getDataMOEX(): MutableLiveData<List<CurrencyMOEX>> {
         if (dataMOEX.value?.size == null) {
-            val archPr = ArchivePreferences.loadPrefs(getApplication())
+            val archPr = ArchivePreferences.loadPrefs()
             loadDataMOEX(
                 archPr[6],
                 archPr[7],
@@ -47,7 +48,9 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
     }
 
 
-    //depending on the selected values of the spinners, we form parts of the request to the server
+    /**
+     * depending on the selected values of the spinners, forms parts of the request to the server
+     */
     fun createRequestStrings(choosen: Int, fromDate: Date, tillDate: Date) {
         var jsonCurr = ""
         var xmlCurr = ""
@@ -79,14 +82,16 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
             startArchiveWorker(xmlDate[0], xmlDate[1], xmlCurr)
             startArchiveMOEXWorker(jsonCurr, jsonDate[0], jsonDate[1])
             ArchivePreferences.savePrefs(
-                context, fromDate.time, tillDate.time, choosen, xmlCurr,
+                fromDate.time, tillDate.time, choosen, xmlCurr,
                 xmlDate[0], xmlDate[1], jsonCurr, jsonDate[0], jsonDate[1], "24"
             )
         } else Toast.makeText(context, context.getString(R.string.ARCFRAGError), Toast.LENGTH_LONG)
             .show()
     }
 
-    //checking choosen dates for correct
+    /**
+     * checking correct choosen of input dates
+     */
     private fun checkDates(from: Date, till: Date): Boolean {
         val tillLong = till.time
         val fromLong = from.time
@@ -96,7 +101,9 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
         return (till.compareTo(from)) > 0
     }
 
-    //launch worker to get data from CB
+    /**
+     * launch worker to get data from CB through [ArchiveWorker]
+     */
     private fun startArchiveWorker(from: String, till: String, request: String) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -121,7 +128,9 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
     }
 
 
-    //launch worker to get data from MOEX
+    /**
+     * launch worker to get data from MOEX through [ArchiveMOEXWorker]
+     */
     private fun startArchiveMOEXWorker(request: String, from: String, till: String) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -140,17 +149,28 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
         workManager.enqueue(myWorkRequest)
     }
 
+    /**
+     * @property dataCB MutableLiveData contains list of actual currency values [CurrencyCBarhive] from CB through [CBXMLRepository]
+     * @property dataMOEX MutableLiveData contains list of actual currency values [CurrencyMOEX] from MOEX through [MOEXRepository]
+     */
     companion object {
+
         var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
             MutableLiveData<List<CurrencyCBarhive>>()
 
         var dataMOEX: MutableLiveData<List<CurrencyMOEX>> = MutableLiveData<List<CurrencyMOEX>>()
 
+        /**
+         * load currencies values from CB through [CBXMLRepository] which post it to [dataCB]
+         */
         fun loadCBArhieve(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
             val cbxmlRepository = CBXMLRepository()
             cbxmlRepository.getXMLarchive(date_req1, date_req2, VAL_NM_RQ)
         }
 
+        /**
+         * load currencies values from MOEX through [MOEXRepository] which post it to [dataMOEX]
+         */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
             val moexRepository = MOEXRepository()
             moexRepository.getMOEX(request, from, till, interval, true)

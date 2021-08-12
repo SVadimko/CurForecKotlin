@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * util class for converting dates with patterns that accept servers
+ * Util class for converting dates with patterns that accept servers
  */
 
 object DateConverter : KoinComponent {

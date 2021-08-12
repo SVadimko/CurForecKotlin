@@ -17,7 +17,7 @@ import android.widget.ImageView
 import java.util.*
 
 /**
- * class for creating animation after courses updated
+ * Class for creating animation after courses updated
  */
 
 class CoinsAnimator(
@@ -37,7 +37,7 @@ class CoinsAnimator(
     private val mAllImageViews = ArrayList<View>()
     private val timer = Timer()
 
-    fun weatherAnimationSnow() {
+    fun coinsAnimate() {
         timer.schedule(ExeTimerTask(), 0, 100)
     }
 
@@ -127,6 +127,10 @@ class CoinsAnimator(
         }
     }
 
+    /**
+     * set animations count
+     * @property count sets the number of flying coins
+     */
     inner class ExeTimerTask : TimerTask() {
         override fun run() {
             mHandler.sendEmptyMessage(0x001)

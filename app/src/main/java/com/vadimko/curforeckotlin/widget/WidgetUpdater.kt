@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 /**
- * perform request to servers to get Tinkov and CB data
+ * Perform request to servers to get Tinkov and CB data
  */
 
 class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWidgetID: Int) {
@@ -47,6 +47,9 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
         updateCB()
     }
 
+    /**
+     * performs Retrofit request to Tinkov server
+     */
     private fun updateTCs() {
         val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
         currentRequest.enqueue(object : Callback<TCSResponse> {
@@ -117,6 +120,9 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
         })
     }
 
+    /**
+     * performs Retrofit request to CB server
+     */
     private fun updateCB() {
         val currentRequest: Call<CBjsonResponse> = cBjsonApi.getCBForec()
         currentRequest.enqueue(object : Callback<CBjsonResponse> {

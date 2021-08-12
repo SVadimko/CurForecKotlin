@@ -6,6 +6,6 @@ import androidx.room.TypeConverters
 
 @Database(entities = [Currencies::class], version = 1, exportSchema = false)
 @TypeConverters(CurrenciesTypeConverter::class)
-abstract class CurrenciesDataBase: RoomDatabase() {
-    abstract fun currenciesDao():CurrencyDao
+abstract class CurrenciesDataBase : RoomDatabase() {
+    abstract fun currenciesDao(): CurrencyDao
 }

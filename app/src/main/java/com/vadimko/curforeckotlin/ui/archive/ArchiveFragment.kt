@@ -4,7 +4,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
@@ -31,16 +34,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
- const val FROM_DATE_PICKER = "fromDatePicker"
- const val TILL_DATE_PICKER = "tillDatePicker"
+const val FROM_DATE_PICKER = "fromDatePicker"
+const val TILL_DATE_PICKER = "tillDatePicker"
 
 /**
  * Archive fragment representing courses for the interval selected by the user
  */
 
 
-class ArchiveFragment : Fragment(){
-
+class ArchiveFragment : Fragment() {
 
     private lateinit var linearCbrf: LineChart
     private lateinit var linearChartForec: LineChart
@@ -63,9 +65,9 @@ class ArchiveFragment : Fragment(){
     private lateinit var currSpinner: Spinner
 
 
-   /* private val archiveViewModel: ArchiveViewModel by lazy {
-        ViewModelProvider(this).get(ArchiveViewModel::class.java)
-    }*/
+    /* private val archiveViewModel: ArchiveViewModel by lazy {
+         ViewModelProvider(this).get(ArchiveViewModel::class.java)
+     }*/
 
     private val archiveViewModel by viewModel<ArchiveViewModel>()
 
@@ -97,7 +99,7 @@ class ArchiveFragment : Fragment(){
         _binding = FragmentArchiveBinding.inflate(inflater, container, false)
         root = binding.root
 
-        val loadPrefs = context?.let { ArchivePreferences.loadPrefs(it) }
+        val loadPrefs = context?.let { ArchivePreferences.loadPrefs() }
         if (loadPrefs != null) {
             tillDate = Date(loadPrefs[1].toLong())
         }
@@ -175,17 +177,25 @@ class ArchiveFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /**
+         * set listener to receive data from [DatePickerFragment] with first date
+         */
         parentFragmentManager
             .setFragmentResultListener("fromDate", this) { _, bundle ->
-            fromDate = bundle.get("bundleKey") as Date
-            fromTv.text = DateConverter.dateWithOutTimeFormat(fromDate)
-        }
+                fromDate = bundle.get("bundleKey") as Date
+                fromTv.text = DateConverter.dateWithOutTimeFormat(fromDate)
+            }
+        /**
+         * set listener to receive data from [DatePickerFragment] with first date
+         */
         parentFragmentManager
             .setFragmentResultListener("tillDate", this) { _, bundle ->
-            tillDate = bundle.get("bundleKey") as Date
-            tillTv.text = DateConverter.dateWithOutTimeFormat(tillDate)
-        }
-        //subscribe to data from the Central Bank in ArchiveViewModel
+                tillDate = bundle.get("bundleKey") as Date
+                tillTv.text = DateConverter.dateWithOutTimeFormat(tillDate)
+            }
+        /**
+         * subscribe to data from the Central Bank throught [ArchiveViewModel]
+         */
         archiveViewModel.getDataCB().observe(viewLifecycleOwner, { archiveCB ->
             archiveCB?.let {
                 histCBRF = it as MutableList<CurrencyCBarhive>
@@ -193,7 +203,9 @@ class ArchiveFragment : Fragment(){
             }
 
         })
-        //subscribe to data from the MOEX in ArchiveViewModel
+        /**
+         * subscribe to data from the MOEX throught [ArchiveViewModel]
+         */
         archiveViewModel.getDataMOEX().observe(viewLifecycleOwner, { archiveMOEX ->
             archiveMOEX?.let {
                 extractDataMOEX(archiveMOEX)
@@ -201,7 +213,9 @@ class ArchiveFragment : Fragment(){
         })
     }
 
-    //extraction of data received from MOEX for graph building
+    /**
+     * extraction of data received from MOEX (list of [CurrencyMOEX]) for chart building
+     */
     private fun extractDataMOEX(dataListMOEX: List<CurrencyMOEX>) {
         dates.clear()
         open.clear()
@@ -227,7 +241,9 @@ class ArchiveFragment : Fragment(){
         redrawMoex()
     }
 
-    //extraction of data received from CB for graph building
+    /**
+     * extraction of data received from CB (list of [CurrencyCBarhive]) for chart building
+     */
     private fun extractDataCB(dataListCB: List<CurrencyCBarhive>) {
         datesCB.clear()
         dataListCB.forEach {
@@ -236,19 +252,25 @@ class ArchiveFragment : Fragment(){
         redrawCB(dataListCB)
     }
 
-    //redraw CB chart
+    /**
+     * call functions to redraw CB graph
+     */
     private fun redrawCB(dataListCB: List<CurrencyCBarhive>) {
         createClearCbrfGraph()
         fillClearCbrfGraph(currSpinner.selectedItem as String, dataListCB)
     }
 
-    //redraw MOEX chart
+    /**
+     * call functions to redraw MOEX graph
+     */
     private fun redrawMoex() {
         createLinearSetForecast()
         fillLinearSetForecast(currSpinner.selectedItem as String)
     }
 
-    //creating and setting the parameters of the CB chart
+    /**
+     * setting the parameters of the CB graph
+     */
     private fun createClearCbrfGraph() {
         linearCbrf = binding.chartcbrf
         linearCbrf.clear()
@@ -306,7 +328,9 @@ class ArchiveFragment : Fragment(){
     }
 
 
-    //filling CB chart with data
+    /**
+     * filling CB graph with data
+     */
     private fun fillClearCbrfGraph(s: String, dataListCB: List<CurrencyCBarhive>) {
         val dataSets = ArrayList<ILineDataSet>()
         val entries = ArrayList<Entry>()
@@ -328,7 +352,9 @@ class ArchiveFragment : Fragment(){
         linearCbrf.invalidate()
     }
 
-    //creating and setting the parameters of the MOEX chart
+    /**
+     * setting the parameters of the MOEX graph
+     */
     private fun createLinearSetForecast() {
         linearChartForec = binding.linearforec
         linearChartForec.clear()
@@ -386,7 +412,9 @@ class ArchiveFragment : Fragment(){
         l.textColor = resources.getColor(color.white, requireActivity().application.theme)
     }
 
-    //filling MOEX chart with data
+    /**
+     *  filling MOEX graph with data
+     */
     private fun fillLinearSetForecast(s: String) {
         val dataSets: MutableList<ILineDataSet> = mutableListOf()
         val entries: MutableList<Entry> = mutableListOf()

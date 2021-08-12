@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
- * request using Retrofit to https://iss.moex.com/iss/engines/currency/
+ * Request using Retrofit to https://iss.moex.com/iss/engines/currency/
  */
 
 class MOEXRepository {
@@ -42,6 +42,10 @@ class MOEXRepository {
             moexApi.getMOEXForec(request, from, till, "24")
         }
         currentRequest.enqueue(object : Callback<MOEXResponse> {
+            /**
+             * get list of [CurrencyMOEX] and post it to [ArchiveViewModel] or [TodayViewModel] depends
+             * of from which fragment request was send
+             */
             override fun onResponse(call: Call<MOEXResponse>, response: Response<MOEXResponse>) {
                 val moexResponse: MOEXResponse? = response.body()
                 val moexCandles: MOEXCandles? = moexResponse?.candles

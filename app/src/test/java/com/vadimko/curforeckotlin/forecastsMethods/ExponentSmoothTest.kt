@@ -1,10 +1,9 @@
 package com.vadimko.curforeckotlin.forecastsMethods
 
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-
-import org.junit.Assert.*
 
 class ExponentSmoothTest {
     lateinit var exponentSmooth: ExponentSmooth
@@ -24,7 +23,7 @@ class ExponentSmoothTest {
     }
 
     @Test
-    fun calcErrorSmoothTest(){
+    fun calcErrorSmoothTest() {
         val error = "0"
         assertEquals(exponentSmooth.getErrSmooth(), error)
     }

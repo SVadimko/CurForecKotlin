@@ -4,7 +4,7 @@ import java.text.NumberFormat
 import kotlin.math.abs
 
 /**
- *  calculate forecast using method of Less Square
+ *  Calculate forecast using method of Less Square
  */
 
 class LessSquare(inp: MutableList<Float>) {
@@ -83,7 +83,9 @@ class LessSquare(inp: MutableList<Float>) {
         }
     }
 
-    //calculating methods error
+    /**
+     *calculating methods error
+     */
     private fun calculateError() {
         for (i in input.indices) {
             errTmp += abs(input[i] - output[i]) / input[i] * 100
@@ -94,11 +96,16 @@ class LessSquare(inp: MutableList<Float>) {
         return output
     }
 
-    //get forecast value
+    /**
+     * @return forecast value
+     */
     fun getForecastVal(): MutableList<Float> {
         return forecast
     }
 
+    /**
+     * @return error of calculating method
+     */
     fun getErrVal(): String {
         val numberFormat = NumberFormat.getInstance()
         numberFormat.maximumFractionDigits = 2

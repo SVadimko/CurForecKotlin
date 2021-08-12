@@ -2,7 +2,7 @@ package com.vadimko.curforeckotlin.moexApi
 
 
 /**
- * splitting response into classes
+ * Splitting response into classes
  */
 
 class MOEXResponse {

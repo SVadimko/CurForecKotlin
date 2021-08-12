@@ -13,7 +13,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.text.SimpleDateFormat
 
 /**
- * request using Retrofit to https://www.cbr.ru/scripts/
+ * Request using Retrofit to https://www.cbr.ru/scripts/
  */
 
 class CBXMLRepository {
@@ -40,6 +40,9 @@ class CBXMLRepository {
             VAL_NM_RQ
         )
         currentRequest.enqueue(object : Callback<MOEXXMLResponse> {
+            /**
+             * get list of [CurrencyCBarhive] and post it to [ArchiveViewModel]
+             */
             override fun onResponse(
                 call: Call<MOEXXMLResponse>,
                 response: Response<MOEXXMLResponse>

@@ -5,14 +5,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.work.*
 import com.vadimko.curforeckotlin.DateConverter
-import com.vadimko.curforeckotlin.prefs.TodayPreferences
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
+import com.vadimko.curforeckotlin.prefs.TodayPreferences
+import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.data
 import com.vadimko.curforeckotlin.updateWorkers.TodayWorker
 import java.util.*
 
 /**
- * viewModel for Today fragment
+ * ViewModel for Today fragment
  */
 
 class TodayViewModel(application: Application) : AndroidViewModel(application) {
@@ -24,7 +25,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
     fun getData(): MutableLiveData<List<CurrencyMOEX>> {
         if (data.value?.size == null) {
             data = MutableLiveData()
-            val loadedPrefs = TodayPreferences.loadPrefs(getApplication())
+            val loadedPrefs = TodayPreferences.loadPrefs()
             loadDataMOEX(
                 loadedPrefs.component1(),
                 loadedPrefs.component2(),
@@ -35,6 +36,9 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
         return data
     }
 
+    /**
+     * creates string for request to MOEX server API
+     */
     fun createRequestStrings(
         choosen: IntArray,
         currSpinnerPos: Int,
@@ -92,7 +96,6 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
         jsonDate = result[0]
         startTodayWorker(jsonCurr, jsonDate[0], jsonDate[1], rates.toString())
         TodayPreferences.savePrefs(
-            context,
             jsonCurr,
             jsonDate[0],
             jsonDate[1],
@@ -104,7 +107,9 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-    //configure and launch worker for requested days
+    /**
+     * configure and launch worker to receive currencies values for requested days through [TodayWorker]
+     */
     private fun startTodayWorker(request: String, from: String, till: String, interval: String) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -112,7 +117,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
 
         val data =
             workDataOf("request" to request, "from" to from, "till" to till, "interval" to interval)
-        val workManager =  WorkManager.getInstance(context)
+        val workManager = WorkManager.getInstance(context)
         val myWorkRequest = OneTimeWorkRequest.Builder(
             TodayWorker::class.java//,
         )
@@ -122,11 +127,16 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
         workManager.enqueue(myWorkRequest)
     }
 
+    /**
+     * @property data MutableLiveData contains list of actual currency values [CurrencyMOEX] from MOEX through [MOEXRepository]
+     */
     companion object {
         var data: MutableLiveData<List<CurrencyMOEX>> = MutableLiveData<List<CurrencyMOEX>>()
 
+        /**
+         * load currencies values from MOEX through [CurrencyMOEX] which post it to [data]
+         */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
-
             val moexRepository = MOEXRepository()
             moexRepository.getMOEX(request, from, till, interval, false)
 

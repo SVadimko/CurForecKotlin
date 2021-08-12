@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 /**
- * interface for requesting Central Bank data with a response in XML format
+ * Interface for requesting Central Bank data with a response in XML format
  */
 
 interface CBXMLAPI {

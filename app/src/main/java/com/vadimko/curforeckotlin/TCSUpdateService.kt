@@ -31,7 +31,7 @@ var NOTIFICATION_ID = 5555
 private const val notificationId = 11
 
 /**
- * service for auto-updating the rates of the Tinkov bank
+ * Service for auto-updating the rates of the Tinkov bank
  */
 
 class TCSUpdateService : Service() {
@@ -79,8 +79,6 @@ class TCSUpdateService : Service() {
     }
 
     private fun updateTask() {
-        //period = PreferenceManager.getDefaultSharedPreferences(this)
-        //.getString("update_per", "15_min")?.split("_")?.get(0)?.toLong()!!
         Thread {
             var allRequest = 1
             while (true) {
@@ -116,6 +114,9 @@ class TCSUpdateService : Service() {
         }.start()
     }
 
+    /**
+     * performs Retrofit request to Tinkov server
+     */
     fun getCurrentTCS() {
         var currentTCS: MutableList<CurrencyTCS>
         try {
@@ -152,7 +153,7 @@ class TCSUpdateService : Service() {
                             //load()
                             val mutex = Mutex()
                             mutex.withLock { Saver.saveTcsLast(currentTCS) }
-                            mutex.withLock { CalcViewModel.data2.postValue(Saver.loadTcsLast()) }
+                            mutex.withLock { CalcViewModel.dataAutoUpdate.postValue(Saver.loadTcsLast()) }
                             //Saver.saveTcsLast(currentTCS)
                             //CalcViewModel.data2.postValue(Saver.loadTcsLast())
                         }
@@ -204,6 +205,9 @@ class TCSUpdateService : Service() {
         return b.build()
     }
 
+    /**
+     * read user settings which currency and values need to monitor
+     */
     private fun checkCurrencyLevel(dataList: List<CurrencyTCS>) {
         val notifyCheck =
             PreferenceManager.getDefaultSharedPreferences(applicationContext)
@@ -221,7 +225,9 @@ class TCSUpdateService : Service() {
             checking(notifyCurr, notifyBuy, notifySell, dataList)
     }
 
-
+    /**
+     * comparing actual currency values to values setted by user and start notification
+     */
     private fun checking(
         curr: String?,
         buyLevel: String?,
@@ -264,6 +270,9 @@ class TCSUpdateService : Service() {
         }
     }
 
+    /**
+     * configure and show notification if actual values overrange user settings
+     */
     private fun notification(textMessage: String) {
         val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.notify)
@@ -287,6 +296,9 @@ class TCSUpdateService : Service() {
         }
     }
 
+    /**
+     * check connection state
+     */
     private fun checkConnection(): Boolean {
         val connectivityManager =
             getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -294,15 +306,4 @@ class TCSUpdateService : Service() {
         val caps = connectivityManager.getNetworkCapabilities(currentNetwork)
         return caps?.hasCapability(NET_CAPABILITY_INTERNET) ?: false
     }
-
-    /* private val mutex = Mutex()
-
-     private suspend fun save(currentTCS: MutableList<CurrencyTCS>) {
-         mutex.withLock() { Saver.saveTcsLast(currentTCS) }
-     }
-
-     private suspend fun load() {
-         mutex.withLock() { CalcViewModel.data2.postValue(Saver.loadTcsLast()) }
-     }
- */
 }

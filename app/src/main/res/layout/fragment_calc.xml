@@ -114,7 +114,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
                                 android:id="@+id/currvaluecalc"
-                                android:inputType="numberDecimal"/>
+                                android:inputType="numberDecimal" />
 
                         <TextView
                                 android:layout_width="0dp"

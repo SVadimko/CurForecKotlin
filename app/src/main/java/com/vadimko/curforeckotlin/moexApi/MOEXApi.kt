@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 
 /**
- *interface for requesting MOEX data with a response in JSON format
+ * Interface for requesting MOEX data with a response in JSON format
  */
 
 interface MOEXApi {

@@ -5,17 +5,25 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
-import java.util.*
-import com.vadimko.curforeckotlin.databinding.TinkoffMainRecycleBinding
 import android.widget.TextView
 import androidx.core.widget.TextViewCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.vadimko.curforeckotlin.databinding.TinkoffMainRecycleBinding
 import com.vadimko.curforeckotlin.prefs.NowPreference
-
+import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
+import com.vadimko.curforeckotlin.tcsApi.TCSRepository
+import com.vadimko.curforeckotlin.ui.now.NowFragment
+import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import java.util.*
 
 /**
- * adapter for RecycleView for Tinkov bank data on Today fragment
+ * Adapter for RecycleView for Tinkov bank data on [NowFragment]
+ *
+ * @constructor take list of [CurrencyTCS] that getted from
+ * [NowViewModel] through
+ * [TCSRepository] Retrofit
+ * @param curTCS list of [CurrencyTCS]
+ *
  */
 
 //in the comments below - code version without ViewBinding
@@ -39,6 +47,11 @@ class TCSMainAdapter(private val curTCS: List<CurrencyTCS>) :
     override fun getItemCount(): Int {
         return curTCS.size
     }
+
+    /**
+     * inner class ViewHolder
+     *
+     */
 
     //inner class CurrTCSHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
     inner class CurrTCSHolder(binding: TinkoffMainRecycleBinding) :

@@ -32,14 +32,14 @@ class SettingsActivity : AppCompatActivity() {
             val editTextBuy = findPreference<EditTextPreference>("buymore")
             val editTextSell = findPreference<EditTextPreference>("sellmore")
 
-            editTextBuy!!.setOnBindEditTextListener {
-                    editText -> editText.inputType = InputType.TYPE_CLASS_NUMBER
+            editTextBuy!!.setOnBindEditTextListener { editText ->
+                editText.inputType = InputType.TYPE_CLASS_NUMBER
             }
-            editTextSell!!.setOnBindEditTextListener {
-                    editText -> editText.inputType = InputType.TYPE_CLASS_NUMBER
+            editTextSell!!.setOnBindEditTextListener { editText ->
+                editText.inputType = InputType.TYPE_CLASS_NUMBER
             }
 
-          updateSwitch?.onPreferenceChangeListener =
+            updateSwitch?.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { _, newValue ->
                     val some = newValue.toString().toBoolean()
                     updatePeriod?.isEnabled = !some

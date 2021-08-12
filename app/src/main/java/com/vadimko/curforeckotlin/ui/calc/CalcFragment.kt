@@ -23,8 +23,8 @@ import com.vadimko.curforeckotlin.Saver
 import com.vadimko.curforeckotlin.SettingsActivity
 import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
-import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.databinding.FragmentCalcBinding
+import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -85,9 +85,9 @@ class CalcFragment : Fragment() {
 
     private lateinit var listWidgetData: List<Currencies>
 
-  /*  private val calcViewModel: CalcViewModel by lazy {
-        ViewModelProvider(this).get(CalcViewModel::class.java)
-    }*/
+    /*  private val calcViewModel: CalcViewModel by lazy {
+          ViewModelProvider(this).get(CalcViewModel::class.java)
+      }*/
 
     private val calcViewModel by viewModel<CalcViewModel>()
 
@@ -203,16 +203,20 @@ class CalcFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //subscribe to data from the Tinkov in CalcViewModel
+        /**
+         * subscribe to data from the Tinkov in [CalcViewModel]
+         */
         calcViewModel.getData().observe(viewLifecycleOwner, { forecTCS ->
             forecTCS?.let {
                 getData(forecTCS)
                 dataToCalc = forecTCS
             }
         })
-        // if the auto-update rate item is active in the settings, we extract data from the
-        // subscription to the currency rates stored on the device,
-        // which are saved on every auto-update
+        /**
+         * If the auto-update rate item is active in the settings, we extract data from the
+         * subscription to the currency rates stored on the device,
+         * which are saved on every auto-update
+         */
         var pref =
             PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean("updateon", false)
@@ -222,14 +226,16 @@ class CalcFragment : Fragment() {
             })
         }
 
-        // if the item show information from the rate widget is active in the settings, we extract
-        // data from the subscription to the currency rates stored in the database on the device,
-        // which are saved every time the widget is updated
+        /**
+         * if the item show information from the rate widget is active in the settings, we extract
+         * data from the subscription to the currency rates stored in the database on the device,
+         * which are saved every time the widget is updated
+         */
         pref =
             PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean("widgeton", false)
         if (pref) {
-            calcViewModel.livedataTKS.observe(viewLifecycleOwner) {
+            calcViewModel.liveDataTKS.observe(viewLifecycleOwner) {
                 extractWidgetGraphData(it)
                 listWidgetData = it
             }
@@ -240,7 +246,9 @@ class CalcFragment : Fragment() {
     }
 
 
-    // retrieve the latest Tinkov currency rate data
+    /**
+     *retrieve the latest Tinkov currency rate data
+     */
     private fun getData(dataList: List<CurrencyTCS>) {
         usdBuy = dataList[0].buy!!
         usdSell = dataList[0].sell!!
@@ -250,7 +258,9 @@ class CalcFragment : Fragment() {
         gbpSell = dataList[1].sell!!
     }
 
-    // retrieve data to show a graph of values obtained as a result of auto-update service
+    /**
+     * retrieve data to show a graph of values obtained as a result of auto-update service
+     */
     private fun extractGraphData(dataList: List<List<CurrencyTCS>>) {
         usdData.clear()
         usdDataBuy.clear()
@@ -290,7 +300,9 @@ class CalcFragment : Fragment() {
         }
     }
 
-    // retrieve data to show a graph of values obtained as a result of updating the widget
+    /**
+     * retrieve data to show a graph of values obtained as a result of updating the widget
+     */
     private fun extractWidgetGraphData(dataList: List<Currencies>) {
         usdDataW.clear()
         usdDataBuyW.clear()
@@ -318,8 +330,10 @@ class CalcFragment : Fragment() {
         }
     }
 
-    // if the auto-update checkbox is enabled in the settings, add a view with the
-    // corresponding graph to the fragment
+    /**
+     * if the auto-update checkbox is enabled in the settings, add a view with the
+     * corresponding graph to the fragment
+     */
     private fun attachGraph() {
         val pref =
             PreferenceManager.getDefaultSharedPreferences(context)
@@ -359,7 +373,7 @@ class CalcFragment : Fragment() {
                         val mutex = Mutex()
                         mutex.withLock { Saver.deleteTcsLast() }
                         withContext(Dispatchers.Main) { attachGraph() }
-                        mutex.withLock { CalcViewModel.data2.postValue(Saver.loadTcsLast()) }
+                        mutex.withLock { CalcViewModel.dataAutoUpdate.postValue(Saver.loadTcsLast()) }
                     }
                 }
             }
@@ -368,8 +382,10 @@ class CalcFragment : Fragment() {
         }
     }
 
-    // if in the settings there is a check mark showing information about updating the widget, add
-    // a view with the corresponding graph to the fragment
+    /**
+     * if in the settings there is a check mark showing information about updating the widget, add
+     * a view with the corresponding graph to the fragment
+     */
     private fun attachWidgetGraph() {
         val pref =
             PreferenceManager.getDefaultSharedPreferences(context)
@@ -422,7 +438,9 @@ class CalcFragment : Fragment() {
         }
     }
 
-    //creating and configuring the graph
+    /**
+     * creating and configuring the graph
+     */
     private fun createGraph(type: Int, childView: View, timeDate: MutableList<String>) {
         val chart: LineChart = childView.findViewById(R.id.chartattach)
         chart.clear()
@@ -484,7 +502,9 @@ class CalcFragment : Fragment() {
         l.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
     }
 
-    //filling graph with widget data according to the selected currency
+    /**
+     * filling graph with widget data according to the selected currency
+     */
     private fun fillWidgetTCsGraph() {
         when (currGrafSpinnerWidget.selectedItemPosition) {
             0 -> {
@@ -499,7 +519,9 @@ class CalcFragment : Fragment() {
         }
     }
 
-    //filling graph with auto update data according to the selected currency
+    /**
+     * filling graph with auto update data according to the selected currency
+     */
     private fun fillTCsGraph() {
         when (currGrafSpinner.selectedItemPosition) {
             0 -> {
@@ -517,7 +539,9 @@ class CalcFragment : Fragment() {
         }
     }
 
-
+    /**
+     * filling autoupdate graph with selected currency
+     */
     private fun alternativeFillTCsGraph(s: String, currData: MutableList<CurrencyTCS>) {
         if (currData.size > 2) {
             val currBuy: MutableList<Double> = mutableListOf()
@@ -563,6 +587,9 @@ class CalcFragment : Fragment() {
         }
     }
 
+    /**
+     * filling widget graph with selected currency
+     */
     private fun alternativeFillTCsGraphWidget(
         s: String,
         currBuy: MutableList<Double>,

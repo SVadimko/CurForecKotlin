@@ -5,8 +5,11 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.*
-import android.widget.*
+import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.CombinedChart
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
@@ -28,6 +31,8 @@ import java.util.*
 
 /**
  * Today fragment representing chart for latest 1-5 days
+ * @property comboChartForec - chart combining line and candle graphs
+ * @property yValsCandleStick - list contains data for build candle graph
  */
 
 class TodayFragment : Fragment() {
@@ -42,11 +47,11 @@ class TodayFragment : Fragment() {
 
 
     private lateinit var comboChartForec: CombinedChart
-    private val yValsCandleStick2 = ArrayList<CandleEntry>()
+    private val yValsCandleStick = ArrayList<CandleEntry>()
 
- /*   private val todayViewModel: TodayViewModel by lazy {
-        ViewModelProvider(this).get(TodayViewModel::class.java)
-    }*/
+    /*   private val todayViewModel: TodayViewModel by lazy {
+           ViewModelProvider(this).get(TodayViewModel::class.java)
+       }*/
 
     private val todayViewModel by viewModel<TodayViewModel>()
 
@@ -79,7 +84,7 @@ class TodayFragment : Fragment() {
         root = binding.root
 
 
-        val loadPrefs = context?.let { TodayPreferences.loadPrefs(it) }
+        val loadPrefs = context?.let { TodayPreferences.loadPrefs() }
 
         currSpinner = binding.currchoose
         val currAdapter = ArrayAdapter(
@@ -187,7 +192,9 @@ class TodayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //subscribe to data from the MOEX in TodayViewModel
+        /**
+         * observe data receiving from Central bank bank throught [TodayViewModel]
+         */
         todayViewModel.getData().observe(viewLifecycleOwner, { forecMOEX ->
             forecMOEX?.let {
                 extractData(forecMOEX)
@@ -201,7 +208,9 @@ class TodayFragment : Fragment() {
 
     }
 
-    //extract received from viewModel data
+    /**
+     * extract received from [TodayViewModel] data
+     */
     private fun extractData(dataList: List<CurrencyMOEX>) {
         dates.clear()
         open.clear()
@@ -229,10 +238,11 @@ class TodayFragment : Fragment() {
             )
         }
         createComboChartForecast()
-
     }
 
-    //create a combined candlestick and line chart
+    /**
+     * create a combined candlestick and line chart
+     */
     private fun createComboChartForecast() {
         comboChartForec = binding.candlforec
         comboChartForec.clear()
@@ -306,7 +316,9 @@ class TodayFragment : Fragment() {
         }
     }
 
-    //calling functions for filling the chart with data
+    /**
+     *call functions for configure and fill the [comboChartForec] with data
+     */
     private fun fillComboChartForecast(s: String) {
         val data = CombinedData()
         data.setData(generateLineData(s))
@@ -315,7 +327,9 @@ class TodayFragment : Fragment() {
         comboChartForec.invalidate()
     }
 
-    //filling linear chart with values
+    /**
+     * filling linear graph with values
+     */
     private fun generateLineData(s: String): LineData {
         val dataSets: MutableList<ILineDataSet> = mutableListOf()
         val entries:
@@ -348,7 +362,7 @@ class TodayFragment : Fragment() {
             }
             val d2 = LineDataSet(
                 entries2,
-                "s ${getString(R.string.ARCFRAGmovAverForecGraph)}  ${temp.getAverageErr()}  %"
+                "$s ${getString(R.string.ARCFRAGmovAverForecGraph)}  ${temp.getAverageErr()}  %"
             )
             d2.enableDashedLine(10f, 10f, 0f)
 
@@ -372,13 +386,15 @@ class TodayFragment : Fragment() {
         return LineData(dataSets)
     }
 
-    //filling candle chart with values
+    /**
+     * filling candle chart with values
+     */
     private fun generateCandleData(s: String): CandleData {
-        yValsCandleStick2.clear()
+        yValsCandleStick.clear()
         for (i in 0 until open.size) {
             if (open[i] != 0.0)
                 if (close[i] != 0.0) {
-                    yValsCandleStick2.add(
+                    yValsCandleStick.add(
                         CandleEntry(
                             i.toFloat(),
                             high[i].toFloat(),
@@ -389,7 +405,7 @@ class TodayFragment : Fragment() {
                     )
                 }
         }
-        val set1 = CandleDataSet(yValsCandleStick2, "$s ${getString(R.string.TODAYFRAGMMVB)}")
+        val set1 = CandleDataSet(yValsCandleStick, "$s ${getString(R.string.TODAYFRAGMMVB)}")
         set1.color = Color.rgb(80, 80, 80)
         set1.shadowWidth = 2f
         set1.valueTextColor = resources.getColor(R.color.white, requireActivity().application.theme)
