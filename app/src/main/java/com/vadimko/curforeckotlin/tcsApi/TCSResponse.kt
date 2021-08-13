@@ -8,6 +8,7 @@ package com.vadimko.curforeckotlin.tcsApi
 class TCSResponse {
     lateinit var payload: TCSPayload
 }
+
 /**
  * Splitting JSON response from Tinkov into classes
  */
@@ -15,6 +16,7 @@ class TCSPayload {
     lateinit var rates: List<TCSRates>
     lateinit var lastUpdate: TCSLastUpdate
 }
+
 /**
  * Splitting JSON response from Tinkov into classes
  */
@@ -26,6 +28,7 @@ class TCSRates {
     var buy = 0.0
     var sell = 0.0
 }
+
 /**
  * Splitting JSON response from Tinkov into classes
  */

@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import org.koin.core.component.KoinComponent
 
 /**
  * Bootreceiver for starting the service of auto-update of the exchange rate Tinkov after reboot,

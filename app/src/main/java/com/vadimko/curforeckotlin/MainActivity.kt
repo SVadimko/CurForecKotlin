@@ -129,6 +129,7 @@ class MainActivity : AppCompatActivity() {
             toolbar?.show()
             setFullscreen(false, mainActivity)
         }
+
         /**
          * Hide [BottomNavigationView] in landscape mode
          */
