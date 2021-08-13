@@ -25,7 +25,7 @@ import com.vadimko.curforeckotlin.SettingsActivity
 import com.vadimko.curforeckotlin.databinding.FragmentTodayBinding
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
-import com.vadimko.curforeckotlin.prefs.TodayPreferences
+import com.vadimko.curforeckotlin.utils.TodayPreferences
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 

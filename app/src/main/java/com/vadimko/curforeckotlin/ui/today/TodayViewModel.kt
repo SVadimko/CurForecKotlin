@@ -4,10 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.work.*
-import com.vadimko.curforeckotlin.DateConverter
+import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
-import com.vadimko.curforeckotlin.prefs.TodayPreferences
+import com.vadimko.curforeckotlin.utils.TodayPreferences
 import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.data
 import com.vadimko.curforeckotlin.updateWorkers.TodayWorker
 import java.util.*

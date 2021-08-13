@@ -134,15 +134,6 @@ $dokka.location:com.vadimko.curforeckotlin.moexApi/MOEXRepository/getMOEX/#kotli
 $dokka.location:com.vadimko.curforeckotlin.moexApi/MOEXResponse///PointingToDeclaration/app/com.vadimko.curforeckotlin.moexApi/-m-o-e-x-response/index.html
 $dokka.location:com.vadimko.curforeckotlin.moexApi/MOEXResponse/MOEXResponse/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.moexApi/-m-o-e-x-response/-m-o-e-x-response.html
 $dokka.location:com.vadimko.curforeckotlin.moexApi/MOEXResponse/candles/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.moexApi/-m-o-e-x-response/candles.html
-$dokka.location:com.vadimko.curforeckotlin.prefs////PointingToDeclaration/app/com.vadimko.curforeckotlin.prefs/index.html
-$dokka.location:com.vadimko.curforeckotlin.prefs/ArchivePreferences///PointingToDeclaration/app/com.vadimko.curforeckotlin.prefs/-archive-preferences/index.html
-$dokka.location:com.vadimko.curforeckotlin.prefs/ArchivePreferences/loadPrefs/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.prefs/-archive-preferences/load-prefs.html
-$dokka.location:com.vadimko.curforeckotlin.prefs/ArchivePreferences/savePrefs/#kotlin.Long#kotlin.Long#kotlin.Int#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.prefs/-archive-preferences/save-prefs.html
-$dokka.location:com.vadimko.curforeckotlin.prefs/NowPreference///PointingToDeclaration/app/com.vadimko.curforeckotlin.prefs/-now-preference/index.html
-$dokka.location:com.vadimko.curforeckotlin.prefs/NowPreference/getTextParams/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.prefs/-now-preference/get-text-params.html
-$dokka.location:com.vadimko.curforeckotlin.prefs/TodayPreferences///PointingToDeclaration/app/com.vadimko.curforeckotlin.prefs/-today-preferences/index.html
-$dokka.location:com.vadimko.curforeckotlin.prefs/TodayPreferences/loadPrefs/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.prefs/-today-preferences/load-prefs.html
-$dokka.location:com.vadimko.curforeckotlin.prefs/TodayPreferences/savePrefs/#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/app/com.vadimko.curforeckotlin.prefs/-today-preferences/save-prefs.html
 $dokka.location:com.vadimko.curforeckotlin.tcsApi////PointingToDeclaration/app/com.vadimko.curforeckotlin.tcsApi/index.html
 $dokka.location:com.vadimko.curforeckotlin.tcsApi/CurrencyTCS///PointingToDeclaration/app/com.vadimko.curforeckotlin.tcsApi/-currency-t-c-s/index.html
 $dokka.location:com.vadimko.curforeckotlin.tcsApi/CurrencyTCS/CurrencyTCS/#kotlin.Int#kotlin.Long?#kotlin.Double?#kotlin.Double?#kotlin.String?/PointingToDeclaration/app/com.vadimko.curforeckotlin.tcsApi/-currency-t-c-s/-currency-t-c-s.html
@@ -275,6 +266,23 @@ $dokka.location:com.vadimko.curforeckotlin.updateWorkers/NowWorker/doWork/#/Poin
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/TodayWorker///PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-today-worker/index.html
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/TodayWorker/TodayWorker/#android.content.Context#androidx.work.WorkerParameters/PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-today-worker/-today-worker.html
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/TodayWorker/doWork/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-today-worker/do-work.html
+$dokka.location:com.vadimko.curforeckotlin.utils////PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/index.html
+$dokka.location:com.vadimko.curforeckotlin.utils/ArchivePreferences///PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-archive-preferences/index.html
+$dokka.location:com.vadimko.curforeckotlin.utils/ArchivePreferences/loadPrefs/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-archive-preferences/load-prefs.html
+$dokka.location:com.vadimko.curforeckotlin.utils/ArchivePreferences/savePrefs/#kotlin.Long#kotlin.Long#kotlin.Int#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-archive-preferences/save-prefs.html
+$dokka.location:com.vadimko.curforeckotlin.utils/DateConverter///PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-date-converter/index.html
+$dokka.location:com.vadimko.curforeckotlin.utils/DateConverter/dateWithOutTimeFormat/#java.util.Date/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-date-converter/date-with-out-time-format.html
+$dokka.location:com.vadimko.curforeckotlin.utils/DateConverter/getFromTillDate/#java.util.Date#java.util.Date/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-date-converter/get-from-till-date.html
+$dokka.location:com.vadimko.curforeckotlin.utils/DateConverter/longToDateWithTime/#kotlin.Long/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-date-converter/long-to-date-with-time.html
+$dokka.location:com.vadimko.curforeckotlin.utils/NowPreference///PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-now-preference/index.html
+$dokka.location:com.vadimko.curforeckotlin.utils/NowPreference/getTextParams/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-now-preference/get-text-params.html
+$dokka.location:com.vadimko.curforeckotlin.utils/Saver///PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-saver/index.html
+$dokka.location:com.vadimko.curforeckotlin.utils/Saver/deleteTcsLast/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-saver/delete-tcs-last.html
+$dokka.location:com.vadimko.curforeckotlin.utils/Saver/loadTcsLast/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-saver/load-tcs-last.html
+$dokka.location:com.vadimko.curforeckotlin.utils/Saver/saveTcsLast/#kotlin.collections.MutableList[com.vadimko.curforeckotlin.tcsApi.CurrencyTCS]/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-saver/save-tcs-last.html
+$dokka.location:com.vadimko.curforeckotlin.utils/TodayPreferences///PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-today-preferences/index.html
+$dokka.location:com.vadimko.curforeckotlin.utils/TodayPreferences/loadPrefs/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-today-preferences/load-prefs.html
+$dokka.location:com.vadimko.curforeckotlin.utils/TodayPreferences/savePrefs/#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-today-preferences/save-prefs.html
 $dokka.location:com.vadimko.curforeckotlin.widget////PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/index.html
 $dokka.location:com.vadimko.curforeckotlin.widget/AppWidget///PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/-app-widget/index.html
 $dokka.location:com.vadimko.curforeckotlin.widget/AppWidget/AppWidget/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/-app-widget/-app-widget.html
@@ -306,19 +314,11 @@ $dokka.location:com.vadimko.curforeckotlin/CurrenciesApplication.Companion/appli
 $dokka.location:com.vadimko.curforeckotlin/CurrenciesApplication///PointingToDeclaration/app/com.vadimko.curforeckotlin/-currencies-application/index.html
 $dokka.location:com.vadimko.curforeckotlin/CurrenciesApplication/CurrenciesApplication/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-currencies-application/-currencies-application.html
 $dokka.location:com.vadimko.curforeckotlin/CurrenciesApplication/onCreate/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-currencies-application/on-create.html
-$dokka.location:com.vadimko.curforeckotlin/DateConverter///PointingToDeclaration/app/com.vadimko.curforeckotlin/-date-converter/index.html
-$dokka.location:com.vadimko.curforeckotlin/DateConverter/dateWithOutTimeFormat/#java.util.Date/PointingToDeclaration/app/com.vadimko.curforeckotlin/-date-converter/date-with-out-time-format.html
-$dokka.location:com.vadimko.curforeckotlin/DateConverter/getFromTillDate/#java.util.Date#java.util.Date/PointingToDeclaration/app/com.vadimko.curforeckotlin/-date-converter/get-from-till-date.html
-$dokka.location:com.vadimko.curforeckotlin/DateConverter/longToDateWithTime/#kotlin.Long/PointingToDeclaration/app/com.vadimko.curforeckotlin/-date-converter/long-to-date-with-time.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity.Companion///PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/-companion/index.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity.Companion/landscapeMode/#com.vadimko.curforeckotlin.MainActivity/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/-companion/landscape-mode.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity.Companion/portraitMode/#com.vadimko.curforeckotlin.MainActivity/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/-companion/portrait-mode.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity///PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/index.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/MainActivity/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/-main-activity.html
-$dokka.location:com.vadimko.curforeckotlin/Saver///PointingToDeclaration/app/com.vadimko.curforeckotlin/-saver/index.html
-$dokka.location:com.vadimko.curforeckotlin/Saver/deleteTcsLast/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-saver/delete-tcs-last.html
-$dokka.location:com.vadimko.curforeckotlin/Saver/loadTcsLast/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-saver/load-tcs-last.html
-$dokka.location:com.vadimko.curforeckotlin/Saver/saveTcsLast/#kotlin.collections.MutableList[com.vadimko.curforeckotlin.tcsApi.CurrencyTCS]/PointingToDeclaration/app/com.vadimko.curforeckotlin/-saver/save-tcs-last.html
 $dokka.location:com.vadimko.curforeckotlin/SettingsActivity.SettingsFragment///PointingToDeclaration/app/com.vadimko.curforeckotlin/-settings-activity/-settings-fragment/index.html
 $dokka.location:com.vadimko.curforeckotlin/SettingsActivity.SettingsFragment/SettingsFragment/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-settings-activity/-settings-fragment/-settings-fragment.html
 $dokka.location:com.vadimko.curforeckotlin/SettingsActivity.SettingsFragment/onCreatePreferences/#android.os.Bundle?#kotlin.String?/PointingToDeclaration/app/com.vadimko.curforeckotlin/-settings-activity/-settings-fragment/on-create-preferences.html
@@ -337,12 +337,12 @@ com.vadimko.curforeckotlin.cbxmlApi
 com.vadimko.curforeckotlin.database
 com.vadimko.curforeckotlin.forecastsMethods
 com.vadimko.curforeckotlin.moexApi
-com.vadimko.curforeckotlin.prefs
 com.vadimko.curforeckotlin.tcsApi
 com.vadimko.curforeckotlin.ui.archive
 com.vadimko.curforeckotlin.ui.calc
 com.vadimko.curforeckotlin.ui.now
 com.vadimko.curforeckotlin.ui.today
 com.vadimko.curforeckotlin.updateWorkers
+com.vadimko.curforeckotlin.utils
 com.vadimko.curforeckotlin.widget
 

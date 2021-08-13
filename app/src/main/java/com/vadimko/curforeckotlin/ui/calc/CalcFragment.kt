@@ -17,9 +17,9 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.vadimko.curforeckotlin.DateConverter
+import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.R
-import com.vadimko.curforeckotlin.Saver
+import com.vadimko.curforeckotlin.utils.Saver
 import com.vadimko.curforeckotlin.SettingsActivity
 import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository

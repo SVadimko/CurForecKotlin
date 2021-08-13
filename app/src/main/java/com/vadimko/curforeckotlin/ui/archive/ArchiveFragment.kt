@@ -19,7 +19,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.vadimko.curforeckotlin.DateConverter
+import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.R.*
 import com.vadimko.curforeckotlin.SettingsActivity
@@ -29,7 +29,7 @@ import com.vadimko.curforeckotlin.forecastsMethods.ExponentSmooth
 import com.vadimko.curforeckotlin.forecastsMethods.LessSquare
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
-import com.vadimko.curforeckotlin.prefs.ArchivePreferences
+import com.vadimko.curforeckotlin.utils.ArchivePreferences
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.collections.ArrayList

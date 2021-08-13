@@ -3,6 +3,7 @@ package com.vadimko.curforeckotlin
 import android.app.Application
 import android.content.Context
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
+import com.vadimko.curforeckotlin.utils.Saver
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import com.vadimko.curforeckotlin.ui.now.NowViewModel

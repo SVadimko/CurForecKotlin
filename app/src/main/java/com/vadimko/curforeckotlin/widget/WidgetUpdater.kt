@@ -4,7 +4,7 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.graphics.Color
 import android.widget.RemoteViews
-import com.vadimko.curforeckotlin.DateConverter
+import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.cbjsonApi.CBjsonApi
 import com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse

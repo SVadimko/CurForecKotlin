@@ -1,4 +1,4 @@
-package com.vadimko.curforeckotlin
+package com.vadimko.curforeckotlin.utils
 
 import android.content.Context
 import android.os.Build

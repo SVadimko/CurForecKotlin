@@ -51,11 +51,9 @@ the currencies of the application widget into the database)
 ExponentSmooth - calculation of the forecast by the method of exponential smoothing LessSquare -
 Least Squares Forecast WMA - calculating the forecast by the moving average method
 
-# Package com.vadimko.curforeckotlin.prefs
+# Package com.vadimko.curforeckotlin.utils
 
-ArchivePreferences, TodayPreferences - classes for saving and reading custom selection for
-ArhiveFragment and TodayFragment fragments NowPreference - a class that reads a custom font
-selection to change the font for currency values in NowFragment
+Package with helper objects
 
 # Package com.vadimko.curforeckotlin.ui
 

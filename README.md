@@ -41,26 +41,26 @@ https://github.com/SVadimko/CurForecKotlin/tree/master/documentation/html
 CBmainAdapter, TCSmainAdapter - классы адаптеров для recycleview фрагмента NowFragment
 
 ## /cbjsonApi/
-набор классов для запроса данных о валютах с помощью Retrofit с сайта Центрального
+Набор классов для запроса данных о валютах с помощью Retrofit с сайта Центрального
 Банка (на текущий и прошедший дни)
 для фрагмента NowFragment с ответом в формате Json
 
 ## /cbxmlApi/
-набор классов для запроса данных о валютах с помощью Retrofit с сайта Центрального
+Набор классов для запроса данных о валютах с помощью Retrofit с сайта Центрального
 Банка (на указанный пользователем период)
 для ArchiveFragment с ответом в формате Xml
 
 ## /moexApi/
-набор классов для запроса данных о валютах с помощью Retrofit с сайта Московской биржи (
+Набор классов для запроса данных о валютах с помощью Retrofit с сайта Московской биржи (
 на указанный пользователем период)
 для фрагментов TodayFragment и ArhiveFragment с ответом в формате Json
 
 ## /tcsApi/
-набор классов для запроса данных о валютах с помощью Retrofit с сайта Тиньков (на текущий
+Набор классов для запроса данных о валютах с помощью Retrofit с сайта Тиньков (на текущий
 момент) для фрагмента NowFragment с ответом в формате Json
 
 ## /database/
-набор классов для работы с Sql базой данных с помощью Room (запись в базу данных
+Набор классов для работы с Sql базой данных с помощью Room (запись в базу данных
 результатов обновления валют виджета приложения)
 
 ## /forecastsMethods/
@@ -68,11 +68,8 @@ ExponentSmooth - рассчет прогноза методом экспонен
 LessSquare - рассчет прогноза методом наименьших квадратов WMA - рассчет прогноза методом средней
 скользящей
 
-## /prefs/
-ArchivePreferences, TodayPreferences - классы для сохранения и чтения пользовательского
-выбора для фрагментов ArhiveFragment и TodayFragment
-NowPreference - класс, читающий пользовательский выбор шрифта для изменения шрифта для значений
-валют фрагмента NowFragment
+## /utils/
+Пакет вспомогательных объектов
 
 ## /ui/archive/
 ArchiveFragment - фрагмент, отвечающий за экран Архив
@@ -93,39 +90,31 @@ TodayFragment - фрагмент, отвечающий за экран Сего�
 TodayModel - реализация viewmodel для соответствующего фрагмента
 
 # /updateWorkers/
-workers для обновления информации о курсах валют для соответствующих фрагментов
+Workers для обновления информации о курсах валют для соответствующих фрагментов
 
 ## /widget/
-классы, реализующие функционал виджета
+Классы, реализующие функционал виджета
 
 # CurrenciesApplication -
 Application класс (инициализация CurrenciesRepository для работы с базой
 данных и запуск KOIN(DI), создание синглтона контекста приложения)
 
-# DateConverter
-Вспомогательный класс с функциями форматирования даты в нужные форматы для
-формирования запроса к серверам
-
-# Saver
-Вспомогательный класс для сохранения/загрузки данных о
-курсах Тиньков банка, получаемых сервисом TCSUpdateService
-
 ## MainActivity
-главная активити
+Главная активити
 
 ## SettingsActivity
-активити настроек автообновления
+Активити настроек автообновления
 
 ## TCSUpdateService
-сервис, запускаемый для автообновления курсов Тиньков банка
+Сервис, запускаемый для автообновления курсов Тиньков банка
 
 ## Bootreceiver
-broadcast receiver для получения информации, после перезагрузки, было ли у
+Broadcast receiver для получения информации, после перезагрузки, было ли у
 пользователя активировано автообновление курсов запускающий сервис TCSUpdateService, если оно было
 активировано
 
 # CoinsAnimator
-вспомогательный класс для запуска анимации монет при обновлении курса
+Вспомогательный класс для запуска анимации монет при обновлении курса
 
 <h1 align="center">Tinkoff exchange rates</h1>
 
@@ -151,26 +140,26 @@ https://github.com/SVadimko/CurForecKotlin/tree/master/documentation/html
 CBmainAdapter, TCSmainAdapter - adapter classes for recycleview NowFragment
 
 ## / cbjsonApi /
-a set of classes for requesting data about currencies using Retrofit from the
+A set of classes for requesting data about currencies using Retrofit from the
 Central Bank website (for the current and past days)
 for the NowFragment fragment with a response in Json format
 
 ## / cbxmlApi /
-a set of classes for requesting data on currencies using Retrofit from the Central
+A set of classes for requesting data on currencies using Retrofit from the Central
 Bank website (for a user-specified period)
 for ArchiveFragment with a response in Xml format
 
 ## / moexApi /
-a set of classes for requesting currency data using Retrofit from the Moscow Exchange
+A set of classes for requesting currency data using Retrofit from the Moscow Exchange
 website (for a user-specified period)
 for TodayFragment and ArhiveFragment fragments with a response in Json format
 
 ## / tcsApi /
-a set of classes for requesting data about currencies using Retrofit from the Tinkov
+A set of classes for requesting data about currencies using Retrofit from the Tinkov
 website for a NowFragment fragment with a response in Json format
 
 ## / database /
-a set of classes for working with Sql database using Room (recording the results of
+A set of classes for working with Sql database using Room (recording the results of
 updating the currencies of the application widget into the database)
 
 ## / forecastsMethods /
@@ -180,47 +169,37 @@ LessSquare - Least Squares Forecast
 WMA - calculating the forecast by the moving average
 method
 
-## / prefs /
-ArchivePreferences, TodayPreferences - classes for saving and reading custom selection for
-ArhiveFragment and TodayFragment fragments
-NowPreference - a class that reads a custom font selection to change the font for currency values in NowFragment
+## / utils /
+Package with helper objects
 
 ## / ui /
-set of packages responsible for the UI, consists of:
+Set of packages responsible for the UI, consists of:
 
 ## / updateWorkers /
-workers to update the exchange rate information for the relevant snippets
+Workers to update the exchange rate information for the relevant snippets
 
 ## /widget/
-classes that implement the functionality of the widget
+Classes that implement the functionality of the widget
 
 ## CurrenciesApplication
 Application class (initializing CurrenciesRepository for working with the
 database, start KOIN(DI) and create singleton of application context)
 
-## DateConverter
-a helper class with functions for formatting dates in the required formats to form a
-request to servers
-
-## Saver
-an auxiliary class for saving / loading data on Tinkov bank rates
-received by the TCSUpdateService service
-
 ## MainActivity
-main activity
+Main activity
 
 ## SettingsActivity
-activates auto update settings
+Activates auto update settings
 
 ## TCSUpdateService
-a service launched for auto-update of Tinkov Bank rates
+A service launched for auto-update of Tinkov Bank rates
 
 ## Bootreceiver
-broadcast receiver to receive information, after reboot, whether the user had enabled autoupdate courses.
+Broadcast receiver to receive information, after reboot, whether the user had enabled autoupdate courses.
 If it was enabled- TCSUpdateService starts
 
 ## CoinsAnimator
-a helper class for triggering animation of coins when the rate is updated    
+A helper class for triggering animation of coins when the rate is updated    
  
   
 

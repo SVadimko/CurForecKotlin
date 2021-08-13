@@ -1,8 +1,7 @@
-package com.vadimko.curforeckotlin.prefs
+package com.vadimko.curforeckotlin.utils
 
 import android.content.Context
 import androidx.preference.PreferenceManager
-import com.vadimko.curforeckotlin.DateConverter
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.*
