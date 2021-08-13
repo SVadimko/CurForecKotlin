@@ -6,16 +6,17 @@ import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
 /**
- * Splitting response into classes
+ * Splitting xml response from Central Bank into classes
  */
-
 @Root(name = "ValCurs", strict = false)
 data class MOEXXMLResponse(
     @field:ElementList(name = "Record", inline = true)
     var record: List<Record>? = null,
 )
 
-
+/**
+ * Splitting xml response from Central Bank into classes
+ */
 @Root(name = "Record", strict = false)
 data class Record(
 

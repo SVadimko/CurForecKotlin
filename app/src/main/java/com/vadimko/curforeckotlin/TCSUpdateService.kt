@@ -33,7 +33,6 @@ private const val notificationId = 11
 /**
  * Service for auto-updating the rates of the Tinkov bank
  */
-
 class TCSUpdateService : Service() {
     private val tcsApi: TCSApi
 
@@ -115,7 +114,8 @@ class TCSUpdateService : Service() {
     }
 
     /**
-     * performs Retrofit request to Tinkov server
+     * Performs request to Tinkov server through Retrofit [TCSResponse] and then saved it with [Saver]
+     * and post value to [CalcViewModel.dataAutoUpdate]
      */
     fun getCurrentTCS() {
         var currentTCS: MutableList<CurrencyTCS>
@@ -206,7 +206,7 @@ class TCSUpdateService : Service() {
     }
 
     /**
-     * read user settings which currency and values need to monitor
+     * Read user settings which currency and values need to monitor
      */
     private fun checkCurrencyLevel(dataList: List<CurrencyTCS>) {
         val notifyCheck =
@@ -226,7 +226,7 @@ class TCSUpdateService : Service() {
     }
 
     /**
-     * comparing actual currency values to values setted by user and start notification
+     * Comparing actual currency values to values setted by user and start notification
      */
     private fun checking(
         curr: String?,
@@ -271,7 +271,7 @@ class TCSUpdateService : Service() {
     }
 
     /**
-     * configure and show notification if actual values overrange user settings
+     * Configure and show notification if actual values overrange user settings
      */
     private fun notification(textMessage: String) {
         val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
@@ -297,7 +297,7 @@ class TCSUpdateService : Service() {
     }
 
     /**
-     * check connection state
+     * Check connection state
      */
     private fun checkConnection(): Boolean {
         val connectivityManager =

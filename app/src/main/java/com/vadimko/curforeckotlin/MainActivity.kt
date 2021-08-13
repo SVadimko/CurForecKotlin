@@ -22,11 +22,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vadimko.curforeckotlin.databinding.ActivityMainBinding
 
 /**
- * MainActivity class
+ * Const of Channel ID for Notification channel
  */
-
 private const val CHANNEL_ID = "11"
 
+/**
+ * MainActivity class
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -55,6 +57,10 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
+    /**
+     * Check on/off condition auto update in [SettingsActivity] and if it on, but service is not active
+     * (checked in [isServiceAlive])-  launch [TCSUpdateServicepdate]
+     */
     private fun checkAutoUpdate() {
         val pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
             .getBoolean("updateon", false)
@@ -82,6 +88,9 @@ class MainActivity : AppCompatActivity() {
          return serviceActive
      }*/
 
+    /**
+     * Checking is wanted service is alive
+     */
     private fun isServiceAlive(serviceClass: Class<*>): Boolean {
         val manager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
         for (service in manager.getRunningServices(Int.MAX_VALUE)) {
@@ -106,7 +115,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Contains function to switch interface according landscape/portrait mode
+     */
     companion object {
+        /**
+         * Show [BottomNavigationView] in portrait mode
+         */
         fun portraitMode(mainActivity: MainActivity) {
             val navView: BottomNavigationView = mainActivity.binding.navView
             navView.visibility = View.VISIBLE
@@ -114,7 +129,9 @@ class MainActivity : AppCompatActivity() {
             toolbar?.show()
             setFullscreen(false, mainActivity)
         }
-
+        /**
+         * Hide [BottomNavigationView] in landscape mode
+         */
         fun landscapeMode(mainActivity: MainActivity) {
             val navView: BottomNavigationView = mainActivity.binding.navView
             navView.visibility = View.GONE
@@ -123,6 +140,9 @@ class MainActivity : AppCompatActivity() {
             setFullscreen(true, mainActivity)
         }
 
+        /**
+         * Toggles on fullscreen mode in landscape mode and off in portrait
+         */
         private fun setFullscreen(fullscreen: Boolean, mainActivity: MainActivity) {
             val attrs = mainActivity.window.attributes
             if (fullscreen) {
@@ -143,6 +163,9 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
     }
 
+    /**
+     * Checking connection state if no internet - Show Toast
+     */
     private fun checkConnection() {
         val connectivityManager =
             getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager

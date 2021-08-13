@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import org.koin.core.component.KoinComponent
 
 /**
  * Bootreceiver for starting the service of auto-update of the exchange rate Tinkov after reboot,
@@ -13,7 +14,9 @@ import android.os.Build
 class BootReceiver : BroadcastReceiver() {
     lateinit var mContext: Context
 
-
+    /**
+     * If auto update enabled - launch [startUpdater]
+     */
     override fun onReceive(context: Context, intent: Intent) {
         mContext = context
         val pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(mContext)
@@ -23,7 +26,7 @@ class BootReceiver : BroadcastReceiver() {
     }
 
     /**
-     * depends on android version start foreground or background
+     * Depends on android version start foreground or background [TCSUpdateService]
      */
     private fun startUpdater() {
         try {

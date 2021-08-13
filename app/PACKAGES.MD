@@ -1,9 +1,9 @@
 # Package com.vadimko.curforeckotlin
 
-The application uses the api Tinkov Bank, the Central Bank of Russia and the Moscow Exchange to view
-the exchange rates of these companies. Based on the data of the Moscow Exchange, a forecast is made
-for further changes in the exchange rate. The forecast is based on three different calculation
-methods:
+Main package, contains all application packages and classes The application uses the api Tinkov Bank,
+the Central Bank of Russia and the Moscow Exchange to view the exchange rates of these companies.
+Based on the data of the Moscow Exchange, a forecast is made for further changes in the exchange rate.
+The forecast is based on three different calculation methods:
 
 1) Moving average method
 2) Exponential smoothing method
@@ -35,6 +35,12 @@ for TodayFragment and ArhiveFragment fragments with a response in Json format
 Contains set of classes for requesting data using Retrofit from the Tinkov website (actual
 currencies values) for a NowFragment fragment with a response in Json format
 
+# Package com.vadimko.curforeckotlin.moexApi
+
+Set of classes for requesting currency data using Retrofit from the Moscow Exchange
+website (for a user-specified period) for TodayFragment and ArchiveFragment fragments with a response
+in Json format
+
 # Package com.vadimko.curforeckotlin.database
 
 Contains set of classes for working with Sql database using Room (recording the results of updating
@@ -57,7 +63,7 @@ Contains UI packages
 
 # Package com.vadimko.curforeckotlin.ui.archive
 
-Contains View and ViewModel for Archieve screen
+Contains View and ViewModel for Archive screen
 
 # Package com.vadimko.curforeckotlin.ui.calc
 

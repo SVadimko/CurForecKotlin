@@ -48,7 +48,7 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
     }
 
     /**
-     * performs Retrofit request to Tinkov server
+     * performs Retrofit [TCSResponse] request to Tinkov server
      */
     private fun updateTCs() {
         val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
@@ -121,7 +121,7 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
     }
 
     /**
-     * performs Retrofit request to CB server
+     * performs Retrofit [TCSResponse] request to CB server
      */
     private fun updateCB() {
         val currentRequest: Call<CBjsonResponse> = cBjsonApi.getCBForec()

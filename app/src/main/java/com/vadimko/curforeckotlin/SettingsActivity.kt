@@ -8,7 +8,6 @@ import androidx.preference.*
 /**
  * SettingsActivity class
  */
-
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +23,9 @@ class SettingsActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Settings fragment with logic of enable/disable some elements
+     */
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -38,7 +40,6 @@ class SettingsActivity : AppCompatActivity() {
             editTextSell!!.setOnBindEditTextListener { editText ->
                 editText.inputType = InputType.TYPE_CLASS_NUMBER
             }
-
             updateSwitch?.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { _, newValue ->
                     val some = newValue.toString().toBoolean()

@@ -1,9 +1,8 @@
 package com.vadimko.curforeckotlin.cbjsonApi
 
 /**
- * Splitting the nested JSON response into classes
+ * Splitting JSON response from Central Bank into classes
  */
-
 class CBjsonResponse {
     var Date: String = ""
 
@@ -11,6 +10,9 @@ class CBjsonResponse {
     lateinit var Valute: CBjsonValuteResponse
 }
 
+/**
+ * Splitting JSON response from Central Bank into classes
+ */
 class CBjsonValuteResponse {
     lateinit var USD: CBjsonValute
     lateinit var EUR: CBjsonValute
@@ -20,6 +22,9 @@ class CBjsonValuteResponse {
     lateinit var UAH: CBjsonValute
 }
 
+/**
+ * Splitting JSON response from Central Bank into classes
+ */
 class CBjsonValute {
     //lateinit var ID: String
     //lateinit var NumCode: String
