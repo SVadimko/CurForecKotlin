@@ -131,7 +131,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
      * @property data MutableLiveData contains list of actual currency values [CurrencyMOEX] from MOEX through [MOEXRepository]
      */
     companion object {
-        var data: MutableLiveData<List<CurrencyMOEX>> = MutableLiveData<List<CurrencyMOEX>>()
+        internal var data: MutableLiveData<List<CurrencyMOEX>> = MutableLiveData<List<CurrencyMOEX>>()
 
         /**
          * load currencies values from MOEX through [CurrencyMOEX] which post it to [data]

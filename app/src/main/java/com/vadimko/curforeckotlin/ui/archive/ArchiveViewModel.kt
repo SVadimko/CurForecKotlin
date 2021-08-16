@@ -5,17 +5,17 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.work.*
-import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.cbxmlApi.CBXMLRepository
 import com.vadimko.curforeckotlin.cbxmlApi.CurrencyCBarhive
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
-import com.vadimko.curforeckotlin.utils.ArchivePreferences
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB
 import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataCB
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker
+import com.vadimko.curforeckotlin.utils.ArchivePreferences
+import com.vadimko.curforeckotlin.utils.DateConverter
 import java.util.*
 
 /**
@@ -155,10 +155,11 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
      */
     companion object {
 
-        var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
+        internal var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
             MutableLiveData<List<CurrencyCBarhive>>()
 
-        var dataMOEX: MutableLiveData<List<CurrencyMOEX>> = MutableLiveData<List<CurrencyMOEX>>()
+        internal var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
+            MutableLiveData<List<CurrencyMOEX>>()
 
         /**
          * load currencies values from CB through [CBXMLRepository] which post it to [dataCB]

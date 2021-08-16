@@ -1,6 +1,7 @@
 package com.vadimko.curforeckotlin.utils
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -23,16 +24,17 @@ object TodayPreferences : KoinComponent {
         perSp: Int,
         rateSp: Int
     ) {
-        val sp = PreferenceManager.getDefaultSharedPreferences(context)
-        val preferencesEditor = sp.edit()
-        preferencesEditor.putString("request", request)
-        preferencesEditor.putString("fromDate", from)
-        preferencesEditor.putString("tillDate", till)
-        preferencesEditor.putString("interval", interval)
-        preferencesEditor.putString("currSP", currSp.toString())
-        preferencesEditor.putString("perSP", perSp.toString())
-        preferencesEditor.putString("ratSP", rateSp.toString())
-        preferencesEditor.apply()
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        preferences.edit{
+            putString("request", request)
+            putString("fromDate", from)
+            putString("tillDate", till)
+            putString("interval", interval)
+            putString("currSP", currSp.toString())
+            putString("perSP", perSp.toString())
+            putString("ratSP", rateSp.toString())
+            apply()
+        }
     }
 
     fun loadPrefs(): List<String> {

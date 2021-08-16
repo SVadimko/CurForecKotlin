@@ -45,7 +45,7 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
      * @property liveDataTKS getting information about courses from the database,
      * which is updated every time the widget is updated
      */
-    val liveDataTKS = CurrenciesRepository.get().getCurrencies()
+    internal val liveDataTKS = CurrenciesRepository.get().getCurrencies()
 
     /**
      * fun perform result of calculating for buing and selling currency
@@ -104,7 +104,7 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
      * @property dataAutoUpdate currency data saved as a result of auto-update
      */
     companion object {
-        var dataForCalc: MutableLiveData<List<CurrencyTCS>> = NowViewModel.data
+        internal var dataForCalc: MutableLiveData<List<CurrencyTCS>> = NowViewModel.data
 
         /**
          * load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
@@ -114,7 +114,7 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
             tcsRepository.getCurrentTCS()
         }
 
-        var dataAutoUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
+        internal var dataAutoUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
             MutableLiveData<List<List<CurrencyTCS>>>()
 
         /**

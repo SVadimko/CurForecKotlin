@@ -1,6 +1,7 @@
 package com.vadimko.curforeckotlin.utils
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -26,19 +27,20 @@ object ArchivePreferences : KoinComponent {
         tillMoex: String,
         interval: String
     ) {
-        val sp = PreferenceManager.getDefaultSharedPreferences(context)
-        val preferencesEditor = sp.edit()
-        preferencesEditor.putLong("fromARDate", from)
-        preferencesEditor.putLong("tillARDate", till)
-        preferencesEditor.putInt("currSelecter", currSelecter)
-        preferencesEditor.putString("VAL_NM_RQ", VAL_NM_RQ)
-        preferencesEditor.putString("date_rec1CB", date_rec1)
-        preferencesEditor.putString("date_rec2CB", date_rec2)
-        preferencesEditor.putString("requestARMOEX", request)
-        preferencesEditor.putString("fromMOEX", fromMoex)
-        preferencesEditor.putString("tillMOEX", tillMoex)
-        preferencesEditor.putString("intervalARMOEX", interval)
-        preferencesEditor.apply()
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        preferences.edit {
+            putLong("fromARDate", from)
+            putLong("tillARDate", till)
+            putInt("currSelecter", currSelecter)
+            putString("VAL_NM_RQ", VAL_NM_RQ)
+            putString("date_rec1CB", date_rec1)
+            putString("date_rec2CB", date_rec2)
+            putString("requestARMOEX", request)
+            putString("fromMOEX", fromMoex)
+            putString("tillMOEX", tillMoex)
+            putString("intervalARMOEX", interval)
+            apply()
+        }
     }
 
     fun loadPrefs(): List<String> {

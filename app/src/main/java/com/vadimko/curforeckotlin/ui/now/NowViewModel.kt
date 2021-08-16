@@ -64,9 +64,10 @@ class NowViewModel(application: Application) : AndroidViewModel(application) {
      */
     companion object {
 
-        var data: MutableLiveData<List<CurrencyTCS>> = MutableLiveData<List<CurrencyTCS>>()
+        internal var data: MutableLiveData<List<CurrencyTCS>> = MutableLiveData<List<CurrencyTCS>>()
 
-        var dataCB: MutableLiveData<List<CurrencyCBjs>> = MutableLiveData<List<CurrencyCBjs>>()
+        internal var dataCB: MutableLiveData<List<CurrencyCBjs>> =
+            MutableLiveData<List<CurrencyCBjs>>()
 
         fun loadDataTCS() {
             GlobalScope.launch(Dispatchers.IO) {
