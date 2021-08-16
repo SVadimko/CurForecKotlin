@@ -89,13 +89,13 @@ NowModel - реализация viewmodel для соответствующег�
 TodayFragment - фрагмент, отвечающий за экран Сегодня
 TodayModel - реализация viewmodel для соответствующего фрагмента
 
-# /updateWorkers/
+## /updateWorkers/
 Workers для обновления информации о курсах валют для соответствующих фрагментов
 
 ## /widget/
 Классы, реализующие функционал виджета
 
-# CurrenciesApplication -
+## CurrenciesApplication -
 Application класс (инициализация CurrenciesRepository для работы с базой
 данных и запуск KOIN(DI), создание синглтона контекста приложения)
 
@@ -113,8 +113,6 @@ Broadcast receiver для получения информации, после п
 пользователя активировано автообновление курсов запускающий сервис TCSUpdateService, если оно было
 активировано
 
-# CoinsAnimator
-Вспомогательный класс для запуска анимации монет при обновлении курса
 
 <h1 align="center">Tinkoff exchange rates</h1>
 
@@ -197,9 +195,7 @@ A service launched for auto-update of Tinkov Bank rates
 ## Bootreceiver
 Broadcast receiver to receive information, after reboot, whether the user had enabled autoupdate courses.
 If it was enabled- TCSUpdateService starts
-
-## CoinsAnimator
-A helper class for triggering animation of coins when the rate is updated    
+  
  
   
 
