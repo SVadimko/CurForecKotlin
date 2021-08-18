@@ -128,7 +128,7 @@ class CoinsAnimator(
     }
 
     /**
-     * set animations count
+     * Set animations count
      * @property count sets the number of flying coins
      */
     inner class ExeTimerTask : TimerTask() {

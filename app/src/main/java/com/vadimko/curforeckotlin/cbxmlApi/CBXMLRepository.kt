@@ -41,7 +41,7 @@ class CBXMLRepository {
         )
         currentRequest.enqueue(object : Callback<MOEXXMLResponse> {
             /**
-             * get list of [CurrencyCBarhive] and post it to [ArchiveViewModel]
+             * Get list of [CurrencyCBarhive] and post it to [ArchiveViewModel]
              */
             override fun onResponse(
                 call: Call<MOEXXMLResponse>,

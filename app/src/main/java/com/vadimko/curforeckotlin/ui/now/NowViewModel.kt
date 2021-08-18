@@ -37,7 +37,7 @@ class NowViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /**
-     * launching coroutines to get Tinkov and CB
+     * Launching coroutines to get Tinkov and CB
      */
     fun startRefresh() {
         loadDataTCS()
@@ -45,7 +45,7 @@ class NowViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /**
-     * start animation after updating courses with [CoinsAnimator]
+     * Start animation after updating courses with [CoinsAnimator]
      */
     fun startAnimations(mScale: Float, mDisplaySize: Rect, mRootLayout: FrameLayout) {
         val onRefreshAnimation =

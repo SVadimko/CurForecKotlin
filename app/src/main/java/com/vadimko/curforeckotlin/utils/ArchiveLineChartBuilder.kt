@@ -1,7 +1,6 @@
 package com.vadimko.curforeckotlin.utils
 
 import android.content.Context
-import android.util.Log
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
@@ -36,19 +35,17 @@ object ArchiveLineChartBuilder : KoinComponent {
     @Suppress("UNCHECKED_CAST")
     fun createLineChart(
         linearChart: LineChart,
-        //dates: List<String>,
         data: List<Any>,
         description: String
     ): LineChart {
         val dates = mutableListOf<String>()
-        if(description == "cbr.ru"){
+        if (description == "cbr.ru") {
             data as List<CurrencyCBarhive>
             dates.clear()
             data.forEach {
                 dates.add(it.datetimeConv)
             }
-        }
-        else{
+        } else {
             data as List<CurrencyMOEX>
             dates.clear()
             data.forEach {
@@ -139,7 +136,7 @@ object ArchiveLineChartBuilder : KoinComponent {
         s: String,
         dataListMOEX: List<CurrencyMOEX>
     ) {
-        val  warprice: MutableList<Float> = mutableListOf()
+        val warprice: MutableList<Float> = mutableListOf()
         warprice.clear()
         dataListMOEX.forEach {
             warprice.add(it.warprice.toFloat())
@@ -156,17 +153,17 @@ object ArchiveLineChartBuilder : KoinComponent {
         }
         val entriesWMAForecast: MutableList<Entry> = mutableListOf()
         val utilWMA = WMA(warpFlt, 3)
-            utilWMA.calc()
+        utilWMA.calc()
         val wmaError = utilWMA.getAverageErr().toString()
-            val forecastWMA: MutableList<Float> = utilWMA.getForecast()
-            for (i in forecastWMA.indices) {
-                entriesWMAForecast.add(
-                    Entry(
-                        (i + warprice.size - 1).toFloat(),
-                        forecastWMA[i]
-                    )
+        val forecastWMA: MutableList<Float> = utilWMA.getForecast()
+        for (i in forecastWMA.indices) {
+            entriesWMAForecast.add(
+                Entry(
+                    (i + warprice.size - 1).toFloat(),
+                    forecastWMA[i]
                 )
-            }
+            )
+        }
         warpFlt.clear()
         for (i in warprice.indices) {
             warpFlt.add(warprice[i])

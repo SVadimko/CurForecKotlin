@@ -27,10 +27,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NowFragment : Fragment() {
 
-    /*   private val nowViewModel: NowViewModel by lazy {
-           ViewModelProvider(this).get(NowViewModel::class.java)
-       }*/
-
     private val nowViewModel by viewModel<NowViewModel>()
 
     private var _binding: FragmentNowBinding? = null
@@ -76,7 +72,7 @@ class NowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getDisplayParams()
         /**
-         * observe data receiving from Central bank bank throught [NowViewModel]
+         * Observe data receiving from Central bank bank throught [NowViewModel]
          */
         nowViewModel.getData().observe(viewLifecycleOwner, { forecTCS ->
             forecTCS?.let {
@@ -84,13 +80,13 @@ class NowFragment : Fragment() {
                 binding.lastchk.text =
                     "${getString(R.string.lastupdateTCS)} ${forecTCS[0].curr} ${getString(R.string.NOWFRAGsource)} tinkoff.ru"
                 /**
-                 * launching [CoinsAnimator] through [NowViewModel]
+                 * Launching [CoinsAnimator] through [NowViewModel]
                  */
                 nowViewModel.startAnimations(mScale, rect, frameLayout)
             }
         })
         /**
-         * observe data receiving from Tinkov bank throught [NowViewModel]
+         * Observe data receiving from Tinkov bank throught [NowViewModel]
          */
         nowViewModel.getData2().observe(viewLifecycleOwner, { forecCB ->
             forecCB?.let {
@@ -136,7 +132,7 @@ class NowFragment : Fragment() {
     }
 
     /**
-     * get display params for launching [CoinsAnimator] through [NowViewModel]
+     * Get display params for launching [CoinsAnimator] through [NowViewModel]
      */
     private fun getDisplayParams() {
         rect = Rect()

@@ -33,10 +33,6 @@ class ArchiveFragment : Fragment() {
     private lateinit var linearCbrf: LineChart
     private lateinit var linearChartForec: LineChart
 
-    private var warprice: MutableList<Float> = mutableListOf()
-    private var datesForecast: MutableList<String> = mutableListOf()
-    private var datesCB: MutableList<String> = mutableListOf()
-
     private var choosenCurrency = ""
     private lateinit var currSpinner: Spinner
 

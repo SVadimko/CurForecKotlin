@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.vadimko.curforeckotlin.R
+import com.vadimko.curforeckotlin.TCSUpdateService
 import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
@@ -15,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
-import com.vadimko.curforeckotlin.TCSUpdateService
 
 /**
  * ViewModel for Calc fragment
@@ -49,7 +49,7 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Request to delete [dataServiceUpdate] data, except last value
      */
-    fun deleteServiceUpdateData(data: List<List<CurrencyTCS>>){
+    fun deleteServiceUpdateData(data: List<List<CurrencyTCS>>) {
         Saver.deleteTcsLast(data)
         loadServiceUpdateData()
     }
@@ -69,11 +69,9 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Request to delete [dataWidgetUpdate] data, except last value
      */
-    fun deleteWidgetUpdateData(data: MutableList<Currencies>){
+    fun deleteWidgetUpdateData(data: MutableList<Currencies>) {
         val currenciesRepository = CurrenciesRepository.get()
         currenciesRepository.clearCurrencies(data)
-        //currenciesRepository.dropTable()
-        //loadDataTCS()
     }
 
 

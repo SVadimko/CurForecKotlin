@@ -30,7 +30,7 @@ class CurrenciesRepository private constructor(context: Context) {
     fun getCurrencies(): LiveData<List<Currencies>> = currencyDao.getCurrencies()
 
     /**
-     * add [Currencies] value to DB
+     * Add [Currencies] value to DB
      */
 
     fun insertCurrencies(currencies: Currencies) {
@@ -41,7 +41,7 @@ class CurrenciesRepository private constructor(context: Context) {
     }
 
     /**
-     * delete all [Currencies] notes in DB
+     * Delete all [Currencies] notes in DB
      */
     fun clearCurrencies(list: MutableList<Currencies>) {
         executor.execute {
@@ -50,12 +50,12 @@ class CurrenciesRepository private constructor(context: Context) {
         }
     }
 
-    fun dropTable(){
+    fun dropTable() {
         currencyDao.nukeTable()
     }
 
     /**
-     * initialise and get singleton of [CurrenciesRepository] DB
+     * Initialise and get singleton of [CurrenciesRepository] DB
      */
     companion object {
         private var INSTANCE: CurrenciesRepository? = null

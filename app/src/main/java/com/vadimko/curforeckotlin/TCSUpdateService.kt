@@ -18,8 +18,6 @@ import com.vadimko.curforeckotlin.utils.Saver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.component.KoinComponent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

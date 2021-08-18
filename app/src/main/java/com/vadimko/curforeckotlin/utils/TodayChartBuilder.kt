@@ -32,19 +32,19 @@ object TodayChartBuilder : KoinComponent {
     fun createChart(
         comboChartForec: CombinedChart,
         dataList: List<CurrencyMOEX>,
-        period:String,
+        period: String,
         animationLong: Int,
     ): CombinedChart {
-       val dates:MutableList<String> = mutableListOf()
+        val dates: MutableList<String> = mutableListOf()
         val datesForecast: MutableList<String> = mutableListOf()
         dataList.forEach {
             dates.add(it.dates)
         }
-            for (i in 1 until 4) {
-                datesForecast.add(
-                    "${context.getString(R.string.forec)} $period"
-                )
-            }
+        for (i in 1 until 4) {
+            datesForecast.add(
+                "${context.getString(R.string.forec)} $period"
+            )
+        }
         comboChartForec.clear()
         comboChartForec.invalidate()
         comboChartForec.setDrawGridBackground(false)
@@ -113,13 +113,13 @@ object TodayChartBuilder : KoinComponent {
         s: String,
         dataList: List<CurrencyMOEX>,
     ) {
-         val dates: MutableList<String> = mutableListOf()
-         val open: MutableList<Double> = mutableListOf()
-         val close: MutableList<Double> = mutableListOf()
-         val low: MutableList<Double> = mutableListOf()
-         val high: MutableList<Double> = mutableListOf()
-         val warprice: MutableList<Double> = mutableListOf()
-         val datesForecast: MutableList<String> = mutableListOf()
+        val dates: MutableList<String> = mutableListOf()
+        val open: MutableList<Double> = mutableListOf()
+        val close: MutableList<Double> = mutableListOf()
+        val low: MutableList<Double> = mutableListOf()
+        val high: MutableList<Double> = mutableListOf()
+        val warprice: MutableList<Double> = mutableListOf()
+        val datesForecast: MutableList<String> = mutableListOf()
         dates.clear()
         open.clear()
         close.clear()

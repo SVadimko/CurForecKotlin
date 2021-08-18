@@ -30,10 +30,6 @@ class TodayFragment : Fragment() {
     private lateinit var comboChartForec: CombinedChart
     private val yValsCandleStick = ArrayList<CandleEntry>()
 
-    /*   private val todayViewModel: TodayViewModel by lazy {
-           ViewModelProvider(this).get(TodayViewModel::class.java)
-       }*/
-
     private val todayViewModel by viewModel<TodayViewModel>()
 
     private lateinit var root: View

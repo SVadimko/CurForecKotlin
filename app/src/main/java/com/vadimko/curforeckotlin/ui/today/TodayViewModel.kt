@@ -38,7 +38,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /**
-     * creates string for request to MOEX server API
+     * Creates string for request to MOEX server API
      */
     fun createRequestStrings(
         choosen: IntArray,
@@ -104,7 +104,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /**
-     * configure and launch worker to receive currencies values for requested days through [TodayWorker]
+     * Configure and launch worker to receive currencies values for requested days through [TodayWorker]
      */
     private fun startTodayWorker(request: String, from: String, till: String, interval: String) {
         val constraints = Constraints.Builder()
@@ -124,7 +124,11 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun showToast() {
-        Toast.makeText(context, context.getString(R.string.TODAYFRAGchoosediffinterval), Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            context,
+            context.getString(R.string.TODAYFRAGchoosediffinterval),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     /**
@@ -135,12 +139,11 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
             MutableLiveData<List<CurrencyMOEX>>()
 
         /**
-         * load currencies values from MOEX through [CurrencyMOEX] which post it to [data]
+         * Load currencies values from MOEX through [CurrencyMOEX] which post it to [data]
          */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
             val moexRepository = MOEXRepository()
             moexRepository.getMOEX(request, from, till, interval, false)
-
         }
     }
 }

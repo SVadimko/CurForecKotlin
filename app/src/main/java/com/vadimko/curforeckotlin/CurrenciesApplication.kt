@@ -48,7 +48,10 @@ class CurrenciesApplication : Application() {
         }
     }
 
-    //Singleton of app context
+    /**
+     * Singleton of app context (not used, replaced by Koin inject)
+     */
+
     companion object {
         private var instance: CurrenciesApplication? = null
 

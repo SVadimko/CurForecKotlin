@@ -84,7 +84,7 @@ class LessSquare(inp: MutableList<Float>) {
     }
 
     /**
-     *Calculating methods error
+     * Calculating methods error
      */
     private fun calculateError() {
         for (i in input.indices) {

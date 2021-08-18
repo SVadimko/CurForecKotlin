@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Vadimko/AndroidStudioProjects/CurForecKotlin/app/src/main/res/drawable-v21/app_widget_background.xml" value="0.13935185185185187" />
+        <entry key="..\:/Users/Vadimko/AndroidStudioProjects/CurForecKotlin/app/src/main/res/drawable-v21/app_widget_inner_view_background.xml" value="0.13935185185185187" />
         <entry key="..\:/Users/Vadimko/AndroidStudioProjects/CurForecKotlin/app/src/main/res/layout/activity_main.xml" value="0.17119565217391305" />
         <entry key="..\:/Users/Vadimko/AndroidStudioProjects/CurForecKotlin/app/src/main/res/layout/cbrf_main_recycle.xml" value="0.33" />
         <entry key="..\:/Users/Vadimko/AndroidStudioProjects/CurForecKotlin/app/src/main/res/layout/fragment_calc.xml" value="0.25" />
         <entry key="..\:/Users/Vadimko/AndroidStudioProjects/CurForecKotlin/app/src/main/res/layout/fragment_today.xml" value="0.17119565217391305" />
+        <entry key="..\:/Users/Vadimko/AndroidStudioProjects/CurForecKotlin/app/src/main/res/layout/main_widget.xml" value="0.125" />
         <entry key="..\:/Users/Vadimko/AndroidStudioProjects/CurForecKotlin/app/src/main/res/layout/tinkoff_main_recycle.xml" value="0.33" />
+        <entry key="..\:/Users/Vadimko/AndroidStudioProjects/CurForecKotlin/app/src/main/res/layout/widget.xml" value="0.25" />
         <entry key="..\:/Users/Vadimko/AndroidStudioProjects/CurForecKotlin/app/src/main/res/xml/root_preferences.xml" value="0.33" />
       </map>
     </option>

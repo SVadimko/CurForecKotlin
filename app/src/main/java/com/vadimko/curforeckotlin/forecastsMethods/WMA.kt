@@ -14,8 +14,8 @@ class WMA(inp: MutableList<Float>, a: Int) {
     private var count = 0
 
     /**
-     * calculate forecast (3 values ahead) [forecast]
-     * calculate error of method [averageError]
+     * Calculate forecast (3 values ahead) [forecast]
+     * Calculate error of method [averageError]
      */
     fun calc() {
         for (i in 1 until input.size - 1) {

@@ -1,11 +1,10 @@
 package com.vadimko.curforeckotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.*
-import android.content.Intent
-import android.util.Log
 
 
 /**

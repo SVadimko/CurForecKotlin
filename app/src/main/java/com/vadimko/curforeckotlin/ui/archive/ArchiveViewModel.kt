@@ -15,7 +15,6 @@ import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB
 import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataCB
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker
-import com.vadimko.curforeckotlin.utils.ArchiveLineChartBuilder
 import com.vadimko.curforeckotlin.utils.ArchivePreferences
 import com.vadimko.curforeckotlin.utils.DateConverter
 import org.koin.core.component.KoinComponent
@@ -27,7 +26,6 @@ import java.util.*
  */
 
 class ArchiveViewModel(application: Application) : AndroidViewModel(application), KoinComponent {
-    //private val context = getApplication<Application>()
     private var custCur = ""
     private val context: Context by inject()
     fun getDataCB(): MutableLiveData<List<CurrencyCBarhive>> {
@@ -53,7 +51,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
 
 
     /**
-     * depending on the selected values of the spinners, forms parts of the request to the server
+     * Depending on the selected values of the spinners, forms parts of the request to the server
      */
     fun createRequestStrings(choosen: Int, fromDate: Date, tillDate: Date) {
         var jsonCurr = ""
@@ -94,7 +92,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
     }
 
     /**
-     * checking correct choosen of input dates
+     * Checking correct choosen of input dates
      */
     private fun checkDates(from: Date, till: Date): Boolean {
         val tillLong = till.time
@@ -106,7 +104,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
     }
 
     /**
-     * launch worker to get data from CB through [ArchiveWorker]
+     * Launch worker to get data from CB through [ArchiveWorker]
      */
     private fun startArchiveWorker(from: String, till: String, request: String) {
         val constraints = Constraints.Builder()
@@ -133,7 +131,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
 
 
     /**
-     * launch worker to get data from MOEX through [ArchiveMOEXWorker]
+     * Launch worker to get data from MOEX through [ArchiveMOEXWorker]
      */
     private fun startArchiveMOEXWorker(request: String, from: String, till: String) {
         val constraints = Constraints.Builder()
@@ -156,7 +154,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
     /**
      * Show warning messages if data received from CB or/and MOEX is not enough to build graph
      */
-    fun showToast(s:String){
+    fun showToast(s: String) {
         Toast.makeText(context, s, Toast.LENGTH_SHORT).show()
     }
 
@@ -173,7 +171,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
             MutableLiveData<List<CurrencyMOEX>>()
 
         /**
-         * load currencies values from CB through [CBXMLRepository] which post it to [dataCB]
+         * Load currencies values from CB through [CBXMLRepository] which post it to [dataCB]
          */
         fun loadCBArhieve(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
             val cbxmlRepository = CBXMLRepository()
@@ -181,7 +179,7 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
         }
 
         /**
-         * load currencies values from MOEX through [MOEXRepository] which post it to [dataMOEX]
+         * Load currencies values from MOEX through [MOEXRepository] which post it to [dataMOEX]
          */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
             val moexRepository = MOEXRepository()

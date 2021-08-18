@@ -35,7 +35,7 @@ class CBJsonRepository {
         val currentRequest: Call<CBjsonResponse> = cBjsonApi.getCBForec()
         currentRequest.enqueue(object : Callback<CBjsonResponse> {
             /**
-             * get list of [CurrencyCBjs] and post it to [NowViewModel.dataCB]
+             * Get list of [CurrencyCBjs] and post it to [NowViewModel.dataCB]
              */
             override fun onResponse(
                 call: Call<CBjsonResponse>,

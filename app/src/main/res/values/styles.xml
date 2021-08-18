@@ -22,6 +22,16 @@
         <item name="colorAccent">@color/colorRed</item>
     </style>
 
+    <style name="Widget.CurForecKotlin.AppWidget.Container" parent="android:Widget">
+        <item name="android:id">@android:id/background</item>
+        <item name="android:background">?android:attr/colorBackground</item>
+    </style>
+
+    <style name="Widget.CurForecKotlin.AppWidget.InnerView" parent="android:Widget">
+        <item name="android:background">?android:attr/colorBackground</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
     <!-- <style name="PreferenceTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
          <item name="colorAccent">@color/MainTextColor</item>
          <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>

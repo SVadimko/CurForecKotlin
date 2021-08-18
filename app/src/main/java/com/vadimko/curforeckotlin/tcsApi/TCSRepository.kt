@@ -36,7 +36,7 @@ class TCSRepository {
         val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
         currentRequest.enqueue(object : Callback<TCSResponse> {
             /**
-             * if received from server some 0 value, repeat [getCurrentTCS] else post list of [CurrencyTCS]
+             * If received from server some 0 value, repeat [getCurrentTCS] else post list of [CurrencyTCS]
              * to [NowViewModel] and [CalcViewModel]
              */
             override fun onResponse(call: Call<TCSResponse>, response: Response<TCSResponse>) {

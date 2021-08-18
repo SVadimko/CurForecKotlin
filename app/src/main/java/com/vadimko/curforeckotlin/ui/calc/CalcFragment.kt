@@ -38,36 +38,8 @@ class CalcFragment : Fragment() {
     private lateinit var eqSign: TextView
     private lateinit var currValue: EditText
     private lateinit var curSigna: TextView
-    private var usdBuy: Double = 0.0
-    private var usdSell: Double = 0.0
-    private var eurBuy: Double = 0.0
-    private var eurSell: Double = 0.0
-    private var gbpBuy: Double = 0.0
-    private var gbpSell: Double = 0.0
+
     private lateinit var dataToCalc: List<CurrencyTCS>
-
-
-    private val datesTime: MutableList<String> = mutableListOf()
-    private val usdData: MutableList<CurrencyTCS> = mutableListOf()
-    private val usdDataBuy: MutableList<Double> = mutableListOf()
-    private val usdDataSell: MutableList<Double> = mutableListOf()
-    private val eurData: MutableList<CurrencyTCS> = mutableListOf()
-    private val eurDataBuy: MutableList<Double> = mutableListOf()
-    private val eurDataSell: MutableList<Double> = mutableListOf()
-    private val gbpData: MutableList<CurrencyTCS> = mutableListOf()
-    private val gbpDataBuy: MutableList<Double> = mutableListOf()
-    private val gbpDataSell: MutableList<Double> = mutableListOf()
-
-    private val datesTimeW: MutableList<String> = mutableListOf()
-    private val usdDataW: MutableList<CurrencyTCS> = mutableListOf()
-    private val usdDataBuyW: MutableList<Double> = mutableListOf()
-    private val usdDataSellW: MutableList<Double> = mutableListOf()
-    private val eurDataW: MutableList<CurrencyTCS> = mutableListOf()
-    private val eurDataBuyW: MutableList<Double> = mutableListOf()
-    private val eurDataSellW: MutableList<Double> = mutableListOf()
-    private val gbpDataW: MutableList<CurrencyTCS> = mutableListOf()
-    private val gbpDataBuyW: MutableList<Double> = mutableListOf()
-    private val gbpDataSellW: MutableList<Double> = mutableListOf()
 
     private var widgetUpdateData: MutableList<Currencies> = mutableListOf()
     private var serviceUpdateData: List<List<CurrencyTCS>> = mutableListOf()
@@ -212,7 +184,7 @@ class CalcFragment : Fragment() {
             //attachGraph(pref, it)
             attachChart(pref, it, false)
             if (pref)
-               // serviceUpdateData = it
+            // serviceUpdateData = it
                 if (!it.isNullOrEmpty() && it[0].size > 2) {
                     createGraph(it, false)
                     fillGraph(false, it, updateSpinnerValue)
@@ -227,14 +199,12 @@ class CalcFragment : Fragment() {
 
         calcViewModel.dataWidgetUpdate.observe(viewLifecycleOwner) {
             widgetUpdateData = it as MutableList<Currencies>
-            //showWidgetChart()
             val pref =
                 PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean("widgetOn", false)
             //attachWidgetGraph(pref, it)
             attachChart(pref, it, true)
             if (pref) {
-               // widgetUpdateData = it as MutableList<Currencies>
                 if (it.isNotEmpty()) {
                     createGraph(it, true)
                     fillGraph(true, it, widgetSpinnerValue)
@@ -249,32 +219,6 @@ class CalcFragment : Fragment() {
         })
     }
 
-    private fun showServiceChart(){
-        val pref =
-            PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("updateon", false)
-        //attachGraph(pref, serviceUpdateData)
-        attachChart(pref, serviceUpdateData, false)
-        if (pref)
-        if (!serviceUpdateData.isNullOrEmpty() && serviceUpdateData[0].size > 2) {
-            createGraph(widgetUpdateData, false)
-            fillGraph(false, serviceUpdateData, updateSpinnerValue)
-        }
-    }
-
-    private fun showWidgetChart(){
-        val pref =
-            PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("widgeton", false)
-        //attachWidgetGraph(pref, widgetUpdateData)
-        attachChart(pref, widgetUpdateData, true)
-        if (pref) {
-            if (widgetUpdateData.isNotEmpty()) {
-                createGraph(widgetUpdateData, true)
-                fillGraph(true, widgetUpdateData, widgetSpinnerValue)
-            }
-        }
-    }
 
     /**
      * Retrieve the latest Tinkov currency rate data
@@ -288,88 +232,16 @@ class CalcFragment : Fragment() {
         gbpSell = dataList[2].sell!!
     }*/
 
-    /*  */
-    /**
-     * Retrieve data to show a graph of values obtained as a result of auto-update service
-     *//*
-    private fun extractGraphData(dataList: List<List<CurrencyTCS>>) {
-        usdData.clear()
-        usdDataBuy.clear()
-        usdDataSell.clear()
-        eurData.clear()
-        eurDataBuy.clear()
-        eurDataSell.clear()
-        gbpData.clear()
-        gbpDataBuy.clear()
-        gbpDataSell.clear()
-        datesTime.clear()
-
-        dataList.forEach {
-            usdData.add(it[0])
-            it[0].buy?.let { it1 -> usdDataBuy.add(it1) }
-            it[0].sell?.let { it1 -> usdDataSell.add(it1) }
-            it[0].datetime?.let { it1 -> datesTime.add(DateConverter.longToDateWithTime(it1)) }
-            eurData.add(it[1])
-            it[1].buy?.let { it1 -> eurDataBuy.add(it1) }
-            it[1].sell?.let { it1 -> eurDataSell.add(it1) }
-            gbpData.add(it[2])
-            it[2].buy?.let { it1 -> gbpDataBuy.add(it1) }
-            it[2].sell?.let { it1 -> gbpDataSell.add(it1) }
-        }
-        if (datesTime.size > 2) {
-            //createGraph(0, viewChild!!, datesTime)
-            val s = usdData[0].name
-            val e = eurData[0].name
-            val g = gbpData[0].name
-            if (s != null) {
-                if (e != null) {
-                    if (g != null) {
-                        fillTCsGraph()
-                    }
-                }
-            }
-        }
-    }*/
 
     /* */
     /**
-     * Retrieve data to show a graph of values obtained as a result of updating the widget
-     *//*
-    private fun extractWidgetGraphData(dataList: List<Currencies>) {
-        usdDataW.clear()
-        usdDataBuyW.clear()
-        usdDataSellW.clear()
-        eurDataW.clear()
-        eurDataBuyW.clear()
-        eurDataSellW.clear()
-        gbpDataW.clear()
-        gbpDataBuyW.clear()
-        gbpDataSellW.clear()
-        datesTimeW.clear()
-
-        dataList.forEach {
-            usdDataBuyW.add(it.usdBuy)
-            usdDataSellW.add(it.usdSell)
-            eurDataBuyW.add(it.eurBuy)
-            eurDataSellW.add(it.eurSell)
-            gbpDataBuyW.add(it.gbpBuy)
-            gbpDataSellW.add(it.gbpSell)
-            datesTimeW.add(it.dt)
-        }
-        if (datesTimeW.size > 2) {
-            //createGraph(1, viewChildWidget!!, datesTimeW)
-            fillWidgetTCsGraph()
-        }
-    }*/
-
-    /**
      * If the auto-update checkbox is enabled in the settings, add a view with the
      * corresponding graph to the fragment
-     */
+     *//*
     private fun attachGraph(pref: Boolean, data: List<List<CurrencyTCS>>) {
-        /* val pref =
+        *//* val pref =
              PreferenceManager.getDefaultSharedPreferences(context)
-                 .getBoolean("updateon", false)*/
+                 .getBoolean("updateon", false)*//*
         if (pref) {
             if (viewChild?.isAttachedToWindow == false) {
                 viewAccept.removeAllViews()
@@ -426,14 +298,15 @@ class CalcFragment : Fragment() {
         }
     }
 
+    */
     /**
      * If in the settings there is a check mark showing information about updating the widget, add
      * a view with the corresponding graph to the fragment
-     */
+     *//*
     private fun attachWidgetGraph(pref: Boolean, data: List<Currencies>) {
-        /* val pref =
+        *//* val pref =
              PreferenceManager.getDefaultSharedPreferences(context)
-                 .getBoolean("widgeton", false)*/
+                 .getBoolean("widgeton", false)*//*
         if (pref) {
             if (viewChildWidget?.isAttachedToWindow == false) {
                 viewAcceptWidget.removeAllViews()
@@ -471,10 +344,10 @@ class CalcFragment : Fragment() {
                 val trashCan = viewChildWidget!!.findViewById<ImageView>(R.id.trashcan)
                 trashCan.apply {
                     setOnClickListener {
-                        /* val currenciesRepository = CurrenciesRepository.get()
+                        *//* val currenciesRepository = CurrenciesRepository.get()
                          currenciesRepository.clearCurrencies(listWidgetData)
 
-                         CalcViewModel.loadDataTCS()*/
+                         CalcViewModel.loadDataTCS()*//*
 
                         calcViewModel.deleteWidgetUpdateData(widgetUpdateData)
                     }
@@ -484,24 +357,24 @@ class CalcFragment : Fragment() {
             viewAcceptWidget.removeAllViews()
         }
     }
-
-    private fun attachChart(pref: Boolean, data: Any, type:Boolean){
-        val parent:LinearLayout?
+*/
+    @Suppress("UNCHECKED_CAST")
+    private fun attachChart(pref: Boolean, data: Any, type: Boolean) {
+        val parent: LinearLayout?
         val child: View?
         val spinner: Spinner
         var spinnerPos: Int
-        val text:String
+        val text: String
         val serviceData = data as List<List<CurrencyTCS>>
         val updateData = data as List<Currencies>
-        if(!type){
+        if (!type) {
             parent = viewAccept
             child = viewChild
             currGrafSpinner = child!!.findViewById(R.id.currency_graf)
             spinner = currGrafSpinner
             spinnerPos = updateSpinnerValue
-text = getString(R.string.CALCFRAGdatafrautoup)
-        }
-        else{
+            text = getString(R.string.CALCFRAGdatafrautoup)
+        } else {
             parent = viewAcceptWidget
             child = viewChildWidget
             currGrafSpinnerWidget = child!!.findViewById(R.id.currency_graf)
@@ -510,15 +383,14 @@ text = getString(R.string.CALCFRAGdatafrautoup)
             text = getString(R.string.CALCFRAGdatafrwidget)
         }
         if (pref) {
-            if (child.isAttachedToWindow == false) {
+            if (!child.isAttachedToWindow) {
                 parent.removeAllViews()
                 if (parent.childCount > 0)
                     parent.removeView(child)
                 parent.addView(child)
-                if(!type){
+                if (!type) {
                     linearTCs = child.findViewById(R.id.chartattach)
-                }
-                else{
+                } else {
                     linearTCsWidget = child.findViewById(R.id.chartattach)
                 }
                 val currAdapter = ArrayAdapter(
@@ -536,13 +408,12 @@ text = getString(R.string.CALCFRAGdatafrautoup)
                             position: Int, id: Long
                         ) {
                             spinnerPos = spinner.selectedItemPosition
-                            if(!type) {
+                            if (!type) {
                                 if (!serviceData.isNullOrEmpty() && serviceData[0].size > 2) {
                                     createGraph(serviceData, false)
                                     fillGraph(false, serviceData, spinnerPos)
                                 }
-                            }
-                            else{
+                            } else {
                                 if (updateData.isNotEmpty()) {
                                     createGraph(updateData, true)
                                     fillGraph(true, updateData, widgetSpinnerValue)
@@ -559,13 +430,12 @@ text = getString(R.string.CALCFRAGdatafrautoup)
                 val trashCan = child.findViewById<ImageView>(R.id.trashcan)
                 trashCan.apply {
                     setOnClickListener {
-                        if(!type)
+                        if (!type)
                             GlobalScope.launch(Dispatchers.IO) {
-                            calcViewModel.deleteServiceUpdateData(data)
-                        }
+                                calcViewModel.deleteServiceUpdateData(data)
+                            }
                         else
                             calcViewModel.deleteWidgetUpdateData(widgetUpdateData)
-
                     }
                 }
             }
@@ -579,16 +449,9 @@ text = getString(R.string.CALCFRAGdatafrautoup)
      */
     private fun createGraph(data: Any, dataType: Boolean) {
         if (!dataType) {
-            //if (viewChild?.isAttachedToWindow == true) {
-            // linearTCs = viewChild!!.findViewById(R.id.chartattach)
             linearTCs = CalcLineChartBuilder.createGraph(linearTCs, data, dataType)
-
-            //}
         } else {
-            // if (viewChildWidget?.isAttachedToWindow == true) {
-            // linearTCsWidget = viewChildWidget!!.findViewById(R.id.chartattach)
             linearTCsWidget = CalcLineChartBuilder.createGraph(linearTCsWidget, data, dataType)
-            //}
         }
     }
 
@@ -598,200 +461,6 @@ text = getString(R.string.CALCFRAGdatafrautoup)
         else
             CalcLineChartBuilder.fillChart(linearTCsWidget, spinnerPos, data, dataType)
     }
-
-    /* chart.clear()
-     chart.setDrawGridBackground(false)
-     chart.description.isEnabled = true
-     val tempDescription = Description()
-     tempDescription.text = "https://www.tinkoff.ru/"
-     chart.description = tempDescription
-     chart.setDrawBorders(true)
-     chart.axisLeft.isEnabled = true
-     chart.axisRight.setDrawAxisLine(true)
-     chart.axisRight.setDrawGridLines(true)
-     chart.xAxis.setDrawAxisLine(true)
-     chart.xAxis.setDrawGridLines(true)
-     chart.xAxis.labelRotationAngle = -45f
-     val xAxis: XAxis = chart.xAxis
-     xAxis.isGranularityEnabled = true
-     xAxis.granularity = 1f
-     xAxis.valueFormatter = object : ValueFormatter() {
-         override fun getFormattedValue(value: Float): String {
-             return if (value < timeDate.size) timeDate[value.toInt()] else ""
-         }
-     }
-     val rightAxis: YAxis = chart.axisRight
-     rightAxis.setDrawGridLines(true)
-     val leftAxis: YAxis = chart.axisLeft
-     leftAxis.setDrawGridLines(true)
-     rightAxis.valueFormatter = object : ValueFormatter() {
-         override fun getFormattedValue(value: Float): String {
-             return String.format("%.2f", value) + " ₽"
-         }
-     }
-     leftAxis.valueFormatter = object : ValueFormatter() {
-         override fun getFormattedValue(value: Float): String {
-             return String.format("%.2f", value) + " ₽"
-         }
-     }
-     chart.setTouchEnabled(true)
-     chart.isDragEnabled = true
-     chart.setScaleEnabled(true)
-     chart.setPinchZoom(true)
-     val animationLong: Int = if (timeDate.size < 20) 200
-     else 500
-     chart.animateX(animationLong)
-     val l: Legend = chart.legend
-     l.isWordWrapEnabled = true
-     l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-     l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-     l.orientation = Legend.LegendOrientation.HORIZONTAL
-     when (type) {
-         0 -> linearTCs = chart
-         1 -> linearTCsWidget = chart
-     }
-     xAxis.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
-     leftAxis.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
-     rightAxis.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
-     tempDescription.textColor =
-         resources.getColor(R.color.white, requireActivity().application.theme)
-     l.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
- }*/
-
-    /* */
-    /**
-     * Filling graph with widget data according to the selected currency
-     *//*
-    private fun fillWidgetTCsGraph() {
-        when (currGrafSpinnerWidget.selectedItemPosition) {
-            0 -> {
-                alternativeFillTCsGraphWidget("USD", usdDataBuyW, usdDataSellW)
-            }
-            1 -> {
-                alternativeFillTCsGraphWidget("EUR", eurDataBuyW, eurDataSellW)
-            }
-            2 -> {
-                alternativeFillTCsGraphWidget("GBP", gbpDataBuyW, gbpDataSellW)
-            }
-        }
-    }
-
-    */
-    /**
-     * Filling graph with auto update data according to the selected currency
-     *//*
-    private fun fillTCsGraph() {
-        when (currGrafSpinner.selectedItemPosition) {
-            0 -> {
-                if (usdData.size > 1)
-                    alternativeFillTCsGraph(usdData[0].name!!, usdData)
-            }
-            1 -> {
-                if (eurData.size > 1)
-                    alternativeFillTCsGraph(eurData[0].name!!, eurData)
-            }
-            2 -> {
-                if (gbpData.size > 1)
-                    alternativeFillTCsGraph(gbpData[0].name!!, gbpData)
-            }
-        }
-    }
-
-    */
-    /**
-     * Filling autoupdate graph with selected currency
-     *//*
-    private fun alternativeFillTCsGraph(s: String, currData: MutableList<CurrencyTCS>) {
-        if (currData.size > 2) {
-            val currBuy: MutableList<Double> = mutableListOf()
-            val currSell: MutableList<Double> = mutableListOf()
-            currData.forEach {
-                currBuy.add(it.buy!!)
-                currSell.add(it.sell!!)
-            }
-
-            val dataSets: MutableList<ILineDataSet> = mutableListOf()
-            val entries: MutableList<Entry> = mutableListOf()
-            val entries2: MutableList<Entry> = mutableListOf()
-            for (i in 0 until currBuy.size) {
-                entries.add(Entry(i.toFloat(), currBuy[i].toFloat()))
-            }
-            val d = LineDataSet(entries, "$s ${getString(R.string.CALCFRAGbuying)}")
-            d.lineWidth = 2.5f
-            d.circleRadius = 1f
-            d.color = Color.rgb(55, 70, 170)
-            d.valueTextColor =
-                resources.getColor(R.color.white, requireActivity().application.theme)
-            d.mode =
-                if (d.mode == LineDataSet.Mode.HORIZONTAL_BEZIER) LineDataSet.Mode.LINEAR else LineDataSet.Mode.HORIZONTAL_BEZIER
-            dataSets.add(d)
-
-            for (i in 0 until currSell.size) {
-                entries2.add(Entry(i.toFloat(), currSell[i].toFloat()))
-            }
-            val d2 = LineDataSet(entries2, "$s ${getString(R.string.CALCFRAGselling)}")
-            d2.lineWidth = 2.5f
-            d2.circleRadius = 1f
-            d2.color = Color.rgb(240, 70, 55)
-            d2.valueTextColor =
-                resources.getColor(R.color.white, requireActivity().application.theme)
-            d2.mode =
-                if (d2.mode == LineDataSet.Mode.HORIZONTAL_BEZIER) LineDataSet.Mode.LINEAR else LineDataSet.Mode.HORIZONTAL_BEZIER
-            dataSets.add(d2)
-
-            val dateSet = LineData(dataSets)
-            linearTCs.data = dateSet
-            linearTCs.notifyDataSetChanged()
-            linearTCs.invalidate()
-        }
-    }
-
-    */
-    /**
-     * Filling widget graph with selected currency
-     *//*
-    private fun alternativeFillTCsGraphWidget(
-        s: String,
-        currBuy: MutableList<Double>,
-        currSell: MutableList<Double>
-    ) {
-        if ((currBuy.size > 2) and (currSell.size > 2)) {
-            val dataSets: MutableList<ILineDataSet> = mutableListOf()
-            val entries: MutableList<Entry> = mutableListOf()
-            val entries2: MutableList<Entry> = mutableListOf()
-            for (i in 0 until currBuy.size) {
-                entries.add(Entry(i.toFloat(), currBuy[i].toFloat()))
-            }
-            val d = LineDataSet(entries, "$s ${getString(R.string.CALCFRAGbuying)}")
-            d.lineWidth = 2.5f
-            d.circleRadius = 1f
-            d.color = Color.rgb(55, 70, 170)
-            d.valueTextColor =
-                resources.getColor(R.color.white, requireActivity().application.theme)
-            d.mode =
-                if (d.mode == LineDataSet.Mode.HORIZONTAL_BEZIER) LineDataSet.Mode.LINEAR else LineDataSet.Mode.HORIZONTAL_BEZIER
-            dataSets.add(d)
-
-            for (i in 0 until currSell.size) {
-                entries2.add(Entry(i.toFloat(), currSell[i].toFloat()))
-            }
-            val d2 = LineDataSet(entries2, "$s ${getString(R.string.CALCFRAGselling)}")
-            d2.lineWidth = 2.5f
-            d2.circleRadius = 1f
-            d2.color = Color.rgb(240, 70, 55)
-            d2.valueTextColor =
-                resources.getColor(R.color.white, requireActivity().application.theme)
-            d2.mode =
-                if (d2.mode == LineDataSet.Mode.HORIZONTAL_BEZIER) LineDataSet.Mode.LINEAR else LineDataSet.Mode.HORIZONTAL_BEZIER
-            dataSets.add(d2)
-
-            val dateSet = LineData(dataSets)
-            linearTCsWidget.data = dateSet
-            linearTCsWidget.notifyDataSetChanged()
-            linearTCsWidget.invalidate()
-        }
-    }
-*/
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

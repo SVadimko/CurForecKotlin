@@ -1,8 +1,6 @@
 package com.vadimko.curforeckotlin.utils
 
 import android.content.Context
-import android.graphics.Color
-import android.util.Log
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
@@ -27,30 +25,18 @@ object CalcLineChartBuilder : KoinComponent {
     private val color = context.getColor(R.color.white)
 
     private val datesTime: MutableList<String> = mutableListOf()
-    private val usdData: MutableList<CurrencyTCS> = mutableListOf()
     private val usdDataBuy: MutableList<Double> = mutableListOf()
     private val usdDataSell: MutableList<Double> = mutableListOf()
-    private val eurData: MutableList<CurrencyTCS> = mutableListOf()
     private val eurDataBuy: MutableList<Double> = mutableListOf()
     private val eurDataSell: MutableList<Double> = mutableListOf()
-    private val gbpData: MutableList<CurrencyTCS> = mutableListOf()
     private val gbpDataBuy: MutableList<Double> = mutableListOf()
     private val gbpDataSell: MutableList<Double> = mutableListOf()
 
-    private val datesTimeW: MutableList<String> = mutableListOf()
-    private val usdDataW: MutableList<CurrencyTCS> = mutableListOf()
-    private val usdDataBuyW: MutableList<Double> = mutableListOf()
-    private val usdDataSellW: MutableList<Double> = mutableListOf()
-    private val eurDataW: MutableList<CurrencyTCS> = mutableListOf()
-    private val eurDataBuyW: MutableList<Double> = mutableListOf()
-    private val eurDataSellW: MutableList<Double> = mutableListOf()
-    private val gbpDataW: MutableList<CurrencyTCS> = mutableListOf()
-    private val gbpDataBuyW: MutableList<Double> = mutableListOf()
-    private val gbpDataSellW: MutableList<Double> = mutableListOf()
 
     /**
      * Creating and configuring the graph
      */
+    @Suppress("UNCHECKED_CAST")
     fun createGraph(chart: LineChart, data: Any, dataType: Boolean): LineChart {
         val timeDate: MutableList<String> = mutableListOf()
         if (!dataType) {
@@ -58,8 +44,7 @@ object CalcLineChartBuilder : KoinComponent {
             data.forEach {
                 it[0].datetime?.let { it1 -> timeDate.add(DateConverter.longToDateWithTime(it1)) }
             }
-        }
-        else{
+        } else {
             data as List<Currencies>
             data.forEach {
                 timeDate.add(it.dt)
@@ -83,8 +68,8 @@ object CalcLineChartBuilder : KoinComponent {
         xAxis.granularity = 1f
         xAxis.valueFormatter = object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
-               return  if ((value < timeDate.size) && (value.toInt()>=0)) timeDate[value.toInt()]
-                          else ""
+                return if ((value < timeDate.size) && (value.toInt() >= 0)) timeDate[value.toInt()]
+                else ""
             }
         }
         val rightAxis: YAxis = chart.axisRight
@@ -122,11 +107,12 @@ object CalcLineChartBuilder : KoinComponent {
     }
 
     /**
-     * filling autoupdate graph with selected currency
+     * Filling autoupdate graph with selected currency
      */
+    @Suppress("UNCHECKED_CAST")
     fun fillChart(
         lineChart: LineChart,
-        curr:Int,
+        curr: Int,
         data: Any,
         dataType: Boolean
     ) {
@@ -148,8 +134,7 @@ object CalcLineChartBuilder : KoinComponent {
                 it[2].buy?.let { it1 -> gbpDataBuy.add(it1) }
                 it[2].sell?.let { it1 -> gbpDataSell.add(it1) }
             }
-        }
-        else{
+        } else {
             data as List<Currencies>
             data.forEach {
                 usdDataBuy.add(it.usdBuy)
@@ -163,26 +148,32 @@ object CalcLineChartBuilder : KoinComponent {
         }
         when (curr) {
             0 -> {
-                fillLineChart(lineChart,"USD", usdDataBuy, usdDataSell)
+                fillLineChart(lineChart, "USD", usdDataBuy, usdDataSell)
             }
             1 -> {
-                fillLineChart(lineChart,"EUR", eurDataBuy, eurDataSell)
+                fillLineChart(lineChart, "EUR", eurDataBuy, eurDataSell)
             }
             2 -> {
-                fillLineChart(lineChart,"GBP", gbpDataBuy, gbpDataSell)
+                fillLineChart(lineChart, "GBP", gbpDataBuy, gbpDataSell)
             }
         }
     }
 
-    private fun fillLineChart(lineChart: LineChart, curr:String, buy: List<Double>, sell: List<Double>){
+    private fun fillLineChart(
+        lineChart: LineChart,
+        curr: String,
+        buy: List<Double>,
+        sell: List<Double>
+    ) {
         val dataSets: MutableList<ILineDataSet> = mutableListOf()
         val buyEntries: MutableList<Entry> = mutableListOf()
         val sellEntries: MutableList<Entry> = mutableListOf()
         for (i in buy.indices) {
             buyEntries.add(Entry(i.toFloat(), buy[i].toFloat()))
-           // Log.wtf("buy", i.toString())
+            // Log.wtf("buy", i.toString())
         }
-        val buyLineDataSet = LineDataSet(buyEntries, "$curr ${context.getString(R.string.CALCFRAGbuying)}")
+        val buyLineDataSet =
+            LineDataSet(buyEntries, "$curr ${context.getString(R.string.CALCFRAGbuying)}")
         LinearDataSetsConfigure.configureLineDataSets(
             buyLineDataSet,
             false,
@@ -191,19 +182,13 @@ object CalcLineChartBuilder : KoinComponent {
             170,
             0
         )
-      /*  buyLineDataSet.lineWidth = 2.5f
-        buyLineDataSet.circleRadius = 1f
-        buyLineDataSet.color = Color.rgb(55, 70, 170)
-        buyLineDataSet.valueTextColor =
-            context.getColor(R.color.white)
-        buyLineDataSet.mode =
-            if (buyLineDataSet.mode == LineDataSet.Mode.HORIZONTAL_BEZIER) LineDataSet.Mode.LINEAR else LineDataSet.Mode.HORIZONTAL_BEZIER*/
         dataSets.add(buyLineDataSet)
 
         for (i in sell.indices) {
             sellEntries.add(Entry(i.toFloat(), sell[i].toFloat()))
         }
-        val sellLineDataSet = LineDataSet(sellEntries, "$curr ${context.getString(R.string.CALCFRAGselling)}")
+        val sellLineDataSet =
+            LineDataSet(sellEntries, "$curr ${context.getString(R.string.CALCFRAGselling)}")
         LinearDataSetsConfigure.configureLineDataSets(
             sellLineDataSet,
             false,
@@ -212,17 +197,10 @@ object CalcLineChartBuilder : KoinComponent {
             55,
             0
         )
-       /* sellLineDataSet.lineWidth = 2.5f
-        sellLineDataSet.circleRadius = 1f
-        sellLineDataSet.color = Color.rgb(240, 70, 55)
-        sellLineDataSet.valueTextColor =
-            context.getColor(R.color.white)
-        sellLineDataSet.mode =
-            if (sellLineDataSet.mode == LineDataSet.Mode.HORIZONTAL_BEZIER) LineDataSet.Mode.LINEAR else LineDataSet.Mode.HORIZONTAL_BEZIER*/
         dataSets.add(sellLineDataSet)
         val dateSet = LineData(dataSets)
         lineChart.data = dateSet
         lineChart.notifyDataSetChanged()
         lineChart.invalidate()
     }
-    }
+}
