@@ -14,4 +14,7 @@ interface CurrencyDao {
 
     @Delete
     fun clearCurrencies(list: List<Currencies>)
+
+    @Query("DELETE FROM currencies")
+    fun nukeTable()
 }

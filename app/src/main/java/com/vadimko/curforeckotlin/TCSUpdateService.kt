@@ -12,14 +12,14 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.TaskStackBuilder
 import androidx.preference.PreferenceManager
-import com.vadimko.curforeckotlin.utils.Saver
 import com.vadimko.curforeckotlin.tcsApi.*
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
+import com.vadimko.curforeckotlin.utils.Saver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -116,7 +116,7 @@ class TCSUpdateService : Service() {
 
     /**
      * Performs request to Tinkov server through Retrofit [TCSResponse] and then saved it with [Saver]
-     * and post value to [CalcViewModel.dataAutoUpdate]
+     * and post value to [CalcViewModel.dataServiceUpdate]
      */
     fun getCurrentTCS() {
         var currentTCS: MutableList<CurrencyTCS>
@@ -152,10 +152,14 @@ class TCSUpdateService : Service() {
                         GlobalScope.launch(Dispatchers.IO) {
                             //save(currentTCS)
                             //load()
-                            val mutex = Mutex()
-                            mutex.withLock { Saver.saveTcsLast(currentTCS) }
-                            mutex.withLock { CalcViewModel.dataAutoUpdate.postValue(Saver.loadTcsLast()) }
-                            //Saver.saveTcsLast(currentTCS)
+
+
+                            //val mutex = Mutex()
+                            //mutex.withLock { Saver.saveTcsLast(currentTCS) }
+                            //mutex.withLock { CalcViewModel.dataAutoUpdate.postValue(Saver.loadTcsLast()) }
+
+
+                            Saver.saveTcsLast(currentTCS)
                             //CalcViewModel.data2.postValue(Saver.loadTcsLast())
                         }
                         val usdBuy = String.format("%.2f", currentTCS[0].buy)

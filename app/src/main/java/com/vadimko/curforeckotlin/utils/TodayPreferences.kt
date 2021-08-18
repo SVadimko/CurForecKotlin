@@ -25,7 +25,7 @@ object TodayPreferences : KoinComponent {
         rateSp: Int
     ) {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        preferences.edit{
+        preferences.edit {
             putString("request", request)
             putString("fromDate", from)
             putString("tillDate", till)

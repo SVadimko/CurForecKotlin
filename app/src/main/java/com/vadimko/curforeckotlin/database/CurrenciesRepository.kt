@@ -19,6 +19,7 @@ class CurrenciesRepository private constructor(context: Context) {
         DATABASE_NAME
     )
         //.allowMainThreadQueries()
+        .fallbackToDestructiveMigration()
         .build()
 
     private val currencyDao = database.currenciesDao()
@@ -42,10 +43,15 @@ class CurrenciesRepository private constructor(context: Context) {
     /**
      * delete all [Currencies] notes in DB
      */
-    fun clearCurrencies(list: List<Currencies>) {
+    fun clearCurrencies(list: MutableList<Currencies>) {
         executor.execute {
+            list.removeLast()
             currencyDao.clearCurrencies(list)
         }
+    }
+
+    fun dropTable(){
+        currencyDao.nukeTable()
     }
 
     /**

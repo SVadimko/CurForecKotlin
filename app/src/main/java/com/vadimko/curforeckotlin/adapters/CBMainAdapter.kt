@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
 import com.vadimko.curforeckotlin.databinding.CbrfMainRecycleBinding
-import com.vadimko.curforeckotlin.utils.NowPreference
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 import com.vadimko.curforeckotlin.ui.now.NowFragment
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import com.vadimko.curforeckotlin.utils.NowPreference
 import java.util.*
 
 /**

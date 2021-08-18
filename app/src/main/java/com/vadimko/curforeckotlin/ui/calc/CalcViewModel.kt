@@ -5,15 +5,17 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.vadimko.curforeckotlin.R
-import com.vadimko.curforeckotlin.utils.Saver
+import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import com.vadimko.curforeckotlin.utils.Saver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
+import com.vadimko.curforeckotlin.TCSUpdateService
 
 /**
  * ViewModel for Calc fragment
@@ -22,19 +24,36 @@ import java.util.*
 class CalcViewModel(application: Application) : AndroidViewModel(application) {
     private val context = getApplication<Application>()
 
-    fun getData(): MutableLiveData<List<CurrencyTCS>> {
+    /**
+     * Request to create/return [dataForCalc]
+     */
+    fun getDataForCalc(): MutableLiveData<List<CurrencyTCS>> {
         if (dataForCalc.value?.size == null) {
-            loadDataTCS()
+            loadDataForCalc()
         }
         return dataForCalc
     }
 
-    fun getDataList(): MutableLiveData<List<List<CurrencyTCS>>> {
-        if (dataAutoUpdate.value?.size == null) {
-            loadGraphData()
+
+    /**
+     * Request to create/return [dataServiceUpdate]
+     * @return data stored by [TCSUpdateService] dataServiceCalc
+     */
+    fun getServiceUpdateData(): MutableLiveData<List<List<CurrencyTCS>>> {
+        if (dataServiceUpdate.value?.size == null) {
+            loadServiceUpdateData()
         }
-        return dataAutoUpdate
+        return dataServiceUpdate
     }
+
+    /**
+     * Request to delete [dataServiceUpdate] data, except last value
+     */
+    fun deleteServiceUpdateData(data: List<List<CurrencyTCS>>){
+        Saver.deleteTcsLast(data)
+        loadServiceUpdateData()
+    }
+
 
     /**
      * @property rubValue contains ruble result for buying and selling which calcs in [calculating]
@@ -42,13 +61,24 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
     var rubValue: MutableLiveData<String> = MutableLiveData<String>()
 
     /**
-     * @property liveDataTKS getting information about courses from the database,
+     * @property dataWidgetUpdate getting information about courses from the database,
      * which is updated every time the widget is updated
      */
-    internal val liveDataTKS = CurrenciesRepository.get().getCurrencies()
+    internal val dataWidgetUpdate = CurrenciesRepository.get().getCurrencies()
 
     /**
-     * fun perform result of calculating for buing and selling currency
+     * Request to delete [dataWidgetUpdate] data, except last value
+     */
+    fun deleteWidgetUpdateData(data: MutableList<Currencies>){
+        val currenciesRepository = CurrenciesRepository.get()
+        currenciesRepository.clearCurrencies(data)
+        //currenciesRepository.dropTable()
+        //loadDataTCS()
+    }
+
+
+    /**
+     * Fun perform result of calculating for buing and selling currency
      */
     fun calculating(
         currSpinnerPos: Int,
@@ -101,28 +131,35 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
      * @property dataForCalc currency data used for calculating values
-     * @property dataAutoUpdate currency data saved as a result of auto-update
+     * @property dataServiceUpdate currency data saved as a result of auto-update
      */
     companion object {
+
+        /**
+         * Currency data used for calculating values
+         */
         internal var dataForCalc: MutableLiveData<List<CurrencyTCS>> = NowViewModel.data
 
         /**
-         * load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
+         * Load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
          */
-        fun loadDataTCS() {
+        fun loadDataForCalc() {
             val tcsRepository = TCSRepository()
             tcsRepository.getCurrentTCS()
         }
 
-        internal var dataAutoUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
+        /**
+         * Currency data saved as a result of work [TCSUpdateService]
+         */
+        internal var dataServiceUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
             MutableLiveData<List<List<CurrencyTCS>>>()
 
         /**
-         * load currencies values from storage through [Saver] to [dataAutoUpdate]
+         * Load currencies values from storage through [Saver] to [dataServiceUpdate]
          */
-        fun loadGraphData() {
+        fun loadServiceUpdateData() {
             GlobalScope.launch(Dispatchers.IO) {
-                dataAutoUpdate.postValue(Saver.loadTcsLast())
+                dataServiceUpdate.postValue(Saver.loadTcsLast())
             }
         }
     }

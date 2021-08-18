@@ -1,15 +1,17 @@
 package com.vadimko.curforeckotlin.ui.today
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.work.*
-import com.vadimko.curforeckotlin.utils.DateConverter
+import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
-import com.vadimko.curforeckotlin.utils.TodayPreferences
 import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.data
 import com.vadimko.curforeckotlin.updateWorkers.TodayWorker
+import com.vadimko.curforeckotlin.utils.DateConverter
+import com.vadimko.curforeckotlin.utils.TodayPreferences
 import java.util.*
 
 /**
@@ -19,7 +21,6 @@ import java.util.*
 class TodayViewModel(application: Application) : AndroidViewModel(application) {
     private val context = getApplication<Application>()
     private var recCur = ""
-    private var recDay = "0"
 
 
     fun getData(): MutableLiveData<List<CurrencyMOEX>> {
@@ -66,23 +67,18 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
         when (choosen[1]) {
             0 -> {
                 recDays = 1
-                recDay = "1 день"
             }
             1 -> {
                 recDays = 2
-                recDay = "2 дня"
             }
             2 -> {
                 recDays = 3
-                recDay = "3 дня"
             }
             3 -> {
                 recDays = 4
-                recDay = "4 дня"
             }
             4 -> {
                 recDays = 5
-                recDay = "5 дней"
             }
         }
         when (choosen[2]) {
@@ -127,11 +123,16 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
         workManager.enqueue(myWorkRequest)
     }
 
+    fun showToast() {
+        Toast.makeText(context, context.getString(R.string.TODAYFRAGchoosediffinterval), Toast.LENGTH_SHORT).show()
+    }
+
     /**
      * @property data MutableLiveData contains list of actual currency values [CurrencyMOEX] from MOEX through [MOEXRepository]
      */
     companion object {
-        internal var data: MutableLiveData<List<CurrencyMOEX>> = MutableLiveData<List<CurrencyMOEX>>()
+        internal var data: MutableLiveData<List<CurrencyMOEX>> =
+            MutableLiveData<List<CurrencyMOEX>>()
 
         /**
          * load currencies values from MOEX through [CurrencyMOEX] which post it to [data]

@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.TaskStackBuilder
 import com.vadimko.curforeckotlin.MainActivity
@@ -39,11 +40,13 @@ class AppWidget : AppWidgetProvider() {
         appWidgetIds: IntArray
     ) {
         for (appWidgetId in appWidgetIds) {
+            Log.wtf("Appwidget", "onUpdate")
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
     }
 
     override fun onEnabled(context: Context?) {
+        Log.wtf("Appwidget", "onEnabled")
         // Enter relevant functionality for when the first widget is created
     }
 

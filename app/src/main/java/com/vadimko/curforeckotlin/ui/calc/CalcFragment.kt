@@ -1,40 +1,26 @@
 package com.vadimko.curforeckotlin.ui.calc
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.ValueFormatter
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.R
-import com.vadimko.curforeckotlin.utils.Saver
 import com.vadimko.curforeckotlin.SettingsActivity
 import com.vadimko.curforeckotlin.database.Currencies
-import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.databinding.FragmentCalcBinding
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
-import kotlinx.coroutines.*
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
+import com.vadimko.curforeckotlin.utils.CalcLineChartBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Calc fragment representing calculator and chart of widget update data and auto update data
  */
-
-
 class CalcFragment : Fragment() {
     private lateinit var linearTCs: LineChart
     private lateinit var linearTCsWidget: LineChart
@@ -83,7 +69,11 @@ class CalcFragment : Fragment() {
     private val gbpDataBuyW: MutableList<Double> = mutableListOf()
     private val gbpDataSellW: MutableList<Double> = mutableListOf()
 
-    private lateinit var listWidgetData: List<Currencies>
+    private var widgetUpdateData: MutableList<Currencies> = mutableListOf()
+    private var serviceUpdateData: List<List<CurrencyTCS>> = mutableListOf()
+
+    private var updateSpinnerValue = 0
+    private var widgetSpinnerValue = 0
 
     /*  private val calcViewModel: CalcViewModel by lazy {
           ViewModelProvider(this).get(CalcViewModel::class.java)
@@ -190,77 +180,118 @@ class CalcFragment : Fragment() {
                 }
             }
         }
-        attachGraph()
-        attachWidgetGraph()
         return root
-    }
-
-    override fun onResume() {
-        attachGraph()
-        attachWidgetGraph()
-        super.onResume()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         /**
-         * subscribe to data from the Tinkov in [CalcViewModel]
+         * Subscribe to data from the Tinkov in [CalcViewModel]
          */
-        calcViewModel.getData().observe(viewLifecycleOwner, { forecTCS ->
+        calcViewModel.getDataForCalc().observe(viewLifecycleOwner, { forecTCS ->
             forecTCS?.let {
-                getData(forecTCS)
+                //getData(forecTCS)
                 dataToCalc = forecTCS
             }
         })
+
         /**
          * If the auto-update rate item is active in the settings, we extract data from the
          * subscription to the currency rates stored on the device,
          * which are saved on every auto-update
          */
-        var pref =
-            PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("updateon", false)
-        if (pref) {
-            calcViewModel.getDataList().observe(viewLifecycleOwner, {
-                extractGraphData(it)
-            })
-        }
+
+        //if (pref) {
+        calcViewModel.getServiceUpdateData().observe(viewLifecycleOwner, {
+            serviceUpdateData = it
+            //showServiceChart()
+            val pref =
+                PreferenceManager.getDefaultSharedPreferences(context)
+                    .getBoolean("updateon", false)
+            //attachGraph(pref, it)
+            attachChart(pref, it, false)
+            if (pref)
+               // serviceUpdateData = it
+                if (!it.isNullOrEmpty() && it[0].size > 2) {
+                    createGraph(it, false)
+                    fillGraph(false, it, updateSpinnerValue)
+                }
+        })
 
         /**
-         * if the item show information from the rate widget is active in the settings, we extract
+         * If the item show information from the rate widget is active in the settings, we extract
          * data from the subscription to the currency rates stored in the database on the device,
          * which are saved every time the widget is updated
          */
-        pref =
-            PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("widgeton", false)
-        if (pref) {
-            calcViewModel.liveDataTKS.observe(viewLifecycleOwner) {
-                extractWidgetGraphData(it)
-                listWidgetData = it
+
+        calcViewModel.dataWidgetUpdate.observe(viewLifecycleOwner) {
+            widgetUpdateData = it as MutableList<Currencies>
+            //showWidgetChart()
+            val pref =
+                PreferenceManager.getDefaultSharedPreferences(context)
+                    .getBoolean("widgetOn", false)
+            //attachWidgetGraph(pref, it)
+            attachChart(pref, it, true)
+            if (pref) {
+               // widgetUpdateData = it as MutableList<Currencies>
+                if (it.isNotEmpty()) {
+                    createGraph(it, true)
+                    fillGraph(true, it, widgetSpinnerValue)
+                }
             }
         }
+        /**
+         * Observe result of calculating and show it
+         */
         calcViewModel.rubValue.observe(viewLifecycleOwner, {
             rubValue.text = it
         })
     }
 
+    private fun showServiceChart(){
+        val pref =
+            PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean("updateon", false)
+        //attachGraph(pref, serviceUpdateData)
+        attachChart(pref, serviceUpdateData, false)
+        if (pref)
+        if (!serviceUpdateData.isNullOrEmpty() && serviceUpdateData[0].size > 2) {
+            createGraph(widgetUpdateData, false)
+            fillGraph(false, serviceUpdateData, updateSpinnerValue)
+        }
+    }
+
+    private fun showWidgetChart(){
+        val pref =
+            PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean("widgeton", false)
+        //attachWidgetGraph(pref, widgetUpdateData)
+        attachChart(pref, widgetUpdateData, true)
+        if (pref) {
+            if (widgetUpdateData.isNotEmpty()) {
+                createGraph(widgetUpdateData, true)
+                fillGraph(true, widgetUpdateData, widgetSpinnerValue)
+            }
+        }
+    }
 
     /**
-     *retrieve the latest Tinkov currency rate data
-     */
+     * Retrieve the latest Tinkov currency rate data
+     *//*
     private fun getData(dataList: List<CurrencyTCS>) {
         usdBuy = dataList[0].buy!!
         usdSell = dataList[0].sell!!
         eurBuy = dataList[1].buy!!
         eurSell = dataList[1].sell!!
-        gbpBuy = dataList[1].buy!!
-        gbpSell = dataList[1].sell!!
-    }
+        gbpBuy = dataList[2].buy!!
+        gbpSell = dataList[2].sell!!
+    }*/
 
+    /*  */
     /**
-     * retrieve data to show a graph of values obtained as a result of auto-update service
-     */
+     * Retrieve data to show a graph of values obtained as a result of auto-update service
+     *//*
     private fun extractGraphData(dataList: List<List<CurrencyTCS>>) {
         usdData.clear()
         usdDataBuy.clear()
@@ -286,7 +317,7 @@ class CalcFragment : Fragment() {
             it[2].sell?.let { it1 -> gbpDataSell.add(it1) }
         }
         if (datesTime.size > 2) {
-            createGraph(0, viewChild!!, datesTime)
+            //createGraph(0, viewChild!!, datesTime)
             val s = usdData[0].name
             val e = eurData[0].name
             val g = gbpData[0].name
@@ -298,11 +329,12 @@ class CalcFragment : Fragment() {
                 }
             }
         }
-    }
+    }*/
 
+    /* */
     /**
-     * retrieve data to show a graph of values obtained as a result of updating the widget
-     */
+     * Retrieve data to show a graph of values obtained as a result of updating the widget
+     *//*
     private fun extractWidgetGraphData(dataList: List<Currencies>) {
         usdDataW.clear()
         usdDataBuyW.clear()
@@ -325,55 +357,67 @@ class CalcFragment : Fragment() {
             datesTimeW.add(it.dt)
         }
         if (datesTimeW.size > 2) {
-            createGraph(1, viewChildWidget!!, datesTimeW)
+            //createGraph(1, viewChildWidget!!, datesTimeW)
             fillWidgetTCsGraph()
         }
-    }
+    }*/
 
     /**
-     * if the auto-update checkbox is enabled in the settings, add a view with the
+     * If the auto-update checkbox is enabled in the settings, add a view with the
      * corresponding graph to the fragment
      */
-    private fun attachGraph() {
-        val pref =
-            PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("updateon", false)
+    private fun attachGraph(pref: Boolean, data: List<List<CurrencyTCS>>) {
+        /* val pref =
+             PreferenceManager.getDefaultSharedPreferences(context)
+                 .getBoolean("updateon", false)*/
         if (pref) {
-            viewAccept.removeAllViews()
-            if (viewAccept.childCount > 0)
-                viewAccept.removeView(viewChild)
-            viewAccept.addView(viewChild)
-            currGrafSpinner = viewChild!!.findViewById(R.id.currency_graf)
-            val currAdapter = ArrayAdapter(
-                requireContext(),
-                R.layout.spinner_layout_main,
-                resources.getStringArray(R.array.currency)
-            )
-            currAdapter.setDropDownViewResource(R.layout.spinner_layout_main)
-            currGrafSpinner.apply {
-                adapter = currAdapter
-                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?, view: View?,
-                        position: Int, id: Long
-                    ) {
-                        createGraph(0, viewChild!!, datesTime)
-                        fillTCsGraph()
-                    }
+            if (viewChild?.isAttachedToWindow == false) {
+                viewAccept.removeAllViews()
+                if (viewAccept.childCount > 0)
+                    viewAccept.removeView(viewChild)
+                viewAccept.addView(viewChild)
+                linearTCs = viewChild!!.findViewById(R.id.chartattach)  //!!!!!!!!!!!!
+                currGrafSpinner = viewChild!!.findViewById(R.id.currency_graf)
+                val currAdapter = ArrayAdapter(
+                    requireContext(),
+                    R.layout.spinner_layout_main,
+                    resources.getStringArray(R.array.currency)
+                )
+                currAdapter.setDropDownViewResource(R.layout.spinner_layout_main)
+                updateSpinnerValue = currGrafSpinner.selectedItemPosition
+                currGrafSpinner.apply {
+                    adapter = currAdapter
+                    onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?, view: View?,
+                            position: Int, id: Long
+                        ) {
+                            updateSpinnerValue = currGrafSpinner.selectedItemPosition
+                            if (!data.isNullOrEmpty() && data[0].size > 2) {
+                                createGraph(data, false)
+                                fillGraph(false, data, updateSpinnerValue)
+                            }
+                        }
 
-                    override fun onNothingSelected(arg0: AdapterView<*>?) {}
+                        override fun onNothingSelected(arg0: AdapterView<*>?) {}
+                    }
                 }
-            }
-            val title = viewChild!!.findViewById<TextView>(R.id.title)
-            title.text = getString(R.string.CALCFRAGdatafrautoup)
-            val trashCan = viewChild!!.findViewById<ImageView>(R.id.trashcan)
-            trashCan.apply {
-                setOnClickListener {
-                    GlobalScope.launch(Dispatchers.IO) {
-                        val mutex = Mutex()
-                        mutex.withLock { Saver.deleteTcsLast() }
-                        withContext(Dispatchers.Main) { attachGraph() }
-                        mutex.withLock { CalcViewModel.dataAutoUpdate.postValue(Saver.loadTcsLast()) }
+                val title = viewChild!!.findViewById<TextView>(R.id.title)
+                title.text = getString(R.string.CALCFRAGdatafrautoup)
+                val trashCan = viewChild!!.findViewById<ImageView>(R.id.trashcan)
+                trashCan.apply {
+                    setOnClickListener {
+                        GlobalScope.launch(Dispatchers.IO) {
+                            //val mutex = Mutex()
+                            //mutex.withLock { Saver.deleteTcsLast(data) }
+                            //mutex.withLock { CalcViewModel.loadGraphData() }
+
+                            //delay(600)
+
+                            //withContext(Dispatchers.Main) { attachGraph() }
+                            //mutex.withLock { CalcViewModel.dataAutoUpdate.postValue(Saver.loadTcsLast()) }
+                            calcViewModel.deleteServiceUpdateData(data)
+                        }
                     }
                 }
             }
@@ -383,53 +427,56 @@ class CalcFragment : Fragment() {
     }
 
     /**
-     * if in the settings there is a check mark showing information about updating the widget, add
+     * If in the settings there is a check mark showing information about updating the widget, add
      * a view with the corresponding graph to the fragment
      */
-    private fun attachWidgetGraph() {
-        val pref =
-            PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("widgeton", false)
+    private fun attachWidgetGraph(pref: Boolean, data: List<Currencies>) {
+        /* val pref =
+             PreferenceManager.getDefaultSharedPreferences(context)
+                 .getBoolean("widgeton", false)*/
         if (pref) {
-            viewAcceptWidget.removeAllViews()
-            if (viewAcceptWidget.childCount > 0)
-                viewAcceptWidget.removeView(viewChildWidget)
-            viewAcceptWidget.addView(viewChildWidget)
-            currGrafSpinnerWidget = viewChildWidget!!.findViewById(R.id.currency_graf)
-            val currAdapter = ArrayAdapter(
-                requireContext(),
-                R.layout.spinner_layout_main,
-                resources.getStringArray(R.array.currency)
-            )
-            currAdapter.setDropDownViewResource(R.layout.spinner_layout_main)
-            currGrafSpinnerWidget.apply {
-                adapter = currAdapter
-                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?, view: View?,
-                        position: Int, id: Long
-                    ) {
-                        createGraph(1, viewChildWidget!!, datesTimeW)
-                        fillWidgetTCsGraph()
-                    }
+            if (viewChildWidget?.isAttachedToWindow == false) {
+                viewAcceptWidget.removeAllViews()
+                if (viewAcceptWidget.childCount > 0)
+                    viewAcceptWidget.removeView(viewChildWidget)
+                viewAcceptWidget.addView(viewChildWidget)
+                linearTCsWidget = viewChildWidget!!.findViewById(R.id.chartattach)
+                currGrafSpinnerWidget = viewChildWidget!!.findViewById(R.id.currency_graf)
+                val currAdapter = ArrayAdapter(
+                    requireContext(),
+                    R.layout.spinner_layout_main,
+                    resources.getStringArray(R.array.currency)
+                )
+                currAdapter.setDropDownViewResource(R.layout.spinner_layout_main)
+                widgetSpinnerValue = currGrafSpinnerWidget.selectedItemPosition
+                currGrafSpinnerWidget.apply {
+                    adapter = currAdapter
+                    onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?, view: View?,
+                            position: Int, id: Long
+                        ) {
+                            widgetSpinnerValue = currGrafSpinnerWidget.selectedItemPosition
+                            if (data.isNotEmpty()) {
+                                createGraph(data, true)
+                                fillGraph(true, data, widgetSpinnerValue)
+                            }
+                        }
 
-                    override fun onNothingSelected(arg0: AdapterView<*>?) {}
+                        override fun onNothingSelected(arg0: AdapterView<*>?) {}
+                    }
                 }
-            }
-            val title = viewChildWidget!!.findViewById<TextView>(R.id.title)
-            title.text = getString(R.string.CALCFRAGdatafrwidget)
-            val trashCan = viewChildWidget!!.findViewById<ImageView>(R.id.trashcan)
-            //TODO refactor
-            trashCan.apply {
-                setOnClickListener {
-                    val currenciesRepository = CurrenciesRepository.get()
-                    currenciesRepository.clearCurrencies(listWidgetData)
-                    viewAcceptWidget.removeAllViews()
-                    GlobalScope.launch(Dispatchers.Main) {
-                        delay(600)
-                        attachWidgetGraph()
-                        createGraph(1, viewChildWidget!!, datesTimeW)
-                        fillWidgetTCsGraph()
+                val title = viewChildWidget!!.findViewById<TextView>(R.id.title)
+                title.text = getString(R.string.CALCFRAGdatafrwidget)
+                val trashCan = viewChildWidget!!.findViewById<ImageView>(R.id.trashcan)
+                trashCan.apply {
+                    setOnClickListener {
+                        /* val currenciesRepository = CurrenciesRepository.get()
+                         currenciesRepository.clearCurrencies(listWidgetData)
+
+                         CalcViewModel.loadDataTCS()*/
+
+                        calcViewModel.deleteWidgetUpdateData(widgetUpdateData)
                     }
                 }
             }
@@ -438,73 +485,183 @@ class CalcFragment : Fragment() {
         }
     }
 
-    /**
-     * creating and configuring the graph
-     */
-    private fun createGraph(type: Int, childView: View, timeDate: MutableList<String>) {
-        val chart: LineChart = childView.findViewById(R.id.chartattach)
-        chart.clear()
-        chart.setDrawGridBackground(false)
-        chart.description.isEnabled = true
-        val tempDescription = Description()
-        tempDescription.text = "https://www.tinkoff.ru/"
-        chart.description = tempDescription
-        chart.setDrawBorders(true)
-        chart.axisLeft.isEnabled = true
-        chart.axisRight.setDrawAxisLine(true)
-        chart.axisRight.setDrawGridLines(true)
-        chart.xAxis.setDrawAxisLine(true)
-        chart.xAxis.setDrawGridLines(true)
-        chart.xAxis.labelRotationAngle = -45f
-        val xAxis: XAxis = chart.xAxis
-        xAxis.isGranularityEnabled = true
-        xAxis.granularity = 1f
-        xAxis.valueFormatter = object : ValueFormatter() {
-            override fun getFormattedValue(value: Float): String {
-                return if (value < timeDate.size) timeDate[value.toInt()] else ""
+    private fun attachChart(pref: Boolean, data: Any, type:Boolean){
+        val parent:LinearLayout?
+        val child: View?
+        val spinner: Spinner
+        var spinnerPos: Int
+        val text:String
+        val serviceData = data as List<List<CurrencyTCS>>
+        val updateData = data as List<Currencies>
+        if(!type){
+            parent = viewAccept
+            child = viewChild
+            currGrafSpinner = child!!.findViewById(R.id.currency_graf)
+            spinner = currGrafSpinner
+            spinnerPos = updateSpinnerValue
+text = getString(R.string.CALCFRAGdatafrautoup)
+        }
+        else{
+            parent = viewAcceptWidget
+            child = viewChildWidget
+            currGrafSpinnerWidget = child!!.findViewById(R.id.currency_graf)
+            spinner = currGrafSpinnerWidget
+            spinnerPos = widgetSpinnerValue
+            text = getString(R.string.CALCFRAGdatafrwidget)
+        }
+        if (pref) {
+            if (child.isAttachedToWindow == false) {
+                parent.removeAllViews()
+                if (parent.childCount > 0)
+                    parent.removeView(child)
+                parent.addView(child)
+                if(!type){
+                    linearTCs = child.findViewById(R.id.chartattach)
+                }
+                else{
+                    linearTCsWidget = child.findViewById(R.id.chartattach)
+                }
+                val currAdapter = ArrayAdapter(
+                    requireContext(),
+                    R.layout.spinner_layout_main,
+                    resources.getStringArray(R.array.currency)
+                )
+                currAdapter.setDropDownViewResource(R.layout.spinner_layout_main)
+                spinnerPos = spinner.selectedItemPosition
+                spinner.apply {
+                    adapter = currAdapter
+                    onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?, view: View?,
+                            position: Int, id: Long
+                        ) {
+                            spinnerPos = spinner.selectedItemPosition
+                            if(!type) {
+                                if (!serviceData.isNullOrEmpty() && serviceData[0].size > 2) {
+                                    createGraph(serviceData, false)
+                                    fillGraph(false, serviceData, spinnerPos)
+                                }
+                            }
+                            else{
+                                if (updateData.isNotEmpty()) {
+                                    createGraph(updateData, true)
+                                    fillGraph(true, updateData, widgetSpinnerValue)
+                                }
+                            }
+                        }
+
+                        override fun onNothingSelected(arg0: AdapterView<*>?) {}
+                    }
+                }
+                val title = child.findViewById<TextView>(R.id.title)
+
+                title.text = text
+                val trashCan = child.findViewById<ImageView>(R.id.trashcan)
+                trashCan.apply {
+                    setOnClickListener {
+                        if(!type)
+                            GlobalScope.launch(Dispatchers.IO) {
+                            calcViewModel.deleteServiceUpdateData(data)
+                        }
+                        else
+                            calcViewModel.deleteWidgetUpdateData(widgetUpdateData)
+
+                    }
+                }
             }
+        } else {
+            parent.removeAllViews()
         }
-        val rightAxis: YAxis = chart.axisRight
-        rightAxis.setDrawGridLines(true)
-        val leftAxis: YAxis = chart.axisLeft
-        leftAxis.setDrawGridLines(true)
-        rightAxis.valueFormatter = object : ValueFormatter() {
-            override fun getFormattedValue(value: Float): String {
-                return String.format("%.2f", value) + " ₽"
-            }
-        }
-        leftAxis.valueFormatter = object : ValueFormatter() {
-            override fun getFormattedValue(value: Float): String {
-                return String.format("%.2f", value) + " ₽"
-            }
-        }
-        chart.setTouchEnabled(true)
-        chart.isDragEnabled = true
-        chart.setScaleEnabled(true)
-        chart.setPinchZoom(true)
-        val animationLong: Int = if (timeDate.size < 20) 200
-        else 500
-        chart.animateX(animationLong)
-        val l: Legend = chart.legend
-        l.isWordWrapEnabled = true
-        l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-        l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-        l.orientation = Legend.LegendOrientation.HORIZONTAL
-        when (type) {
-            0 -> linearTCs = chart
-            1 -> linearTCsWidget = chart
-        }
-        xAxis.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
-        leftAxis.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
-        rightAxis.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
-        tempDescription.textColor =
-            resources.getColor(R.color.white, requireActivity().application.theme)
-        l.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
     }
 
     /**
-     * filling graph with widget data according to the selected currency
+     * Creating and configuring the graph
      */
+    private fun createGraph(data: Any, dataType: Boolean) {
+        if (!dataType) {
+            //if (viewChild?.isAttachedToWindow == true) {
+            // linearTCs = viewChild!!.findViewById(R.id.chartattach)
+            linearTCs = CalcLineChartBuilder.createGraph(linearTCs, data, dataType)
+
+            //}
+        } else {
+            // if (viewChildWidget?.isAttachedToWindow == true) {
+            // linearTCsWidget = viewChildWidget!!.findViewById(R.id.chartattach)
+            linearTCsWidget = CalcLineChartBuilder.createGraph(linearTCsWidget, data, dataType)
+            //}
+        }
+    }
+
+    private fun fillGraph(dataType: Boolean, data: Any, spinnerPos: Int) {
+        if (!dataType)
+            CalcLineChartBuilder.fillChart(linearTCs, spinnerPos, data, dataType)
+        else
+            CalcLineChartBuilder.fillChart(linearTCsWidget, spinnerPos, data, dataType)
+    }
+
+    /* chart.clear()
+     chart.setDrawGridBackground(false)
+     chart.description.isEnabled = true
+     val tempDescription = Description()
+     tempDescription.text = "https://www.tinkoff.ru/"
+     chart.description = tempDescription
+     chart.setDrawBorders(true)
+     chart.axisLeft.isEnabled = true
+     chart.axisRight.setDrawAxisLine(true)
+     chart.axisRight.setDrawGridLines(true)
+     chart.xAxis.setDrawAxisLine(true)
+     chart.xAxis.setDrawGridLines(true)
+     chart.xAxis.labelRotationAngle = -45f
+     val xAxis: XAxis = chart.xAxis
+     xAxis.isGranularityEnabled = true
+     xAxis.granularity = 1f
+     xAxis.valueFormatter = object : ValueFormatter() {
+         override fun getFormattedValue(value: Float): String {
+             return if (value < timeDate.size) timeDate[value.toInt()] else ""
+         }
+     }
+     val rightAxis: YAxis = chart.axisRight
+     rightAxis.setDrawGridLines(true)
+     val leftAxis: YAxis = chart.axisLeft
+     leftAxis.setDrawGridLines(true)
+     rightAxis.valueFormatter = object : ValueFormatter() {
+         override fun getFormattedValue(value: Float): String {
+             return String.format("%.2f", value) + " ₽"
+         }
+     }
+     leftAxis.valueFormatter = object : ValueFormatter() {
+         override fun getFormattedValue(value: Float): String {
+             return String.format("%.2f", value) + " ₽"
+         }
+     }
+     chart.setTouchEnabled(true)
+     chart.isDragEnabled = true
+     chart.setScaleEnabled(true)
+     chart.setPinchZoom(true)
+     val animationLong: Int = if (timeDate.size < 20) 200
+     else 500
+     chart.animateX(animationLong)
+     val l: Legend = chart.legend
+     l.isWordWrapEnabled = true
+     l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+     l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+     l.orientation = Legend.LegendOrientation.HORIZONTAL
+     when (type) {
+         0 -> linearTCs = chart
+         1 -> linearTCsWidget = chart
+     }
+     xAxis.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
+     leftAxis.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
+     rightAxis.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
+     tempDescription.textColor =
+         resources.getColor(R.color.white, requireActivity().application.theme)
+     l.textColor = resources.getColor(R.color.white, requireActivity().application.theme)
+ }*/
+
+    /* */
+    /**
+     * Filling graph with widget data according to the selected currency
+     *//*
     private fun fillWidgetTCsGraph() {
         when (currGrafSpinnerWidget.selectedItemPosition) {
             0 -> {
@@ -519,9 +676,10 @@ class CalcFragment : Fragment() {
         }
     }
 
+    */
     /**
-     * filling graph with auto update data according to the selected currency
-     */
+     * Filling graph with auto update data according to the selected currency
+     *//*
     private fun fillTCsGraph() {
         when (currGrafSpinner.selectedItemPosition) {
             0 -> {
@@ -539,9 +697,10 @@ class CalcFragment : Fragment() {
         }
     }
 
+    */
     /**
-     * filling autoupdate graph with selected currency
-     */
+     * Filling autoupdate graph with selected currency
+     *//*
     private fun alternativeFillTCsGraph(s: String, currData: MutableList<CurrencyTCS>) {
         if (currData.size > 2) {
             val currBuy: MutableList<Double> = mutableListOf()
@@ -587,9 +746,10 @@ class CalcFragment : Fragment() {
         }
     }
 
+    */
     /**
-     * filling widget graph with selected currency
-     */
+     * Filling widget graph with selected currency
+     *//*
     private fun alternativeFillTCsGraphWidget(
         s: String,
         currBuy: MutableList<Double>,
@@ -631,7 +791,7 @@ class CalcFragment : Fragment() {
             linearTCsWidget.invalidate()
         }
     }
-
+*/
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

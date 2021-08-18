@@ -9,11 +9,11 @@ import android.widget.TextView
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.vadimko.curforeckotlin.databinding.TinkoffMainRecycleBinding
-import com.vadimko.curforeckotlin.utils.NowPreference
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 import com.vadimko.curforeckotlin.ui.now.NowFragment
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import com.vadimko.curforeckotlin.utils.NowPreference
 import java.util.*
 
 /**

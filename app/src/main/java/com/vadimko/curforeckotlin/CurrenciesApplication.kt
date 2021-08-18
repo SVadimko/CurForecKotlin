@@ -3,11 +3,11 @@ package com.vadimko.curforeckotlin
 import android.app.Application
 import android.content.Context
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
-import com.vadimko.curforeckotlin.utils.Saver
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
 import com.vadimko.curforeckotlin.ui.today.TodayViewModel
+import com.vadimko.curforeckotlin.utils.Saver
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel

@@ -3,8 +3,8 @@ package com.vadimko.curforeckotlin.widget
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.widget.RemoteViews
-import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.cbjsonApi.CBjsonApi
 import com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse
@@ -12,6 +12,7 @@ import com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute
 import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsApi.*
+import com.vadimko.curforeckotlin.utils.DateConverter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +33,7 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
 
 
     init {
+        Log.wtf("WidgetUpdater", "onInit")
         val retrofitTCs: Retrofit = Retrofit.Builder()
             .baseUrl("https://www.tinkoff.ru/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -51,6 +53,7 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
      * performs Retrofit [TCSResponse] request to Tinkov server
      */
     private fun updateTCs() {
+        Log.wtf("WidgetUpdater", "updateTCs")
         val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
         currentRequest.enqueue(object : Callback<TCSResponse> {
             override fun onResponse(call: Call<TCSResponse>, response: Response<TCSResponse>) {
@@ -116,6 +119,7 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
             }
 
             override fun onFailure(call: Call<TCSResponse>, t: Throwable) {
+                Log.wtf("WidgetUpdater", "updateTCs onFailure")
             }
         })
     }
@@ -124,6 +128,7 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
      * performs Retrofit [TCSResponse] request to CB server
      */
     private fun updateCB() {
+        Log.wtf("WidgetUpdater", "updateCB")
         val currentRequest: Call<CBjsonResponse> = cBjsonApi.getCBForec()
         currentRequest.enqueue(object : Callback<CBjsonResponse> {
             override fun onResponse(
@@ -179,6 +184,7 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
             }
 
             override fun onFailure(call: Call<CBjsonResponse>, t: Throwable) {
+                Log.wtf("WidgetUpdater", "updateCB onFailure")
             }
         })
     }

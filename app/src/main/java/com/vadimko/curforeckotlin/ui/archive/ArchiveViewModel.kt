@@ -1,6 +1,7 @@
 package com.vadimko.curforeckotlin.ui.archive
 
 import android.app.Application
+import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -14,18 +15,21 @@ import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB
 import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataCB
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker
+import com.vadimko.curforeckotlin.utils.ArchiveLineChartBuilder
 import com.vadimko.curforeckotlin.utils.ArchivePreferences
 import com.vadimko.curforeckotlin.utils.DateConverter
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.util.*
 
 /**
  * ViewModel for Archive fragment
  */
 
-class ArchiveViewModel(application: Application) : AndroidViewModel(application) {
-    private val context = getApplication<Application>()
+class ArchiveViewModel(application: Application) : AndroidViewModel(application), KoinComponent {
+    //private val context = getApplication<Application>()
     private var custCur = ""
-
+    private val context: Context by inject()
     fun getDataCB(): MutableLiveData<List<CurrencyCBarhive>> {
         if (dataCB.value?.size == null) {
             val archPr = ArchivePreferences.loadPrefs()
@@ -150,6 +154,13 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
     }
 
     /**
+     * Show warning messages if data received from CB or/and MOEX is not enough to build graph
+     */
+    fun showToast(s:String){
+        Toast.makeText(context, s, Toast.LENGTH_SHORT).show()
+    }
+
+    /**
      * @property dataCB MutableLiveData contains list of actual currency values [CurrencyCBarhive] from CB through [CBXMLRepository]
      * @property dataMOEX MutableLiveData contains list of actual currency values [CurrencyMOEX] from MOEX through [MOEXRepository]
      */
@@ -177,5 +188,4 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
             moexRepository.getMOEX(request, from, till, interval, true)
         }
     }
-
 }

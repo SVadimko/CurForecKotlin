@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.text.InputType
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.*
+import android.content.Intent
+import android.util.Log
+
 
 /**
  * SettingsActivity class
@@ -47,5 +50,12 @@ class SettingsActivity : AppCompatActivity() {
                     true
                 }
         }
+    }
+
+    override fun onBackPressed() {
+        val i = Intent(this, MainActivity::class.java)
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(i)
+        super.onBackPressed()
     }
 }

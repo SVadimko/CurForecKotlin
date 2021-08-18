@@ -24,8 +24,7 @@ object Saver : KoinComponent {
         try {
             ObjectOutputStream(FileOutputStream(path + "TCSlast.sav")).use {
                 it.writeObject(temp)
-                CalcViewModel.loadGraphData()
-                it.close()
+                CalcViewModel.loadServiceUpdateData()
             }
         } catch (ex: IOException) {
             ex.printStackTrace()
@@ -38,7 +37,6 @@ object Saver : KoinComponent {
         try {
             ObjectInputStream(FileInputStream(path + "TCSlast.sav")).use {
                 tcsList = it.readObject() as MutableList<MutableList<CurrencyTCS>>
-                it.close()
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
@@ -46,12 +44,15 @@ object Saver : KoinComponent {
         return tcsList
     }
 
-    fun deleteTcsLast() {
-        val temp: List<CurrencyTCS> = listOf()
+    fun deleteTcsLast(temp: List<List<CurrencyTCS>>) {
+        //val temp: MutableList<MutableList<CurrencyTCS>> = mutableListOf()
+        //temp.filter { it == temp.last() }
+        //val delArray : MutableList<MutableList<CurrencyTCS>> = mutableListOf()
+        val delArray = temp.filter { it == temp.last() }
+        //delArray.add(temp.last() as MutableList<CurrencyTCS>)
         try {
             ObjectOutputStream(FileOutputStream(path + "TCSlast.sav")).use {
-                it.writeObject(temp)
-                it.close()
+                it.writeObject(delArray)
             }
         } catch (ex: IOException) {
             ex.printStackTrace()

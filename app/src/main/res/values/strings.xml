@@ -85,6 +85,8 @@
     <string name="fonts">Font selector</string>
     <string name="font">Current font</string>
     <string name="digital">Digital</string>
+    <string name="wrongcountTK">Choose more than 2 work days range to see MOEX graph with forecast!</string>
+    <string name="wrongcountCB">Choose more than 2 work days range to see CB graph!</string>
 
 
 </resources>
