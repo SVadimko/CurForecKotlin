@@ -169,11 +169,10 @@ class CalcFragment : Fragment() {
         })
 
         /**
-         * If the auto-update rate item is active in the settings, we extract data from the
-         * subscription to the currency rates stored on the device,
-         * which are saved on every auto-update
+         * Subscribe to [calcViewModel]. If the auto-update from service item is active in the settings,
+         * call functions to attach graph [attachChart], configure it [createGraph] and fill by
+         * data [fillGraph] wich received from [calcViewModel]
          */
-
         //if (pref) {
         calcViewModel.getServiceUpdateData().observe(viewLifecycleOwner, {
             serviceUpdateData = it
@@ -192,11 +191,10 @@ class CalcFragment : Fragment() {
         })
 
         /**
-         * If the item show information from the rate widget is active in the settings, we extract
-         * data from the subscription to the currency rates stored in the database on the device,
-         * which are saved every time the widget is updated
+         * Subscribe to [calcViewModel]. If the auto-update from widget updater item is active in
+         * the settings, call functions to attach graph [attachChart], configure it [createGraph] and fill by
+         * data [fillGraph] wich received from [calcViewModel]
          */
-
         calcViewModel.dataWidgetUpdate.observe(viewLifecycleOwner) {
             widgetUpdateData = it as MutableList<Currencies>
             val pref =
@@ -358,6 +356,11 @@ class CalcFragment : Fragment() {
         }
     }
 */
+    /**
+     * Attach widget and service graph
+     * @param type if false- attach service graph else- attach widget graph
+     * @param pref if false- remove view with graph, else - attach it
+     */
     @Suppress("UNCHECKED_CAST")
     private fun attachChart(pref: Boolean, data: Any, type: Boolean) {
         val parent: LinearLayout?
@@ -445,7 +448,7 @@ class CalcFragment : Fragment() {
     }
 
     /**
-     * Creating and configuring the graph
+     * Creating and configuring the graph with [CalcLineChartBuilder.createGraph]
      */
     private fun createGraph(data: Any, dataType: Boolean) {
         if (!dataType) {
@@ -455,6 +458,9 @@ class CalcFragment : Fragment() {
         }
     }
 
+    /**
+     *  Filling graphs with data with [CalcLineChartBuilder.fillChart]
+     */
     private fun fillGraph(dataType: Boolean, data: Any, spinnerPos: Int) {
         if (!dataType)
             CalcLineChartBuilder.fillChart(linearTCs, spinnerPos, data, dataType)

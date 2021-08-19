@@ -21,6 +21,7 @@ import com.vadimko.curforeckotlin.databinding.FragmentNowBinding
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 /**
  * Now fragment representing current courses of Tinkov and Central Bank
  */

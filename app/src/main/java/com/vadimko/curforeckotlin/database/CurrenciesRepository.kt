@@ -1,8 +1,14 @@
 package com.vadimko.curforeckotlin.database
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
+import com.vadimko.curforeckotlin.widget.WidgetUpdater
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "currencies-database"
@@ -24,6 +30,8 @@ class CurrenciesRepository private constructor(context: Context) {
 
     private val currencyDao = database.currenciesDao()
 
+    private var stopWrite = false
+
     /**
      * @return Livedata of list [Currencies]
      */
@@ -32,11 +40,18 @@ class CurrenciesRepository private constructor(context: Context) {
     /**
      * Add [Currencies] value to DB
      */
-
     fun insertCurrencies(currencies: Currencies) {
-        executor.execute {
-            currencyDao.addCurrencies(currencies)
 
+        executor.execute {
+            if(!stopWrite) {
+                currencyDao.addCurrencies(currencies)
+                Log.wtf("!@#$$", "insertCurrencies ${currencies.dt}")
+            }
+            stopWrite = true
+            GlobalScope.launch(Dispatchers.IO) {
+                delay(60000)
+                stopWrite =false
+            }
         }
     }
 

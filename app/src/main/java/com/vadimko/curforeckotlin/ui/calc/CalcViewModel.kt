@@ -10,6 +10,7 @@ import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
+import com.vadimko.curforeckotlin.tcsApi.TCSRepositoryUnited
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
 import com.vadimko.curforeckotlin.utils.Saver
 import kotlinx.coroutines.Dispatchers
@@ -142,7 +143,8 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
          * Load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
          */
         fun loadDataForCalc() {
-            val tcsRepository = TCSRepository()
+            val tcsRepository = TCSRepositoryUnited(false, null, null)
+            //val tcsRepository = TCSRepository()
             tcsRepository.getCurrentTCS()
         }
 

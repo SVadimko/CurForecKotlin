@@ -8,9 +8,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.CoinsAnimator
 import com.vadimko.curforeckotlin.cbjsonApi.CBJsonRepository
+import com.vadimko.curforeckotlin.cbjsonApi.CBJsonRepositoryUnited
 import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
+import com.vadimko.curforeckotlin.tcsApi.TCSRepositoryUnited
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -71,14 +73,16 @@ class NowViewModel(application: Application) : AndroidViewModel(application) {
 
         fun loadDataTCS() {
             GlobalScope.launch(Dispatchers.IO) {
-                val tcsRepository = TCSRepository()
+                val tcsRepository = TCSRepositoryUnited(false, null, null)
+                //val tcsRepository = TCSRepository()
                 tcsRepository.getCurrentTCS()
             }
         }
 
         fun loadDataCB() {
             GlobalScope.launch(Dispatchers.IO) {
-                val cbJsonRepository = CBJsonRepository()
+                //val cbJsonRepository = CBJsonRepository()
+                val cbJsonRepository = CBJsonRepositoryUnited(false, null, null)
                 cbJsonRepository.getCurrentCB()
             }
         }

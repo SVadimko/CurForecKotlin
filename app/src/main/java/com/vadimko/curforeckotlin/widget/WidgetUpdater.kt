@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.util.Log
 import android.widget.RemoteViews
 import com.vadimko.curforeckotlin.R
+import com.vadimko.curforeckotlin.cbjsonApi.CBJsonRepositoryUnited
 import com.vadimko.curforeckotlin.cbjsonApi.CBjsonApi
 import com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse
 import com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute
@@ -13,6 +14,8 @@ import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsApi.*
 import com.vadimko.curforeckotlin.utils.DateConverter
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,30 +34,37 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
     private val mappWidgetManager = appWidgetManager
     private val mappWidgetID = appWidgetID
 
-
     init {
-        Log.wtf("WidgetUpdater", "onInit")
+        val okHttpClientBuilder = OkHttpClient.Builder()
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BASIC
+        okHttpClientBuilder.addInterceptor(logging)
+
         val retrofitTCs: Retrofit = Retrofit.Builder()
             .baseUrl("https://www.tinkoff.ru/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClientBuilder.build())
             .build()
         tcsApi = retrofitTCs.create(TCSApi::class.java)
 
         val retrofitCB: Retrofit = Retrofit.Builder()
             .baseUrl("https://www.cbr-xml-daily.ru/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClientBuilder.build())
             .build()
         cBjsonApi = retrofitCB.create(CBjsonApi::class.java)
         updateTCs()
         updateCB()
+        Log.wtf("!@#$$", "WidgetUpdater $appWidgetID")
     }
 
     /**
-     * performs Retrofit [TCSResponse] request to Tinkov server
+     * Performs Retrofit [TCSResponse] request to Tinkov server
      */
     private fun updateTCs() {
-        Log.wtf("WidgetUpdater", "updateTCs")
-        val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
+        val tcsRepository = TCSRepositoryUnited(true, null, null)
+        tcsRepository.getCurrentTCS()
+    /*    val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
         currentRequest.enqueue(object : Callback<TCSResponse> {
             override fun onResponse(call: Call<TCSResponse>, response: Response<TCSResponse>) {
                 val tcsResponse: TCSResponse? = response.body()
@@ -119,17 +129,17 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
             }
 
             override fun onFailure(call: Call<TCSResponse>, t: Throwable) {
-                Log.wtf("WidgetUpdater", "updateTCs onFailure")
             }
-        })
+        })*/
     }
 
     /**
-     * performs Retrofit [TCSResponse] request to CB server
+     * Performs Retrofit [TCSResponse] request to CB server
      */
     private fun updateCB() {
-        Log.wtf("WidgetUpdater", "updateCB")
-        val currentRequest: Call<CBjsonResponse> = cBjsonApi.getCBForec()
+        val cbJsonRepository = CBJsonRepositoryUnited(true, null, null)
+        cbJsonRepository.getCurrentCB()
+      /*  val currentRequest: Call<CBjsonResponse> = cBjsonApi.getCBForec()
         currentRequest.enqueue(object : Callback<CBjsonResponse> {
             override fun onResponse(
                 call: Call<CBjsonResponse>,
@@ -184,8 +194,7 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
             }
 
             override fun onFailure(call: Call<CBjsonResponse>, t: Throwable) {
-                Log.wtf("WidgetUpdater", "updateCB onFailure")
             }
-        })
+        })*/
     }
 }

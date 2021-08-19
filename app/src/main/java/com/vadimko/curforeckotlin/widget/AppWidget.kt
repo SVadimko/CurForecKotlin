@@ -40,17 +40,20 @@ class AppWidget : AppWidgetProvider() {
         appWidgetIds: IntArray
     ) {
         for (appWidgetId in appWidgetIds) {
-            Log.wtf("Appwidget", "onUpdate")
             updateAppWidget(context, appWidgetManager, appWidgetId)
+            Log.wtf("!@#$$", "onUpdate $appWidgetId")
         }
     }
 
     override fun onEnabled(context: Context?) {
-        Log.wtf("Appwidget", "onEnabled")
         // Enter relevant functionality for when the first widget is created
     }
 
     override fun onDisabled(context: Context?) {
         // Enter relevant functionality for when the last widget is disabled
+    }
+
+    override fun onDeleted(context: Context?, appWidgetIds: IntArray?) {
+        super.onDeleted(context, appWidgetIds)
     }
 }
