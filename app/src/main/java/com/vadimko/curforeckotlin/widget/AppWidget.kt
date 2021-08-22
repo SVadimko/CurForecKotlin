@@ -5,7 +5,6 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.TaskStackBuilder
 import com.vadimko.curforeckotlin.MainActivity
@@ -41,7 +40,6 @@ class AppWidget : AppWidgetProvider() {
     ) {
         for (appWidgetId in appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId)
-            Log.wtf("!@#$$", "onUpdate $appWidgetId")
         }
     }
 

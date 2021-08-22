@@ -6,7 +6,7 @@ import androidx.work.WorkerParameters
 import com.vadimko.curforeckotlin.ui.today.TodayViewModel
 
 /**
- * Worker for calling throw viewModel request for courses data for 1-5 days
+ * Worker for calling throw [TodayViewModel.loadDataMOEX] request for courses data for 1-5 days
  */
 
 class TodayWorker(context: Context, workerParams: WorkerParameters) :

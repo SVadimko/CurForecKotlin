@@ -28,13 +28,13 @@ class CurrenciesApplication : Application() {
 
         single { Saver }
 
-        viewModel { CalcViewModel(get()) }
+        viewModel { CalcViewModel() }
 
-        viewModel { NowViewModel(get()) }
+        viewModel { NowViewModel() }
 
-        viewModel { TodayViewModel(get()) }
+        viewModel { TodayViewModel() }
 
-        viewModel { ArchiveViewModel(get()) }
+        viewModel { ArchiveViewModel() }
     }
 
 

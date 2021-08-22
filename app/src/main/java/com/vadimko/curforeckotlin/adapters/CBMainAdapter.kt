@@ -23,8 +23,7 @@ import java.util.*
  * Adapter class for RecycleView for CentralBank data on [NowFragment]
  *
  * @param curCB take list of [CurrencyCBjs] that got from
- * [NowViewModel] through
- * [TCSRepository] Retrofit
+ * [NowViewModel] through [TCSRepository] Retrofit
  *
  */
 
@@ -47,8 +46,10 @@ class CBMainAdapter(private val curCB: List<CurrencyCBjs>) :
     }
 
     /**
-     * inner class ViewHolder
-     *
+     * Inner class ViewHolder
+     * @property arrow - imageview shows rising and fading current value against previous value
+     * @property valTv - current value
+     * @property valWasTv - previous value
      */
 
     inner class CurrCBHolder(binding: CbrfMainRecycleBinding) :

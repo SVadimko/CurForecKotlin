@@ -20,6 +20,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vadimko.curforeckotlin.databinding.ActivityMainBinding
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /**
  * Const of Channel ID for Notification channel
@@ -29,7 +31,9 @@ private const val CHANNEL_ID = "11"
 /**
  * MainActivity class
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KoinComponent {
+
+    private val context: Context by inject()
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +66,7 @@ class MainActivity : AppCompatActivity() {
      * (checked in [isServiceAlive])-  launch [TCSUpdateServicepdate]
      */
     private fun checkAutoUpdate() {
-        val pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
+        val pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean("updateon", false)
         if (!isServiceAlive(TCSUpdateService::class.java) and pref) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -173,7 +177,7 @@ class MainActivity : AppCompatActivity() {
         val currentNetwork = connectivityManager.activeNetwork
         val caps = connectivityManager.getNetworkCapabilities(currentNetwork)
         if (caps?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) != true)
-            Toast.makeText(this, getString(R.string.noconnection), Toast.LENGTH_LONG).show()
+            Toast.makeText(context, getString(R.string.noconnection), Toast.LENGTH_LONG).show()
     }
 
 }

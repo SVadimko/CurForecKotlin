@@ -16,8 +16,12 @@ object LinearDataSetsConfigure : KoinComponent {
 
     /**
      * Configure common LineDataSets for LineCharts
+     * @param d takes [LineDataSet] to configure
      * @param dash - true- enable dash
      * @param mode - 0-linear graph, 1-stepped graph
+     * @param colorB - blue color
+     * @param colorG - green color
+     * @param colorR - red color
      */
     fun configureLineDataSets(
         d: LineDataSet,

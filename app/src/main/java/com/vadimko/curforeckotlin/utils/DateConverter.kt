@@ -2,6 +2,7 @@ package com.vadimko.curforeckotlin.utils
 
 import android.content.Context
 import android.os.Build
+import com.vadimko.curforeckotlin.utils.DateConverter.androidHigherN
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.text.SimpleDateFormat
@@ -9,11 +10,16 @@ import java.util.*
 
 /**
  * Util class for converting dates with patterns that accept servers
+ * @property androidHigherN flag shows is SDK > N ot not
  */
 
 object DateConverter : KoinComponent {
     private val context: Context by inject()
     private val androidHigherN = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+
+    /**
+     * Used to convert dates received from DataPickerFragments to ArchiveFragment
+     */
     fun getFromTillDate(
         fromDate: Date,
         tillDate: Date,
@@ -38,6 +44,9 @@ object DateConverter : KoinComponent {
         return result
     }
 
+    /**
+     * Used to convert dates received from DataPickerFragments and set them to UI in ArhiveFragment
+     */
     fun dateWithOutTimeFormat(date: Date): String {
         val jdf = if (androidHigherN) {
             SimpleDateFormat("dd/MM/yyyy", context.resources.configuration.locales[0])
@@ -47,6 +56,9 @@ object DateConverter : KoinComponent {
         return jdf.format(date)
     }
 
+    /**
+     * Used to convert dates received from Tinkov to represent them in UI and charts
+     */
     fun longToDateWithTime(time: Long): String {
         return if (androidHigherN) {
             SimpleDateFormat(

@@ -35,6 +35,10 @@ class MOEXRepository {
         moexApi = retrofit.create(MOEXApi::class.java)
     }
 
+    /**
+     * In case of response get list of [CurrencyMOEX] and post it to [ArchiveViewModel] or [TodayViewModel] depends
+     * of from which fragment request was send
+     */
     fun getMOEX(request: String, from: String, till: String, interval: String, todayArch: Boolean) {
         val currentRequest: Call<MOEXResponse> = if (!todayArch) {
             moexApi.getMOEXForec(request, from, till, interval)
@@ -42,10 +46,7 @@ class MOEXRepository {
             moexApi.getMOEXForec(request, from, till, "24")
         }
         currentRequest.enqueue(object : Callback<MOEXResponse> {
-            /**
-             * get list of [CurrencyMOEX] and post it to [ArchiveViewModel] or [TodayViewModel] depends
-             * of from which fragment request was send
-             */
+
             override fun onResponse(call: Call<MOEXResponse>, response: Response<MOEXResponse>) {
                 val moexResponse: MOEXResponse? = response.body()
                 val moexCandles: MOEXCandles? = moexResponse?.candles

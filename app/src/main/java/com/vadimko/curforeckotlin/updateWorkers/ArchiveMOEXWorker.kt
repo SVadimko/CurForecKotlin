@@ -6,7 +6,7 @@ import androidx.work.WorkerParameters
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 
 /**
- * Worker for calling throw viewModel request for MOEX data
+ * Worker for calling throw [ArchiveViewModel.loadDataMOEX] request for MOEX data
  */
 
 class ArchiveMOEXWorker(context: Context, workerParams: WorkerParameters) :

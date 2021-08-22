@@ -29,6 +29,7 @@ object ArchiveLineChartBuilder : KoinComponent {
 
     /**
      * Configure lineChart
+     * @param linearChart takes [LineChart] to configure it
      * @param data list with dataclass [CurrencyCBarhive] or [CurrencyMOEX]
      * @param description depends if it equal "cbr.ru" or not fun cast [data] to list of [CurrencyCBarhive] or [CurrencyMOEX]
      */
@@ -112,6 +113,9 @@ object ArchiveLineChartBuilder : KoinComponent {
 
     /**
      * Prepare dataSets for CB graph
+     * @param linearCbrf takes CB [LineChart] to fill it with [dataListCB]
+     * @param dataListCB values to fill the [linearCbrf]
+     * @param s - currency name
      */
     fun fillClearCbrfGraph(linearCbrf: LineChart, s: String, dataListCB: List<CurrencyCBarhive>) {
         val dataSets = ArrayList<ILineDataSet>()
@@ -130,6 +134,9 @@ object ArchiveLineChartBuilder : KoinComponent {
 
     /**
      * Prepare dataSets for Moex graph
+     * @param linearChartForec takes MOEX [LineChart] to fill it with [dataListMOEX]
+     * @param dataListMOEX values to fill the [linearChartForec]
+     * @param s - currency name
      */
     fun fillLinearSetForecast(
         linearChartForec: LineChart,

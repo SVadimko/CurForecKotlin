@@ -6,7 +6,7 @@ import androidx.work.WorkerParameters
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 
 /**
- * Worker for calling throw viewModel request for CB data
+ * Worker for calling throw [ArchiveViewModel.loadCBArchive] request for CB data
  */
 
 class ArchiveWorker(context: Context, workerParams: WorkerParameters) :
@@ -19,7 +19,7 @@ class ArchiveWorker(context: Context, workerParams: WorkerParameters) :
         if (request != null) {
             if (from != null) {
                 if (till != null) {
-                    ArchiveViewModel.loadCBArhieve(from, till, request)
+                    ArchiveViewModel.loadCBArchive(from, till, request)
                 }
             }
         }

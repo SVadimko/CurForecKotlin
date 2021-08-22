@@ -114,7 +114,7 @@ class TCSUpdateService : Service() {
 
     /**
      * Performs request to Tinkov server through Retrofit [TCSResponse] and then saved it with [Saver]
-     * and post value to [CalcViewModel.dataServiceUpdate]
+     * and post value to [CalcViewModel] dataServiceUpdate
      */
     fun getCurrentTCS() {
         var currentTCS: MutableList<CurrencyTCS>
@@ -148,17 +148,7 @@ class TCSUpdateService : Service() {
                     } else {
                         currentTCS = mutableListOf(usdTCS, eurTCS, gbpTCS)
                         GlobalScope.launch(Dispatchers.IO) {
-                            //save(currentTCS)
-                            //load()
-
-
-                            //val mutex = Mutex()
-                            //mutex.withLock { Saver.saveTcsLast(currentTCS) }
-                            //mutex.withLock { CalcViewModel.dataAutoUpdate.postValue(Saver.loadTcsLast()) }
-
-
                             Saver.saveTcsLast(currentTCS)
-                            //CalcViewModel.data2.postValue(Saver.loadTcsLast())
                         }
                         val usdBuy = String.format("%.2f", currentTCS[0].buy)
                         val usdSell = String.format("%.2f", currentTCS[0].sell)
@@ -229,7 +219,7 @@ class TCSUpdateService : Service() {
     }
 
     /**
-     * Comparing actual currency values to values setted by user and start notification
+     * Comparing actual currency values to values that were set by user and start notification
      */
     private fun checking(
         curr: String?,

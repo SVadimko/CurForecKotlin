@@ -49,8 +49,9 @@ class TCSMainAdapter(private val curTCS: List<CurrencyTCS>) :
     }
 
     /**
-     * inner class ViewHolder
-     *
+     * Inner class ViewHolder
+     * @property buyTv TextView shows buy value
+     * @property sellTv TextView shows sell value
      */
 
     //inner class CurrTCSHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -71,7 +72,7 @@ class TCSMainAdapter(private val curTCS: List<CurrencyTCS>) :
         private var buyTv = binding.buy
 
         //private var cellTv = cardView.findViewById<View>(R.id.cell) as TextView
-        private var cellTv = binding.cell
+        private var sellTv = binding.cell
 
         init {
             cardView.setOnClickListener(this)
@@ -91,7 +92,7 @@ class TCSMainAdapter(private val curTCS: List<CurrencyTCS>) :
                 typeface = typefaceTv
                 textSize = textSizeInt
             }
-            cellTv.apply {
+            sellTv.apply {
                 text = String.format(Locale.US, "%.2f", valute.sell)
                 typeface = typefaceTv
                 textSize = textSizeInt
@@ -103,7 +104,7 @@ class TCSMainAdapter(private val curTCS: List<CurrencyTCS>) :
                     TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM
                 )
                 TextViewCompat.setAutoSizeTextTypeWithDefaults(
-                    cellTv,
+                    sellTv,
                     TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM
                 )
                 TextViewCompat.setAutoSizeTextTypeWithDefaults(

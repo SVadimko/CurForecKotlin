@@ -1,29 +1,35 @@
 package com.vadimko.curforeckotlin.ui.calc
 
-import android.app.Application
+import android.content.Context
 import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.TCSUpdateService
 import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
-import com.vadimko.curforeckotlin.tcsApi.TCSRepositoryUnited
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
 import com.vadimko.curforeckotlin.utils.Saver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.util.*
 
 /**
  * ViewModel for Calc fragment
+ * @property context Application context injected by Koin
+ * @property rubValue Contains ruble result for buying and selling which calcs in [calculating]
+ * @property dataWidgetUpdate Getting information about courses from the database,
+ * which is updated every time the widget is updated
  */
 
-class CalcViewModel(application: Application) : AndroidViewModel(application) {
-    private val context = getApplication<Application>()
+class CalcViewModel : ViewModel(), KoinComponent {
+
+    private val context: Context by inject()
 
     /**
      * Request to create/return [dataForCalc]
@@ -56,15 +62,9 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    /**
-     * @property rubValue contains ruble result for buying and selling which calcs in [calculating]
-     */
     var rubValue: MutableLiveData<String> = MutableLiveData<String>()
 
-    /**
-     * @property dataWidgetUpdate getting information about courses from the database,
-     * which is updated every time the widget is updated
-     */
+
     internal val dataWidgetUpdate = CurrenciesRepository.get().getCurrencies()
 
     /**
@@ -129,28 +129,24 @@ class CalcViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /**
-     * @property dataForCalc currency data used for calculating values
-     * @property dataServiceUpdate currency data saved as a result of auto-update
+     * Companion object for operating with LiveData [dataForCalc] [dataServiceUpdate]
+     * @property dataForCalc Currency data used for calculating values
+     * @property dataServiceUpdate Currency data saved as a result of work [TCSUpdateService]
      */
     companion object {
 
-        /**
-         * Currency data used for calculating values
-         */
-        internal var dataForCalc: MutableLiveData<List<CurrencyTCS>> = NowViewModel.data
+
+        internal var dataForCalc: MutableLiveData<List<CurrencyTCS>> = NowViewModel.dataTCs
 
         /**
          * Load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
          */
         fun loadDataForCalc() {
-            val tcsRepository = TCSRepositoryUnited(false, null, null)
-            //val tcsRepository = TCSRepository()
+            val tcsRepository = TCSRepository(false, null, null)
             tcsRepository.getCurrentTCS()
         }
 
-        /**
-         * Currency data saved as a result of work [TCSUpdateService]
-         */
+
         internal var dataServiceUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
             MutableLiveData<List<List<CurrencyTCS>>>()
 

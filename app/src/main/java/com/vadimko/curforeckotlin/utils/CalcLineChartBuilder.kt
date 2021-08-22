@@ -35,6 +35,9 @@ object CalcLineChartBuilder : KoinComponent {
 
     /**
      * Creating and configuring the graph
+     * @param chart takes chart to configure
+     * @param data takes values to build axis X values
+     * @param dataType define which type of [chart] and [data] used
      */
     @Suppress("UNCHECKED_CAST")
     fun createGraph(chart: LineChart, data: Any, dataType: Boolean): LineChart {
@@ -108,6 +111,10 @@ object CalcLineChartBuilder : KoinComponent {
 
     /**
      * Filling autoupdate graph with selected currency
+     * @param lineChart takes chart to fill it with values
+     * @param curr - spinner of selection currency position
+     *  @param data takes values to fill chart with values
+     * @param dataType define which type of [lineChart] and [data] used
      */
     @Suppress("UNCHECKED_CAST")
     fun fillChart(

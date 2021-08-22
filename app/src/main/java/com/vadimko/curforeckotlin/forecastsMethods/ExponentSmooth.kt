@@ -47,7 +47,7 @@ class ExponentSmooth(inp: MutableList<Float>) {
     }
 
     /**
-     * calculating error in percent
+     * Calculating error in percent
      */
     private fun calculateErr(inp: MutableList<Float>, out: MutableList<Float>): Float {
         var err = 0f

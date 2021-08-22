@@ -22,6 +22,9 @@ class LessSquare(inp: MutableList<Float>) {
     private var errTmp = 0f
     private var err: String = "0"
 
+    /**
+     * Performs all calculating operations to receive forecast and error of calculation
+     */
     fun calc() {
         calculateInputSumm()
         calculateTimeSumm()

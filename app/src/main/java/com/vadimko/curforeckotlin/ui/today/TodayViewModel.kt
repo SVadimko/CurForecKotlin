@@ -1,28 +1,36 @@
 package com.vadimko.curforeckotlin.ui.today
 
-import android.app.Application
+import android.content.Context
 import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.work.*
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
-import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.data
+import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.loadDataMOEX
+import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataTCs
 import com.vadimko.curforeckotlin.updateWorkers.TodayWorker
 import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.utils.TodayPreferences
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.util.*
 
 /**
  * ViewModel for Today fragment
+ * @property context Application context injected by Koin
  */
 
-class TodayViewModel(application: Application) : AndroidViewModel(application) {
-    private val context = getApplication<Application>()
-    private var recCur = ""
+class TodayViewModel : ViewModel(), KoinComponent {
 
+    private val context: Context by inject()
 
+    /**
+     * If [dataTCs] is null, load last user request params from [TodayWorker] and send
+     * request to server through [loadDataMOEX]
+     * @return [dataTCs] MutableLiveData listof [CurrencyMOEX] from Moex
+     */
     fun getData(): MutableLiveData<List<CurrencyMOEX>> {
         if (data.value?.size == null) {
             data = MutableLiveData()
@@ -38,10 +46,11 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /**
-     * Creates string for request to MOEX server API
+     * Creates string for request to MOEX server API, launch [startTodayWorker] and saved request in
+     * SharedPreferences
      */
     fun createRequestStrings(
-        choosen: IntArray,
+        chosen: IntArray,
         currSpinnerPos: Int,
         perSpinnerPos: Int,
         rateSpinnerPos: Int
@@ -50,21 +59,18 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
         val jsonDate: Array<String>
         var recDays = 0L
         var rates = 0
-        when (choosen[0]) {
+        when (chosen[0]) {
             0 -> {
                 jsonCurr = "USD000000TOD"
-                recCur = "USD"
             }
             1 -> {
                 jsonCurr = "EUR_RUB__TOD"
-                recCur = "EUR"
             }
             2 -> {
                 jsonCurr = "GBPRUB_TOD"
-                recCur = "GBP"
             }
         }
-        when (choosen[1]) {
+        when (chosen[1]) {
             0 -> {
                 recDays = 1
             }
@@ -81,7 +87,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
                 recDays = 5
             }
         }
-        when (choosen[2]) {
+        when (chosen[2]) {
             0 -> rates = 1
             1 -> rates = 10
             2 -> rates = 60
@@ -104,7 +110,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /**
-     * Configure and launch worker to receive currencies values for requested days through [TodayWorker]
+     * Configure and launch worker [TodayWorker] to receive currencies values for requested days
      */
     private fun startTodayWorker(request: String, from: String, till: String, interval: String) {
         val constraints = Constraints.Builder()
@@ -123,6 +129,10 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
         workManager.enqueue(myWorkRequest)
     }
 
+    /**
+     * Shows warning [Toast] to inform uaer to choose interval 1,10 min in case when server return not
+     * enough data for selected interval
+     */
     fun showToast() {
         Toast.makeText(
             context,
@@ -132,6 +142,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /**
+     *  Companion object for operating with LiveData [data] and loading it by [loadDataMOEX]
      * @property data MutableLiveData contains list of actual currency values [CurrencyMOEX] from MOEX through [MOEXRepository]
      */
     companion object {
@@ -139,7 +150,7 @@ class TodayViewModel(application: Application) : AndroidViewModel(application) {
             MutableLiveData<List<CurrencyMOEX>>()
 
         /**
-         * Load currencies values from MOEX through [CurrencyMOEX] which post it to [data]
+         * Load currencies values from MOEX through [CurrencyMOEX] which post it to [dataTCs]
          */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
             val moexRepository = MOEXRepository()

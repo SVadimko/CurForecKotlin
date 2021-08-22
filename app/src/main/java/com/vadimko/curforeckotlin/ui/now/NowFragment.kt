@@ -6,12 +6,9 @@ import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.vadimko.curforeckotlin.CoinsAnimator
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.SettingsActivity
 import com.vadimko.curforeckotlin.adapters.CBMainAdapter
@@ -19,11 +16,17 @@ import com.vadimko.curforeckotlin.adapters.TCSMainAdapter
 import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
 import com.vadimko.curforeckotlin.databinding.FragmentNowBinding
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
+import com.vadimko.curforeckotlin.utils.CoinsAnimator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 /**
  * Now fragment representing current courses of Tinkov and Central Bank
+ * @property nowViewModel [NowViewModel] for [NowFragment]
+ * @property mScale Display params, used for [CoinsAnimator]. Send it through [NowViewModel]
+ * @property rect Display params, used for [CoinsAnimator]. Send it through [NowViewModel]
+ * @property displayRight Display params, used for [CoinsAnimator]. Send it through [NowViewModel]
+ * @property displayBottom Display params, used for [CoinsAnimator]. Send it through [NowViewModel]
  */
 
 class NowFragment : Fragment() {
@@ -31,17 +34,12 @@ class NowFragment : Fragment() {
     private val nowViewModel by viewModel<NowViewModel>()
 
     private var _binding: FragmentNowBinding? = null
-
     private val binding get() = _binding!!
-    private lateinit var root: View
-    private lateinit var tcsRecycle: RecyclerView
-    private lateinit var cbRecycle: RecyclerView
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
     private var mScale: Float = 0f
     private lateinit var rect: Rect
     private var displayRight = 0
     private var displayBottom = 0
-    private lateinit var frameLayout: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,62 +53,66 @@ class NowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNowBinding.inflate(inflater, container, false)
-        root = binding.root
-        tcsRecycle = binding.recycletinkoff
-        tcsRecycle.layoutManager = LinearLayoutManager(context)
-        cbRecycle = binding.recyclecbrf
-        cbRecycle.layoutManager = LinearLayoutManager(context)
-        frameLayout = binding.framelay
-        swipeRefreshLayout = binding.swipe
-        swipeRefreshLayout.setOnRefreshListener {
+        val root = binding.root
+        binding.recycletinkoff.layoutManager = LinearLayoutManager(context)
+        binding.recyclecbrf.layoutManager = LinearLayoutManager(context)
+        binding.swipe.setOnRefreshListener {
             nowViewModel.startRefresh()
         }
         return root
     }
 
+    /**
+     * Observe data receiving from Tinkov bank bank through [NowViewModel]
+     * Launching [CoinsAnimator] through [NowViewModel]
+     * Observe data receiving from Central Bank through [NowViewModel]
+     */
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getDisplayParams()
-        /**
-         * Observe data receiving from Central bank bank throught [NowViewModel]
-         */
-        nowViewModel.getData().observe(viewLifecycleOwner, { forecTCS ->
+        nowViewModel.prepareAnimations(mScale, rect, binding.root)
+        nowViewModel.getDataTCs().observe(viewLifecycleOwner, { forecTCS ->
             forecTCS?.let {
                 setupAdapterTCS(forecTCS)
                 binding.lastchk.text =
                     "${getString(R.string.lastupdateTCS)} ${forecTCS[0].curr} ${getString(R.string.NOWFRAGsource)} tinkoff.ru"
-                /**
-                 * Launching [CoinsAnimator] through [NowViewModel]
-                 */
-                nowViewModel.startAnimations(mScale, rect, frameLayout)
+
+                /* nowViewModel.prepareAnimations(mScale, rect, binding.root)
+                 nowViewModel.startAnimations()*/
             }
         })
-        /**
-         * Observe data receiving from Tinkov bank throught [NowViewModel]
-         */
-        nowViewModel.getData2().observe(viewLifecycleOwner, { forecCB ->
+
+        nowViewModel.getDataCD().observe(viewLifecycleOwner, { forecCB ->
             forecCB?.let {
                 setupAdapterCB(forecCB)
                 binding.lastchkcbrf.text =
                     "${getString(R.string.lastupdateTCS)} ${forecCB[0].dateTime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
-                swipeRefreshLayout.isRefreshing = false
+
+                binding.swipe.isRefreshing = false
             }
         })
     }
 
     override fun onDestroyView() {
+        nowViewModel.stopAnimation()
         _binding = null
         super.onDestroyView()
 
     }
 
+    /**
+     * Setup [TCSMainAdapter] for [RecyclerView] Tinkov bank
+     */
     private fun setupAdapterTCS(tcsForec: List<CurrencyTCS>) {
-        tcsRecycle.adapter = TCSMainAdapter(tcsForec)
+        binding.recycletinkoff.adapter = TCSMainAdapter(tcsForec)
     }
 
+    /**
+     * Setup [CBMainAdapter] for [RecyclerView] Central bank
+     */
     private fun setupAdapterCB(cbForec: List<CurrencyCBjs>) {
-        cbRecycle.adapter = CBMainAdapter(cbForec)
+        binding.recyclecbrf.adapter = CBMainAdapter(cbForec)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

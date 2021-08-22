@@ -1,10 +1,8 @@
 package com.vadimko.curforeckotlin.database
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
-import com.vadimko.curforeckotlin.widget.WidgetUpdater
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -15,6 +13,8 @@ private const val DATABASE_NAME = "currencies-database"
 
 /**
  * Repository for work with DataBase
+ * @property stopWrite - flag used for blocking several continuous write to database, when at the
+ * same time updating several widgets
  */
 
 class CurrenciesRepository private constructor(context: Context) {
@@ -38,25 +38,24 @@ class CurrenciesRepository private constructor(context: Context) {
     fun getCurrencies(): LiveData<List<Currencies>> = currencyDao.getCurrencies()
 
     /**
-     * Add [Currencies] value to DB
+     * Add [Currencies] value to DB if [stopWrite] allows it
      */
     fun insertCurrencies(currencies: Currencies) {
 
         executor.execute {
-            if(!stopWrite) {
+            if (!stopWrite) {
                 currencyDao.addCurrencies(currencies)
-                Log.wtf("!@#$$", "insertCurrencies ${currencies.dt}")
             }
             stopWrite = true
             GlobalScope.launch(Dispatchers.IO) {
                 delay(60000)
-                stopWrite =false
+                stopWrite = false
             }
         }
     }
 
     /**
-     * Delete all [Currencies] notes in DB
+     * Delete all [Currencies] except last in DB
      */
     fun clearCurrencies(list: MutableList<Currencies>) {
         executor.execute {
@@ -65,6 +64,9 @@ class CurrenciesRepository private constructor(context: Context) {
         }
     }
 
+    /**
+     * Drop table (not used)
+     */
     fun dropTable() {
         currencyDao.nukeTable()
     }
@@ -85,6 +87,4 @@ class CurrenciesRepository private constructor(context: Context) {
                 ?: throw IllegalStateException("CurrenciesRepository must be initialized")
         }
     }
-
-
 }

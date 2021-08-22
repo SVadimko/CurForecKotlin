@@ -51,6 +51,9 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * override onBackPressed function so it works like Back arrow
+     */
     override fun onBackPressed() {
         val i = Intent(this, MainActivity::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

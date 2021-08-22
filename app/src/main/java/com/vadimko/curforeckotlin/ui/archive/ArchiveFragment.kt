@@ -27,13 +27,23 @@ const val TILL_DATE_PICKER = "tillDatePicker"
 
 /**
  * Archive fragment representing courses for the interval selected by the user
+ * @property linearCbrf [LineChart] represent chart of CB currencies values
+ * @property linearChartForec [LineChart] represent chart of MOEX currencies values and forecast for
+ * this values
+ * @property currSpinner spinner to select currency type
+ * @property archiveViewModel [ArchiveViewModel] for [ArchiveFragment]
+ * @property root root view of [ArchiveFragment]
+ * @property fromTv textview with listener to set "from" date range
+ * @property tillTv textview with listener to set "till" date range
+ * @property tillDate date contains selected "till" date value
+ * @property fromDate date contains selected "from" date value
+ *
  */
 class ArchiveFragment : Fragment() {
 
     private lateinit var linearCbrf: LineChart
     private lateinit var linearChartForec: LineChart
 
-    private var choosenCurrency = ""
     private lateinit var currSpinner: Spinner
 
     /* private val archiveViewModel: ArchiveViewModel by lazy {
@@ -42,7 +52,7 @@ class ArchiveFragment : Fragment() {
 
     private val archiveViewModel by viewModel<ArchiveViewModel>()
 
-    private lateinit var root: View
+    //private lateinit var root: View
 
     private var _binding: FragmentArchiveBinding? = null
 
@@ -68,7 +78,7 @@ class ArchiveFragment : Fragment() {
     ): View {
 
         _binding = FragmentArchiveBinding.inflate(inflater, container, false)
-        root = binding.root
+        val root = binding.root
 
         val loadPrefs = context?.let { ArchivePreferences.loadPrefs() }
         if (loadPrefs != null) {
@@ -93,7 +103,6 @@ class ArchiveFragment : Fragment() {
                     parent: AdapterView<*>?, view: View,
                     position: Int, id: Long
                 ) {
-                    choosenCurrency = currSpinner.getItemAtPosition(position) as String
                 }
 
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
@@ -102,9 +111,9 @@ class ArchiveFragment : Fragment() {
         val buttonGraphBuild = binding.buildgraph
         buttonGraphBuild.apply {
             setOnClickListener {
-                val choosen = currSpinner.selectedItemPosition
+                val chosen = currSpinner.selectedItemPosition
                 archiveViewModel.createRequestStrings(
-                    choosen,
+                    chosen,
                     fromDate,
                     tillDate,
                 )
@@ -148,27 +157,27 @@ class ArchiveFragment : Fragment() {
 
     }
 
+    /**
+     * Set listener to receive data from [DatePickerFragment] with first date
+     * Set listener to receive data from [DatePickerFragment] with first date
+     * Subscribe to data from the Central Bank through [ArchiveViewModel]
+     * Subscribe to data from the MOEX through [ArchiveViewModel]
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /**
-         * Set listener to receive data from [DatePickerFragment] with first date
-         */
+
         parentFragmentManager
             .setFragmentResultListener("fromDate", this) { _, bundle ->
                 fromDate = bundle.get("bundleKey") as Date
                 fromTv.text = DateConverter.dateWithOutTimeFormat(fromDate)
             }
-        /**
-         * Set listener to receive data from [DatePickerFragment] with first date
-         */
+
         parentFragmentManager
             .setFragmentResultListener("tillDate", this) { _, bundle ->
                 tillDate = bundle.get("bundleKey") as Date
                 tillTv.text = DateConverter.dateWithOutTimeFormat(tillDate)
             }
-        /**
-         * Subscribe to data from the Central Bank throught [ArchiveViewModel]
-         */
+
         archiveViewModel.getDataCB().observe(viewLifecycleOwner, { archiveCB ->
             archiveCB?.let {
                 if (archiveCB.size > 2)
@@ -178,9 +187,7 @@ class ArchiveFragment : Fragment() {
             }
 
         })
-        /**
-         * Subscribe to data from the MOEX throught [ArchiveViewModel]
-         */
+
         archiveViewModel.getDataMOEX().observe(viewLifecycleOwner, { archiveMOEX ->
             archiveMOEX?.let {
                 if (archiveMOEX.size > 2)
@@ -193,6 +200,8 @@ class ArchiveFragment : Fragment() {
 
     /**
      * Call functions to redraw CB graph
+     * @param dataListCB listof [CurrencyCBarhive] used for build x Axis in [ArchiveLineChartBuilder.createLineChart]
+     * and fill chart by values in [ArchiveLineChartBuilder.fillClearCbrfGraph]
      */
     private fun redrawCB(dataListCB: List<CurrencyCBarhive>) {
         linearCbrf = ArchiveLineChartBuilder.createLineChart(linearCbrf, dataListCB, "cbr.ru")
@@ -205,6 +214,8 @@ class ArchiveFragment : Fragment() {
 
     /**
      * Call functions to redraw MOEX graph
+     * @param dataListMOEX listof [CurrencyMOEX] used for build x Axis in [ArchiveLineChartBuilder.createLineChart]
+     * and fill chart by values in [ArchiveLineChartBuilder.fillLinearSetForecast]
      */
     private fun redrawMoex(dataListMOEX: List<CurrencyMOEX>) {
         linearChartForec =

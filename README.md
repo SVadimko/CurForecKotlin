@@ -42,8 +42,8 @@ CBmainAdapter, TCSmainAdapter - классы адаптеров для recyclevi
 
 ## /cbjsonApi/
 Набор классов для запроса данных о валютах с помощью Retrofit с сайта Центрального
-Банка (на текущий и прошедший дни)
-для фрагмента NowFragment с ответом в формате Json
+Банка (на текущий и прошедший дни) для фрагмента NowFragment и обновления виджета с ответом в
+формате Json
 
 ## /cbxmlApi/
 Набор классов для запроса данных о валютах с помощью Retrofit с сайта Центрального
@@ -57,7 +57,7 @@ CBmainAdapter, TCSmainAdapter - классы адаптеров для recyclevi
 
 ## /tcsApi/
 Набор классов для запроса данных о валютах с помощью Retrofit с сайта Тиньков (на текущий
-момент) для фрагмента NowFragment с ответом в формате Json
+момент) для фрагмента NowFragment и обновления виджета с ответом в формате Json
 
 ## /database/
 Набор классов для работы с Sql базой данных с помощью Room (запись в базу данных
@@ -140,7 +140,7 @@ CBmainAdapter, TCSmainAdapter - adapter classes for recycleview NowFragment
 ## / cbjsonApi /
 A set of classes for requesting data about currencies using Retrofit from the
 Central Bank website (for the current and past days)
-for the NowFragment fragment with a response in Json format
+for the NowFragment fragment and widget with a response in Json format
 
 ## / cbxmlApi /
 A set of classes for requesting data on currencies using Retrofit from the Central
@@ -154,7 +154,7 @@ for TodayFragment and ArhiveFragment fragments with a response in Json format
 
 ## / tcsApi /
 A set of classes for requesting data about currencies using Retrofit from the Tinkov
-website for a NowFragment fragment with a response in Json format
+website for a NowFragment and widget fragment with a response in Json format
 
 ## / database /
 A set of classes for working with Sql database using Room (recording the results of

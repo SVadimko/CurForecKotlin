@@ -3,18 +3,23 @@ package com.vadimko.curforeckotlin.utils
 import android.content.Context
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.vadimko.curforeckotlin.utils.TodayPreferences.context
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.*
 
 /**
  * Save/load in prefs spinner conditions on Today fragment
+ * @property context Application context injected by Koin
  */
 
 object TodayPreferences : KoinComponent {
 
     private val context: Context by inject()
 
+    /**
+     * Saving in SharedPreferences last request on TodayFragment
+     */
     fun savePrefs(
         request: String,
         from: String,
@@ -37,6 +42,9 @@ object TodayPreferences : KoinComponent {
         }
     }
 
+    /**
+     * Loading from SharedPreferences last request on TodayFragment
+     */
     fun loadPrefs(): List<String> {
         val till = Date(System.currentTimeMillis())
         val from = Date(System.currentTimeMillis() - 86400000 * 1)

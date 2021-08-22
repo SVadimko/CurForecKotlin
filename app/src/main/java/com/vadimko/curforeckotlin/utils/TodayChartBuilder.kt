@@ -28,6 +28,10 @@ object TodayChartBuilder : KoinComponent {
 
     /**
      * Configure a combined candlestick and line chart
+     * @param comboChartForec - takes chart to configure
+     * @param dataList used to build x Axis values
+     * @param period used to add to forecast x Axis values type of period
+     * @param takes how lasts animation of chart drawing
      */
     fun createChart(
         comboChartForec: CombinedChart,
@@ -107,6 +111,9 @@ object TodayChartBuilder : KoinComponent {
 
     /**
      * Fill the [comboChartForec] with data
+     * @param dataList takes values of [CurrencyMOEX] to fill the graphs
+     * @param comboChartForec takes chart to fill it with [dataList] of [CurrencyMOEX]
+     * @param s used to name the graphs
      */
     fun fillComboChartForecast(
         comboChartForec: CombinedChart,

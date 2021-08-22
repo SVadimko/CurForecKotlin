@@ -12,7 +12,7 @@ import com.vadimko.curforeckotlin.ui.now.NowViewModel
 
 class NowWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
     override fun doWork(): Result {
-        NowViewModel.loadDataTCS()
+        NowViewModel.loadDataTCs()
         NowViewModel.loadDataCB()
         return Result.success()
     }

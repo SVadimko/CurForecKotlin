@@ -3,18 +3,23 @@ package com.vadimko.curforeckotlin.utils
 import android.content.Context
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.vadimko.curforeckotlin.utils.ArchivePreferences.context
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.*
 
 /**
- * Save/load request to server of choosen data on Archive fragment
+ * Save/load request to server of chosen data on Archive fragment
+ * @property context Application context injected by Koin
  */
 
 object ArchivePreferences : KoinComponent {
 
     private val context: Context by inject()
 
+    /**
+     * Saving in SharedPreferences last request on ArchiveFragment
+     */
     fun savePrefs(
         from: Long,
         till: Long,
@@ -43,6 +48,9 @@ object ArchivePreferences : KoinComponent {
         }
     }
 
+    /**
+     * Loading from SharedPreferences last request on ArchiveFragment
+     */
     fun loadPrefs(): List<String> {
         val from = Date(System.currentTimeMillis() - 604800000)
         val till = Date(System.currentTimeMillis())

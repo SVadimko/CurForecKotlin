@@ -23,6 +23,14 @@ import java.util.*
  * Today fragment representing chart for latest 1-5 days
  * @property comboChartForec - chart combining line and candle graphs
  * @property yValsCandleStick - list contains data for build candle graph
+ * @property todayViewModel [TodayViewModel] for [TodayFragment]
+ * @property root root view of [TodayFragment]
+ * @property chosenCurrency contains selected value of [currSpinner]
+ * @property chosenPeriod contains selected value of [perSpinner]
+ * @property chosenRate contains selected value of [rateSpinner]
+ * @property currSpinner spinner for selecting currency for request to server
+ * @property perSpinner spinner for selecting period ot time for request to server
+ * @property rateSpinner spinner for selecting rate of time for request to server
  */
 
 class TodayFragment : Fragment() {
@@ -32,11 +40,10 @@ class TodayFragment : Fragment() {
 
     private val todayViewModel by viewModel<TodayViewModel>()
 
-    private lateinit var root: View
     private var _binding: FragmentTodayBinding? = null
-    private var choosenCurrency = ""
-    private var choosenPeriod = ""
-    private var choosenRate = ""
+    private var chosenCurrency = ""
+    private var chosenPeriod = ""
+    private var chosenRate = ""
     private lateinit var currSpinner: Spinner
     private lateinit var perSpinner: Spinner
     private lateinit var rateSpinner: Spinner
@@ -56,7 +63,7 @@ class TodayFragment : Fragment() {
     ): View {
 
         _binding = FragmentTodayBinding.inflate(inflater, container, false)
-        root = binding.root
+        val root = binding.root
 
 
         val loadPrefs = context?.let { TodayPreferences.loadPrefs() }
@@ -76,7 +83,7 @@ class TodayFragment : Fragment() {
                     parent: AdapterView<*>?, view: View,
                     position: Int, id: Long
                 ) {
-                    choosenCurrency = currSpinner.getItemAtPosition(position) as String
+                    chosenCurrency = currSpinner.getItemAtPosition(position) as String
                 }
 
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
@@ -97,7 +104,7 @@ class TodayFragment : Fragment() {
                     parent: AdapterView<*>?, view: View,
                     position: Int, id: Long
                 ) {
-                    choosenPeriod = perSpinner.getItemAtPosition(position) as String
+                    chosenPeriod = perSpinner.getItemAtPosition(position) as String
                     if ((position > 0) and (rateSpinner.selectedItemPosition == 0))
                         rateSpinner.setSelection(1)
                 }
@@ -120,7 +127,7 @@ class TodayFragment : Fragment() {
                     parent: AdapterView<*>?, view: View,
                     position: Int, id: Long
                 ) {
-                    choosenRate = rateSpinner.getItemAtPosition(position) as String
+                    chosenRate = rateSpinner.getItemAtPosition(position) as String
                     if ((position == 0) and (perSpinner.selectedItemPosition > 0)) perSpinner.setSelection(
                         0
                     )
@@ -133,12 +140,12 @@ class TodayFragment : Fragment() {
         val showGraphButton = binding.buildgraph
         showGraphButton.apply {
             setOnClickListener {
-                val choosen = IntArray(3)
-                choosen[0] = currSpinner.selectedItemPosition
-                choosen[1] = perSpinner.selectedItemPosition
-                choosen[2] = rateSpinner.selectedItemPosition
+                val chosen = IntArray(3)
+                chosen[0] = currSpinner.selectedItemPosition
+                chosen[1] = perSpinner.selectedItemPosition
+                chosen[2] = rateSpinner.selectedItemPosition
                 todayViewModel.createRequestStrings(
-                    choosen,
+                    chosen,
                     currSpinner.selectedItemPosition,
                     perSpinner.selectedItemPosition,
                     rateSpinner.selectedItemPosition
@@ -165,12 +172,11 @@ class TodayFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-
+    /**
+     * Observe data receiving from Central bank bank through [TodayViewModel]
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /**
-         * Observe data receiving from Central bank bank throught [TodayViewModel]
-         */
         todayViewModel.getData().observe(viewLifecycleOwner, { forecMOEX ->
             forecMOEX?.let {
                 if (forecMOEX.size > 3)
