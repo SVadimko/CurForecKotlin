@@ -105,7 +105,7 @@ class CBjsonRepository(
                 if (!requestMode) {
                     val cbCurr: List<CurrencyCBjs> =
                         listOf(curUSD, curEUR, curGBP, curBYN, curTRY, curUAH)
-                    NowViewModel.dataCB.postValue(cbCurr)
+                    NowViewModel.setDataCB(cbCurr)
                 } else {
                     val views = RemoteViews(context.packageName, R.layout.main_widget)
                     if (valueUSD <= previousUSD) views.setTextColor(

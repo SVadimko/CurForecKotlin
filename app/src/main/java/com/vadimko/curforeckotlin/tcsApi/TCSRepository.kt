@@ -85,9 +85,8 @@ class TCSRepository(
                         getCurrentTCS()
                     } else {
                         val currentTCS: List<CurrencyTCS> = listOf(usdTCS, eurTCS, gbpTCS)
-                        NowViewModel.dataTCs.postValue(currentTCS)
+                        NowViewModel.setDataTCs(currentTCS)
                         NowViewModel.onRefreshRatesActions()
-                        CalcViewModel.dataForCalc.postValue(currentTCS)
                     }
                 } else {
                     if (buyUSD == 0.0 || buyEUR == 0.0 || buyGBP == 0.0) {

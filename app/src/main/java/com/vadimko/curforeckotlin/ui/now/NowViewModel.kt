@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.preference.PreferenceManager
@@ -84,16 +85,28 @@ class NowViewModel : ViewModel(), KoinComponent {
         private val context: Context by inject()
         private lateinit var coinsAnimator: CoinsAnimator
 
-        internal var dataTCs: MutableLiveData<List<CurrencyTCS>> =
+        private val dataTCs: MutableLiveData<List<CurrencyTCS>> =
             MutableLiveData<List<CurrencyTCS>>()
 
-        internal var dataCB: MutableLiveData<List<CurrencyCBjs>> =
+        internal fun setDataTCs(data: List<CurrencyTCS>) {
+            dataTCs.postValue(data)
+        }
+
+        internal fun getDataForCalc(): LiveData<List<CurrencyTCS>> {
+            return dataTCs
+        }
+
+        private val dataCB: MutableLiveData<List<CurrencyCBjs>> =
             MutableLiveData<List<CurrencyCBjs>>()
+
+        internal fun setDataCB(data: List<CurrencyCBjs>) {
+            dataCB.postValue(data)
+        }
 
         /**
          * Get actual values of [CurrencyTCS] through [TCSRepository]
          */
-        fun loadDataTCs() {
+        internal fun loadDataTCs() {
             GlobalScope.launch(Dispatchers.IO) {
                 val tcsRepository = TCSRepository(false, null, null)
                 tcsRepository.getCurrentTCS()
@@ -103,7 +116,7 @@ class NowViewModel : ViewModel(), KoinComponent {
         /**
          * Get actual values of [CurrencyCBjs] through [CBjsonRepository]
          */
-        fun loadDataCB() {
+        internal fun loadDataCB() {
             GlobalScope.launch(Dispatchers.IO) {
                 val cbJsonRepository = CBjsonRepository(false, null, null)
                 cbJsonRepository.getCurrentCB()

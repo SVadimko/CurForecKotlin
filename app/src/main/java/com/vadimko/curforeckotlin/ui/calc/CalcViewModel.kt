@@ -2,6 +2,7 @@ package com.vadimko.curforeckotlin.ui.calc
 
 import android.content.Context
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vadimko.curforeckotlin.R
@@ -34,7 +35,7 @@ class CalcViewModel : ViewModel(), KoinComponent {
     /**
      * Request to create/return [dataForCalc]
      */
-    fun getDataForCalc(): MutableLiveData<List<CurrencyTCS>> {
+    fun getDataForCalc(): LiveData<List<CurrencyTCS>> {
         if (dataForCalc.value?.size == null) {
             loadDataForCalc()
         }
@@ -136,24 +137,24 @@ class CalcViewModel : ViewModel(), KoinComponent {
     companion object {
 
 
-        internal var dataForCalc: MutableLiveData<List<CurrencyTCS>> = NowViewModel.dataTCs
+        private var dataForCalc: LiveData<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
 
         /**
          * Load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
          */
-        fun loadDataForCalc() {
+        internal fun loadDataForCalc() {
             val tcsRepository = TCSRepository(false, null, null)
             tcsRepository.getCurrentTCS()
         }
 
 
-        internal var dataServiceUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
+        private var dataServiceUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
             MutableLiveData<List<List<CurrencyTCS>>>()
 
         /**
          * Load currencies values from storage through [Saver] to [dataServiceUpdate]
          */
-        fun loadServiceUpdateData() {
+        internal fun loadServiceUpdateData() {
             GlobalScope.launch(Dispatchers.IO) {
                 dataServiceUpdate.postValue(Saver.loadTcsLast())
             }

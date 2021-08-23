@@ -11,7 +11,7 @@ import com.vadimko.curforeckotlin.cbxmlApi.CurrencyCBarhive
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB
-import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataCB
+//import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataCB
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker
 import com.vadimko.curforeckotlin.utils.ArchivePreferences
@@ -185,11 +185,19 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
      */
     companion object {
 
-        internal var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
+        private var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
             MutableLiveData<List<CurrencyCBarhive>>()
 
-        internal var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
+        internal fun setDataCB(data: List<CurrencyCBarhive>) {
+            dataCB.postValue(data)
+        }
+
+        private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
             MutableLiveData<List<CurrencyMOEX>>()
+
+        internal fun setDataMOEX(data: List<CurrencyMOEX>) {
+            dataMOEX.postValue(data)
+        }
 
         /**
          * Load currencies values from CB through [CBxmlRepository] which post it to [dataCB]

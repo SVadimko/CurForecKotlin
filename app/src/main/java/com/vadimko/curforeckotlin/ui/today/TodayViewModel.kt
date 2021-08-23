@@ -9,7 +9,7 @@ import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.loadDataMOEX
-import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataTCs
+//import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataTCs
 import com.vadimko.curforeckotlin.updateWorkers.TodayWorker
 import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.utils.TodayPreferences
@@ -27,13 +27,13 @@ class TodayViewModel : ViewModel(), KoinComponent {
     private val context: Context by inject()
 
     /**
-     * If [dataTCs] is null, load last user request params from [TodayWorker] and send
+     * If [dataMOEX] is null, load last user request params from [TodayWorker] and send
      * request to server through [loadDataMOEX]
-     * @return [dataTCs] MutableLiveData listof [CurrencyMOEX] from Moex
+     * @return [dataMOEX] MutableLiveData listof [CurrencyMOEX] from Moex
      */
     fun getData(): MutableLiveData<List<CurrencyMOEX>> {
-        if (data.value?.size == null) {
-            data = MutableLiveData()
+        if (dataMOEX.value?.size == null) {
+            dataMOEX = MutableLiveData()
             val loadedPrefs = TodayPreferences.loadPrefs()
             loadDataMOEX(
                 loadedPrefs.component1(),
@@ -42,7 +42,7 @@ class TodayViewModel : ViewModel(), KoinComponent {
                 loadedPrefs.component4()
             )
         }
-        return data
+        return dataMOEX
     }
 
     /**
@@ -142,15 +142,19 @@ class TodayViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     *  Companion object for operating with LiveData [data] and loading it by [loadDataMOEX]
-     * @property data MutableLiveData contains list of actual currency values [CurrencyMOEX] from MOEX through [MOEXRepository]
+     *  Companion object for operating with LiveData [dataMOEX] and loading it by [loadDataMOEX]
+     * @property dataMOEX MutableLiveData contains list of actual currency values [CurrencyMOEX] from MOEX through [MOEXRepository]
      */
     companion object {
-        internal var data: MutableLiveData<List<CurrencyMOEX>> =
+        private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
             MutableLiveData<List<CurrencyMOEX>>()
 
+        internal fun setDataMOEX(data: List<CurrencyMOEX>) {
+            dataMOEX.postValue(data)
+        }
+
         /**
-         * Load currencies values from MOEX through [CurrencyMOEX] which post it to [dataTCs]
+         * Load currencies values from MOEX through [CurrencyMOEX] which post it to [dataMOEX]
          */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
             val moexRepository = MOEXRepository()

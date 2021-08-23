@@ -66,9 +66,9 @@ class MOEXRepository {
                     moexcurrency.add(currencyMoex)
                 }
                 if (!todayArch)
-                    TodayViewModel.data.postValue(moexcurrency)
+                    TodayViewModel.setDataMOEX(moexcurrency)
                 else
-                    ArchiveViewModel.dataMOEX.postValue(moexcurrency)
+                    ArchiveViewModel.setDataMOEX(moexcurrency)
             }
 
 

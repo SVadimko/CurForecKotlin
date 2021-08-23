@@ -270,6 +270,8 @@ $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel.Companion
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel.Companion/dataMOEX/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/data-m-o-e-x.html
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel.Companion/loadCBArchive/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/load-c-b-archive.html
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel.Companion/loadDataMOEX/#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/load-data-m-o-e-x.html
+$dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel.Companion/setDataCB/#kotlin.collections.List[com.vadimko.curforeckotlin.cbxmlApi.CurrencyCBarhive]/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/set-data-c-b.html
+$dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel.Companion/setDataMOEX/#kotlin.collections.List[com.vadimko.curforeckotlin.moexApi.CurrencyMOEX]/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/set-data-m-o-e-x.html
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel///PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/index.html
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel/ArchiveViewModel/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-archive-view-model.html
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel/checkDates/#java.util.Date#java.util.Date/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/check-dates.html
@@ -359,9 +361,12 @@ $dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel.Companion/coinsAn
 $dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel.Companion/context/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/context.html
 $dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel.Companion/dataCB/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/data-c-b.html
 $dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel.Companion/dataTCs/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/data-t-cs.html
+$dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel.Companion/getDataForCalc/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/get-data-for-calc.html
 $dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel.Companion/loadDataCB/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/load-data-c-b.html
 $dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel.Companion/loadDataTCs/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/load-data-t-cs.html
 $dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel.Companion/onRefreshRatesActions/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/on-refresh-rates-actions.html
+$dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel.Companion/setDataCB/#kotlin.collections.List[com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs]/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/set-data-c-b.html
+$dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel.Companion/setDataTCs/#kotlin.collections.List[com.vadimko.curforeckotlin.tcsApi.CurrencyTCS]/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/set-data-t-cs.html
 $dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel///PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/index.html
 $dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel/NowViewModel/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-now-view-model.html
 $dokka.location:com.vadimko.curforeckotlin.ui.now/NowViewModel/context/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.now/-now-view-model/context.html
@@ -392,8 +397,9 @@ $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayFragment/rateSpinner/#/
 $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayFragment/todayViewModel/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-fragment/today-view-model.html
 $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayFragment/yValsCandleStick/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-fragment/y-vals-candle-stick.html
 $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel.Companion///PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/index.html
-$dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel.Companion/data/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/data.html
+$dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel.Companion/dataMOEX/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/data-m-o-e-x.html
 $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel.Companion/loadDataMOEX/#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/load-data-m-o-e-x.html
+$dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel.Companion/setDataMOEX/#kotlin.collections.List[com.vadimko.curforeckotlin.moexApi.CurrencyMOEX]/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/set-data-m-o-e-x.html
 $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel///PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/index.html
 $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel/TodayViewModel/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-today-view-model.html
 $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel/context/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/context.html

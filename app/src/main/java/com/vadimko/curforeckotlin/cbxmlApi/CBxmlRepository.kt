@@ -56,7 +56,7 @@ class CBxmlRepository {
                     val dateTimeConv = dateFormat(dateTime)
                     listData.add(CurrencyCBarhive(offCur, dateTime, dateTimeConv))
                 }
-                ArchiveViewModel.dataCB.postValue(listData)
+                ArchiveViewModel.setDataCB(listData)
             }
 
             override fun onFailure(call: Call<MOEXXMLResponse>, t: Throwable) {
