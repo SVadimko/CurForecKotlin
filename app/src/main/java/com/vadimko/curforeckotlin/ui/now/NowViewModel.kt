@@ -26,7 +26,6 @@ import java.lang.ref.WeakReference
  */
 class NowViewModel : ViewModel(), KoinComponent {
 
-    //private lateinit var coinsAnimator: CoinsAnimator
     private val context: Context by inject()
 
     /**
@@ -66,20 +65,6 @@ class NowViewModel : ViewModel(), KoinComponent {
         val layoutWeakReference: WeakReference<FrameLayout> = WeakReference(layout)
         coinsAnimator = CoinsAnimator(mScale, mDisplaySize, layoutWeakReference)
     }
-
-    /*   */
-    /**
-     * Start animation after updating courses with [CoinsAnimator] if it enabled in SharedPreferences
-     *//*
-    fun startAnimations() {
-        val onRefreshAnimation =
-            PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("onRefreshAnimation", true)
-        if (onRefreshAnimation) {
-            coinsAnimator.coinsAnimate()
-        }
-        //Toast.makeText(context, R.string.refreshed, Toast.LENGTH_SHORT).show()
-    }*/
 
     fun stopAnimation() {
         val onRefreshAnimation =
