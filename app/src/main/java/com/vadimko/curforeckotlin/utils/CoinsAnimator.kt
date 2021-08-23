@@ -161,6 +161,7 @@ class CoinsAnimator(
                 handler.post { mAllImageViews.forEach { layout.get()?.removeView(it) } }
                 mAllImageViews.clear()
             }
+            stop = false
         }
     }
 

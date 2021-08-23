@@ -57,6 +57,7 @@ class NowFragment : Fragment() {
         binding.recycletinkoff.layoutManager = LinearLayoutManager(context)
         binding.recyclecbrf.layoutManager = LinearLayoutManager(context)
         binding.swipe.setOnRefreshListener {
+            nowViewModel.prepareAnimations(mScale, rect, binding.root)
             nowViewModel.startRefresh()
         }
         return root
@@ -77,9 +78,6 @@ class NowFragment : Fragment() {
                 setupAdapterTCS(forecTCS)
                 binding.lastchk.text =
                     "${getString(R.string.lastupdateTCS)} ${forecTCS[0].curr} ${getString(R.string.NOWFRAGsource)} tinkoff.ru"
-
-                /* nowViewModel.prepareAnimations(mScale, rect, binding.root)
-                 nowViewModel.startAnimations()*/
             }
         })
 
@@ -88,7 +86,6 @@ class NowFragment : Fragment() {
                 setupAdapterCB(forecCB)
                 binding.lastchkcbrf.text =
                     "${getString(R.string.lastupdateTCS)} ${forecCB[0].dateTime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
-
                 binding.swipe.isRefreshing = false
             }
         })
