@@ -1,6 +1,5 @@
 package com.vadimko.curforeckotlin.ui.today
 
-//import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataTCs
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.loadDataMOEX
-import com.vadimko.curforeckotlin.updateWorkers.TodayWorker
 import com.vadimko.curforeckotlin.utils.CheckConnection
 import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.utils.TodayPreferences
@@ -31,22 +29,9 @@ class TodayViewModel : ViewModel(), KoinComponent {
      * request to server through [loadDataMOEX]
      * @return [dataMOEX] MutableStateFlow listof [CurrencyMOEX] from Moex
      */
-    /* fun getData(): MutableLiveData<List<CurrencyMOEX>> {
-         if (dataMOEX.value?.size == null) {
-             dataMOEX = MutableLiveData()
-             val loadedPrefs = TodayPreferences.loadPrefs()
-             loadDataMOEX(
-                 loadedPrefs.component1(),
-                 loadedPrefs.component2(),
-                 loadedPrefs.component3(),
-                 loadedPrefs.component4()
-             )
-         }
-         return dataMOEX
-     }*/
+
     fun getData(): MutableStateFlow<List<CurrencyMOEX>> {
         if (dataMOEX.value[0].dates == "") {
-            //dataMOEX = MutableLiveData()
             val loadedPrefs = TodayPreferences.loadPrefs()
             loadDataMOEX(
                 loadedPrefs.component1(),
@@ -109,7 +94,6 @@ class TodayViewModel : ViewModel(), KoinComponent {
         val from = Date(System.currentTimeMillis() - 86400000 * recDays)
         val result = DateConverter.getFromTillDate(from, till)
         jsonDate = result[0]
-        //startTodayWorker(jsonCurr, jsonDate[0], jsonDate[1], rates.toString())
         loadDataMOEX(jsonCurr, jsonDate[0], jsonDate[1], rates.toString())
         TodayPreferences.savePrefs(
             jsonCurr,
@@ -123,26 +107,6 @@ class TodayViewModel : ViewModel(), KoinComponent {
 
     }
 
-    /*  */
-    /**
-     * Configure and launch worker [TodayWorker] to receive currencies values for requested days
-     *//*
-    private fun startTodayWorker(request: String, from: String, till: String, interval: String) {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val data =
-            workDataOf("request" to request, "from" to from, "till" to till, "interval" to interval)
-        val workManager = WorkManager.getInstance(context)
-        val myWorkRequest = OneTimeWorkRequest.Builder(
-            TodayWorker::class.java//,
-        )
-            .setConstraints(constraints)
-            .setInputData(data)
-            .build()
-        workManager.enqueue(myWorkRequest)
-    }*/
 
     /**
      * Shows warning [Toast] to inform uaer to choose interval 1,10 min in case when server return not
@@ -163,8 +127,6 @@ class TodayViewModel : ViewModel(), KoinComponent {
      * from MOEX through [MOEXRepository]
      */
     companion object {
-        /* private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
-             MutableLiveData<List<CurrencyMOEX>>()*/
 
         private val dataMOEX: MutableStateFlow<List<CurrencyMOEX>> = MutableStateFlow(
             listOf(
@@ -172,10 +134,9 @@ class TodayViewModel : ViewModel(), KoinComponent {
             )
         )
 
-        /*   internal fun setDataMOEX(data: List<CurrencyMOEX>) {
-               dataMOEX.postValue(data)
-           }*/
-
+        /**
+         * Set value for [MutableStateFlow] [dataMOEX]
+         */
         internal fun setDataMOEX(data: List<CurrencyMOEX>) {
             dataMOEX.value = data
         }
@@ -185,10 +146,8 @@ class TodayViewModel : ViewModel(), KoinComponent {
          */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
             if (CheckConnection.checkConnect()) {
-                //GlobalScope.launch(Dispatchers.IO) {
                 val moexRepository = MOEXRepository()
                 moexRepository.getMOEX(request, from, till, interval, false)
-                //  }
             }
         }
     }

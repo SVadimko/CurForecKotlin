@@ -69,7 +69,7 @@
     <string name="cbrf">ЦБРФ</string>
     <string name="ARCFRAGfrom">от</string>
     <string name="ARCFRAGtill">до</string>
-    <string name="choosedwarm">График Московской биржи отображает период не более 2х лет!</string>
+    <string name="choosedwarn">График Московской биржи отображает период не более 2х лет!</string>
     <string name="buycourse">Курс покупки</string>
     <string name="higher">выше</string>
     <string name="sellcourse">Курс продажи</string>

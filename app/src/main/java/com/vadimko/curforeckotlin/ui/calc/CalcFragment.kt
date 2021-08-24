@@ -194,19 +194,11 @@ class CalcFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-      /*  calcViewModel.getDataForCalc().observe(viewLifecycleOwner, { forecTCS ->
-            forecTCS?.let {
-                dataToCalc = forecTCS
-            }
-        })*/
-
         lifecycleScope.launchWhenStarted {
             calcViewModel.getDataForCalc().collect {
                 dataToCalc = it
             }
         }
-
 
         calcViewModel.getServiceUpdateData().observe(viewLifecycleOwner, {
             serviceUpdateData = it
@@ -222,27 +214,12 @@ class CalcFragment : Fragment() {
                 }
         })
 
- /*       lifecycleScope.launchWhenStarted {
-            calcViewModel.getServiceUpdateData().collect {
-                serviceUpdateData = it
-                val pref =
-                    PreferenceManager.getDefaultSharedPreferences(context)
-                        .getBoolean("updateon", false)
-                attachChart(pref, it, false)
-                if (pref)
-                    if (!it.isNullOrEmpty() && it[0].size > 2) {
-                        createGraph(it, false)
-                        fillGraph(false, it, updateSpinnerValue)
-                    }
-            }
-        }*/
-
         calcViewModel.dataWidgetUpdate.observe(viewLifecycleOwner) {
             widgetUpdateData = it as MutableList<Currencies>
             val pref =
                 PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean("widgetOn", false)
-            attachChart(pref,true)
+            attachChart(pref, true)
             if (pref) {
                 if (it.isNotEmpty()) {
                     createGraph(it, true)
@@ -250,11 +227,6 @@ class CalcFragment : Fragment() {
                 }
             }
         }
-
-
-        /*calcViewModel.rubValue.observe(viewLifecycleOwner, {
-            rubValue.text = it
-        })*/
 
         lifecycleScope.launchWhenStarted {
             calcViewModel.rubValue.collect {
@@ -278,21 +250,17 @@ class CalcFragment : Fragment() {
         var spinnerPos: Int
         val text: String
 
-        //Log.wtf("serviceData", serviceData.size.toString())
-
         if (!type) {
             parent = viewAcceptService
             child = viewChildService
             currGraphSpinnerService = child!!.findViewById(R.id.currency_graf)
             spinner = currGraphSpinnerService
-            //spinnerPos = updateSpinnerValue
             text = getString(R.string.CALCFRAGdatafrautoup)
         } else {
             parent = viewAcceptWidget
             child = viewChildWidget
             currGraphSpinnerWidget = child!!.findViewById(R.id.currency_graf)
             spinner = currGraphSpinnerWidget
-            //spinnerPos = widgetSpinnerValue
             text = getString(R.string.CALCFRAGdatafrwidget)
         }
         if (pref) {
@@ -403,7 +371,5 @@ class CalcFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
-
     }
-
 }

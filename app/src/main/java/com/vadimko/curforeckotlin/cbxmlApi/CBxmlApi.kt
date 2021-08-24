@@ -9,6 +9,7 @@ import retrofit2.http.Query
  */
 
 interface CBxmlApi {
+
     @GET("XML_dynamic.asp")
     fun getCBXmlForec(
         @Query("date_req1") date_req1: String,

@@ -2,7 +2,6 @@ package com.vadimko.curforeckotlin.tcsApi
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
-import android.util.Log
 import android.widget.RemoteViews
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.database.Currencies
@@ -61,87 +60,87 @@ class TCSRepository(
         val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
         currentRequest.enqueue(object : Callback<TCSResponse> {
             override fun onResponse(call: Call<TCSResponse>, response: Response<TCSResponse>) {
-                    val tcsResponse: TCSResponse? = response.body()
-                    val tcsPayload: TCSPayload? = tcsResponse?.payload
-                    val tcsRates: List<TCSRates>? = tcsPayload?.rates
-                    val tcsLastUpdate: TCSLastUpdate? = tcsPayload?.lastUpdate
-                    val flagUSD = R.drawable.usd
-                    val nameUSD = tcsRates?.get(15)?.fromCurrency?.name
-                    val buyUSD = tcsRates?.get(15)?.buy
-                    val sellUSD = tcsRates?.get(15)?.sell
-                    val dt = tcsLastUpdate?.milliseconds
-                    val flagEUR = R.drawable.eur
-                    val nameEUR = tcsRates?.get(18)?.fromCurrency?.name
-                    val buyEUR = tcsRates?.get(18)?.buy
-                    val sellEUR = tcsRates?.get(18)?.sell
-                    val flagGBP = R.drawable.gbp
-                    val nameGBP = tcsRates?.get(21)?.fromCurrency?.name
-                    val buyGBP = tcsRates?.get(21)?.buy
-                    val sellGBP = tcsRates?.get(21)?.sell
-                    if (!requestMode) {
-                        val usdTCS = CurrencyTCS(flagUSD, dt, sellUSD, buyUSD, nameUSD)
-                        val eurTCS = CurrencyTCS(flagEUR, dt, sellEUR, buyEUR, nameEUR)
-                        val gbpTCS = CurrencyTCS(flagGBP, dt, sellGBP, buyGBP, nameGBP)
-                        if (usdTCS.buy == 0.0 || eurTCS.buy == 0.0 || gbpTCS.buy == 0.0) {
-                            getCurrentTCS()
-                        } else {
-                            val currentTCS: List<CurrencyTCS> = listOf(usdTCS, eurTCS, gbpTCS)
-                            NowViewModel.setDataTCs(currentTCS)
-                            NowViewModel.onRefreshRatesActions()
-                        }
+                val tcsResponse: TCSResponse? = response.body()
+                val tcsPayload: TCSPayload? = tcsResponse?.payload
+                val tcsRates: List<TCSRates>? = tcsPayload?.rates
+                val tcsLastUpdate: TCSLastUpdate? = tcsPayload?.lastUpdate
+                val flagUSD = R.drawable.usd
+                val nameUSD = tcsRates?.get(15)?.fromCurrency?.name
+                val buyUSD = tcsRates?.get(15)?.buy
+                val sellUSD = tcsRates?.get(15)?.sell
+                val dt = tcsLastUpdate?.milliseconds
+                val flagEUR = R.drawable.eur
+                val nameEUR = tcsRates?.get(18)?.fromCurrency?.name
+                val buyEUR = tcsRates?.get(18)?.buy
+                val sellEUR = tcsRates?.get(18)?.sell
+                val flagGBP = R.drawable.gbp
+                val nameGBP = tcsRates?.get(21)?.fromCurrency?.name
+                val buyGBP = tcsRates?.get(21)?.buy
+                val sellGBP = tcsRates?.get(21)?.sell
+                if (!requestMode) {
+                    val usdTCS = CurrencyTCS(flagUSD, dt, sellUSD, buyUSD, nameUSD)
+                    val eurTCS = CurrencyTCS(flagEUR, dt, sellEUR, buyEUR, nameEUR)
+                    val gbpTCS = CurrencyTCS(flagGBP, dt, sellGBP, buyGBP, nameGBP)
+                    if (usdTCS.buy == 0.0 || eurTCS.buy == 0.0 || gbpTCS.buy == 0.0) {
+                        getCurrentTCS()
                     } else {
-                        if (buyUSD == 0.0 || buyEUR == 0.0 || buyGBP == 0.0) {
-                            getCurrentTCS()
-                        } else {
-                            CurrenciesRepository.initialize(context)
-                            val currenciesRepository = CurrenciesRepository.get()
-                            currenciesRepository.insertCurrencies(
-                                Currencies(
-                                    usdBuy = buyUSD!!,
-                                    usdSell = sellUSD!!,
-                                    eurBuy = buyEUR!!,
-                                    eurSell = sellEUR!!,
-                                    gbpBuy = buyGBP!!,
-                                    gbpSell = sellGBP!!,
-                                    dt = DateConverter.longToDateWithTime(dt!!)
-                                )
+                        val currentTCS: List<CurrencyTCS> = listOf(usdTCS, eurTCS, gbpTCS)
+                        NowViewModel.setDataTCs(currentTCS)
+                        NowViewModel.onRefreshRatesActions()
+                    }
+                } else {
+                    if (buyUSD == 0.0 || buyEUR == 0.0 || buyGBP == 0.0) {
+                        getCurrentTCS()
+                    } else {
+                        CurrenciesRepository.initialize(context)
+                        val currenciesRepository = CurrenciesRepository.get()
+                        currenciesRepository.insertCurrencies(
+                            Currencies(
+                                usdBuy = buyUSD!!,
+                                usdSell = sellUSD!!,
+                                eurBuy = buyEUR!!,
+                                eurSell = sellEUR!!,
+                                gbpBuy = buyGBP!!,
+                                gbpSell = sellGBP!!,
+                                dt = DateConverter.longToDateWithTime(dt!!)
                             )
-                            val views = RemoteViews(context.packageName, R.layout.main_widget)
-                            views.setTextViewText(
-                                R.id.usd_buy, String.format(
-                                    Locale.US, "%.2f",
-                                    buyUSD
-                                ) + "₽"
-                            )
-                            views.setTextViewText(
-                                R.id.usd_sell, String.format(
-                                    Locale.US, "%.2f",
-                                    sellUSD
-                                ) + "₽"
-                            )
-                            views.setTextViewText(
-                                R.id.eur_buy, String.format(
-                                    Locale.US, "%.2f",
-                                    buyEUR
-                                ) + "₽"
-                            )
-                            views.setTextViewText(
-                                R.id.eur_sell, String.format(
-                                    Locale.US, "%.2f",
-                                    sellEUR
-                                ) + "₽"
-                            )
-                            views.setTextViewText(
-                                R.id.dt,
-                                "${context.resources.getString(R.string.tcsfrom)} " + " "
-                                        + DateConverter.longToDateWithTime(dt)
-                            )
+                        )
+                        val views = RemoteViews(context.packageName, R.layout.main_widget)
+                        views.setTextViewText(
+                            R.id.usd_buy, String.format(
+                                Locale.US, "%.2f",
+                                buyUSD
+                            ) + "₽"
+                        )
+                        views.setTextViewText(
+                            R.id.usd_sell, String.format(
+                                Locale.US, "%.2f",
+                                sellUSD
+                            ) + "₽"
+                        )
+                        views.setTextViewText(
+                            R.id.eur_buy, String.format(
+                                Locale.US, "%.2f",
+                                buyEUR
+                            ) + "₽"
+                        )
+                        views.setTextViewText(
+                            R.id.eur_sell, String.format(
+                                Locale.US, "%.2f",
+                                sellEUR
+                            ) + "₽"
+                        )
+                        views.setTextViewText(
+                            R.id.dt,
+                            "${context.resources.getString(R.string.tcsfrom)} " + " "
+                                    + DateConverter.longToDateWithTime(dt)
+                        )
 
-                            if (appWidgetID != null) {
-                                appWidgetManager?.updateAppWidget(appWidgetID, views)
-                            }
+                        if (appWidgetID != null) {
+                            appWidgetManager?.updateAppWidget(appWidgetID, views)
                         }
                     }
+                }
             }
 
             override fun onFailure(call: Call<TCSResponse>, t: Throwable) {

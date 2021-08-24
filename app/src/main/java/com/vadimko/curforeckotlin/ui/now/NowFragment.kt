@@ -77,13 +77,7 @@ class NowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 //        getDisplayParams()
 //        nowViewModel.prepareAnimations(mScale, rect, binding.root)
-        /*nowViewModel.getDataTCs().observe(viewLifecycleOwner, { forecTCS ->
-            forecTCS?.let {
-                setupAdapterTCS(forecTCS)
-                binding.lastchk.text =
-                    "${getString(R.string.lastupdateTCS)} ${forecTCS[0].curr} ${getString(R.string.NOWFRAGsource)} tinkoff.ru"
-            }
-        })*/
+
         lifecycleScope.launchWhenStarted {
             nowViewModel.getDataTCs().collect {
                 setupAdapterTCS(it)
@@ -93,31 +87,20 @@ class NowFragment : Fragment() {
             }
         }
 
-      /*  nowViewModel.getDataCD().observe(viewLifecycleOwner, { forecCB ->
-            forecCB?.let {
-                setupAdapterCB(forecCB)
-                binding.lastchkcbrf.text =
-                    "${getString(R.string.lastupdateTCS)} ${forecCB[0].dateTime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
-                binding.swipe.isRefreshing = false
-            }
-        })*/
 
         lifecycleScope.launchWhenStarted {
             nowViewModel.getDataCD().collect {
                 setupAdapterCB(it)
                 binding.lastchkcbrf.text =
                     "${getString(R.string.lastupdateTCS)} ${it[0].dateTime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
-
             }
         }
-
     }
 
     override fun onDestroyView() {
         nowViewModel.stopAnimation()
         _binding = null
         super.onDestroyView()
-
     }
 
     /**

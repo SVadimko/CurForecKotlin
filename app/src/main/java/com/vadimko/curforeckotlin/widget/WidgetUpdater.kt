@@ -1,8 +1,6 @@
 package com.vadimko.curforeckotlin.widget
 
 import android.appwidget.AppWidgetManager
-import android.content.Context
-import android.util.Log
 import com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 

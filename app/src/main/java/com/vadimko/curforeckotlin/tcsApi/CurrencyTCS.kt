@@ -15,16 +15,11 @@ import java.util.*
  */
 
 data class CurrencyTCS(
-   /* var flag: Int,
-    var datetime: Long?,
-    var sell: Double?,
-    var buy: Double?,
-    var name: String?*/
-    var flag: Int=0,
-    var datetime: Long?=0L,
-    var sell: Double?=0.0,
-    var buy: Double?=0.0,
-    var name: String?=""
+    var flag: Int = 0,
+    var datetime: Long? = 0L,
+    var sell: Double? = 0.0,
+    var buy: Double? = 0.0,
+    var name: String? = ""
 ) : Serializable {
 
 

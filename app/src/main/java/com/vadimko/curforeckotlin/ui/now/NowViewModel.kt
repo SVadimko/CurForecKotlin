@@ -2,11 +2,8 @@ package com.vadimko.curforeckotlin.ui.now
 
 import android.content.Context
 import android.graphics.Rect
-import android.util.Log
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.R
@@ -16,12 +13,9 @@ import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 import com.vadimko.curforeckotlin.utils.CheckConnection
 import com.vadimko.curforeckotlin.utils.CoinsAnimator
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.lang.ref.WeakReference
@@ -38,12 +32,6 @@ class NowViewModel : ViewModel(), KoinComponent {
      * If [dataTCs] value (Data from Tinkov server) is null- request data from server through [TCSRepository]
      * @return [dataTCs] MutableStateFlow list of [CurrencyTCS]
      */
-   /* fun getDataTCs(): MutableLiveData<List<CurrencyTCS>> {
-        if (dataTCs.value?.size == null) {
-            loadDataTCs()
-        }
-        return dataTCs
-    }*/
     fun getDataTCs(): MutableStateFlow<List<CurrencyTCS>> {
         if (dataTCs.value[0].name == "") {
             loadDataTCs()
@@ -55,12 +43,6 @@ class NowViewModel : ViewModel(), KoinComponent {
      * If [dataCB] value (Data from CB server) is null- request data from server through [CBjsonRepository]
      * @return [dataCB] MutableStateFlow list of [CurrencyCBjs]
      */
- /*   fun getDataCD(): MutableLiveData<List<CurrencyCBjs>> {
-        if (dataCB.value?.size == null) {
-            loadDataCB()
-        }
-        return dataCB
-    }*/
     fun getDataCD(): MutableStateFlow<List<CurrencyCBjs>> {
         if (dataCB.value[0].curr == "") {
             loadDataCB()
@@ -77,6 +59,7 @@ class NowViewModel : ViewModel(), KoinComponent {
     }
 
     /**
+     * Get display params form NowFragment and create animator class [CoinsAnimator]
      *
      */
     fun prepareAnimations(mScale: Float, mDisplaySize: Rect, layout: FrameLayout) {
@@ -84,6 +67,9 @@ class NowViewModel : ViewModel(), KoinComponent {
         coinsAnimator = CoinsAnimator(mScale, mDisplaySize, layoutWeakReference)
     }
 
+    /**
+     * Call to stop timer in animation class and delete added views to prevent memory leak
+     */
     fun stopAnimation() {
         val onRefreshAnimation =
             PreferenceManager.getDefaultSharedPreferences(context)
@@ -105,63 +91,53 @@ class NowViewModel : ViewModel(), KoinComponent {
         private val context: Context by inject()
         private lateinit var coinsAnimator: CoinsAnimator
 
-       /* private val dataTCs: MutableLiveData<List<CurrencyTCS>> =
-            MutableLiveData<List<CurrencyTCS>>()
-
-        internal fun setDataTCs(data: List<CurrencyTCS>) {
-            dataTCs.postValue(data)
-        }
-        internal fun getDataForCalc(): LiveData<List<CurrencyTCS>> {
-            return dataTCs
-        }
-        */
 
         private val dataTCs: MutableStateFlow<List<CurrencyTCS>> =
             MutableStateFlow(listOf(CurrencyTCS(), CurrencyTCS()))
 
+        /**
+         * Set new data to [MutableStateFlow] [dataTCs] which contains actual currency rate values
+         * from Tinkov bank to represent it NowFragment]
+         */
         internal fun setDataTCs(data: List<CurrencyTCS>) {
             dataTCs.value = data
         }
 
+        /**
+         * @return  data of [MutableStateFlow] [dataTCs] which contains actual currency rate values
+         */
         internal fun getDataForCalc(): StateFlow<List<CurrencyTCS>> {
             return dataTCs.asStateFlow()
         }
 
-       /* private val dataCB: MutableLiveData<List<CurrencyCBjs>> =
-            MutableLiveData<List<CurrencyCBjs>>()
-
-        internal fun setDataCB(data: List<CurrencyCBjs>) {
-            dataCB.postValue(data)
-        }*/
-
         private val dataCB: MutableStateFlow<List<CurrencyCBjs>> =
-            MutableStateFlow(listOf(CurrencyCBjs(),CurrencyCBjs()))
+            MutableStateFlow(listOf(CurrencyCBjs(), CurrencyCBjs()))
 
+        /**
+         * Set new data to [MutableStateFlow] [dataCB] which contains actual currency rate values
+         * from Central Bank bank to represent it NowFragment]
+         */
         internal fun setDataCB(data: List<CurrencyCBjs>) {
-            dataCB.value =data
+            dataCB.value = data
         }
 
         /**
-         * Get actual values of [CurrencyTCS] through [TCSRepository]
+         * Get actual values of [CurrencyTCS] through [TCSRepository]  which post it to [dataTCs]
          */
         internal fun loadDataTCs() {
             if (CheckConnection.checkConnect()) {
-                //GlobalScope.launch(Dispatchers.IO) {
                 val tcsRepository = TCSRepository(false, null, null)
                 tcsRepository.getCurrentTCS()
-                //}
             }
         }
 
         /**
-         * Get actual values of [CurrencyCBjs] through [CBjsonRepository]
+         * Get actual values of [CurrencyCBjs] through [CBjsonRepository] which post it to [dataCB]
          */
         internal fun loadDataCB() {
             if (CheckConnection.checkConnect()) {
-                //GlobalScope.launch(Dispatchers.IO) {
                 val cbJsonRepository = CBjsonRepository(false, null, null)
                 cbJsonRepository.getCurrentCB()
-                // }
             }
         }
 

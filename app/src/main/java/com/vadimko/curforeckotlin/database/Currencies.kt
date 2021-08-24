@@ -7,7 +7,6 @@ import java.util.*
 /**
  * DataBase file
  */
-
 @Entity
 data class Currencies(
     @PrimaryKey val id: UUID = UUID.randomUUID(),

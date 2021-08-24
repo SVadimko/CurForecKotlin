@@ -69,8 +69,11 @@ $dokka.location:com.vadimko.curforeckotlin.cbjsonApi/CurrencyCBjs/flag/#/Pointin
 $dokka.location:com.vadimko.curforeckotlin.cbjsonApi/CurrencyCBjs/value/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbjsonApi/-currency-c-bjs/value.html
 $dokka.location:com.vadimko.curforeckotlin.cbjsonApi/CurrencyCBjs/valueWas/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbjsonApi/-currency-c-bjs/value-was.html
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi////PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/index.html
+$dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CBXXMLResponse///PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-c-b-x-x-m-l-response/index.html
+$dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CBXXMLResponse/CBXXMLResponse/#kotlin.collections.List[com.vadimko.curforeckotlin.cbxmlApi.Record]?/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-c-b-x-x-m-l-response/-c-b-x-x-m-l-response.html
+$dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CBXXMLResponse/record/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-c-b-x-x-m-l-response/record.html
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CBxmlApi///PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-c-bxml-api/index.html
-$dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CBxmlApi/getTCSForec/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-c-bxml-api/get-t-c-s-forec.html
+$dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CBxmlApi/getCBXmlForec/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-c-bxml-api/get-c-b-xml-forec.html
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CBxmlRepository///PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-c-bxml-repository/index.html
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CBxmlRepository/CBxmlRepository/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-c-bxml-repository/-c-bxml-repository.html
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CBxmlRepository/cbxmlApi/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-c-bxml-repository/cbxml-api.html
@@ -81,9 +84,6 @@ $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CurrencyCBarhive/CurrencyCBa
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CurrencyCBarhive/dateTime/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-currency-c-barhive/date-time.html
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CurrencyCBarhive/datetimeConv/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-currency-c-barhive/datetime-conv.html
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/CurrencyCBarhive/offCur/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-currency-c-barhive/off-cur.html
-$dokka.location:com.vadimko.curforeckotlin.cbxmlApi/MOEXXMLResponse///PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-m-o-e-x-x-m-l-response/index.html
-$dokka.location:com.vadimko.curforeckotlin.cbxmlApi/MOEXXMLResponse/MOEXXMLResponse/#kotlin.collections.List[com.vadimko.curforeckotlin.cbxmlApi.Record]?/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-m-o-e-x-x-m-l-response/-m-o-e-x-x-m-l-response.html
-$dokka.location:com.vadimko.curforeckotlin.cbxmlApi/MOEXXMLResponse/record/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-m-o-e-x-x-m-l-response/record.html
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/Record///PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-record/index.html
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/Record/Date/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-record/-date.html
 $dokka.location:com.vadimko.curforeckotlin.cbxmlApi/Record/Record/#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.cbxmlApi/-record/-record.html
@@ -280,8 +280,6 @@ $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel/createReq
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel/getDataCB/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/get-data-c-b.html
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel/getDataMOEX/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/get-data-m-o-e-x.html
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel/showToast/#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/show-toast.html
-$dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel/startArchiveMOEXWorker/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/start-archive-m-o-e-x-worker.html
-$dokka.location:com.vadimko.curforeckotlin.ui.archive/ArchiveViewModel/startArchiveWorker/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/start-archive-worker.html
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/DatePickerFragment.Companion///PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-date-picker-fragment/-companion/index.html
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/DatePickerFragment.Companion/newInstance/#java.util.Date/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-date-picker-fragment/-companion/new-instance.html
 $dokka.location:com.vadimko.curforeckotlin.ui.archive/DatePickerFragment///PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.archive/-date-picker-fragment/index.html
@@ -291,7 +289,7 @@ $dokka.location:com.vadimko.curforeckotlin.ui.calc////PointingToDeclaration/app
 $dokka.location:com.vadimko.curforeckotlin.ui.calc/CalcFragment///PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/index.html
 $dokka.location:com.vadimko.curforeckotlin.ui.calc/CalcFragment/CalcFragment/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/-calc-fragment.html
 $dokka.location:com.vadimko.curforeckotlin.ui.calc/CalcFragment/_binding/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/_binding.html
-$dokka.location:com.vadimko.curforeckotlin.ui.calc/CalcFragment/attachChart/#kotlin.Boolean#kotlin.Any#kotlin.Boolean/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/attach-chart.html
+$dokka.location:com.vadimko.curforeckotlin.ui.calc/CalcFragment/attachChart/#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/attach-chart.html
 $dokka.location:com.vadimko.curforeckotlin.ui.calc/CalcFragment/binding/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/binding.html
 $dokka.location:com.vadimko.curforeckotlin.ui.calc/CalcFragment/calcViewModel/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/calc-view-model.html
 $dokka.location:com.vadimko.curforeckotlin.ui.calc/CalcFragment/createGraph/#kotlin.Any#kotlin.Boolean/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/create-graph.html
@@ -406,7 +404,6 @@ $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel/context/#/Poi
 $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel/createRequestStrings/#kotlin.IntArray#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/create-request-strings.html
 $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel/getData/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/get-data.html
 $dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel/showToast/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/show-toast.html
-$dokka.location:com.vadimko.curforeckotlin.ui.today/TodayViewModel/startTodayWorker/#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/app/com.vadimko.curforeckotlin.ui.today/-today-view-model/start-today-worker.html
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers////PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/index.html
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/ArchiveMOEXWorker///PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-archive-m-o-e-x-worker/index.html
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/ArchiveMOEXWorker/ArchiveMOEXWorker/#android.content.Context#androidx.work.WorkerParameters/PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-archive-m-o-e-x-worker/-archive-m-o-e-x-worker.html
@@ -444,6 +441,11 @@ $dokka.location:com.vadimko.curforeckotlin.utils/CalcLineChartBuilder/gbpDataBuy
 $dokka.location:com.vadimko.curforeckotlin.utils/CalcLineChartBuilder/gbpDataSell/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-calc-line-chart-builder/gbp-data-sell.html
 $dokka.location:com.vadimko.curforeckotlin.utils/CalcLineChartBuilder/usdDataBuy/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-calc-line-chart-builder/usd-data-buy.html
 $dokka.location:com.vadimko.curforeckotlin.utils/CalcLineChartBuilder/usdDataSell/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-calc-line-chart-builder/usd-data-sell.html
+$dokka.location:com.vadimko.curforeckotlin.utils/CheckConnection///PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-connection/index.html
+$dokka.location:com.vadimko.curforeckotlin.utils/CheckConnection/blockSeveralToast/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-connection/block-several-toast.html
+$dokka.location:com.vadimko.curforeckotlin.utils/CheckConnection/checkConnect/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-connection/check-connect.html
+$dokka.location:com.vadimko.curforeckotlin.utils/CheckConnection/context/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-connection/context.html
+$dokka.location:com.vadimko.curforeckotlin.utils/CheckConnection/stopShowToast/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-connection/stop-show-toast.html
 $dokka.location:com.vadimko.curforeckotlin.utils/CoinsAnimator.Companion///PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-coins-animator/-companion/index.html
 $dokka.location:com.vadimko.curforeckotlin.utils/CoinsAnimator.Companion/stop/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-coins-animator/-companion/stop.html
 $dokka.location:com.vadimko.curforeckotlin.utils/CoinsAnimator.Companion/stopAnimation/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-coins-animator/-companion/stop-animation.html
@@ -501,7 +503,7 @@ $dokka.location:com.vadimko.curforeckotlin.widget/AppWidget/onEnabled/#android.c
 $dokka.location:com.vadimko.curforeckotlin.widget/AppWidget/onUpdate/#android.content.Context#android.appwidget.AppWidgetManager#kotlin.IntArray/PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/-app-widget/on-update.html
 $dokka.location:com.vadimko.curforeckotlin.widget/AppWidget/updateAppWidget/#android.content.Context#android.appwidget.AppWidgetManager#kotlin.Int/PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/-app-widget/update-app-widget.html
 $dokka.location:com.vadimko.curforeckotlin.widget/WidgetUpdater///PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/-widget-updater/index.html
-$dokka.location:com.vadimko.curforeckotlin.widget/WidgetUpdater/WidgetUpdater/#android.content.Context#android.appwidget.AppWidgetManager#kotlin.Int/PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/-widget-updater/-widget-updater.html
+$dokka.location:com.vadimko.curforeckotlin.widget/WidgetUpdater/WidgetUpdater/#android.appwidget.AppWidgetManager#kotlin.Int/PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/-widget-updater/-widget-updater.html
 $dokka.location:com.vadimko.curforeckotlin.widget/WidgetUpdater/mappWidgetID/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/-widget-updater/mapp-widget-i-d.html
 $dokka.location:com.vadimko.curforeckotlin.widget/WidgetUpdater/mappWidgetManager/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/-widget-updater/mapp-widget-manager.html
 $dokka.location:com.vadimko.curforeckotlin.widget/WidgetUpdater/updateCB/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.widget/-widget-updater/update-c-b.html
@@ -530,7 +532,6 @@ $dokka.location:com.vadimko.curforeckotlin/MainActivity///PointingToDeclaration/
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/MainActivity/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/-main-activity.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/binding/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/binding.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/checkAutoUpdate/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/check-auto-update.html
-$dokka.location:com.vadimko.curforeckotlin/MainActivity/checkConnection/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/check-connection.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/context/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/context.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/createNotificationChannel/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/create-notification-channel.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/isServiceAlive/#java.lang.Class[*]/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/is-service-alive.html

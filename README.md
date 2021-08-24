@@ -90,7 +90,7 @@ TodayFragment - фрагмент, отвечающий за экран Сего�
 TodayModel - реализация viewmodel для соответствующего фрагмента
 
 ## /updateWorkers/
-Workers для обновления информации о курсах валют для соответствующих фрагментов
+Workers для обновления информации о курсах валют для соответствующих фрагментов (не используется)
 
 ## /widget/
 Классы, реализующие функционал виджета
@@ -174,7 +174,7 @@ Package with helper objects
 Set of packages responsible for the UI, consists of:
 
 ## / updateWorkers /
-Workers to update the exchange rate information for the relevant snippets
+Workers to update the exchange rate information for the relevant snippets (not used)
 
 ## /widget/
 Classes that implement the functionality of the widget

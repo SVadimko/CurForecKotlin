@@ -1,6 +1,5 @@
 package com.vadimko.curforeckotlin.moexApi
 
-import android.util.Log
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import com.vadimko.curforeckotlin.ui.today.TodayViewModel
 import okhttp3.OkHttpClient
@@ -14,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * Request using Retrofit to https://iss.moex.com/iss/engines/currency/
  */
-
 class MOEXRepository {
 
     private val moexApi: MOEXApi

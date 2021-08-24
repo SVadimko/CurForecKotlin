@@ -67,7 +67,7 @@
     <string name="cbrf">Official</string>
     <string name="ARCFRAGfrom">from</string>
     <string name="ARCFRAGtill">till</string>
-    <string name="choosedwarm">MOEX graph can show maximum 2 years period</string>
+    <string name="choosedwarn">MOEX graph can show maximum 2 years period</string>
     <string name="buycourse">Buying</string>
     <string name="higher">higher then</string>
     <string name="sellcourse">Selling</string>

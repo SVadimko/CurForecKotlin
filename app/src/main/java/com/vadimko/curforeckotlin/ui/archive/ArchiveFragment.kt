@@ -54,8 +54,6 @@ class ArchiveFragment : Fragment() {
 
     private val archiveViewModel by viewModel<ArchiveViewModel>()
 
-    //private lateinit var root: View
-
     private var _binding: FragmentArchiveBinding? = null
 
     private val binding get() = _binding!!
@@ -179,16 +177,10 @@ class ArchiveFragment : Fragment() {
                 tillDate = bundle.get("bundleKey") as Date
                 tillTv.text = DateConverter.dateWithOutTimeFormat(tillDate)
             }
-
-        /*    archiveViewModel.getDataCB().observe(viewLifecycleOwner, { archiveCB ->
-                archiveCB?.let {
-                    if (archiveCB.size > 2)
-                        redrawCB(archiveCB)
-                    else
-                        archiveViewModel.showToast(requireContext().getString(R.string.wrongcountCB))
-                }
-
-            })*/
+        /**
+         * dontShowCB and dontShowMOEX flags, used for hiding warning Toast on first time because of
+         * MutableStateFlow needs initial value, which replaced by lists with empty data
+         */
         var dontShowCB = true
         var dontShowMOEX = true
         lifecycleScope.launchWhenStarted {
@@ -202,14 +194,6 @@ class ArchiveFragment : Fragment() {
             }
         }
 
-        /*   archiveViewModel.getDataMOEX().observe(viewLifecycleOwner, { archiveMOEX ->
-               archiveMOEX?.let {
-                   if (archiveMOEX.size > 2)
-                       redrawMoex(archiveMOEX)
-                   else
-                       archiveViewModel.showToast(requireContext().getString(R.string.wrongcountTK))
-               }
-           })*/
 
         lifecycleScope.launchWhenStarted {
             archiveViewModel.getDataMOEX().collect {

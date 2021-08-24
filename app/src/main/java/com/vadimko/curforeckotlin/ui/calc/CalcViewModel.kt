@@ -36,13 +36,6 @@ class CalcViewModel : ViewModel(), KoinComponent {
     /**
      * Request to create/return [dataForCalc]
      */
-    /*   fun getDataForCalc(): LiveData<List<CurrencyTCS>> {
-           if (dataForCalc.value?.size == null) {
-               loadDataForCalc()
-           }
-           return dataForCalc
-       }*/
-
     fun getDataForCalc(): StateFlow<List<CurrencyTCS>> {
         if (dataForCalc.value[0].name == "") {
             loadDataForCalc()
@@ -54,32 +47,24 @@ class CalcViewModel : ViewModel(), KoinComponent {
      * Request to create/return [dataServiceUpdate]
      * @return data stored by [TCSUpdateService] dataServiceCalc
      */
-      fun getServiceUpdateData(): MutableLiveData<List<List<CurrencyTCS>>> {
+    fun getServiceUpdateData(): MutableLiveData<List<List<CurrencyTCS>>> {
         if (dataServiceUpdate.value?.size == null) {
             loadServiceUpdateData()
         }
         return dataServiceUpdate
-      }
+    }
 
-  /*  fun getServiceUpdateData(): MutableStateFlow<List<List<CurrencyTCS>>> {
-        //if (dataServiceUpdate.value[0][0].name == "") {
-            loadServiceUpdateData()
-        //}
-        return dataServiceUpdate
-    }*/
 
     /**
      * Request to delete [dataServiceUpdate] data, except last value, if already deleted, show [Toast]
      */
     fun deleteServiceUpdateData(data: List<List<CurrencyTCS>>) {
-       // GlobalScope.launch (Dispatchers.IO){ Saver.deleteTcsLast(data) }
+        // GlobalScope.launch (Dispatchers.IO){ Saver.deleteTcsLast(data) }
         Saver.deleteTcsLast(data)
         loadServiceUpdateData()
 
     }
 
-
-    //var rubValue: MutableLiveData<String> = MutableLiveData<String>()
     var rubValue: MutableStateFlow<String> = MutableStateFlow("")
 
 
@@ -89,8 +74,8 @@ class CalcViewModel : ViewModel(), KoinComponent {
      * Request to delete [dataWidgetUpdate] data, except last value, if already deleted, show [Toast]
      */
     fun deleteWidgetUpdateData(data: MutableList<Currencies>) {
-            val currenciesRepository = CurrenciesRepository.get()
-            currenciesRepository.clearCurrencies(data)
+        val currenciesRepository = CurrenciesRepository.get()
+        currenciesRepository.clearCurrencies(data)
     }
 
 
@@ -132,13 +117,11 @@ class CalcViewModel : ViewModel(), KoinComponent {
             if (toBuy) {
                 convertValue = currValue.toDouble()
                 result = convertValue * sellValue
-                //rubValue.postValue(String.format(Locale.US, "%.2f", result))
                 rubValue.value = String.format(Locale.US, "%.2f", result)
             }
             if (toSell) {
                 convertValue = currValue.toDouble()
                 result = convertValue * buyValue
-                //rubValue.postValue(String.format(Locale.US, "%.2f", result))
                 rubValue.value = String.format(Locale.US, "%.2f", result)
             }
         } catch (ex: NumberFormatException) {
@@ -154,7 +137,6 @@ class CalcViewModel : ViewModel(), KoinComponent {
      * @property dataServiceUpdate Currency data saved as a result of work [TCSUpdateService]
      */
     companion object {
-        //private var dataForCalc: LiveData<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
         private var dataForCalc: StateFlow<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
 
         /**
@@ -166,30 +148,16 @@ class CalcViewModel : ViewModel(), KoinComponent {
         }
 
 
-         private var dataServiceUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
-             MutableLiveData<List<List<CurrencyTCS>>>()
-
-       /* private var dataServiceUpdate: MutableStateFlow<List<List<CurrencyTCS>>> =
-            MutableStateFlow(
-                listOf(
-                    listOf(CurrencyTCS()),
-                    listOf(CurrencyTCS()),
-                    listOf(CurrencyTCS())
-                )
-            )*/
+        private var dataServiceUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
+            MutableLiveData<List<List<CurrencyTCS>>>()
 
         /**
          * Load currencies values from storage through [Saver] to [dataServiceUpdate]
          */
-         internal fun loadServiceUpdateData() {
-             GlobalScope.launch(Dispatchers.IO) {
-                 dataServiceUpdate.postValue(Saver.loadTcsLast())
-             }
-         }
-     /*   internal fun loadServiceUpdateData() {
+        internal fun loadServiceUpdateData() {
             GlobalScope.launch(Dispatchers.IO) {
-                dataServiceUpdate.value = Saver.loadTcsLast()
+                dataServiceUpdate.postValue(Saver.loadTcsLast())
             }
-        }*/
+        }
     }
 }

@@ -178,22 +178,15 @@ class TodayFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var dontShow= true
-     /*   todayViewModel.getData().observe(viewLifecycleOwner, { forecMOEX ->
-            forecMOEX?.let {
-                if (forecMOEX.size > 3)
-                    createComboChartForecast(forecMOEX)
-                else todayViewModel.showToast()
-            }
-        })*/
+        var dontShow = true
 
         lifecycleScope.launchWhenStarted {
             todayViewModel.getData().collect {
                 if (it.size > 3)
                     createComboChartForecast(it)
-                else{
-                    if(!dontShow)todayViewModel.showToast()
-                    dontShow=false
+                else {
+                    if (!dontShow) todayViewModel.showToast()
+                    dontShow = false
                 }
             }
         }
@@ -210,8 +203,10 @@ class TodayFragment : Fragment() {
      */
     private fun createComboChartForecast(dataList: List<CurrencyMOEX>) {
         val animationTime =
-            5 * Integer.parseInt((perSpinner.selectedItem as String)
-                .split(" ")[0]) * Integer.parseInt(
+            5 * Integer.parseInt(
+                (perSpinner.selectedItem as String)
+                    .split(" ")[0]
+            ) * Integer.parseInt(
                 (rateSpinner.selectedItem as String).split(" ")[0]
             )
         comboChartForec = TodayChartBuilder.createChart(

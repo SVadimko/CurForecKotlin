@@ -2,7 +2,6 @@ package com.vadimko.curforeckotlin.cbxmlApi
 
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,7 +15,6 @@ import java.text.SimpleDateFormat
 /**
  * Request using Retrofit to https://www.cbr.ru/scripts/
  */
-
 class CBxmlRepository {
     private val cbxmlApi: CBxmlApi
 

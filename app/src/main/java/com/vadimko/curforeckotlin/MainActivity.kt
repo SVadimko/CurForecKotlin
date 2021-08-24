@@ -5,13 +5,10 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,7 +17,6 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vadimko.curforeckotlin.databinding.ActivityMainBinding
-import com.vadimko.curforeckotlin.utils.CheckConnection
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -166,17 +162,4 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         checkAutoUpdate()
         super.onResume()
     }
-
-  /*  *//**
-     * Checking connection state if no internet - Show Toast
-     *//*
-    private fun checkConnection() {
-        val connectivityManager =
-            getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        val currentNetwork = connectivityManager.activeNetwork
-        val caps = connectivityManager.getNetworkCapabilities(currentNetwork)
-        if (caps?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) != true)
-            Toast.makeText(context, getString(R.string.noconnection), Toast.LENGTH_LONG).show()
-    }*/
-
 }
