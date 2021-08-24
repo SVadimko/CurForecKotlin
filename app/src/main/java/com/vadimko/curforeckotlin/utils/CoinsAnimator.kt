@@ -14,6 +14,7 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.utils.CoinsAnimator.Companion.stop
 import org.koin.core.component.KoinComponent
@@ -28,6 +29,8 @@ import java.util.*
  * @property count number of playing animations
  * @property mAllImageViews arraylist of Views which animates and add on NowFragment main layout
  * @property mHandler Handler prepared image, add it to arraylist and layout and begin [startAnimation]
+ * @property enableSound Settings from SharedPreference allowing to play sound
+ * @property anotherCount Counter to monitor count of falling coins to play on last two final sound
  */
 
 class CoinsAnimator(
@@ -36,9 +39,10 @@ class CoinsAnimator(
     val layout: WeakReference<FrameLayout>
 ) : KoinComponent {
 
-
+    private var enableSound = false
     private val context: Context by inject()
     private var count = 0
+    private var anotherCount = 0
     private val coinsArrayImage = intArrayOf(
         R.drawable.coin,
         R.drawable.coin2,
@@ -55,22 +59,26 @@ class CoinsAnimator(
     fun coinsAnimate() {
         stop = false
         timer.schedule(ExeTimerTask(), 0, 100)
+        enableSound = PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean("onAnimationSound", false)
+        SoundPlayer.onResume()
     }
 
     /**
      * Takes ImageView and use [ValueAnimator] to animate it
      */
     private fun startAnimation(aniView: ImageView) {
+        var alreadyPlayed = false
         aniView.pivotX = (aniView.width / 2).toFloat()
         aniView.pivotY = (aniView.height / 2).toFloat()
         val delay = Random().nextInt(1000).toLong()
         var set = 0
         when (Random().nextInt(5)) {
             0 -> set = 900
-            1 -> set = 2500
-            2 -> set = 2000
+            1 -> set = 2000
+            2 -> set = 1700
             3 -> set = 1200
-            4 -> set = 1500
+            4 -> set = 1300
         }
         val animator = ValueAnimator.ofFloat(0f, 1f)
         animator.duration = set.toLong()
@@ -84,6 +92,17 @@ class CoinsAnimator(
                 aniView.rotation = angle * value
                 aniView.translationX = (moveX - 40) * value
                 aniView.translationY = (mDisplaySize.bottom + 150 * mScale) * value
+                if ((mDisplaySize.height() < aniView.translationY) && !alreadyPlayed && !stop) {
+                    if (enableSound) {
+                        anotherCount++
+                        if (anotherCount < 18) {
+                            SoundPlayer.playRandomSound()
+                        } else {
+                            SoundPlayer.playFinalSound()
+                        }
+                        alreadyPlayed = true
+                    }
+                }
             }
         })
         animator.start()
@@ -154,7 +173,7 @@ class CoinsAnimator(
         override fun run() {
             mHandler.sendEmptyMessage(0x001)
             count++
-            if (count == 50 || stop) {
+            if (count == 20 || stop) {
                 timer.cancel()
                 timer.purge()
                 val handler = Handler(Looper.getMainLooper())
@@ -179,6 +198,4 @@ class CoinsAnimator(
             stop = true
         }
     }
-
-
 }

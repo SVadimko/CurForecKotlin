@@ -2,7 +2,6 @@ package com.vadimko.curforeckotlin.ui.calc
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
@@ -202,7 +201,6 @@ class CalcFragment : Fragment() {
 
         calcViewModel.getServiceUpdateData().observe(viewLifecycleOwner, {
             serviceUpdateData = it
-            Log.wtf("observe", serviceUpdateData.size.toString())
             val pref =
                 PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean("updateon", false)
@@ -298,7 +296,6 @@ class CalcFragment : Fragment() {
                                 }
                             } else {
                                 widgetSpinnerValue = spinnerPos
-                                Log.wtf("widget", widgetUpdateData.size.toString())
                                 if (widgetUpdateData.isNotEmpty()) {
                                     createGraph(widgetUpdateData, true)
                                     fillGraph(true, widgetUpdateData, spinnerPos)

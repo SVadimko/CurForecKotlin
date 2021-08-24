@@ -68,6 +68,11 @@
                 app:summaryOn="@string/animation_on"
                 app:summaryOff="@string/animation_off"
                 app:title="@string/notify_enable" />
+        <CheckBoxPreference
+                app:key="onAnimationSound"
+                android:defaultValue="false"
+                android:dependency="onRefreshAnimation"
+                app:title="@string/notify_sound" />
 
     </PreferenceCategory>
 

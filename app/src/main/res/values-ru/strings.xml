@@ -90,4 +90,5 @@
     <string name="wrongcountTK">Чтобы увидеть графики Московской Биржи с прогнозами, выберите диапазон более 2х рабочих дней!</string>
     <string name="wrongcountCB">Для корректного отображения графика ЦБ требуется указать более 2х рабочих дней!</string>
     <string name="listisempty">Данные отсутствуют!</string>
+    <string name="notify_sound">Animation with sound</string>
 </resources>

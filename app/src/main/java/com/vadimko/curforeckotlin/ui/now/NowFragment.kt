@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +19,7 @@ import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
 import com.vadimko.curforeckotlin.databinding.FragmentNowBinding
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.utils.CoinsAnimator
+import com.vadimko.curforeckotlin.utils.SoundPlayer
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -75,8 +77,6 @@ class NowFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        getDisplayParams()
-//        nowViewModel.prepareAnimations(mScale, rect, binding.root)
 
         lifecycleScope.launchWhenStarted {
             nowViewModel.getDataTCs().collect {
@@ -98,9 +98,17 @@ class NowFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        nowViewModel.stopAnimation()
+        /* nowViewModel.stopAnimation()
+         SoundPlayer.onStop()*/
         _binding = null
         super.onDestroyView()
+    }
+
+    override fun onStop() {
+        nowViewModel.stopAnimation()
+        SoundPlayer.onStop()
+        Log.wtf("OnStop", "TRUE")
+        super.onStop()
     }
 
     /**

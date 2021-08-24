@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vadimko.curforeckotlin.databinding.ActivityMainBinding
+import com.vadimko.curforeckotlin.utils.SoundPlayer
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         createNotificationChannel()
+        SoundPlayer.onInit()
         super.onCreate(savedInstanceState)
 
 
@@ -161,5 +163,10 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         else landscapeMode(this)
         checkAutoUpdate()
         super.onResume()
+    }
+
+    override fun onDestroy() {
+        SoundPlayer.onDestroy()
+        super.onDestroy()
     }
 }

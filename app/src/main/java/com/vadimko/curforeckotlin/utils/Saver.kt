@@ -1,7 +1,6 @@
 package com.vadimko.curforeckotlin.utils
 
 import android.content.Context
-import android.util.Log
 import com.vadimko.curforeckotlin.TCSUpdateService
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
@@ -29,7 +28,6 @@ object Saver : KoinComponent {
      * Load previous values add new value [newData] to it and save them in storage
      */
     fun saveTcsLast(newData: MutableList<CurrencyTCS>) {
-        Log.wtf("saveTcsLast", Thread.currentThread().name)
         val temp: MutableList<MutableList<CurrencyTCS>> = loadTcsLast()
         temp.add(newData)
         try {
@@ -47,7 +45,6 @@ object Saver : KoinComponent {
      */
     @Suppress("UNCHECKED_CAST")
     fun loadTcsLast(): MutableList<MutableList<CurrencyTCS>> {
-        Log.wtf("loadTcsLast", Thread.currentThread().name)
         var tcsList: MutableList<MutableList<CurrencyTCS>> = mutableListOf()
         try {
             ObjectInputStream(FileInputStream(path + "TCSlast.sav")).use {
@@ -63,7 +60,6 @@ object Saver : KoinComponent {
      * Delete all values, except last one
      */
     fun deleteTcsLast(temp: List<List<CurrencyTCS>>) {
-        Log.wtf("delete", Thread.currentThread().name)
         val delArray = temp.filter { it == temp.last() }
         try {
             ObjectOutputStream(FileOutputStream(path + "TCSlast.sav")).use {
