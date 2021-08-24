@@ -2,7 +2,6 @@ package com.vadimko.curforeckotlin.ui.calc
 
 import android.content.Context
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vadimko.curforeckotlin.R
@@ -15,6 +14,8 @@ import com.vadimko.curforeckotlin.ui.now.NowViewModel
 import com.vadimko.curforeckotlin.utils.Saver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -35,45 +36,61 @@ class CalcViewModel : ViewModel(), KoinComponent {
     /**
      * Request to create/return [dataForCalc]
      */
-    fun getDataForCalc(): LiveData<List<CurrencyTCS>> {
-        if (dataForCalc.value?.size == null) {
+    /*   fun getDataForCalc(): LiveData<List<CurrencyTCS>> {
+           if (dataForCalc.value?.size == null) {
+               loadDataForCalc()
+           }
+           return dataForCalc
+       }*/
+
+    fun getDataForCalc(): StateFlow<List<CurrencyTCS>> {
+        if (dataForCalc.value[0].name == "") {
             loadDataForCalc()
         }
         return dataForCalc
     }
 
-
     /**
      * Request to create/return [dataServiceUpdate]
      * @return data stored by [TCSUpdateService] dataServiceCalc
      */
-    fun getServiceUpdateData(): MutableLiveData<List<List<CurrencyTCS>>> {
+      fun getServiceUpdateData(): MutableLiveData<List<List<CurrencyTCS>>> {
         if (dataServiceUpdate.value?.size == null) {
             loadServiceUpdateData()
         }
         return dataServiceUpdate
-    }
+      }
+
+  /*  fun getServiceUpdateData(): MutableStateFlow<List<List<CurrencyTCS>>> {
+        //if (dataServiceUpdate.value[0][0].name == "") {
+            loadServiceUpdateData()
+        //}
+        return dataServiceUpdate
+    }*/
 
     /**
-     * Request to delete [dataServiceUpdate] data, except last value
+     * Request to delete [dataServiceUpdate] data, except last value, if already deleted, show [Toast]
      */
     fun deleteServiceUpdateData(data: List<List<CurrencyTCS>>) {
+       // GlobalScope.launch (Dispatchers.IO){ Saver.deleteTcsLast(data) }
         Saver.deleteTcsLast(data)
         loadServiceUpdateData()
+
     }
 
 
-    var rubValue: MutableLiveData<String> = MutableLiveData<String>()
+    //var rubValue: MutableLiveData<String> = MutableLiveData<String>()
+    var rubValue: MutableStateFlow<String> = MutableStateFlow("")
 
 
     internal val dataWidgetUpdate = CurrenciesRepository.get().getCurrencies()
 
     /**
-     * Request to delete [dataWidgetUpdate] data, except last value
+     * Request to delete [dataWidgetUpdate] data, except last value, if already deleted, show [Toast]
      */
     fun deleteWidgetUpdateData(data: MutableList<Currencies>) {
-        val currenciesRepository = CurrenciesRepository.get()
-        currenciesRepository.clearCurrencies(data)
+            val currenciesRepository = CurrenciesRepository.get()
+            currenciesRepository.clearCurrencies(data)
     }
 
 
@@ -115,12 +132,14 @@ class CalcViewModel : ViewModel(), KoinComponent {
             if (toBuy) {
                 convertValue = currValue.toDouble()
                 result = convertValue * sellValue
-                rubValue.postValue(String.format(Locale.US, "%.2f", result))
+                //rubValue.postValue(String.format(Locale.US, "%.2f", result))
+                rubValue.value = String.format(Locale.US, "%.2f", result)
             }
             if (toSell) {
                 convertValue = currValue.toDouble()
                 result = convertValue * buyValue
-                rubValue.postValue(String.format(Locale.US, "%.2f", result))
+                //rubValue.postValue(String.format(Locale.US, "%.2f", result))
+                rubValue.value = String.format(Locale.US, "%.2f", result)
             }
         } catch (ex: NumberFormatException) {
             Toast.makeText(context, R.string.incorrect_number, Toast.LENGTH_SHORT).show()
@@ -130,14 +149,13 @@ class CalcViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Companion object for operating with LiveData [dataForCalc] [dataServiceUpdate]
+     * Companion object for operating with StateFlow [dataForCalc] [dataServiceUpdate]
      * @property dataForCalc Currency data used for calculating values
      * @property dataServiceUpdate Currency data saved as a result of work [TCSUpdateService]
      */
     companion object {
-
-
-        private var dataForCalc: LiveData<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
+        //private var dataForCalc: LiveData<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
+        private var dataForCalc: StateFlow<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
 
         /**
          * Load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
@@ -148,16 +166,30 @@ class CalcViewModel : ViewModel(), KoinComponent {
         }
 
 
-        private var dataServiceUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
-            MutableLiveData<List<List<CurrencyTCS>>>()
+         private var dataServiceUpdate: MutableLiveData<List<List<CurrencyTCS>>> =
+             MutableLiveData<List<List<CurrencyTCS>>>()
+
+       /* private var dataServiceUpdate: MutableStateFlow<List<List<CurrencyTCS>>> =
+            MutableStateFlow(
+                listOf(
+                    listOf(CurrencyTCS()),
+                    listOf(CurrencyTCS()),
+                    listOf(CurrencyTCS())
+                )
+            )*/
 
         /**
          * Load currencies values from storage through [Saver] to [dataServiceUpdate]
          */
-        internal fun loadServiceUpdateData() {
+         internal fun loadServiceUpdateData() {
+             GlobalScope.launch(Dispatchers.IO) {
+                 dataServiceUpdate.postValue(Saver.loadTcsLast())
+             }
+         }
+     /*   internal fun loadServiceUpdateData() {
             GlobalScope.launch(Dispatchers.IO) {
-                dataServiceUpdate.postValue(Saver.loadTcsLast())
+                dataServiceUpdate.value = Saver.loadTcsLast()
             }
-        }
+        }*/
     }
 }

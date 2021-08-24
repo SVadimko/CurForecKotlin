@@ -3,6 +3,7 @@ package com.vadimko.curforeckotlin.cbjsonApi
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.widget.RemoteViews
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.ui.now.NowViewModel

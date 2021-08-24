@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.github.mikephil.charting.charts.LineChart
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.R.array
@@ -19,6 +20,7 @@ import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.utils.ArchiveLineChartBuilder
 import com.vadimko.curforeckotlin.utils.ArchivePreferences
 import com.vadimko.curforeckotlin.utils.DateConverter
+import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -178,24 +180,47 @@ class ArchiveFragment : Fragment() {
                 tillTv.text = DateConverter.dateWithOutTimeFormat(tillDate)
             }
 
-        archiveViewModel.getDataCB().observe(viewLifecycleOwner, { archiveCB ->
-            archiveCB?.let {
-                if (archiveCB.size > 2)
-                    redrawCB(archiveCB)
-                else
-                    archiveViewModel.showToast(requireContext().getString(R.string.wrongcountCB))
-            }
+        /*    archiveViewModel.getDataCB().observe(viewLifecycleOwner, { archiveCB ->
+                archiveCB?.let {
+                    if (archiveCB.size > 2)
+                        redrawCB(archiveCB)
+                    else
+                        archiveViewModel.showToast(requireContext().getString(R.string.wrongcountCB))
+                }
 
-        })
-
-        archiveViewModel.getDataMOEX().observe(viewLifecycleOwner, { archiveMOEX ->
-            archiveMOEX?.let {
-                if (archiveMOEX.size > 2)
-                    redrawMoex(archiveMOEX)
-                else
-                    archiveViewModel.showToast(requireContext().getString(R.string.wrongcountTK))
+            })*/
+        var dontShowCB = true
+        var dontShowMOEX = true
+        lifecycleScope.launchWhenStarted {
+            archiveViewModel.getDataCB().collect {
+                if (it.size > 2)
+                    redrawCB(it)
+                else {
+                    if (!dontShowCB) archiveViewModel.showToast(requireContext().getString(R.string.wrongcountCB))
+                    dontShowCB = false
+                }
             }
-        })
+        }
+
+        /*   archiveViewModel.getDataMOEX().observe(viewLifecycleOwner, { archiveMOEX ->
+               archiveMOEX?.let {
+                   if (archiveMOEX.size > 2)
+                       redrawMoex(archiveMOEX)
+                   else
+                       archiveViewModel.showToast(requireContext().getString(R.string.wrongcountTK))
+               }
+           })*/
+
+        lifecycleScope.launchWhenStarted {
+            archiveViewModel.getDataMOEX().collect {
+                if (it.size > 2)
+                    redrawMoex(it)
+                else {
+                    if (!dontShowMOEX) archiveViewModel.showToast(requireContext().getString(R.string.wrongcountTK))
+                    dontShowMOEX = false
+                }
+            }
+        }
     }
 
     /**

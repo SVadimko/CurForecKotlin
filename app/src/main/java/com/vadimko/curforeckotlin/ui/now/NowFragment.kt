@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vadimko.curforeckotlin.R
@@ -17,6 +18,7 @@ import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
 import com.vadimko.curforeckotlin.databinding.FragmentNowBinding
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.utils.CoinsAnimator
+import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -60,6 +62,8 @@ class NowFragment : Fragment() {
             nowViewModel.prepareAnimations(mScale, rect, binding.root)
             nowViewModel.startRefresh()
         }
+        getDisplayParams()
+        nowViewModel.prepareAnimations(mScale, rect, binding.root)
         return root
     }
 
@@ -71,24 +75,42 @@ class NowFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getDisplayParams()
-        nowViewModel.prepareAnimations(mScale, rect, binding.root)
-        nowViewModel.getDataTCs().observe(viewLifecycleOwner, { forecTCS ->
+//        getDisplayParams()
+//        nowViewModel.prepareAnimations(mScale, rect, binding.root)
+        /*nowViewModel.getDataTCs().observe(viewLifecycleOwner, { forecTCS ->
             forecTCS?.let {
                 setupAdapterTCS(forecTCS)
                 binding.lastchk.text =
                     "${getString(R.string.lastupdateTCS)} ${forecTCS[0].curr} ${getString(R.string.NOWFRAGsource)} tinkoff.ru"
             }
-        })
+        })*/
+        lifecycleScope.launchWhenStarted {
+            nowViewModel.getDataTCs().collect {
+                setupAdapterTCS(it)
+                binding.lastchk.text =
+                    "${getString(R.string.lastupdateTCS)} ${it[0].curr} ${getString(R.string.NOWFRAGsource)} tinkoff.ru"
+                binding.swipe.isRefreshing = false
+            }
+        }
 
-        nowViewModel.getDataCD().observe(viewLifecycleOwner, { forecCB ->
+      /*  nowViewModel.getDataCD().observe(viewLifecycleOwner, { forecCB ->
             forecCB?.let {
                 setupAdapterCB(forecCB)
                 binding.lastchkcbrf.text =
                     "${getString(R.string.lastupdateTCS)} ${forecCB[0].dateTime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
                 binding.swipe.isRefreshing = false
             }
-        })
+        })*/
+
+        lifecycleScope.launchWhenStarted {
+            nowViewModel.getDataCD().collect {
+                setupAdapterCB(it)
+                binding.lastchkcbrf.text =
+                    "${getString(R.string.lastupdateTCS)} ${it[0].dateTime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
+
+            }
+        }
+
     }
 
     override fun onDestroyView() {
@@ -125,6 +147,7 @@ class NowFragment : Fragment() {
                 return true
             }
             R.id.refresh -> {
+                nowViewModel.prepareAnimations(mScale, rect, binding.root)
                 nowViewModel.startRefresh()
             }
         }

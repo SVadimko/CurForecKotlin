@@ -75,7 +75,7 @@ Contains View and ViewModel for Now screen
 
 Contains View and ViewModel for Today screen
 
-# Package com.vadimko.curforeckotlin.updateWorkers
+# Package com.vadimko.curforeckotlin.updateWorkers (not used)
 
 Contains Workers to update the exchange rate information for the relevant screens
 

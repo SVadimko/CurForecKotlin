@@ -1,18 +1,18 @@
 package com.vadimko.curforeckotlin.ui.today
 
+//import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataTCs
 import android.content.Context
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.work.*
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.loadDataMOEX
-//import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataTCs
 import com.vadimko.curforeckotlin.updateWorkers.TodayWorker
+import com.vadimko.curforeckotlin.utils.CheckConnection
 import com.vadimko.curforeckotlin.utils.DateConverter
 import com.vadimko.curforeckotlin.utils.TodayPreferences
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.*
@@ -27,13 +27,26 @@ class TodayViewModel : ViewModel(), KoinComponent {
     private val context: Context by inject()
 
     /**
-     * If [dataMOEX] is null, load last user request params from [TodayWorker] and send
+     * If [dataMOEX] is null, load last user request params and send
      * request to server through [loadDataMOEX]
-     * @return [dataMOEX] MutableLiveData listof [CurrencyMOEX] from Moex
+     * @return [dataMOEX] MutableStateFlow listof [CurrencyMOEX] from Moex
      */
-    fun getData(): MutableLiveData<List<CurrencyMOEX>> {
-        if (dataMOEX.value?.size == null) {
-            dataMOEX = MutableLiveData()
+    /* fun getData(): MutableLiveData<List<CurrencyMOEX>> {
+         if (dataMOEX.value?.size == null) {
+             dataMOEX = MutableLiveData()
+             val loadedPrefs = TodayPreferences.loadPrefs()
+             loadDataMOEX(
+                 loadedPrefs.component1(),
+                 loadedPrefs.component2(),
+                 loadedPrefs.component3(),
+                 loadedPrefs.component4()
+             )
+         }
+         return dataMOEX
+     }*/
+    fun getData(): MutableStateFlow<List<CurrencyMOEX>> {
+        if (dataMOEX.value[0].dates == "") {
+            //dataMOEX = MutableLiveData()
             val loadedPrefs = TodayPreferences.loadPrefs()
             loadDataMOEX(
                 loadedPrefs.component1(),
@@ -46,7 +59,7 @@ class TodayViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Creates string for request to MOEX server API, launch [startTodayWorker] and saved request in
+     * Creates string for request to MOEX server API, launch [loadDataMOEX] and saved request in
      * SharedPreferences
      */
     fun createRequestStrings(
@@ -96,7 +109,8 @@ class TodayViewModel : ViewModel(), KoinComponent {
         val from = Date(System.currentTimeMillis() - 86400000 * recDays)
         val result = DateConverter.getFromTillDate(from, till)
         jsonDate = result[0]
-        startTodayWorker(jsonCurr, jsonDate[0], jsonDate[1], rates.toString())
+        //startTodayWorker(jsonCurr, jsonDate[0], jsonDate[1], rates.toString())
+        loadDataMOEX(jsonCurr, jsonDate[0], jsonDate[1], rates.toString())
         TodayPreferences.savePrefs(
             jsonCurr,
             jsonDate[0],
@@ -109,9 +123,10 @@ class TodayViewModel : ViewModel(), KoinComponent {
 
     }
 
+    /*  */
     /**
      * Configure and launch worker [TodayWorker] to receive currencies values for requested days
-     */
+     *//*
     private fun startTodayWorker(request: String, from: String, till: String, interval: String) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -127,7 +142,7 @@ class TodayViewModel : ViewModel(), KoinComponent {
             .setInputData(data)
             .build()
         workManager.enqueue(myWorkRequest)
-    }
+    }*/
 
     /**
      * Shows warning [Toast] to inform uaer to choose interval 1,10 min in case when server return not
@@ -142,23 +157,39 @@ class TodayViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     *  Companion object for operating with LiveData [dataMOEX] and loading it by [loadDataMOEX]
-     * @property dataMOEX MutableLiveData contains list of actual currency values [CurrencyMOEX] from MOEX through [MOEXRepository]
+     *  Companion object for operating with MutableStateFlow [dataMOEX] and loading
+     *  it by [loadDataMOEX]
+     * @property dataMOEX MutableStateFlow contains list of actual currency values [CurrencyMOEX]
+     * from MOEX through [MOEXRepository]
      */
     companion object {
-        private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
-            MutableLiveData<List<CurrencyMOEX>>()
+        /* private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
+             MutableLiveData<List<CurrencyMOEX>>()*/
+
+        private val dataMOEX: MutableStateFlow<List<CurrencyMOEX>> = MutableStateFlow(
+            listOf(
+                CurrencyMOEX(), CurrencyMOEX(), CurrencyMOEX()
+            )
+        )
+
+        /*   internal fun setDataMOEX(data: List<CurrencyMOEX>) {
+               dataMOEX.postValue(data)
+           }*/
 
         internal fun setDataMOEX(data: List<CurrencyMOEX>) {
-            dataMOEX.postValue(data)
+            dataMOEX.value = data
         }
 
         /**
          * Load currencies values from MOEX through [CurrencyMOEX] which post it to [dataMOEX]
          */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
-            val moexRepository = MOEXRepository()
-            moexRepository.getMOEX(request, from, till, interval, false)
+            if (CheckConnection.checkConnect()) {
+                //GlobalScope.launch(Dispatchers.IO) {
+                val moexRepository = MOEXRepository()
+                moexRepository.getMOEX(request, from, till, interval, false)
+                //  }
+            }
         }
     }
 }

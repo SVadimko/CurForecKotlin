@@ -8,6 +8,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.github.mikephil.charting.charts.CombinedChart
 import com.github.mikephil.charting.data.CandleEntry
 import com.vadimko.curforeckotlin.R
@@ -16,6 +17,7 @@ import com.vadimko.curforeckotlin.databinding.FragmentTodayBinding
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.utils.TodayChartBuilder
 import com.vadimko.curforeckotlin.utils.TodayPreferences
+import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -128,9 +130,8 @@ class TodayFragment : Fragment() {
                     position: Int, id: Long
                 ) {
                     chosenRate = rateSpinner.getItemAtPosition(position) as String
-                    if ((position == 0) and (perSpinner.selectedItemPosition > 0)) perSpinner.setSelection(
-                        0
-                    )
+                    if ((position == 0) and (perSpinner.selectedItemPosition > 0))
+                        perSpinner.setSelection(0)
                 }
 
                 override fun onNothingSelected(arg0: AdapterView<*>?) {}
@@ -177,13 +178,25 @@ class TodayFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        todayViewModel.getData().observe(viewLifecycleOwner, { forecMOEX ->
+        var dontShow= true
+     /*   todayViewModel.getData().observe(viewLifecycleOwner, { forecMOEX ->
             forecMOEX?.let {
                 if (forecMOEX.size > 3)
                     createComboChartForecast(forecMOEX)
                 else todayViewModel.showToast()
             }
-        })
+        })*/
+
+        lifecycleScope.launchWhenStarted {
+            todayViewModel.getData().collect {
+                if (it.size > 3)
+                    createComboChartForecast(it)
+                else{
+                    if(!dontShow)todayViewModel.showToast()
+                    dontShow=false
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -197,7 +210,8 @@ class TodayFragment : Fragment() {
      */
     private fun createComboChartForecast(dataList: List<CurrencyMOEX>) {
         val animationTime =
-            5 * Integer.parseInt((perSpinner.selectedItem as String).split(" ")[0]) * Integer.parseInt(
+            5 * Integer.parseInt((perSpinner.selectedItem as String)
+                .split(" ")[0]) * Integer.parseInt(
                 (rateSpinner.selectedItem as String).split(" ")[0]
             )
         comboChartForec = TodayChartBuilder.createChart(

@@ -87,6 +87,7 @@
     <string name="digital">Digital</string>
     <string name="wrongcountTK">Choose more than 2 work days range to see MOEX graph with forecast!</string>
     <string name="wrongcountCB">Choose more than 2 work days range to see CB graph!</string>
+    <string name="listisempty">List is already empty!</string>
 
 
 </resources>

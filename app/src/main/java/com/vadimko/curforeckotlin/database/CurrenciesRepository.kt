@@ -59,8 +59,10 @@ class CurrenciesRepository private constructor(context: Context) {
      */
     fun clearCurrencies(list: MutableList<Currencies>) {
         executor.execute {
-            list.removeLast()
-            currencyDao.clearCurrencies(list)
+            if (!list.isNullOrEmpty()) {
+                list.removeLast()
+                currencyDao.clearCurrencies(list)
+            }
         }
     }
 

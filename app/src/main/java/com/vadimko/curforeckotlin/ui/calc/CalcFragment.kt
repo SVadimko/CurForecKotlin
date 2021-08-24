@@ -2,9 +2,11 @@ package com.vadimko.curforeckotlin.ui.calc
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import com.github.mikephil.charting.charts.LineChart
 import com.vadimko.curforeckotlin.R
@@ -17,6 +19,7 @@ import com.vadimko.curforeckotlin.utils.CalcLineChartBuilder
 import com.vadimko.curforeckotlin.widget.AppWidget
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -192,19 +195,26 @@ class CalcFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        calcViewModel.getDataForCalc().observe(viewLifecycleOwner, { forecTCS ->
+      /*  calcViewModel.getDataForCalc().observe(viewLifecycleOwner, { forecTCS ->
             forecTCS?.let {
                 dataToCalc = forecTCS
             }
-        })
+        })*/
+
+        lifecycleScope.launchWhenStarted {
+            calcViewModel.getDataForCalc().collect {
+                dataToCalc = it
+            }
+        }
 
 
         calcViewModel.getServiceUpdateData().observe(viewLifecycleOwner, {
             serviceUpdateData = it
+            Log.wtf("observe", serviceUpdateData.size.toString())
             val pref =
                 PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean("updateon", false)
-            attachChart(pref, it, false)
+            attachChart(pref, false)
             if (pref)
                 if (!it.isNullOrEmpty() && it[0].size > 2) {
                     createGraph(it, false)
@@ -212,13 +222,27 @@ class CalcFragment : Fragment() {
                 }
         })
 
+ /*       lifecycleScope.launchWhenStarted {
+            calcViewModel.getServiceUpdateData().collect {
+                serviceUpdateData = it
+                val pref =
+                    PreferenceManager.getDefaultSharedPreferences(context)
+                        .getBoolean("updateon", false)
+                attachChart(pref, it, false)
+                if (pref)
+                    if (!it.isNullOrEmpty() && it[0].size > 2) {
+                        createGraph(it, false)
+                        fillGraph(false, it, updateSpinnerValue)
+                    }
+            }
+        }*/
 
         calcViewModel.dataWidgetUpdate.observe(viewLifecycleOwner) {
             widgetUpdateData = it as MutableList<Currencies>
             val pref =
                 PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean("widgetOn", false)
-            attachChart(pref, it, true)
+            attachChart(pref,true)
             if (pref) {
                 if (it.isNotEmpty()) {
                     createGraph(it, true)
@@ -227,9 +251,17 @@ class CalcFragment : Fragment() {
             }
         }
 
-        calcViewModel.rubValue.observe(viewLifecycleOwner, {
+
+        /*calcViewModel.rubValue.observe(viewLifecycleOwner, {
             rubValue.text = it
-        })
+        })*/
+
+        lifecycleScope.launchWhenStarted {
+            calcViewModel.rubValue.collect {
+                rubValue.text = it
+            }
+        }
+
     }
 
 
@@ -239,27 +271,28 @@ class CalcFragment : Fragment() {
      * @param pref if false- remove view with graph, else - attach it
      */
     @Suppress("UNCHECKED_CAST")
-    private fun attachChart(pref: Boolean, data: Any, type: Boolean) {
+    private fun attachChart(pref: Boolean, type: Boolean) {
         val parent: LinearLayout?
         val child: View?
         val spinner: Spinner
         var spinnerPos: Int
         val text: String
-        val serviceData = data as List<List<CurrencyTCS>>
-        val updateData = data as List<Currencies>
+
+        //Log.wtf("serviceData", serviceData.size.toString())
+
         if (!type) {
             parent = viewAcceptService
             child = viewChildService
             currGraphSpinnerService = child!!.findViewById(R.id.currency_graf)
             spinner = currGraphSpinnerService
-            spinnerPos = updateSpinnerValue
+            //spinnerPos = updateSpinnerValue
             text = getString(R.string.CALCFRAGdatafrautoup)
         } else {
             parent = viewAcceptWidget
             child = viewChildWidget
             currGraphSpinnerWidget = child!!.findViewById(R.id.currency_graf)
             spinner = currGraphSpinnerWidget
-            spinnerPos = widgetSpinnerValue
+            //spinnerPos = widgetSpinnerValue
             text = getString(R.string.CALCFRAGdatafrwidget)
         }
         if (pref) {
@@ -280,6 +313,7 @@ class CalcFragment : Fragment() {
                 )
                 currAdapter.setDropDownViewResource(R.layout.spinner_layout_main)
                 spinnerPos = spinner.selectedItemPosition
+
                 spinner.apply {
                     adapter = currAdapter
                     onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -289,14 +323,17 @@ class CalcFragment : Fragment() {
                         ) {
                             spinnerPos = spinner.selectedItemPosition
                             if (!type) {
-                                if (!serviceData.isNullOrEmpty() && serviceData[0].size > 2) {
-                                    createGraph(serviceData, false)
-                                    fillGraph(false, serviceData, spinnerPos)
+                                updateSpinnerValue = spinnerPos
+                                if (!serviceUpdateData.isNullOrEmpty() && serviceUpdateData[0].size > 2) {
+                                    createGraph(serviceUpdateData, false)
+                                    fillGraph(false, serviceUpdateData, spinnerPos)
                                 }
                             } else {
-                                if (updateData.isNotEmpty()) {
-                                    createGraph(updateData, true)
-                                    fillGraph(true, updateData, widgetSpinnerValue)
+                                widgetSpinnerValue = spinnerPos
+                                Log.wtf("widget", widgetUpdateData.size.toString())
+                                if (widgetUpdateData.isNotEmpty()) {
+                                    createGraph(widgetUpdateData, true)
+                                    fillGraph(true, widgetUpdateData, spinnerPos)
                                 }
                             }
                         }
@@ -305,17 +342,17 @@ class CalcFragment : Fragment() {
                     }
                 }
                 val title = child.findViewById<TextView>(R.id.title)
-
                 title.text = text
                 val trashCan = child.findViewById<ImageView>(R.id.trashcan)
                 trashCan.apply {
                     setOnClickListener {
-                        if (!type)
+                        if (!type) {
                             GlobalScope.launch(Dispatchers.IO) {
-                                calcViewModel.deleteServiceUpdateData(data)
+                                calcViewModel.deleteServiceUpdateData(serviceUpdateData)
                             }
-                        else
+                        } else {
                             calcViewModel.deleteWidgetUpdateData(widgetUpdateData)
+                        }
                     }
                 }
             }

@@ -15,7 +15,12 @@ import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker
 import com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker
 import com.vadimko.curforeckotlin.utils.ArchivePreferences
+import com.vadimko.curforeckotlin.utils.CheckConnection
 import com.vadimko.curforeckotlin.utils.DateConverter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.*
@@ -33,21 +38,40 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
      * If [dataCB] is null get last request from [ArchivePreferences] and load it by [loadCBArchive]
      * @return [dataCB]
      */
-    fun getDataCB(): MutableLiveData<List<CurrencyCBarhive>> {
+ /*   fun getDataCB(): MutableLiveData<List<CurrencyCBarhive>> {
         if (dataCB.value?.size == null) {
             val archPr = ArchivePreferences.loadPrefs()
             loadCBArchive(archPr[4], archPr[5], archPr[3])
         }
         return dataCB
+    }*/
+    fun getDataCB(): MutableStateFlow<List<CurrencyCBarhive>> {
+        if (dataCB.value[0].offCur == "") {
+            val archPr = ArchivePreferences.loadPrefs()
+            loadCBArchive(archPr[4], archPr[5], archPr[3])
+        }
+        return dataCB
     }
-
     /**
      * If [dataMOEX] is null, load last user request params from [ArchivePreferences] and send
      * request to server through [loadDataMOEX]
      * @return [dataMOEX]
      */
-    fun getDataMOEX(): MutableLiveData<List<CurrencyMOEX>> {
+    /*fun getDataMOEX(): MutableLiveData<List<CurrencyMOEX>> {
         if (dataMOEX.value?.size == null) {
+            val archPr = ArchivePreferences.loadPrefs()
+            loadDataMOEX(
+                archPr[6],
+                archPr[7],
+                archPr[8],
+                archPr[9]
+            )
+        }
+        return dataMOEX
+    }*/
+
+    fun getDataMOEX(): MutableStateFlow<List<CurrencyMOEX>> {
+        if (dataMOEX.value[0].dates == "") {
             val archPr = ArchivePreferences.loadPrefs()
             loadDataMOEX(
                 archPr[6],
@@ -62,6 +86,7 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
 
     /**
      * Depending on the selected values of the spinners, forms parts of the request to the server
+     * and send it via [loadDataMOEX] or [loadCBArchive]
      * @param chosen Spinner currency selector position
      * @param fromDate "From" date using in request to server
      * @param tillDate "Till" date using in request to server
@@ -91,8 +116,10 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
                 DateConverter.getFromTillDate(fromDate, tillDate)
             jsonDate = result[0]
             xmlDate = result[1]
-            startArchiveWorker(xmlDate[0], xmlDate[1], xmlCurr)
-            startArchiveMOEXWorker(jsonCurr, jsonDate[0], jsonDate[1])
+            //startArchiveWorker(xmlDate[0], xmlDate[1], xmlCurr)
+            loadCBArchive(xmlDate[0],xmlDate[1], xmlCurr)
+            //startArchiveMOEXWorker(jsonCurr, jsonDate[0], jsonDate[1])
+            loadDataMOEX(jsonCurr, jsonDate[0], jsonDate[1],"24")
             ArchivePreferences.savePrefs(
                 fromDate.time, tillDate.time, chosen, xmlCurr,
                 xmlDate[0], xmlDate[1], jsonCurr, jsonDate[0], jsonDate[1], "24"
@@ -116,12 +143,12 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
         return (till.compareTo(from)) > 0
     }
 
-    /**
+  /*  *//**
      * Launch worker to get data from CB through [ArchiveWorker]
      * @param from "From" date using in request to server
      * @param till "Till" date using in request to server
      * @param request string contains request to server
-     */
+     *//*
     private fun startArchiveWorker(from: String, till: String, request: String) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -146,12 +173,12 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
     }
 
 
-    /**
+    *//**
      * Launch worker to get data from MOEX through [ArchiveMOEXWorker]
      * @param from "From" date using in request to server
      * @param till "Till" date using in request to server
      * @param request string contains request to server
-     */
+     *//*
     private fun startArchiveMOEXWorker(request: String, from: String, till: String) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -168,7 +195,7 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
             .setInputData(data)
             .build()
         workManager.enqueue(myWorkRequest)
-    }
+    }*/
 
     /**
      * Show warning messages if data received from CB or/and MOEX is not enough to build graph
@@ -178,41 +205,66 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Companion object for operating with LiveData [dataCB], [dataMOEX] and load them through
+     * Companion object for operating with MutableStateFlow [dataCB], [dataMOEX] and load them through
      * [loadCBArchive], [loadDataMOEX]
-     * @property dataCB MutableLiveData contains list of actual currency values [CurrencyCBarhive] from CB through [CBxmlRepository]
-     * @property dataMOEX MutableLiveData contains list of actual currency values [CurrencyMOEX] from MOEX through [MOEXRepository]
+     * @property dataCB MutableStateFlow contains list of actual currency values [CurrencyCBarhive]
+     * from CB through [CBxmlRepository]
+     * @property dataMOEX MutableStateFlow contains list of actual currency values [CurrencyMOEX]
+     * from MOEX through [MOEXRepository]
      */
     companion object {
 
-        private var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
+      /*  private var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
             MutableLiveData<List<CurrencyCBarhive>>()
 
         internal fun setDataCB(data: List<CurrencyCBarhive>) {
             dataCB.postValue(data)
+        }*/
+
+        private var dataCB: MutableStateFlow<List<CurrencyCBarhive>> =
+            MutableStateFlow(listOf(CurrencyCBarhive()))
+
+        internal fun setDataCB(data: List<CurrencyCBarhive>) {
+            dataCB.value = data
         }
 
-        private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
+       /* private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
             MutableLiveData<List<CurrencyMOEX>>()
 
         internal fun setDataMOEX(data: List<CurrencyMOEX>) {
             dataMOEX.postValue(data)
+        }*/
+
+        private var dataMOEX: MutableStateFlow<List<CurrencyMOEX>> =
+            MutableStateFlow(listOf(CurrencyMOEX()))
+
+        internal fun setDataMOEX(data: List<CurrencyMOEX>) {
+            dataMOEX.value= data
         }
+
 
         /**
          * Load currencies values from CB through [CBxmlRepository] which post it to [dataCB]
          */
         fun loadCBArchive(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
-            val cbxmlRepository = CBxmlRepository()
-            cbxmlRepository.getXMLarchive(date_req1, date_req2, VAL_NM_RQ)
+            if (CheckConnection.checkConnect()) {
+                 //GlobalScope.launch(Dispatchers.IO) {
+                val cbxmlRepository = CBxmlRepository()
+                cbxmlRepository.getXMLarchive(date_req1, date_req2, VAL_NM_RQ)
+            //}
+            }
         }
 
         /**
          * Load currencies values from MOEX through [MOEXRepository] which post it to [dataMOEX]
          */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
-            val moexRepository = MOEXRepository()
-            moexRepository.getMOEX(request, from, till, interval, true)
+            if (CheckConnection.checkConnect()) {
+               //   GlobalScope.launch(Dispatchers.IO) {
+                val moexRepository = MOEXRepository()
+                moexRepository.getMOEX(request, from, till, interval, true)
+           // }
+            }
         }
     }
 }

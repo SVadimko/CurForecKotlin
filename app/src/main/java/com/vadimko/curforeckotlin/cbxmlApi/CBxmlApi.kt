@@ -9,11 +9,10 @@ import retrofit2.http.Query
  */
 
 interface CBxmlApi {
-
     @GET("XML_dynamic.asp")
-    fun getTCSForec(
+    fun getCBXmlForec(
         @Query("date_req1") date_req1: String,
         @Query("date_req2") date_req2: String,
         @Query("VAL_NM_RQ") VAL_NM_RQ: String
-    ): Call<MOEXXMLResponse>
+    ): Call<CBXXMLResponse>
 }

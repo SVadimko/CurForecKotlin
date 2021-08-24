@@ -14,6 +14,10 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.*
@@ -120,35 +124,39 @@ object TodayChartBuilder : KoinComponent {
         s: String,
         dataList: List<CurrencyMOEX>,
     ) {
-        val dates: MutableList<String> = mutableListOf()
-        val open: MutableList<Double> = mutableListOf()
-        val close: MutableList<Double> = mutableListOf()
-        val low: MutableList<Double> = mutableListOf()
-        val high: MutableList<Double> = mutableListOf()
-        val warprice: MutableList<Double> = mutableListOf()
-        val datesForecast: MutableList<String> = mutableListOf()
-        dates.clear()
-        open.clear()
-        close.clear()
-        high.clear()
-        low.clear()
-        warprice.clear()
-        datesForecast.clear()
-        dataList.forEach {
-            dates.add(it.dates)
-            open.add(it.open)
-            close.add(it.close)
-            high.add(it.high)
-            low.add(it.low)
-            warprice.add(it.warprice)
-            datesForecast.add(it.dates)
+        GlobalScope.launch(Dispatchers.IO) {
+            val dates: MutableList<String> = mutableListOf()
+            val open: MutableList<Double> = mutableListOf()
+            val close: MutableList<Double> = mutableListOf()
+            val low: MutableList<Double> = mutableListOf()
+            val high: MutableList<Double> = mutableListOf()
+            val warprice: MutableList<Double> = mutableListOf()
+            val datesForecast: MutableList<String> = mutableListOf()
+            dates.clear()
+            open.clear()
+            close.clear()
+            high.clear()
+            low.clear()
+            warprice.clear()
+            datesForecast.clear()
+            dataList.forEach {
+                dates.add(it.dates)
+                open.add(it.open)
+                close.add(it.close)
+                high.add(it.high)
+                low.add(it.low)
+                warprice.add(it.warprice)
+                datesForecast.add(it.dates)
+            }
+            val data = CombinedData()
+            data.setData(generateLineData(s, warprice))
+            data.setData(generateCandleData(s, open, close, high, low))
+            withContext(Dispatchers.Main) {
+                comboChartForec.data = data
+                comboChartForec.notifyDataSetChanged()
+                comboChartForec.invalidate()
+            }
         }
-        val data = CombinedData()
-        data.setData(generateLineData(s, warprice))
-        data.setData(generateCandleData(s, open, close, high, low))
-        comboChartForec.data = data
-        comboChartForec.notifyDataSetChanged()
-        comboChartForec.invalidate()
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.vadimko.curforeckotlin.moexApi
 
+import android.util.Log
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import com.vadimko.curforeckotlin.ui.today.TodayViewModel
 import okhttp3.OkHttpClient
@@ -46,7 +47,6 @@ class MOEXRepository {
             moexApi.getMOEXForec(request, from, till, "24")
         }
         currentRequest.enqueue(object : Callback<MOEXResponse> {
-
             override fun onResponse(call: Call<MOEXResponse>, response: Response<MOEXResponse>) {
                 val moexResponse: MOEXResponse? = response.body()
                 val moexCandles: MOEXCandles? = moexResponse?.candles

@@ -2,6 +2,7 @@ package com.vadimko.curforeckotlin.widget
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
+import android.util.Log
 import com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 
@@ -11,7 +12,7 @@ import com.vadimko.curforeckotlin.tcsApi.TCSRepository
  * @param appWidgetManager Application widget Manager
  */
 
-class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWidgetID: Int) {
+class WidgetUpdater(appWidgetManager: AppWidgetManager, appWidgetID: Int) {
     private val mappWidgetManager = appWidgetManager
     private val mappWidgetID = appWidgetID
 

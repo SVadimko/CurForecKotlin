@@ -9,7 +9,7 @@ import org.simpleframework.xml.Root
  * Splitting xml response from Central Bank into classes
  */
 @Root(name = "ValCurs", strict = false)
-data class MOEXXMLResponse(
+data class CBXXMLResponse(
     @field:ElementList(name = "Record", inline = true)
     var record: List<Record>? = null,
 )

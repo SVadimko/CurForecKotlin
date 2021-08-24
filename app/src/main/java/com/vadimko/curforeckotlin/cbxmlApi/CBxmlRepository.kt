@@ -2,6 +2,7 @@ package com.vadimko.curforeckotlin.cbxmlApi
 
 
 import android.annotation.SuppressLint
+import android.util.Log
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -34,18 +35,18 @@ class CBxmlRepository {
     }
 
     fun getXMLarchive(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
-        val currentRequest: Call<MOEXXMLResponse> = cbxmlApi.getTCSForec(
+        val currentRequest: Call<CBXXMLResponse> = cbxmlApi.getCBXmlForec(
             date_req1,
             date_req2,
             VAL_NM_RQ
         )
-        currentRequest.enqueue(object : Callback<MOEXXMLResponse> {
+        currentRequest.enqueue(object : Callback<CBXXMLResponse> {
             /**
              * Get list of [CurrencyCBarhive] and post it to [ArchiveViewModel]
              */
             override fun onResponse(
-                call: Call<MOEXXMLResponse>,
-                response: Response<MOEXXMLResponse>
+                call: Call<CBXXMLResponse>,
+                response: Response<CBXXMLResponse>
             ) {
                 val listData: MutableList<CurrencyCBarhive> = mutableListOf()
                 val cBXMLResponse = response.body()
@@ -59,7 +60,7 @@ class CBxmlRepository {
                 ArchiveViewModel.setDataCB(listData)
             }
 
-            override fun onFailure(call: Call<MOEXXMLResponse>, t: Throwable) {
+            override fun onFailure(call: Call<CBXXMLResponse>, t: Throwable) {
                 t.printStackTrace()
             }
         })

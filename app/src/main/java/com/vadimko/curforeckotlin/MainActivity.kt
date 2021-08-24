@@ -20,6 +20,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vadimko.curforeckotlin.databinding.ActivityMainBinding
+import com.vadimko.curforeckotlin.utils.CheckConnection
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -38,8 +39,6 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         createNotificationChannel()
-        checkConnection()
-        //checkAutoUpdate()
         super.onCreate(savedInstanceState)
 
 
@@ -168,9 +167,9 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         super.onResume()
     }
 
-    /**
+  /*  *//**
      * Checking connection state if no internet - Show Toast
-     */
+     *//*
     private fun checkConnection() {
         val connectivityManager =
             getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -178,6 +177,6 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         val caps = connectivityManager.getNetworkCapabilities(currentNetwork)
         if (caps?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) != true)
             Toast.makeText(context, getString(R.string.noconnection), Toast.LENGTH_LONG).show()
-    }
+    }*/
 
 }

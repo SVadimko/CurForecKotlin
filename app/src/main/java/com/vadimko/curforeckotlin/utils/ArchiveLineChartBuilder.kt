@@ -17,6 +17,10 @@ import com.vadimko.curforeckotlin.forecastsMethods.ExponentSmooth
 import com.vadimko.curforeckotlin.forecastsMethods.LessSquare
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -118,18 +122,23 @@ object ArchiveLineChartBuilder : KoinComponent {
      * @param s - currency name
      */
     fun fillClearCbrfGraph(linearCbrf: LineChart, s: String, dataListCB: List<CurrencyCBarhive>) {
-        val dataSets = ArrayList<ILineDataSet>()
-        val entries = ArrayList<Entry>()
-        for (i in dataListCB.indices) {
-            val str: String = dataListCB[i].offCur.replace(',', '.')
-            entries.add(Entry(i.toFloat(), str.toFloat()))
+        GlobalScope.launch(Dispatchers.IO) {
+            val dataSets = ArrayList<ILineDataSet>()
+            val entries = ArrayList<Entry>()
+            for (i in dataListCB.indices) {
+                val str: String = dataListCB[i].offCur.replace(',', '.')
+                entries.add(Entry(i.toFloat(), str.toFloat()))
+            }
+            val d =
+                LineDataSet(entries, "$s ${context.getString(R.string.ARCFRAGcursCBGraphLabel)}")
+            LinearDataSetsConfigure.configureLineDataSets(d, false, 32, 90, 200, 1)
+            dataSets.add(d)
+            withContext(Dispatchers.Main) {
+                linearCbrf.data = LineData(dataSets)
+                linearCbrf.notifyDataSetChanged()
+                linearCbrf.invalidate()
+            }
         }
-        val d = LineDataSet(entries, "$s ${context.getString(R.string.ARCFRAGcursCBGraphLabel)}")
-        LinearDataSetsConfigure.configureLineDataSets(d, false, 32, 90, 200, 1)
-        dataSets.add(d)
-        linearCbrf.data = LineData(dataSets)
-        linearCbrf.notifyDataSetChanged()
-        linearCbrf.invalidate()
     }
 
     /**
@@ -143,165 +152,171 @@ object ArchiveLineChartBuilder : KoinComponent {
         s: String,
         dataListMOEX: List<CurrencyMOEX>
     ) {
-        val warprice: MutableList<Float> = mutableListOf()
-        warprice.clear()
-        dataListMOEX.forEach {
-            warprice.add(it.warprice.toFloat())
-        }
-        val dataSets: MutableList<ILineDataSet> = mutableListOf()
-        val warpFlt: MutableList<Float> = mutableListOf()
-        for (i in warprice.indices) {
-            warpFlt.add(warprice[i])
-        }
+        GlobalScope.launch(Dispatchers.IO) {
+            val warprice: MutableList<Float> = mutableListOf()
+            warprice.clear()
+            dataListMOEX.forEach {
+                warprice.add(it.warprice.toFloat())
+            }
+            val dataSets: MutableList<ILineDataSet> = mutableListOf()
+            val warpFlt: MutableList<Float> = mutableListOf()
+            for (i in warprice.indices) {
+                warpFlt.add(warprice[i])
+            }
 
-        val entriesWMA: MutableList<Entry> = mutableListOf()
-        for (i in warprice.indices) {
-            entriesWMA.add(Entry(i.toFloat(), warprice[i]))
-        }
-        val entriesWMAForecast: MutableList<Entry> = mutableListOf()
-        val utilWMA = WMA(warpFlt, 3)
-        utilWMA.calc()
-        val wmaError = utilWMA.getAverageErr().toString()
-        val forecastWMA: MutableList<Float> = utilWMA.getForecast()
-        for (i in forecastWMA.indices) {
-            entriesWMAForecast.add(
-                Entry(
-                    (i + warprice.size - 1).toFloat(),
-                    forecastWMA[i]
+            val entriesWMA: MutableList<Entry> = mutableListOf()
+            for (i in warprice.indices) {
+                entriesWMA.add(Entry(i.toFloat(), warprice[i]))
+            }
+            val entriesWMAForecast: MutableList<Entry> = mutableListOf()
+            val utilWMA = WMA(warpFlt, 3)
+            utilWMA.calc()
+            val wmaError = utilWMA.getAverageErr().toString()
+            val forecastWMA: MutableList<Float> = utilWMA.getForecast()
+            for (i in forecastWMA.indices) {
+                entriesWMAForecast.add(
+                    Entry(
+                        (i + warprice.size - 1).toFloat(),
+                        forecastWMA[i]
+                    )
                 )
-            )
-        }
-        warpFlt.clear()
-        for (i in warprice.indices) {
-            warpFlt.add(warprice[i])
-        }
-        val entriesSmooth: MutableList<Entry> = mutableListOf()
-        val utilSmooth = ExponentSmooth(warpFlt)
-        utilSmooth.calc()
-        val smooth: MutableList<Float> = utilSmooth.getSmooth()
-        for (i in smooth.indices) {
-            entriesSmooth.add(Entry(i.toFloat(), smooth[i]))
-        }
-        val entriesSmoothForecast: MutableList<Entry> = mutableListOf()
-        val forecast1: MutableList<Float> = utilSmooth.getForecast()
-        for (i in forecast1.indices) {
-            entriesSmoothForecast.add(
-                Entry(
-                    ((i + smooth.size - 1).toFloat()),
-                    forecast1[i]
+            }
+            warpFlt.clear()
+            for (i in warprice.indices) {
+                warpFlt.add(warprice[i])
+            }
+            val entriesSmooth: MutableList<Entry> = mutableListOf()
+            val utilSmooth = ExponentSmooth(warpFlt)
+            utilSmooth.calc()
+            val smooth: MutableList<Float> = utilSmooth.getSmooth()
+            for (i in smooth.indices) {
+                entriesSmooth.add(Entry(i.toFloat(), smooth[i]))
+            }
+            val entriesSmoothForecast: MutableList<Entry> = mutableListOf()
+            val forecast1: MutableList<Float> = utilSmooth.getForecast()
+            for (i in forecast1.indices) {
+                entriesSmoothForecast.add(
+                    Entry(
+                        ((i + smooth.size - 1).toFloat()),
+                        forecast1[i]
+                    )
                 )
-            )
-        }
+            }
 
-        warpFlt.clear()
-        for (i in warprice.indices) {
-            warpFlt.add(warprice[i])
-        }
-        val entriesLessSquare: MutableList<Entry> = mutableListOf()
-        val utilLessSquare = LessSquare(warpFlt)
-        utilLessSquare.calc()
-        val square: MutableList<Float> = utilLessSquare.getOutputVal()
-        for (i in square.indices) {
-            entriesLessSquare.add(Entry(i.toFloat(), square[i]))
-        }
-        val entriesLessSquareForecast: MutableList<Entry> = mutableListOf()
-        val forecastLessSquare: MutableList<Float> = utilLessSquare.getForecastVal()
-        for (i in forecastLessSquare.indices) {
-            entriesLessSquareForecast.add(
-                Entry(
-                    (i + square.size - 1).toFloat(),
-                    forecastLessSquare[i]
+            warpFlt.clear()
+            for (i in warprice.indices) {
+                warpFlt.add(warprice[i])
+            }
+            val entriesLessSquare: MutableList<Entry> = mutableListOf()
+            val utilLessSquare = LessSquare(warpFlt)
+            utilLessSquare.calc()
+            val square: MutableList<Float> = utilLessSquare.getOutputVal()
+            for (i in square.indices) {
+                entriesLessSquare.add(Entry(i.toFloat(), square[i]))
+            }
+            val entriesLessSquareForecast: MutableList<Entry> = mutableListOf()
+            val forecastLessSquare: MutableList<Float> = utilLessSquare.getForecastVal()
+            for (i in forecastLessSquare.indices) {
+                entriesLessSquareForecast.add(
+                    Entry(
+                        (i + square.size - 1).toFloat(),
+                        forecastLessSquare[i]
+                    )
                 )
+            }
+
+
+            val lineDataSetWMA =
+                LineDataSet(entriesWMA, "$s ${context.getString(R.string.ARCFRAGaverage)} ")
+            LinearDataSetsConfigure.configureLineDataSets(
+                lineDataSetWMA,
+                false,
+                23,
+                100,
+                255,
+                0
             )
+            dataSets.add(lineDataSetWMA)
+
+            val lineDataSetWMAForecast = LineDataSet(
+                entriesWMAForecast,
+                "$s ${context.getString(R.string.ARCFRAGmovAverForecGraph)} $wmaError %"
+            )
+            LinearDataSetsConfigure.configureLineDataSets(
+                lineDataSetWMAForecast,
+                true,
+                40,
+                120,
+                230,
+                0
+            )
+            dataSets.add(lineDataSetWMAForecast)
+
+
+            val lineDataSetSmooth =
+                LineDataSet(
+                    entriesSmooth,
+                    "$s ${context.getString(R.string.ARCFRAGexponWeighGraph)}"
+                )
+            LinearDataSetsConfigure.configureLineDataSets(
+                lineDataSetSmooth,
+                false,
+                210,
+                80,
+                90,
+                0
+            )
+            dataSets.add(lineDataSetSmooth)
+
+            val lineDataSetSmoothForecast = LineDataSet(
+                entriesSmoothForecast,
+                "$s  ${context.getString(R.string.ARCFRAGexponWeighForecGraph)} ${utilSmooth.getErrSmooth()}%"
+            )
+            LinearDataSetsConfigure.configureLineDataSets(
+                lineDataSetSmoothForecast,
+                true,
+                170,
+                100,
+                100,
+                0
+            )
+            dataSets.add(lineDataSetSmoothForecast)
+
+
+            val lineDataSetLessSquare =
+                LineDataSet(
+                    entriesLessSquare,
+                    "$s ${context.getString(R.string.ARCFRAGleastSqMeth)}"
+                )
+            LinearDataSetsConfigure.configureLineDataSets(
+                lineDataSetLessSquare,
+                false,
+                130,
+                210,
+                120,
+                0
+            )
+            dataSets.add(lineDataSetLessSquare)
+
+            val lineDataSetLessSquareForecast = LineDataSet(
+                entriesLessSquareForecast,
+                "$s  ${context.getString(R.string.ARCFRAGleastSqMethGraph)} ${utilLessSquare.getErrVal()} %"
+            )
+            LinearDataSetsConfigure.configureLineDataSets(
+                lineDataSetLessSquareForecast,
+                true,
+                100,
+                170,
+                80,
+                0
+            )
+            dataSets.add(lineDataSetLessSquareForecast)
+            val dateSet = LineData(dataSets)
+            withContext(Dispatchers.Main) {
+                linearChartForec.data = dateSet
+                linearChartForec.notifyDataSetChanged()
+                linearChartForec.invalidate()
+            }
         }
-
-
-        val lineDataSetWMA =
-            LineDataSet(entriesWMA, "$s ${context.getString(R.string.ARCFRAGaverage)} ")
-        LinearDataSetsConfigure.configureLineDataSets(
-            lineDataSetWMA,
-            false,
-            23,
-            100,
-            255,
-            0
-        )
-        dataSets.add(lineDataSetWMA)
-
-        val lineDataSetWMAForecast = LineDataSet(
-            entriesWMAForecast,
-            "$s ${context.getString(R.string.ARCFRAGmovAverForecGraph)} $wmaError %"
-        )
-        LinearDataSetsConfigure.configureLineDataSets(
-            lineDataSetWMAForecast,
-            true,
-            40,
-            120,
-            230,
-            0
-        )
-        dataSets.add(lineDataSetWMAForecast)
-
-
-        val lineDataSetSmooth =
-            LineDataSet(entriesSmooth, "$s ${context.getString(R.string.ARCFRAGexponWeighGraph)}")
-        LinearDataSetsConfigure.configureLineDataSets(
-            lineDataSetSmooth,
-            false,
-            210,
-            80,
-            90,
-            0
-        )
-        dataSets.add(lineDataSetSmooth)
-
-        val lineDataSetSmoothForecast = LineDataSet(
-            entriesSmoothForecast,
-            "$s  ${context.getString(R.string.ARCFRAGexponWeighForecGraph)} ${utilSmooth.getErrSmooth()}%"
-        )
-        LinearDataSetsConfigure.configureLineDataSets(
-            lineDataSetSmoothForecast,
-            true,
-            170,
-            100,
-            100,
-            0
-        )
-        dataSets.add(lineDataSetSmoothForecast)
-
-
-        val lineDataSetLessSquare =
-            LineDataSet(entriesLessSquare, "$s ${context.getString(R.string.ARCFRAGleastSqMeth)}")
-        LinearDataSetsConfigure.configureLineDataSets(
-            lineDataSetLessSquare,
-            false,
-            130,
-            210,
-            120,
-            0
-        )
-        dataSets.add(lineDataSetLessSquare)
-
-        val lineDataSetLessSquareForecast = LineDataSet(
-            entriesLessSquareForecast,
-            "$s  ${context.getString(R.string.ARCFRAGleastSqMethGraph)} ${utilLessSquare.getErrVal()} %"
-        )
-        LinearDataSetsConfigure.configureLineDataSets(
-            lineDataSetLessSquareForecast,
-            true,
-            100,
-            170,
-            80,
-            0
-        )
-        dataSets.add(lineDataSetLessSquareForecast)
-
-
-        val dateSet = LineData(dataSets)
-        linearChartForec.data = dateSet
-        linearChartForec.notifyDataSetChanged()
-        val animationLong = 5 * warprice.size
-        linearChartForec.animateX(animationLong)
-        linearChartForec.invalidate()
     }
 }

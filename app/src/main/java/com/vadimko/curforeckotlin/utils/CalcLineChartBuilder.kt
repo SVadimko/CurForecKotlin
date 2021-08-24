@@ -14,6 +14,10 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -172,42 +176,46 @@ object CalcLineChartBuilder : KoinComponent {
         buy: List<Double>,
         sell: List<Double>
     ) {
-        val dataSets: MutableList<ILineDataSet> = mutableListOf()
-        val buyEntries: MutableList<Entry> = mutableListOf()
-        val sellEntries: MutableList<Entry> = mutableListOf()
-        for (i in buy.indices) {
-            buyEntries.add(Entry(i.toFloat(), buy[i].toFloat()))
-            // Log.wtf("buy", i.toString())
-        }
-        val buyLineDataSet =
-            LineDataSet(buyEntries, "$curr ${context.getString(R.string.CALCFRAGbuying)}")
-        LinearDataSetsConfigure.configureLineDataSets(
-            buyLineDataSet,
-            false,
-            55,
-            70,
-            170,
-            0
-        )
-        dataSets.add(buyLineDataSet)
+        GlobalScope.launch(Dispatchers.IO) {
+            val dataSets: MutableList<ILineDataSet> = mutableListOf()
+            val buyEntries: MutableList<Entry> = mutableListOf()
+            val sellEntries: MutableList<Entry> = mutableListOf()
+            for (i in buy.indices) {
+                buyEntries.add(Entry(i.toFloat(), buy[i].toFloat()))
+                // Log.wtf("buy", i.toString())
+            }
+            val buyLineDataSet =
+                LineDataSet(buyEntries, "$curr ${context.getString(R.string.CALCFRAGbuying)}")
+            LinearDataSetsConfigure.configureLineDataSets(
+                buyLineDataSet,
+                false,
+                55,
+                70,
+                170,
+                0
+            )
+            dataSets.add(buyLineDataSet)
 
-        for (i in sell.indices) {
-            sellEntries.add(Entry(i.toFloat(), sell[i].toFloat()))
+            for (i in sell.indices) {
+                sellEntries.add(Entry(i.toFloat(), sell[i].toFloat()))
+            }
+            val sellLineDataSet =
+                LineDataSet(sellEntries, "$curr ${context.getString(R.string.CALCFRAGselling)}")
+            LinearDataSetsConfigure.configureLineDataSets(
+                sellLineDataSet,
+                false,
+                240,
+                70,
+                55,
+                0
+            )
+            dataSets.add(sellLineDataSet)
+            val dateSet = LineData(dataSets)
+            withContext(Dispatchers.Main) {
+                lineChart.data = dateSet
+                lineChart.notifyDataSetChanged()
+                lineChart.invalidate()
+            }
         }
-        val sellLineDataSet =
-            LineDataSet(sellEntries, "$curr ${context.getString(R.string.CALCFRAGselling)}")
-        LinearDataSetsConfigure.configureLineDataSets(
-            sellLineDataSet,
-            false,
-            240,
-            70,
-            55,
-            0
-        )
-        dataSets.add(sellLineDataSet)
-        val dateSet = LineData(dataSets)
-        lineChart.data = dateSet
-        lineChart.notifyDataSetChanged()
-        lineChart.invalidate()
     }
 }
