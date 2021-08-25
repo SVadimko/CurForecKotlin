@@ -415,6 +415,9 @@ $dokka.location:com.vadimko.curforeckotlin.updateWorkers/ArchiveWorker/doWork/#/
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/NowWorker///PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-now-worker/index.html
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/NowWorker/NowWorker/#android.content.Context#androidx.work.WorkerParameters/PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-now-worker/-now-worker.html
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/NowWorker/doWork/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-now-worker/do-work.html
+$dokka.location:com.vadimko.curforeckotlin.updateWorkers/ServiceCheckWorker///PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-service-check-worker/index.html
+$dokka.location:com.vadimko.curforeckotlin.updateWorkers/ServiceCheckWorker/ServiceCheckWorker/#android.content.Context#androidx.work.WorkerParameters/PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-service-check-worker/-service-check-worker.html
+$dokka.location:com.vadimko.curforeckotlin.updateWorkers/ServiceCheckWorker/doWork/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-service-check-worker/do-work.html
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/TodayWorker///PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-today-worker/index.html
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/TodayWorker/TodayWorker/#android.content.Context#androidx.work.WorkerParameters/PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-today-worker/-today-worker.html
 $dokka.location:com.vadimko.curforeckotlin.updateWorkers/TodayWorker/doWork/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.updateWorkers/-today-worker/do-work.html
@@ -447,6 +450,10 @@ $dokka.location:com.vadimko.curforeckotlin.utils/CheckConnection/blockSeveralToa
 $dokka.location:com.vadimko.curforeckotlin.utils/CheckConnection/checkConnect/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-connection/check-connect.html
 $dokka.location:com.vadimko.curforeckotlin.utils/CheckConnection/context/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-connection/context.html
 $dokka.location:com.vadimko.curforeckotlin.utils/CheckConnection/stopShowToast/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-connection/stop-show-toast.html
+$dokka.location:com.vadimko.curforeckotlin.utils/CheckTCSUpdateServiceIsRunning///PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-t-c-s-update-service-is-running/index.html
+$dokka.location:com.vadimko.curforeckotlin.utils/CheckTCSUpdateServiceIsRunning/checkAutoUpdate/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-t-c-s-update-service-is-running/check-auto-update.html
+$dokka.location:com.vadimko.curforeckotlin.utils/CheckTCSUpdateServiceIsRunning/context/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-t-c-s-update-service-is-running/context.html
+$dokka.location:com.vadimko.curforeckotlin.utils/CheckTCSUpdateServiceIsRunning/isServiceAlive/#java.lang.Class[*]/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-check-t-c-s-update-service-is-running/is-service-alive.html
 $dokka.location:com.vadimko.curforeckotlin.utils/CoinsAnimator.Companion///PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-coins-animator/-companion/index.html
 $dokka.location:com.vadimko.curforeckotlin.utils/CoinsAnimator.Companion/stop/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-coins-animator/-companion/stop.html
 $dokka.location:com.vadimko.curforeckotlin.utils/CoinsAnimator.Companion/stopAnimation/#/PointingToDeclaration/app/com.vadimko.curforeckotlin.utils/-coins-animator/-companion/stop-animation.html
@@ -532,6 +539,7 @@ $dokka.location:com.vadimko.curforeckotlin.widget/WidgetUpdater/updateTCs/#/Poin
 $dokka.location:com.vadimko.curforeckotlin////PointingToDeclaration/app/com.vadimko.curforeckotlin/index.html
 $dokka.location:com.vadimko.curforeckotlin//CHANNEL_ID/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-c-h-a-n-n-e-l_-i-d.html
 $dokka.location:com.vadimko.curforeckotlin//NOTIFICATION_ID/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-n-o-t-i-f-i-c-a-t-i-o-n_-i-d.html
+$dokka.location:com.vadimko.curforeckotlin//SERVICE_WORKER_TAG/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-s-e-r-v-i-c-e_-w-o-r-k-e-r_-t-a-g.html
 $dokka.location:com.vadimko.curforeckotlin//notificationId/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/notification-id.html
 $dokka.location:com.vadimko.curforeckotlin/BootReceiver///PointingToDeclaration/app/com.vadimko.curforeckotlin/-boot-receiver/index.html
 $dokka.location:com.vadimko.curforeckotlin/BootReceiver/BootReceiver/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-boot-receiver/-boot-receiver.html
@@ -552,10 +560,9 @@ $dokka.location:com.vadimko.curforeckotlin/MainActivity.Companion/setFullscreen/
 $dokka.location:com.vadimko.curforeckotlin/MainActivity///PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/index.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/MainActivity/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/-main-activity.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/binding/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/binding.html
-$dokka.location:com.vadimko.curforeckotlin/MainActivity/checkAutoUpdate/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/check-auto-update.html
+$dokka.location:com.vadimko.curforeckotlin/MainActivity/checkAutoUpdatePeriodic/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/check-auto-update-periodic.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/context/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/context.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/createNotificationChannel/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/create-notification-channel.html
-$dokka.location:com.vadimko.curforeckotlin/MainActivity/isServiceAlive/#java.lang.Class[*]/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/is-service-alive.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/onCreate/#android.os.Bundle?/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/on-create.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/onDestroy/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/on-destroy.html
 $dokka.location:com.vadimko.curforeckotlin/MainActivity/onResume/#/PointingToDeclaration/app/com.vadimko.curforeckotlin/-main-activity/on-resume.html

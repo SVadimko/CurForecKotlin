@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -107,7 +106,6 @@ class NowFragment : Fragment() {
     override fun onStop() {
         nowViewModel.stopAnimation()
         SoundPlayer.onStop()
-        Log.wtf("OnStop", "TRUE")
         super.onStop()
     }
 

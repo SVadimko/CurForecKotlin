@@ -77,7 +77,8 @@ Contains View and ViewModel for Today screen
 
 # Package com.vadimko.curforeckotlin.updateWorkers
 
-Contains Workers to update the exchange rate information for the relevant screens (not used)
+Contains Worker which periodically check is TCSUupdateService is alive and launch it, if not. Other
+workers in this package not used.
 
 # Package com.vadimko.curforeckotlin.widget
 

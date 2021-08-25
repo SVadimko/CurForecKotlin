@@ -90,7 +90,8 @@ TodayFragment - фрагмент, отвечающий за экран Сего�
 TodayModel - реализация viewmodel для соответствующего фрагмента
 
 ## /updateWorkers/
-Workers для обновления информации о курсах валют для соответствующих фрагментов (не используется)
+Содержит Worker который в случае если активировано автообновление курса периодически проверяет- не
+был ли убит сервис и запускает его, если система его убила
 
 ## /widget/
 Классы, реализующие функционал виджета
@@ -174,7 +175,9 @@ Package with helper objects
 Set of packages responsible for the UI, consists of:
 
 ## / updateWorkers /
-Workers to update the exchange rate information for the relevant snippets (not used)
+
+Contains Worker which periodically check is TCSUupdateService is alive and launch it, if not. Other
+workers in this package not used.
 
 ## /widget/
 Classes that implement the functionality of the widget

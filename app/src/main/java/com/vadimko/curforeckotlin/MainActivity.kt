@@ -1,10 +1,8 @@
 package com.vadimko.curforeckotlin
 
-import android.app.ActivityManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -14,17 +12,28 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.*
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vadimko.curforeckotlin.databinding.ActivityMainBinding
+import com.vadimko.curforeckotlin.updateWorkers.ServiceCheckWorker
+import com.vadimko.curforeckotlin.utils.CheckTCSUpdateServiceIsRunning
 import com.vadimko.curforeckotlin.utils.SoundPlayer
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.util.concurrent.TimeUnit
 
 /**
  * Const of Channel ID for Notification channel
  */
 private const val CHANNEL_ID = "11"
+
+/**
+ * Tag of ServiceCheckWorker
+ */
+private const val SERVICE_WORKER_TAG = "serviceChecker"
 
 /**
  * MainActivity class
@@ -58,49 +67,6 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         navView.setupWithNavController(navController)
     }
 
-    /**
-     * Check on/off condition auto update in [SettingsActivity] and if it on, but service is not active
-     * (checked in [isServiceAlive])-  launch [TCSUpdateServicepdate]
-     */
-    private fun checkAutoUpdate() {
-        val pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(context)
-            .getBoolean("updateon", false)
-        if (!isServiceAlive(TCSUpdateService::class.java) and pref) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(
-                    Intent(
-                        this@MainActivity,
-                        TCSUpdateService::class.java
-                    )
-                )
-            } else {
-                val i = Intent(this@MainActivity, TCSUpdateService::class.java)
-                this@MainActivity.startService(i)
-            }
-        }
-    }
-
-    /* private fun requestWorkingServices(): Boolean {
-         val serviceActive: Boolean
-         val am = this@MainActivity.getSystemService(ACTIVITY_SERVICE) as ActivityManager
-         val rs = am.getRunningServices(50)
-         serviceActive = rs.size != 0
-         Log.wtf("reqWS", isServiceAlive(TCSupdateService::class.java).toString())
-         return serviceActive
-     }*/
-
-    /**
-     * Checking is wanted service is alive
-     */
-    private fun isServiceAlive(serviceClass: Class<*>): Boolean {
-        val manager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
-        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == service.service.className) {
-                return true
-            }
-        }
-        return false
-    }
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -116,10 +82,52 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         }
     }
 
+
+    override fun onResume() {
+        val newConfig: android.content.res.Configuration = resources.configuration
+        if (newConfig.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT)
+            portraitMode(this)
+        else landscapeMode(this)
+        CheckTCSUpdateServiceIsRunning.checkAutoUpdate()
+        checkAutoUpdatePeriodic()
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        SoundPlayer.onDestroy()
+        super.onDestroy()
+    }
+
+    /**
+     * If prefs auto update be [TCSUpdateService] is on start [ServiceCheckWorker] which periodicaly
+     * checks is service alive and restart it, if no
+     */
+    private fun checkAutoUpdatePeriodic() {
+        val workManager = WorkManager.getInstance(context)
+        workManager.cancelAllWorkByTag(SERVICE_WORKER_TAG)
+        val pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean("updateon", false)
+        if (pref) {
+            val constraints = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
+
+            val serviceChecker = PeriodicWorkRequest.Builder(
+                ServiceCheckWorker::class.java, 20, TimeUnit.MINUTES, 15, TimeUnit.MINUTES
+            )
+                .setConstraints(constraints)
+                .addTag(SERVICE_WORKER_TAG)
+                .build()
+            workManager.enqueue(serviceChecker)
+        }
+    }
+
+
     /**
      * Contains function to switch interface according landscape/portrait mode
      */
     companion object {
+
         /**
          * Show [BottomNavigationView] in portrait mode
          */
@@ -154,19 +162,5 @@ class MainActivity : AppCompatActivity(), KoinComponent {
             }
             mainActivity.window.attributes = attrs
         }
-    }
-
-    override fun onResume() {
-        val newConfig: android.content.res.Configuration = resources.configuration
-        if (newConfig.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT)
-            portraitMode(this)
-        else landscapeMode(this)
-        checkAutoUpdate()
-        super.onResume()
-    }
-
-    override fun onDestroy() {
-        SoundPlayer.onDestroy()
-        super.onDestroy()
     }
 }
