@@ -36,6 +36,9 @@ object SoundPlayer : KoinComponent {
     private var stream = 0
     private var stopFlag = false
 
+    /**
+     * Initialize [mSoundPool] and set audio sound from assets
+     */
     fun onInit() {
         val attributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_GAME)
