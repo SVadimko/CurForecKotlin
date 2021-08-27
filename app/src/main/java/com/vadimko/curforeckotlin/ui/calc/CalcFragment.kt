@@ -17,7 +17,6 @@ import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.utils.CalcLineChartBuilder
 import com.vadimko.curforeckotlin.widget.AppWidget
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -312,7 +311,7 @@ class CalcFragment : Fragment() {
                 trashCan.apply {
                     setOnClickListener {
                         if (!type) {
-                            GlobalScope.launch(Dispatchers.IO) {
+                            lifecycleScope.launch(Dispatchers.IO) {
                                 calcViewModel.deleteServiceUpdateData(serviceUpdateData)
                             }
                         } else {
