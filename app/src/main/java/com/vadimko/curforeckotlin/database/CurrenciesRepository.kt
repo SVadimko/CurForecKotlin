@@ -3,10 +3,7 @@ package com.vadimko.curforeckotlin.database
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "currencies-database"
@@ -65,6 +62,7 @@ class CurrenciesRepository private constructor(context: Context) {
             }
         }
     }
+
 
     /**
      * Drop table (not used)

@@ -4,8 +4,6 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
@@ -14,6 +12,7 @@ import androidx.core.app.TaskStackBuilder
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.tcsApi.*
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
+import com.vadimko.curforeckotlin.utils.CheckConnection
 import com.vadimko.curforeckotlin.utils.Saver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -33,6 +32,7 @@ private const val notificationId = 11
  * Service for auto-updating the rates of the Tinkov bank
  */
 class TCSUpdateService : Service() {
+
     private val tcsApi: TCSApi
 
     private var period: Long = 5
@@ -58,7 +58,15 @@ class TCSUpdateService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (checkConnection()) updateTask()
+        //if (checkConnection()) updateTask()
+        updateTask()
+        startForeground(
+            NOTIFICATION_ID,
+            buildForegroundNotification(
+                "USD:  ?",
+                "EUR  ?| GBP  ?"
+            )
+        )
         return START_REDELIVER_INTENT
     }
 
@@ -77,16 +85,16 @@ class TCSUpdateService : Service() {
     }
 
     private fun updateTask() {
-        Thread {
+        GlobalScope.launch(Dispatchers.IO) {
             var allRequest = 1
             while (true) {
-                period = PreferenceManager.getDefaultSharedPreferences(this)
+                period = PreferenceManager.getDefaultSharedPreferences(applicationContext)
                     .getString("update_per", "15_min")?.split("_")?.get(0)?.toLong()!!
-                if (checkConnection()) getCurrentTCS()
+                if (CheckConnection.checkConnect()) getCurrentTCS()
                 for (y in 0 until period * 12) {
                     try {
                         TimeUnit.SECONDS.sleep(5)
-                        if (!PreferenceManager.getDefaultSharedPreferences(this)
+                        if (!PreferenceManager.getDefaultSharedPreferences(applicationContext)
                                 .getBoolean("updateon", false)
                         ) {
                             val notificationManager =
@@ -98,7 +106,7 @@ class TCSUpdateService : Service() {
                         e.printStackTrace()
                     }
                 }
-                if (!PreferenceManager.getDefaultSharedPreferences(this)
+                if (!PreferenceManager.getDefaultSharedPreferences(applicationContext)
                         .getBoolean("updateon", false)
                 ) {
                     val notificationManager =
@@ -109,7 +117,7 @@ class TCSUpdateService : Service() {
                 allRequest++
             }
             stopSelf()
-        }.start()
+        }//.start()
     }
 
     /**
@@ -287,16 +295,5 @@ class TCSUpdateService : Service() {
         with(NotificationManagerCompat.from(applicationContext)) {
             notify(notificationId, builder.build())
         }
-    }
-
-    /**
-     * Check connection state
-     */
-    private fun checkConnection(): Boolean {
-        val connectivityManager =
-            getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        val currentNetwork = connectivityManager.activeNetwork
-        val caps = connectivityManager.getNetworkCapabilities(currentNetwork)
-        return caps?.hasCapability(NET_CAPABILITY_INTERNET) ?: false
     }
 }
