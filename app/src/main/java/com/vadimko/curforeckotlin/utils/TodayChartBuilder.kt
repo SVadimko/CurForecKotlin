@@ -49,8 +49,9 @@ object TodayChartBuilder : KoinComponent {
             dates.add(it.dates)
         }
         for (i in 1 until 4) {
-            datesForecast.add(
-                "${context.getString(R.string.forec)} $period"
+            //datesForecast.add(
+            dates.add(
+                "${context.getString(R.string.forec)} +$period"
             )
         }
         comboChartForec.clear()

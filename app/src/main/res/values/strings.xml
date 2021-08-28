@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tinkoff exchange rates</string>
+    <string name="app_name">Tinkov currency rate forecast</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
