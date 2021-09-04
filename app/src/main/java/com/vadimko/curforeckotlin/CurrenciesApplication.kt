@@ -2,7 +2,9 @@ package com.vadimko.curforeckotlin
 
 import android.app.Application
 import android.content.Context
+import com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
+import com.vadimko.curforeckotlin.moexApi.MOEXRepository
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
@@ -35,11 +37,18 @@ class CurrenciesApplication : Application() {
         viewModel { TodayViewModel() }
 
         viewModel { ArchiveViewModel() }
+
+        single<MOEXRepository> { MOEXRepository() }
+
+        single<CBxmlRepository> { CBxmlRepository() }
+
+        single<CurrenciesRepository> { CurrenciesRepository(get()) }
+
     }
 
 
     override fun onCreate() {
-        CurrenciesRepository.initialize(this)
+        //CurrenciesRepository.initialize(this)     //not used, replaced by inject()
         super.onCreate()
         startKoin {
             androidLogger()

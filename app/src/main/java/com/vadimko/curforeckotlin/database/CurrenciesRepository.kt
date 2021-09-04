@@ -3,7 +3,10 @@ package com.vadimko.curforeckotlin.database
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "currencies-database"
@@ -14,7 +17,8 @@ private const val DATABASE_NAME = "currencies-database"
  * same time updating several widgets
  */
 
-class CurrenciesRepository private constructor(context: Context) {
+//class CurrenciesRepository private constructor(context: Context) {
+class CurrenciesRepository constructor(context: Context) {
     private val executor = Executors.newSingleThreadExecutor()
     private val database: CurrenciesDataBase = Room.databaseBuilder(
         context.applicationContext,

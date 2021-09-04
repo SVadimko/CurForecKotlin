@@ -23,16 +23,11 @@ import java.util.*
 
 /**
  * Request using Retrofit to https://www.tinkoff.ru/api/v1/
- * @param requestMode if false - [getCurrentTCS] updates values in viewmodels if true- update widget
- * @param appWidgetID Id of updating widget
- * @param appWidgetManager Application widget Manager
+ *
  */
 
-class TCSRepository(
-    val requestMode: Boolean,
-    val appWidgetManager: AppWidgetManager?,
-    val appWidgetID: Int?
-) : KoinComponent {
+class TCSRepository : KoinComponent {
+    private val currenciesRepository: CurrenciesRepository by inject()
     private val context: Context by inject()
     private val tcsApi: TCSApi
 
@@ -56,7 +51,11 @@ class TCSRepository(
      * else post list of [CurrencyTCS] to [NowViewModel] and [CalcViewModel] or update widget
      * through [AppWidgetManager]
      */
-    fun getCurrentTCS() {
+    fun getCurrentTCS(
+        requestMode: Boolean,
+        appWidgetManager: AppWidgetManager?,
+        appWidgetID: Int?
+    ) {
         val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
         currentRequest.enqueue(object : Callback<TCSResponse> {
             override fun onResponse(call: Call<TCSResponse>, response: Response<TCSResponse>) {
@@ -82,7 +81,7 @@ class TCSRepository(
                     val eurTCS = CurrencyTCS(flagEUR, dt, sellEUR, buyEUR, nameEUR)
                     val gbpTCS = CurrencyTCS(flagGBP, dt, sellGBP, buyGBP, nameGBP)
                     if (usdTCS.buy == 0.0 || eurTCS.buy == 0.0 || gbpTCS.buy == 0.0) {
-                        getCurrentTCS()
+                        getCurrentTCS(requestMode, appWidgetManager, appWidgetID)
                     } else {
                         val currentTCS: List<CurrencyTCS> = listOf(usdTCS, eurTCS, gbpTCS)
                         NowViewModel.setDataTCs(currentTCS)
@@ -90,10 +89,8 @@ class TCSRepository(
                     }
                 } else {
                     if (buyUSD == 0.0 || buyEUR == 0.0 || buyGBP == 0.0) {
-                        getCurrentTCS()
+                        getCurrentTCS(requestMode, appWidgetManager, appWidgetID)
                     } else {
-                        CurrenciesRepository.initialize(context)
-                        val currenciesRepository = CurrenciesRepository.get()
                         currenciesRepository.insertCurrencies(
                             Currencies(
                                 usdBuy = buyUSD!!,

@@ -25,11 +25,7 @@ import java.util.*
  * @param appWidgetID Id of updating widget
  * @param appWidgetManager Application widget Manager
  */
-class CBjsonRepository(
-    val requestMode: Boolean,
-    val appWidgetManager: AppWidgetManager?,
-    val appWidgetID: Int?
-) : KoinComponent {
+class CBjsonRepository : KoinComponent {
     private val cBjsonApi: CBjsonApi
     private val context: Context by inject()
 
@@ -52,7 +48,11 @@ class CBjsonRepository(
      * Depends of flag [requestMode] post list of [CurrencyCBjs]
      * to [NowViewModel] or update widget [AppWidget]
      */
-    fun getCurrentCB() {
+    fun getCurrentCB(
+        requestMode: Boolean,
+        appWidgetManager: AppWidgetManager?,
+        appWidgetID: Int?
+    ) {
         val currentRequest: Call<CBjsonResponse> = cBjsonApi.getCBForec()
         currentRequest.enqueue(object : Callback<CBjsonResponse> {
             /**

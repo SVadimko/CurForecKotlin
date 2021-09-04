@@ -126,7 +126,8 @@ class TodayViewModel : ViewModel(), KoinComponent {
      * @property dataMOEX MutableStateFlow contains list of actual currency values [CurrencyMOEX]
      * from MOEX through [MOEXRepository]
      */
-    companion object {
+    companion object : KoinComponent {
+        private val moexRepository: MOEXRepository by inject()
 
         private val dataMOEX: MutableStateFlow<List<CurrencyMOEX>> = MutableStateFlow(
             listOf(
@@ -146,7 +147,7 @@ class TodayViewModel : ViewModel(), KoinComponent {
          */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
             if (CheckConnection.checkConnect()) {
-                val moexRepository = MOEXRepository()
+                //val moexRepository = MOEXRepository()
                 moexRepository.getMOEX(request, from, till, interval, false)
             }
         }

@@ -126,8 +126,8 @@ class NowViewModel : ViewModel(), KoinComponent {
          */
         internal fun loadDataTCs() {
             if (CheckConnection.checkConnect()) {
-                val tcsRepository = TCSRepository(false, null, null)
-                tcsRepository.getCurrentTCS()
+                val tcsRepository = TCSRepository()
+                tcsRepository.getCurrentTCS(false, null, null)
             }
         }
 
@@ -136,8 +136,8 @@ class NowViewModel : ViewModel(), KoinComponent {
          */
         internal fun loadDataCB() {
             if (CheckConnection.checkConnect()) {
-                val cbJsonRepository = CBjsonRepository(false, null, null)
-                cbJsonRepository.getCurrentCB()
+                val cbJsonRepository = CBjsonRepository()
+                cbJsonRepository.getCurrentCB(false, null, null)
             }
         }
 

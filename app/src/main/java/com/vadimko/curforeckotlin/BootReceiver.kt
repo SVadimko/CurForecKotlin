@@ -5,23 +5,27 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 
+private const val BOOT_ACTION = "android.intent.action.BOOT_COMPLETED"
+
 /**
  * Bootreceiver for starting the service of auto-update of the exchange rate Tinkov after reboot,
  * if auto-update is selected in the application settings
  */
 
 class BootReceiver : BroadcastReceiver() {
-    lateinit var mContext: Context
+    private lateinit var mContext: Context
 
     /**
-     * If auto update enabled - launch [startUpdater]
+     * If action is BootAction and auto update from settings is enabled - launch [startUpdater]
      */
     override fun onReceive(context: Context, intent: Intent) {
         mContext = context
-        val pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(mContext)
-            .getBoolean("updateon", false)
-        if (pref)
-            startUpdater()
+        if (intent.action.equals(BOOT_ACTION, ignoreCase = true)) {
+            val pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(mContext)
+                .getBoolean("updateon", false)
+            if (pref)
+                startUpdater()
+        }
     }
 
     /**

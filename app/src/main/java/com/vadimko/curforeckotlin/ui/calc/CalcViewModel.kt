@@ -33,6 +33,8 @@ class CalcViewModel : ViewModel(), KoinComponent {
 
     private val context: Context by inject()
 
+    private val currenciesRepository: CurrenciesRepository by inject()
+
     /**
      * Request to create/return [dataForCalc]
      */
@@ -68,13 +70,14 @@ class CalcViewModel : ViewModel(), KoinComponent {
     var rubValue: MutableStateFlow<String> = MutableStateFlow("")
 
 
-    internal val dataWidgetUpdate = CurrenciesRepository.get().getCurrencies()
+    //internal val dataWidgetUpdate = CurrenciesRepository.get().getCurrencies()
+    internal val dataWidgetUpdate = currenciesRepository.getCurrencies()
 
     /**
      * Request to delete [dataWidgetUpdate] data, except last value, if already deleted, show [Toast]
      */
     fun deleteWidgetUpdateData(data: MutableList<Currencies>) {
-        val currenciesRepository = CurrenciesRepository.get()
+        //val currenciesRepository = CurrenciesRepository.get()
         currenciesRepository.clearCurrencies(data)
     }
 
@@ -136,15 +139,17 @@ class CalcViewModel : ViewModel(), KoinComponent {
      * @property dataForCalc Currency data used for calculating values
      * @property dataServiceUpdate Currency data saved as a result of work [TCSUpdateService]
      */
-    companion object {
+    companion object : KoinComponent {
+        private val tcsRepository: TCSRepository by inject()
         private var dataForCalc: StateFlow<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
 
         /**
          * Load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
          */
         internal fun loadDataForCalc() {
-            val tcsRepository = TCSRepository(false, null, null)
-            tcsRepository.getCurrentTCS()
+            //val tcsRepository = TCSRepository(false, null, null)
+            //tcsRepository.getCurrentTCS()
+            tcsRepository.getCurrentTCS(false, null, null)
         }
 
 

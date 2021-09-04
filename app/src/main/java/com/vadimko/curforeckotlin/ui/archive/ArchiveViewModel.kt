@@ -129,7 +129,9 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
      * @property dataMOEX MutableStateFlow contains list of actual currency values [CurrencyMOEX]
      * from MOEX through [MOEXRepository]
      */
-    companion object {
+    companion object : KoinComponent {
+        private val moexRepository: MOEXRepository by inject()
+        private val cbxmlRepository: CBxmlRepository by inject()
 
         private var dataCB: MutableStateFlow<List<CurrencyCBarhive>> =
             MutableStateFlow(listOf(CurrencyCBarhive()))
@@ -151,7 +153,7 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
          */
         fun loadCBArchive(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
             if (CheckConnection.checkConnect()) {
-                val cbxmlRepository = CBxmlRepository()
+                //val cbxmlRepository = CBxmlRepository()
                 cbxmlRepository.getXMLarchive(date_req1, date_req2, VAL_NM_RQ)
             }
         }
@@ -161,7 +163,7 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
          */
         fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
             if (CheckConnection.checkConnect()) {
-                val moexRepository = MOEXRepository()
+                //val moexRepository = MOEXRepository()
                 moexRepository.getMOEX(request, from, till, interval, true)
             }
         }
