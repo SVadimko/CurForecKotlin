@@ -54,4 +54,9 @@
         <item>NotoSerif</item>
     </string-array>
 
+    <string-array name="chartsource">
+        <item>MOEX</item>
+        <item>CB</item>
+    </string-array>
+
 </resources>

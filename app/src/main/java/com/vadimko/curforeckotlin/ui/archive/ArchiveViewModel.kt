@@ -3,6 +3,7 @@ package com.vadimko.curforeckotlin.ui.archive
 //import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataCB
 import android.content.Context
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository
@@ -13,7 +14,6 @@ import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB
 import com.vadimko.curforeckotlin.utils.ArchivePreferences
 import com.vadimko.curforeckotlin.utils.CheckConnection
 import com.vadimko.curforeckotlin.utils.DateConverter
-import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.*
@@ -31,8 +31,8 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
      * If [dataCB] is null get last request from [ArchivePreferences] and load it by [loadCBArchive]
      * @return [dataCB]
      */
-    fun getDataCB(): MutableStateFlow<List<CurrencyCBarhive>> {
-        if (dataCB.value[0].offCur == "") {
+    fun getDataCB(): MutableLiveData<List<CurrencyCBarhive>> {
+        if (dataCB.value?.size == null) {
             val archPr = ArchivePreferences.loadPrefs()
             loadCBArchive(archPr[4], archPr[5], archPr[3])
         }
@@ -44,8 +44,8 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
      * request to server through [loadDataMOEX]
      * @return [dataMOEX]
      */
-    fun getDataMOEX(): MutableStateFlow<List<CurrencyMOEX>> {
-        if (dataMOEX.value[0].dates == "") {
+    fun getDataMOEX(): MutableLiveData<List<CurrencyMOEX>> {
+        if (dataMOEX.value?.size == null) {
             val archPr = ArchivePreferences.loadPrefs()
             loadDataMOEX(
                 archPr[6],
@@ -61,16 +61,16 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
     /**
      * Depending on the selected values of the spinners, forms parts of the request to the server
      * and send it via [loadDataMOEX] or [loadCBArchive]
-     * @param chosen Spinner currency selector position
+     * @param currChosen Spinner currency selector position
      * @param fromDate "From" date using in request to server
      * @param tillDate "Till" date using in request to server
      */
-    fun createRequestStrings(chosen: Int, fromDate: Date, tillDate: Date) {
+    fun createRequestStrings(currChosen: Int, chartChosen: Int, fromDate: Date, tillDate: Date) {
         var jsonCurr = ""
         var xmlCurr = ""
         val jsonDate: Array<String>
         val xmlDate: Array<String>
-        when (chosen) {
+        when (currChosen) {
             0 -> {
                 jsonCurr = "USD000000TOD"
                 xmlCurr = "R01235"
@@ -93,8 +93,8 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
             loadCBArchive(xmlDate[0], xmlDate[1], xmlCurr)
             loadDataMOEX(jsonCurr, jsonDate[0], jsonDate[1], "24")
             ArchivePreferences.savePrefs(
-                fromDate.time, tillDate.time, chosen, xmlCurr,
-                xmlDate[0], xmlDate[1], jsonCurr, jsonDate[0], jsonDate[1], "24"
+                fromDate.time, tillDate.time, currChosen, xmlCurr,
+                xmlDate[0], xmlDate[1], jsonCurr, jsonDate[0], jsonDate[1], "24", chartChosen
             )
         } else showToast(context.getString(R.string.ARCFRAGError))
     }
@@ -133,15 +133,15 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
         private val moexRepository: MOEXRepository by inject()
         private val cbxmlRepository: CBxmlRepository by inject()
 
-        private var dataCB: MutableStateFlow<List<CurrencyCBarhive>> =
-            MutableStateFlow(listOf(CurrencyCBarhive()))
+        private var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
+            MutableLiveData<List<CurrencyCBarhive>>()
 
         internal fun setDataCB(data: List<CurrencyCBarhive>) {
             dataCB.value = data
         }
 
-        private var dataMOEX: MutableStateFlow<List<CurrencyMOEX>> =
-            MutableStateFlow(listOf(CurrencyMOEX()))
+        private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
+            MutableLiveData<List<CurrencyMOEX>>()
 
         internal fun setDataMOEX(data: List<CurrencyMOEX>) {
             dataMOEX.value = data

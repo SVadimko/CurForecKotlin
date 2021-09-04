@@ -23,20 +23,21 @@ object ArchivePreferences : KoinComponent {
     fun savePrefs(
         from: Long,
         till: Long,
-        currSelecter: Int,
+        currSelector: Int,
         VAL_NM_RQ: String,
         date_rec1: String,
         date_rec2: String,
         request: String,
         fromMoex: String,
         tillMoex: String,
-        interval: String
+        interval: String,
+        chartSelector: Int
     ) {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         preferences.edit {
             putLong("fromARDate", from)
             putLong("tillARDate", till)
-            putInt("currSelecter", currSelecter)
+            putInt("currSelector", currSelector)
             putString("VAL_NM_RQ", VAL_NM_RQ)
             putString("date_rec1CB", date_rec1)
             putString("date_rec2CB", date_rec2)
@@ -44,6 +45,7 @@ object ArchivePreferences : KoinComponent {
             putString("fromMOEX", fromMoex)
             putString("tillMOEX", tillMoex)
             putString("intervalARMOEX", interval)
+            putInt("graphSelector", chartSelector)
             apply()
         }
     }
@@ -58,7 +60,7 @@ object ArchivePreferences : KoinComponent {
         val sp = PreferenceManager.getDefaultSharedPreferences(context)
         val data0 = sp.getLong("fromARDate", System.currentTimeMillis() - 604800000).toString()
         val data1 = sp.getLong("tillARDate", System.currentTimeMillis()).toString()
-        val data2 = sp.getInt("currSelecter", 0).toString()
+        val data2 = sp.getInt("currSelector", 0).toString()
         val data3 = sp.getString("VAL_NM_RQ", "R01235")!!
         val data4 = sp.getString("date_rec1CB", result[1][0])!!
         val data5 = sp.getString("date_rec2CB", result[1][1])!!
@@ -66,6 +68,7 @@ object ArchivePreferences : KoinComponent {
         val data7 = sp.getString("fromMOEX", result[0][0])!!
         val data8 = sp.getString("tillMOEX", result[0][1])!!
         val data9 = sp.getString("intervalARMOEX", "24")!!
-        return listOf(data0, data1, data2, data3, data4, data5, data6, data7, data8, data9)
+        val data10 = sp.getInt("graphSelector", 0).toString()
+        return listOf(data0, data1, data2, data3, data4, data5, data6, data7, data8, data9, data10)
     }
 }
