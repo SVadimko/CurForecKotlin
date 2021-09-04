@@ -178,15 +178,15 @@ class TodayFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var dontShow = true
+        var notShow = true
 
         lifecycleScope.launchWhenStarted {
             todayViewModel.getData().collect {
                 if (it.size > 3)
                     createComboChartForecast(it)
                 else {
-                    if (!dontShow) todayViewModel.showToast()
-                    dontShow = false
+                    if (!notShow) todayViewModel.showToast()
+                    notShow = false
                 }
             }
         }

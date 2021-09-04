@@ -2,8 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
         android:id="@+id/lineview"
         android:orientation="vertical">
+
+
+    <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chartattach"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:forceDarkAllowed="false"
+            android:background="@drawable/paper5"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="15dp" />
 
     <TextView
             android:layout_width="match_parent"
@@ -36,18 +47,9 @@
                 android:id="@+id/trashcan" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chartattach"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:forceDarkAllowed="false"
-            android:background="@drawable/paper5"
-            android:scaleType="fitCenter"
-            android:layout_marginTop="15dp" />
-
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/paper4" />
+    <!-- <ImageView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="12dp"
+             android:src="@drawable/paper4" />-->
 </LinearLayout>

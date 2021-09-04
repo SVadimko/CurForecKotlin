@@ -22,7 +22,7 @@ class TCSPayload {
  */
 class TCSRates {
     lateinit var category: String
-    lateinit var fromCurrency: fromCurrency
+    lateinit var fromCurrency: FromCurrency
 
     //lateinit var toCurrency: toCurrency
     var buy = 0.0
@@ -40,4 +40,4 @@ class TCSLastUpdate {
 /**
  * Splitting JSON response from Tinkov into classes
  */
-data class fromCurrency(val name: String = "")
+data class FromCurrency(val name: String = "")

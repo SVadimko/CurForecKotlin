@@ -132,7 +132,6 @@ class TCSRepository : KoinComponent {
                             "${context.resources.getString(R.string.tcsfrom)} " + " "
                                     + DateConverter.longToDateWithTime(dt)
                         )
-
                         if (appWidgetID != null) {
                             appWidgetManager?.updateAppWidget(appWidgetID, views)
                         }

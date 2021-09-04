@@ -20,10 +20,6 @@ import java.util.*
 
 /**
  * Request using Retrofit to https://www.cbr-xml-daily.ru/
- * @param requestMode if false - [getCurrentCB] updates values in [NowViewModel] if true- update
- * widget [AppWidget]
- * @param appWidgetID Id of updating widget
- * @param appWidgetManager Application widget Manager
  */
 class CBjsonRepository : KoinComponent {
     private val cBjsonApi: CBjsonApi
@@ -63,30 +59,30 @@ class CBjsonRepository : KoinComponent {
                 response: Response<CBjsonResponse>
             ) {
                 val cBjsonResponse: CBjsonResponse? = response.body()
-                val date: String? = cBjsonResponse?.Date
+                val date: String? = cBjsonResponse?.date
                 val dateSplit = date?.split("T")?.toTypedArray()
                 val timeSplit = dateSplit?.get(1)?.split("+")?.toTypedArray()
                 val dateWas = timeSplit!![0] + " " + dateSplit[0]
-                val valuteResponse = cBjsonResponse.Valute
-                val valUSD: CBjsonValute = valuteResponse.USD
-                val valEUR: CBjsonValute = valuteResponse.EUR
-                val valGBP: CBjsonValute = valuteResponse.GBP
-                val valBYN: CBjsonValute = valuteResponse.BYN
-                val valTRY: CBjsonValute = valuteResponse.TRY
-                val valUAH: CBjsonValute = valuteResponse.UAH
-                val valueUSD = valUSD.Value
-                val valueEUR = valEUR.Value
-                val valueGBP = valGBP.Value
-                val valueBYN = valBYN.Value
-                val valueTRY = valTRY.Value
-                val valueUAH = valUAH.Value
+                val valuteResponse = cBjsonResponse.valute
+                val valUSD: CBjsonValute = valuteResponse.usd
+                val valEUR: CBjsonValute = valuteResponse.eur
+                val valGBP: CBjsonValute = valuteResponse.gbp
+                val valBYN: CBjsonValute = valuteResponse.byn
+                val valTRY: CBjsonValute = valuteResponse.`try`
+                val valUAH: CBjsonValute = valuteResponse.uah
+                val valueUSD = valUSD.value
+                val valueEUR = valEUR.value
+                val valueGBP = valGBP.value
+                val valueBYN = valBYN.value
+                val valueTRY = valTRY.value
+                val valueUAH = valUAH.value
 
-                val previousUSD = valUSD.Previous
-                val previousEUR = valEUR.Previous
-                val previousGBP = valGBP.Previous
-                val previousBYN = valBYN.Previous
-                val previousTRY = valTRY.Previous
-                val previousUAH = valUAH.Previous
+                val previousUSD = valUSD.previous
+                val previousEUR = valEUR.previous
+                val previousGBP = valGBP.previous
+                val previousBYN = valBYN.previous
+                val previousTRY = valTRY.previous
+                val previousUAH = valUAH.previous
 
                 val flagUSD = R.drawable.usd
                 val flagEUR = R.drawable.eur

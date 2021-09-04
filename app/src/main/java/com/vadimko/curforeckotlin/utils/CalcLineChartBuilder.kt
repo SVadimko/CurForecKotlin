@@ -22,7 +22,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 /**
- * Utility class with configure and fill graph functions for Calc Fragment
+ * Utility class with configure and fill graph functions for Calc Fragment (NOT USED)
  */
 object CalcLineChartBuilder : KoinComponent {
     private val context: Context by inject()

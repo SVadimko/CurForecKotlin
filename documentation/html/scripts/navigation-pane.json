@@ -16,6 +16,14 @@
     ]
   },
   {
+    "name": "BOOT_ACTION",
+    "description": null,
+    "location": "app/com.vadimko.curforeckotlin/-b-o-o-t_-a-c-t-i-o-n.html",
+    "searchKeys": [
+      "BOOT_ACTION"
+    ]
+  },
+  {
     "name": "BootReceiver",
     "description": null,
     "location": "app/com.vadimko.curforeckotlin/-boot-receiver/index.html",
@@ -368,11 +376,11 @@
     ]
   },
   {
-    "name": "fromCurrency",
+    "name": "FromCurrency",
     "description": null,
-    "location": "app/com.vadimko.curforeckotlin.tcsApi/from-currency/index.html",
+    "location": "app/com.vadimko.curforeckotlin.tcsApi/-from-currency/index.html",
     "searchKeys": [
-      "fromCurrency"
+      "FromCurrency"
     ]
   },
   {
@@ -629,6 +637,22 @@
     "location": "app/com.vadimko.curforeckotlin.utils/-calc-line-chart-builder/index.html",
     "searchKeys": [
       "CalcLineChartBuilder"
+    ]
+  },
+  {
+    "name": "CalcServiceChartBuilder",
+    "description": null,
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/index.html",
+    "searchKeys": [
+      "CalcServiceChartBuilder"
+    ]
+  },
+  {
+    "name": "CalcWidgetChartBuilder",
+    "description": null,
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/index.html",
+    "searchKeys": [
+      "CalcWidgetChartBuilder"
     ]
   },
   {

@@ -27,7 +27,10 @@ class AppWidget : AppWidgetProvider() {
         val updateIntent = Intent(context, AppWidget::class.java)
         updateIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
         updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(appWidgetId))
-        pIntent = PendingIntent.getBroadcast(context, appWidgetId, updateIntent, 0)
+        pIntent = PendingIntent.getBroadcast(
+            context, appWidgetId, updateIntent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_ONE_SHOT
+        )
         views.setOnClickPendingIntent(R.id.refresh_Widget, pIntent)
         WidgetUpdater(appWidgetManager, appWidgetId)
         appWidgetManager.updateAppWidget(appWidgetId, views)

@@ -65,7 +65,8 @@ class LessSquare(inp: MutableList<Float>) {
 
     private fun calculateAlpha() {
         alpha =
-            (inputSummTime - timeSumm * inputSumm / input.size) / (timeSummSquare - timeSumm * timeSumm / input.size)
+            (inputSummTime - timeSumm * inputSumm / input.size) /
+                    (timeSummSquare - timeSumm * timeSumm / input.size)
     }
 
     private fun calculateBeta() {

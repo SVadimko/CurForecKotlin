@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent"
@@ -19,6 +20,7 @@
             <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:id="@+id/card_view"
+                    app:cardBackgroundColor="@color/colorCalcpanel"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     card_view:cardCornerRadius="20dp"
@@ -53,16 +55,10 @@
                                 android:src="@drawable/solar" />
                     </LinearLayout>
 
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
                         <RadioGroup
                                 android:id="@+id/chose_percent"
                                 android:layout_width="wrap_content"
                                 android:gravity="center|center_vertical"
-
                                 android:layout_marginBottom="5dp"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
@@ -89,7 +85,6 @@
                                     android:text="@string/sell" />
 
                         </RadioGroup>
-                    </LinearLayout>
 
                     <LinearLayout
                             android:layout_width="match_parent"
@@ -121,7 +116,6 @@
                                 android:layout_weight="0.2"
                                 android:textSize="35sp"
                                 android:layout_gravity="center"
-                                android:forceDarkAllowed="true"
                                 android:fontFamily="@font/digital"
                                 android:textColor="@color/colorCalc2"
                                 android:background="@color/colorCalc"
@@ -137,10 +131,8 @@
                                 android:layout_weight="0.2"
                                 android:textSize="25sp"
                                 android:layout_gravity="center"
-                                android:forceDarkAllowed="true"
                                 android:fontFamily="@font/digital"
                                 android:textColor="@color/colorCalc2"
-
                                 android:background="@color/colorCalc"
                                 android:gravity="center"
                                 android:id="@+id/eqtv"
@@ -154,7 +146,6 @@
                                 android:layout_weight="1.4"
                                 android:textSize="35sp"
                                 android:layout_gravity="center"
-                                android:forceDarkAllowed="true"
                                 android:fontFamily="@font/digital"
                                 android:textColor="@color/colorCalc2"
                                 android:enabled="false"
@@ -172,7 +163,6 @@
                                 android:layout_weight="0.3"
                                 android:textSize="30sp"
                                 android:gravity="center_vertical"
-                                android:forceDarkAllowed="true"
                                 android:fontFamily="@font/digital"
                                 android:textColor="@color/colorCalc2"
                                 android:background="@color/colorCalc"
@@ -196,8 +186,6 @@
                                 android:layout_weight="1"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-
-
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="90dp"
@@ -210,17 +198,116 @@
                                 android:layout_weight="0.5"
                                 android:layout_marginEnd="15dp"
                                 android:id="@+id/calcul"
+                                android:forceDarkAllowed="false"
                                 android:hapticFeedbackEnabled="true"
                                 android:text="="
                                 android:enabled="false"
                                 android:textSize="40sp"
                                 android:backgroundTint="@color/colorOrange"
-                                android:textColor="@color/black"
-                                android:forceDarkAllowed="false" />
+                                android:textColor="@color/black" />
                     </LinearLayout>
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:id="@+id/serviceview"
+                    android:orientation="vertical">
+
+                <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/servicechart"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:background="@drawable/paper5"
+                        android:forceDarkAllowed="false"
+                        android:scaleType="fitCenter"
+                        android:layout_marginTop="15dp" />
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/spinnerTextColor"
+                        android:text="@string/CALCFRAGdatafrautoup"
+                        android:layout_margin="6dp"
+                        android:textSize="20sp" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_margin="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <Spinner
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/service_curr" />
+
+                    <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="40dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/trashcan"
+                            android:id="@+id/service_trashcan" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:id="@+id/widgetview"
+                    android:orientation="vertical">
+
+                <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/widget_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:background="@drawable/paper5"
+                        android:forceDarkAllowed="false"
+                        android:scaleType="fitCenter"
+                        android:layout_marginTop="15dp" />
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/spinnerTextColor"
+                        android:text="@string/CALCFRAGdatafrwidget"
+                        android:layout_margin="6dp"
+                        android:textSize="20sp" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_margin="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <Spinner
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/widget_curr" />
+
+                    <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="40dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/trashcan"
+                            android:id="@+id/widget_trashcan" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </LinearLayout>
 
 
             <LinearLayout
@@ -249,7 +336,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:orientation="vertical">
-
             </View>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

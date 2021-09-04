@@ -35,7 +35,7 @@ object TodayChartBuilder : KoinComponent {
      * @param comboChartForec - takes chart to configure
      * @param dataList used to build x Axis values
      * @param period used to add to forecast x Axis values type of period
-     * @param takes how lasts animation of chart drawing
+     * @param animationLong how lasts animation of chart drawing
      */
     fun createChart(
         comboChartForec: CombinedChart,
@@ -44,12 +44,10 @@ object TodayChartBuilder : KoinComponent {
         animationLong: Int,
     ): CombinedChart {
         val dates: MutableList<String> = mutableListOf()
-        val datesForecast: MutableList<String> = mutableListOf()
         dataList.forEach {
             dates.add(it.dates)
         }
         for (i in 1 until 4) {
-            //datesForecast.add(
             dates.add(
                 "${context.getString(R.string.forec)} +$period"
             )

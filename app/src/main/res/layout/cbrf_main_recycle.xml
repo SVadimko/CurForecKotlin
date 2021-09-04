@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView
-
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -73,8 +72,6 @@
                 android:text="70.0"
                 android:id="@+id/val_was"
                 android:layout_margin="5dp" />
-
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>
 

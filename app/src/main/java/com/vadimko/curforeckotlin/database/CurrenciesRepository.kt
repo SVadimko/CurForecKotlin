@@ -17,7 +17,6 @@ private const val DATABASE_NAME = "currencies-database"
  * same time updating several widgets
  */
 
-//class CurrenciesRepository private constructor(context: Context) {
 class CurrenciesRepository constructor(context: Context) {
     private val executor = Executors.newSingleThreadExecutor()
     private val database: CurrenciesDataBase = Room.databaseBuilder(
@@ -76,7 +75,7 @@ class CurrenciesRepository constructor(context: Context) {
     }
 
     /**
-     * Initialise and get singleton of [CurrenciesRepository] DB
+     * Initialise and get singleton of [CurrenciesRepository] DB (not used, replaced by inject Koin)
      */
     companion object {
         private var INSTANCE: CurrenciesRepository? = null

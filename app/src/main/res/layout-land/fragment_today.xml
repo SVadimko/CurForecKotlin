@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.today.TodayFragment">
 
-    <!-- <androidx.core.widget.NestedScrollView
-             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content">-->
-
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-
-        <!--  <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical">-->
 
         <com.github.mikephil.charting.charts.CombinedChart
                 android:id="@+id/candlforec"
@@ -32,18 +20,6 @@
                 android:scaleType="fitCenter"
                 android:layout_marginTop="15dp" />
 
-        <!--<ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/paper4" />-->
-        <!-- </LinearLayout>-->
-
-        <!--       <View
-                       android:layout_width="match_parent"
-                       android:layout_height="60dp"
-                       android:orientation="vertical">
-
-               </View>-->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +35,6 @@
                         android:layout_weight="1"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
-
                         android:id="@+id/currchoose" />
 
                 <Spinner
@@ -67,7 +42,6 @@
                         android:layout_weight="1"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
-
                         android:id="@+id/periodchoose" />
 
                 <Spinner
@@ -75,28 +49,16 @@
                         android:layout_weight="1"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
-
                         android:id="@+id/ratechoose" />
 
                 <Button
                         android:layout_width="0dp"
                         android:layout_weight="1"
-
                         android:textColor="@color/blackwhite"
                         android:layout_height="wrap_content"
                         android:text="@string/showbutton"
                         android:id="@+id/buildgraph" />
-
             </LinearLayout>
-
-            <!--  <LinearLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:orientation="horizontal">-->
-
-
         </LinearLayout>
-
     </LinearLayout>
-    <!-- </androidx.core.widget.NestedScrollView>-->
 </FrameLayout>

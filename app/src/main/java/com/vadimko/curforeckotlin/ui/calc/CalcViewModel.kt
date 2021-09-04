@@ -61,7 +61,6 @@ class CalcViewModel : ViewModel(), KoinComponent {
      * Request to delete [dataServiceUpdate] data, except last value, if already deleted, show [Toast]
      */
     fun deleteServiceUpdateData(data: List<List<CurrencyTCS>>) {
-        // GlobalScope.launch (Dispatchers.IO){ Saver.deleteTcsLast(data) }
         Saver.deleteTcsLast(data)
         loadServiceUpdateData()
 
@@ -70,7 +69,6 @@ class CalcViewModel : ViewModel(), KoinComponent {
     var rubValue: MutableStateFlow<String> = MutableStateFlow("")
 
 
-    //internal val dataWidgetUpdate = CurrenciesRepository.get().getCurrencies()
     internal val dataWidgetUpdate = currenciesRepository.getCurrencies()
 
     /**

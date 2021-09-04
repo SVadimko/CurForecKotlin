@@ -35,7 +35,8 @@ class MOEXRepository {
     }
 
     /**
-     * In case of response get list of [CurrencyMOEX] and post it to [ArchiveViewModel] or [TodayViewModel] depends
+     * In case of response get list of [CurrencyMOEX] and post it to [ArchiveViewModel] or
+     * [TodayViewModel] depends
      * of from which fragment request was send
      */
     fun getMOEX(request: String, from: String, till: String, interval: String, todayArch: Boolean) {

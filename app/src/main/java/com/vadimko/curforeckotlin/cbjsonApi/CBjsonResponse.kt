@@ -1,25 +1,40 @@
 package com.vadimko.curforeckotlin.cbjsonApi
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Splitting JSON response from Central Bank into classes
  */
 class CBjsonResponse {
-    var Date: String = ""
+    @SerializedName("Date")
+    var date: String = ""
 
     //var Timestamp: String = ""
-    lateinit var Valute: CBjsonValuteResponse
+    @SerializedName("Valute")
+    lateinit var valute: CBjsonValuteResponse
 }
 
 /**
  * Splitting JSON response from Central Bank into classes
  */
 class CBjsonValuteResponse {
-    lateinit var USD: CBjsonValute
-    lateinit var EUR: CBjsonValute
-    lateinit var GBP: CBjsonValute
-    lateinit var BYN: CBjsonValute
-    lateinit var TRY: CBjsonValute
-    lateinit var UAH: CBjsonValute
+    @SerializedName("USD")
+    lateinit var usd: CBjsonValute
+
+    @SerializedName("EUR")
+    lateinit var eur: CBjsonValute
+
+    @SerializedName("GBP")
+    lateinit var gbp: CBjsonValute
+
+    @SerializedName("BYN")
+    lateinit var byn: CBjsonValute
+
+    @SerializedName("TRY")
+    lateinit var `try`: CBjsonValute
+
+    @SerializedName("UAH")
+    lateinit var uah: CBjsonValute
 }
 
 /**
@@ -31,6 +46,9 @@ class CBjsonValute {
     //lateinit var CharCode: String
     //var Nominal: Int = 1
     //lateinit var Name: String
-    var Value: Double = 0.0
-    var Previous: Double = 0.0
+    @SerializedName("Value")
+    var value: Double = 0.0
+
+    @SerializedName("Previous")
+    var previous: Double = 0.0
 }

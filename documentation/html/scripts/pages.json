@@ -170,12 +170,12 @@
     ]
   },
   {
-    "name": "class CBjsonRepository(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?) : KoinComponent",
+    "name": "class CBjsonRepository : KoinComponent",
     "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository",
     "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-repository/index.html",
     "searchKeys": [
       "CBjsonRepository",
-      "class CBjsonRepository(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?) : KoinComponent",
+      "class CBjsonRepository : KoinComponent",
       "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository"
     ]
   },
@@ -440,12 +440,12 @@
     ]
   },
   {
-    "name": "class TCSRepository(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?) : KoinComponent",
+    "name": "class TCSRepository : KoinComponent",
     "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository",
     "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/index.html",
     "searchKeys": [
       "TCSRepository",
-      "class TCSRepository(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?) : KoinComponent",
+      "class TCSRepository : KoinComponent",
       "com.vadimko.curforeckotlin.tcsApi.TCSRepository"
     ]
   },
@@ -510,12 +510,12 @@
     ]
   },
   {
-    "name": "class WidgetUpdater(appWidgetManager: AppWidgetManager, appWidgetID: Int)",
+    "name": "class WidgetUpdater(appWidgetManager: AppWidgetManager, appWidgetID: Int) : KoinComponent",
     "description": "com.vadimko.curforeckotlin.widget.WidgetUpdater",
     "location": "app/com.vadimko.curforeckotlin.widget/-widget-updater/index.html",
     "searchKeys": [
       "WidgetUpdater",
-      "class WidgetUpdater(appWidgetManager: AppWidgetManager, appWidgetID: Int)",
+      "class WidgetUpdater(appWidgetManager: AppWidgetManager, appWidgetID: Int) : KoinComponent",
       "com.vadimko.curforeckotlin.widget.WidgetUpdater"
     ]
   },
@@ -600,6 +600,16 @@
     ]
   },
   {
+    "name": "data class FromCurrency(name: String)",
+    "description": "com.vadimko.curforeckotlin.tcsApi.FromCurrency",
+    "location": "app/com.vadimko.curforeckotlin.tcsApi/-from-currency/index.html",
+    "searchKeys": [
+      "FromCurrency",
+      "data class FromCurrency(name: String)",
+      "com.vadimko.curforeckotlin.tcsApi.FromCurrency"
+    ]
+  },
+  {
     "name": "data class Record(Value: String, Date: String)",
     "description": "com.vadimko.curforeckotlin.cbxmlApi.Record",
     "location": "app/com.vadimko.curforeckotlin.cbxmlApi/-record/index.html",
@@ -607,16 +617,6 @@
       "Record",
       "data class Record(Value: String, Date: String)",
       "com.vadimko.curforeckotlin.cbxmlApi.Record"
-    ]
-  },
-  {
-    "name": "data class fromCurrency(name: String)",
-    "description": "com.vadimko.curforeckotlin.tcsApi.fromCurrency",
-    "location": "app/com.vadimko.curforeckotlin.tcsApi/from-currency/index.html",
-    "searchKeys": [
-      "fromCurrency",
-      "data class fromCurrency(name: String)",
-      "com.vadimko.curforeckotlin.tcsApi.fromCurrency"
     ]
   },
   {
@@ -700,12 +700,12 @@
     ]
   },
   {
-    "name": "fun CBjsonRepository(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
+    "name": "fun CBjsonRepository()",
     "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.CBjsonRepository",
     "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-repository/-c-bjson-repository.html",
     "searchKeys": [
       "CBjsonRepository",
-      "fun CBjsonRepository(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
+      "fun CBjsonRepository()",
       "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.CBjsonRepository"
     ]
   },
@@ -830,6 +830,16 @@
     ]
   },
   {
+    "name": "fun CurrenciesRepository(context: Context)",
+    "description": "com.vadimko.curforeckotlin.database.CurrenciesRepository.CurrenciesRepository",
+    "location": "app/com.vadimko.curforeckotlin.database/-currencies-repository/-currencies-repository.html",
+    "searchKeys": [
+      "CurrenciesRepository",
+      "fun CurrenciesRepository(context: Context)",
+      "com.vadimko.curforeckotlin.database.CurrenciesRepository.CurrenciesRepository"
+    ]
+  },
+  {
     "name": "fun CurrenciesTypeConverter()",
     "description": "com.vadimko.curforeckotlin.database.CurrenciesTypeConverter.CurrenciesTypeConverter",
     "location": "app/com.vadimko.curforeckotlin.database/-currencies-type-converter/-currencies-type-converter.html",
@@ -907,6 +917,16 @@
       "ExponentSmooth",
       "fun ExponentSmooth(inp: MutableList<Float>)",
       "com.vadimko.curforeckotlin.forecastsMethods.ExponentSmooth.ExponentSmooth"
+    ]
+  },
+  {
+    "name": "fun FromCurrency(name: String = \"\")",
+    "description": "com.vadimko.curforeckotlin.tcsApi.FromCurrency.FromCurrency",
+    "location": "app/com.vadimko.curforeckotlin.tcsApi/-from-currency/-from-currency.html",
+    "searchKeys": [
+      "FromCurrency",
+      "fun FromCurrency(name: String = \"\")",
+      "com.vadimko.curforeckotlin.tcsApi.FromCurrency.FromCurrency"
     ]
   },
   {
@@ -1070,12 +1090,12 @@
     ]
   },
   {
-    "name": "fun TCSRepository(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
+    "name": "fun TCSRepository()",
     "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository.TCSRepository",
     "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/-t-c-s-repository.html",
     "searchKeys": [
       "TCSRepository",
-      "fun TCSRepository(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
+      "fun TCSRepository()",
       "com.vadimko.curforeckotlin.tcsApi.TCSRepository.TCSRepository"
     ]
   },
@@ -1290,6 +1310,26 @@
     ]
   },
   {
+    "name": "fun createGraph(chart: LineChart, data: List<Currencies>): LineChart",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.createGraph",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/create-graph.html",
+    "searchKeys": [
+      "createGraph",
+      "fun createGraph(chart: LineChart, data: List<Currencies>): LineChart",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.createGraph"
+    ]
+  },
+  {
+    "name": "fun createGraph(chart: LineChart, data: List<List<CurrencyTCS>>): LineChart",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.createGraph",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/create-graph.html",
+    "searchKeys": [
+      "createGraph",
+      "fun createGraph(chart: LineChart, data: List<List<CurrencyTCS>>): LineChart",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.createGraph"
+    ]
+  },
+  {
     "name": "fun createLineChart(linearChart: LineChart, data: List<Any>, description: String): LineChart",
     "description": "com.vadimko.curforeckotlin.utils.ArchiveLineChartBuilder.createLineChart",
     "location": "app/com.vadimko.curforeckotlin.utils/-archive-line-chart-builder/create-line-chart.html",
@@ -1300,16 +1340,6 @@
     ]
   },
   {
-    "name": "fun createRequestStrings(chosen: Int, fromDate: Date, tillDate: Date)",
-    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.createRequestStrings",
-    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/create-request-strings.html",
-    "searchKeys": [
-      "createRequestStrings",
-      "fun createRequestStrings(chosen: Int, fromDate: Date, tillDate: Date)",
-      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.createRequestStrings"
-    ]
-  },
-  {
     "name": "fun createRequestStrings(chosen: IntArray, currSpinnerPos: Int, perSpinnerPos: Int, rateSpinnerPos: Int)",
     "description": "com.vadimko.curforeckotlin.ui.today.TodayViewModel.createRequestStrings",
     "location": "app/com.vadimko.curforeckotlin.ui.today/-today-view-model/create-request-strings.html",
@@ -1317,6 +1347,16 @@
       "createRequestStrings",
       "fun createRequestStrings(chosen: IntArray, currSpinnerPos: Int, perSpinnerPos: Int, rateSpinnerPos: Int)",
       "com.vadimko.curforeckotlin.ui.today.TodayViewModel.createRequestStrings"
+    ]
+  },
+  {
+    "name": "fun createRequestStrings(currChosen: Int, chartChosen: Int, fromDate: Date, tillDate: Date)",
+    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.createRequestStrings",
+    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/create-request-strings.html",
+    "searchKeys": [
+      "createRequestStrings",
+      "fun createRequestStrings(currChosen: Int, chartChosen: Int, fromDate: Date, tillDate: Date)",
+      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.createRequestStrings"
     ]
   },
   {
@@ -1390,6 +1430,26 @@
     ]
   },
   {
+    "name": "fun fillChart(lineChart: LineChart, curr: Int, data: List<Currencies>)",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.fillChart",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/fill-chart.html",
+    "searchKeys": [
+      "fillChart",
+      "fun fillChart(lineChart: LineChart, curr: Int, data: List<Currencies>)",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.fillChart"
+    ]
+  },
+  {
+    "name": "fun fillChart(lineChart: LineChart, curr: Int, data: List<List<CurrencyTCS>>)",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.fillChart",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/fill-chart.html",
+    "searchKeys": [
+      "fillChart",
+      "fun fillChart(lineChart: LineChart, curr: Int, data: List<List<CurrencyTCS>>)",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.fillChart"
+    ]
+  },
+  {
     "name": "fun fillClearCbrfGraph(linearCbrf: LineChart, s: String, dataListCB: List<CurrencyCBarhive>)",
     "description": "com.vadimko.curforeckotlin.utils.ArchiveLineChartBuilder.fillClearCbrfGraph",
     "location": "app/com.vadimko.curforeckotlin.utils/-archive-line-chart-builder/fill-clear-cbrf-graph.html",
@@ -1417,16 +1477,6 @@
       "fillLinearSetForecast",
       "fun fillLinearSetForecast(linearChartForec: LineChart, s: String, dataListMOEX: List<CurrencyMOEX>)",
       "com.vadimko.curforeckotlin.utils.ArchiveLineChartBuilder.fillLinearSetForecast"
-    ]
-  },
-  {
-    "name": "fun fromCurrency(name: String = \"\")",
-    "description": "com.vadimko.curforeckotlin.tcsApi.fromCurrency.fromCurrency",
-    "location": "app/com.vadimko.curforeckotlin.tcsApi/from-currency/from-currency.html",
-    "searchKeys": [
-      "fromCurrency",
-      "fun fromCurrency(name: String = \"\")",
-      "com.vadimko.curforeckotlin.tcsApi.fromCurrency.fromCurrency"
     ]
   },
   {
@@ -1470,12 +1520,12 @@
     ]
   },
   {
-    "name": "fun getCurrentCB()",
+    "name": "fun getCurrentCB(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
     "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.getCurrentCB",
     "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-repository/get-current-c-b.html",
     "searchKeys": [
       "getCurrentCB",
-      "fun getCurrentCB()",
+      "fun getCurrentCB(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
       "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.getCurrentCB"
     ]
   },
@@ -1490,12 +1540,12 @@
     ]
   },
   {
-    "name": "fun getCurrentTCS()",
+    "name": "fun getCurrentTCS(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
     "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository.getCurrentTCS",
     "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/get-current-t-c-s.html",
     "searchKeys": [
       "getCurrentTCS",
-      "fun getCurrentTCS()",
+      "fun getCurrentTCS(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
       "com.vadimko.curforeckotlin.tcsApi.TCSRepository.getCurrentTCS"
     ]
   },
@@ -1510,12 +1560,12 @@
     ]
   },
   {
-    "name": "fun getDataCB(): MutableStateFlow<List<CurrencyCBarhive>>",
+    "name": "fun getDataCB(): MutableLiveData<List<CurrencyCBarhive>>",
     "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.getDataCB",
     "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/get-data-c-b.html",
     "searchKeys": [
       "getDataCB",
-      "fun getDataCB(): MutableStateFlow<List<CurrencyCBarhive>>",
+      "fun getDataCB(): MutableLiveData<List<CurrencyCBarhive>>",
       "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.getDataCB"
     ]
   },
@@ -1540,12 +1590,12 @@
     ]
   },
   {
-    "name": "fun getDataMOEX(): MutableStateFlow<List<CurrencyMOEX>>",
+    "name": "fun getDataMOEX(): MutableLiveData<List<CurrencyMOEX>>",
     "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.getDataMOEX",
     "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/get-data-m-o-e-x.html",
     "searchKeys": [
       "getDataMOEX",
-      "fun getDataMOEX(): MutableStateFlow<List<CurrencyMOEX>>",
+      "fun getDataMOEX(): MutableLiveData<List<CurrencyMOEX>>",
       "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.getDataMOEX"
     ]
   },
@@ -1890,12 +1940,12 @@
     ]
   },
   {
-    "name": "fun savePrefs(from: Long, till: Long, currSelecter: Int, VAL_NM_RQ: String, date_rec1: String, date_rec2: String, request: String, fromMoex: String, tillMoex: String, interval: String)",
+    "name": "fun savePrefs(from: Long, till: Long, currSelector: Int, VAL_NM_RQ: String, date_rec1: String, date_rec2: String, request: String, fromMoex: String, tillMoex: String, interval: String, chartSelector: Int)",
     "description": "com.vadimko.curforeckotlin.utils.ArchivePreferences.savePrefs",
     "location": "app/com.vadimko.curforeckotlin.utils/-archive-preferences/save-prefs.html",
     "searchKeys": [
       "savePrefs",
-      "fun savePrefs(from: Long, till: Long, currSelecter: Int, VAL_NM_RQ: String, date_rec1: String, date_rec2: String, request: String, fromMoex: String, tillMoex: String, interval: String)",
+      "fun savePrefs(from: Long, till: Long, currSelector: Int, VAL_NM_RQ: String, date_rec1: String, date_rec2: String, request: String, fromMoex: String, tillMoex: String, interval: String, chartSelector: Int)",
       "com.vadimko.curforeckotlin.utils.ArchivePreferences.savePrefs"
     ]
   },
@@ -2170,73 +2220,13 @@
     ]
   },
   {
-    "name": "lateinit var BYN: CBjsonValute",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.BYN",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/-b-y-n.html",
+    "name": "lateinit var byn: CBjsonValute",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.byn",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/byn.html",
     "searchKeys": [
-      "BYN",
-      "lateinit var BYN: CBjsonValute",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.BYN"
-    ]
-  },
-  {
-    "name": "lateinit var EUR: CBjsonValute",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.EUR",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/-e-u-r.html",
-    "searchKeys": [
-      "EUR",
-      "lateinit var EUR: CBjsonValute",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.EUR"
-    ]
-  },
-  {
-    "name": "lateinit var GBP: CBjsonValute",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.GBP",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/-g-b-p.html",
-    "searchKeys": [
-      "GBP",
-      "lateinit var GBP: CBjsonValute",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.GBP"
-    ]
-  },
-  {
-    "name": "lateinit var TRY: CBjsonValute",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.TRY",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/-t-r-y.html",
-    "searchKeys": [
-      "TRY",
-      "lateinit var TRY: CBjsonValute",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.TRY"
-    ]
-  },
-  {
-    "name": "lateinit var UAH: CBjsonValute",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.UAH",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/-u-a-h.html",
-    "searchKeys": [
-      "UAH",
-      "lateinit var UAH: CBjsonValute",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.UAH"
-    ]
-  },
-  {
-    "name": "lateinit var USD: CBjsonValute",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.USD",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/-u-s-d.html",
-    "searchKeys": [
-      "USD",
-      "lateinit var USD: CBjsonValute",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.USD"
-    ]
-  },
-  {
-    "name": "lateinit var Valute: CBjsonValuteResponse",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse.Valute",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-response/-valute.html",
-    "searchKeys": [
-      "Valute",
-      "lateinit var Valute: CBjsonValuteResponse",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse.Valute"
+      "byn",
+      "lateinit var byn: CBjsonValute",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.byn"
     ]
   },
   {
@@ -2270,13 +2260,33 @@
     ]
   },
   {
-    "name": "lateinit var fromCurrency: fromCurrency",
+    "name": "lateinit var eur: CBjsonValute",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.eur",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/eur.html",
+    "searchKeys": [
+      "eur",
+      "lateinit var eur: CBjsonValute",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.eur"
+    ]
+  },
+  {
+    "name": "lateinit var fromCurrency: FromCurrency",
     "description": "com.vadimko.curforeckotlin.tcsApi.TCSRates.fromCurrency",
     "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-rates/from-currency.html",
     "searchKeys": [
       "fromCurrency",
-      "lateinit var fromCurrency: fromCurrency",
+      "lateinit var fromCurrency: FromCurrency",
       "com.vadimko.curforeckotlin.tcsApi.TCSRates.fromCurrency"
+    ]
+  },
+  {
+    "name": "lateinit var gbp: CBjsonValute",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.gbp",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/gbp.html",
+    "searchKeys": [
+      "gbp",
+      "lateinit var gbp: CBjsonValute",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.gbp"
     ]
   },
   {
@@ -2287,16 +2297,6 @@
       "lastUpdate",
       "lateinit var lastUpdate: TCSLastUpdate",
       "com.vadimko.curforeckotlin.tcsApi.TCSPayload.lastUpdate"
-    ]
-  },
-  {
-    "name": "lateinit var mContext: Context",
-    "description": "com.vadimko.curforeckotlin.BootReceiver.mContext",
-    "location": "app/com.vadimko.curforeckotlin/-boot-receiver/m-context.html",
-    "searchKeys": [
-      "mContext",
-      "lateinit var mContext: Context",
-      "com.vadimko.curforeckotlin.BootReceiver.mContext"
     ]
   },
   {
@@ -2317,6 +2317,46 @@
       "rates",
       "lateinit var rates: List<TCSRates>",
       "com.vadimko.curforeckotlin.tcsApi.TCSPayload.rates"
+    ]
+  },
+  {
+    "name": "lateinit var try: CBjsonValute",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.try",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/try.html",
+    "searchKeys": [
+      "try",
+      "lateinit var try: CBjsonValute",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.try"
+    ]
+  },
+  {
+    "name": "lateinit var uah: CBjsonValute",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.uah",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/uah.html",
+    "searchKeys": [
+      "uah",
+      "lateinit var uah: CBjsonValute",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.uah"
+    ]
+  },
+  {
+    "name": "lateinit var usd: CBjsonValute",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.usd",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute-response/usd.html",
+    "searchKeys": [
+      "usd",
+      "lateinit var usd: CBjsonValute",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValuteResponse.usd"
+    ]
+  },
+  {
+    "name": "lateinit var valute: CBjsonValuteResponse",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse.valute",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-response/valute.html",
+    "searchKeys": [
+      "valute",
+      "lateinit var valute: CBjsonValuteResponse",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse.valute"
     ]
   },
   {
@@ -2347,6 +2387,26 @@
       "CalcLineChartBuilder",
       "object CalcLineChartBuilder : KoinComponent",
       "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder"
+    ]
+  },
+  {
+    "name": "object CalcServiceChartBuilder : KoinComponent",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/index.html",
+    "searchKeys": [
+      "CalcServiceChartBuilder",
+      "object CalcServiceChartBuilder : KoinComponent",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder"
+    ]
+  },
+  {
+    "name": "object CalcWidgetChartBuilder : KoinComponent",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/index.html",
+    "searchKeys": [
+      "CalcWidgetChartBuilder",
+      "object CalcWidgetChartBuilder : KoinComponent",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder"
     ]
   },
   {
@@ -2401,42 +2461,12 @@
   },
   {
     "name": "object Companion",
-    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion",
-    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/index.html",
-    "searchKeys": [
-      "Companion",
-      "object Companion",
-      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion"
-    ]
-  },
-  {
-    "name": "object Companion",
     "description": "com.vadimko.curforeckotlin.ui.archive.DatePickerFragment.Companion",
     "location": "app/com.vadimko.curforeckotlin.ui.archive/-date-picker-fragment/-companion/index.html",
     "searchKeys": [
       "Companion",
       "object Companion",
       "com.vadimko.curforeckotlin.ui.archive.DatePickerFragment.Companion"
-    ]
-  },
-  {
-    "name": "object Companion",
-    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion",
-    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/-companion/index.html",
-    "searchKeys": [
-      "Companion",
-      "object Companion",
-      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion"
-    ]
-  },
-  {
-    "name": "object Companion",
-    "description": "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion",
-    "location": "app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/index.html",
-    "searchKeys": [
-      "Companion",
-      "object Companion",
-      "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion"
     ]
   },
   {
@@ -2451,12 +2481,42 @@
   },
   {
     "name": "object Companion : KoinComponent",
+    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion",
+    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/index.html",
+    "searchKeys": [
+      "Companion",
+      "object Companion : KoinComponent",
+      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion"
+    ]
+  },
+  {
+    "name": "object Companion : KoinComponent",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/-companion/index.html",
+    "searchKeys": [
+      "Companion",
+      "object Companion : KoinComponent",
+      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion"
+    ]
+  },
+  {
+    "name": "object Companion : KoinComponent",
     "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion",
     "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/index.html",
     "searchKeys": [
       "Companion",
       "object Companion : KoinComponent",
       "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion"
+    ]
+  },
+  {
+    "name": "object Companion : KoinComponent",
+    "description": "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion",
+    "location": "app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/index.html",
+    "searchKeys": [
+      "Companion",
+      "object Companion : KoinComponent",
+      "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion"
     ]
   },
   {
@@ -3070,6 +3130,16 @@
     ]
   },
   {
+    "name": "private const val BOOT_ACTION: String",
+    "description": "com.vadimko.curforeckotlin.BOOT_ACTION",
+    "location": "app/com.vadimko.curforeckotlin/-b-o-o-t_-a-c-t-i-o-n.html",
+    "searchKeys": [
+      "BOOT_ACTION",
+      "private const val BOOT_ACTION: String",
+      "com.vadimko.curforeckotlin.BOOT_ACTION"
+    ]
+  },
+  {
     "name": "private const val CHANNEL_ID: String",
     "description": "com.vadimko.curforeckotlin.CHANNEL_ID",
     "location": "app/com.vadimko.curforeckotlin/-c-h-a-n-n-e-l_-i-d.html",
@@ -3107,26 +3177,6 @@
       "notificationId",
       "private const val notificationId: Int = 11",
       "com.vadimko.curforeckotlin.notificationId"
-    ]
-  },
-  {
-    "name": "private fun CurrenciesRepository(context: Context)",
-    "description": "com.vadimko.curforeckotlin.database.CurrenciesRepository.CurrenciesRepository",
-    "location": "app/com.vadimko.curforeckotlin.database/-currencies-repository/-currencies-repository.html",
-    "searchKeys": [
-      "CurrenciesRepository",
-      "private fun CurrenciesRepository(context: Context)",
-      "com.vadimko.curforeckotlin.database.CurrenciesRepository.CurrenciesRepository"
-    ]
-  },
-  {
-    "name": "private fun attachChart(pref: Boolean, type: Boolean)",
-    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.attachChart",
-    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/attach-chart.html",
-    "searchKeys": [
-      "attachChart",
-      "private fun attachChart(pref: Boolean, type: Boolean)",
-      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.attachChart"
     ]
   },
   {
@@ -3290,16 +3340,6 @@
     ]
   },
   {
-    "name": "private fun checkConnection(): Boolean",
-    "description": "com.vadimko.curforeckotlin.TCSUpdateService.checkConnection",
-    "location": "app/com.vadimko.curforeckotlin/-t-c-s-update-service/check-connection.html",
-    "searchKeys": [
-      "checkConnection",
-      "private fun checkConnection(): Boolean",
-      "com.vadimko.curforeckotlin.TCSUpdateService.checkConnection"
-    ]
-  },
-  {
     "name": "private fun checkCurrencyLevel(dataList: List<CurrencyTCS>)",
     "description": "com.vadimko.curforeckotlin.TCSUpdateService.checkCurrencyLevel",
     "location": "app/com.vadimko.curforeckotlin/-t-c-s-update-service/check-currency-level.html",
@@ -3340,16 +3380,6 @@
     ]
   },
   {
-    "name": "private fun createGraph(data: Any, dataType: Boolean)",
-    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.createGraph",
-    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/create-graph.html",
-    "searchKeys": [
-      "createGraph",
-      "private fun createGraph(data: Any, dataType: Boolean)",
-      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.createGraph"
-    ]
-  },
-  {
     "name": "private fun createNotificationChannel()",
     "description": "com.vadimko.curforeckotlin.MainActivity.createNotificationChannel",
     "location": "app/com.vadimko.curforeckotlin/-main-activity/create-notification-channel.html",
@@ -3370,13 +3400,23 @@
     ]
   },
   {
-    "name": "private fun fillGraph(dataType: Boolean, data: Any, spinnerPos: Int)",
-    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.fillGraph",
-    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/fill-graph.html",
+    "name": "private fun createServiceGraph()",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.createServiceGraph",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/create-service-graph.html",
     "searchKeys": [
-      "fillGraph",
-      "private fun fillGraph(dataType: Boolean, data: Any, spinnerPos: Int)",
-      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.fillGraph"
+      "createServiceGraph",
+      "private fun createServiceGraph()",
+      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.createServiceGraph"
+    ]
+  },
+  {
+    "name": "private fun createWidgetGraph()",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.createWidgetGraph",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/create-widget-graph.html",
+    "searchKeys": [
+      "createWidgetGraph",
+      "private fun createWidgetGraph()",
+      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.createWidgetGraph"
     ]
   },
   {
@@ -3387,6 +3427,46 @@
       "fillLineChart",
       "private fun fillLineChart(lineChart: LineChart, curr: String, buy: List<Double>, sell: List<Double>)",
       "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.fillLineChart"
+    ]
+  },
+  {
+    "name": "private fun fillLineChart(lineChart: LineChart, curr: String, buy: List<Double>, sell: List<Double>)",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.fillLineChart",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/fill-line-chart.html",
+    "searchKeys": [
+      "fillLineChart",
+      "private fun fillLineChart(lineChart: LineChart, curr: String, buy: List<Double>, sell: List<Double>)",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.fillLineChart"
+    ]
+  },
+  {
+    "name": "private fun fillLineChart(lineChart: LineChart, curr: String, buy: List<Double>, sell: List<Double>)",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.fillLineChart",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/fill-line-chart.html",
+    "searchKeys": [
+      "fillLineChart",
+      "private fun fillLineChart(lineChart: LineChart, curr: String, buy: List<Double>, sell: List<Double>)",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.fillLineChart"
+    ]
+  },
+  {
+    "name": "private fun fillServiceGraph()",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.fillServiceGraph",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/fill-service-graph.html",
+    "searchKeys": [
+      "fillServiceGraph",
+      "private fun fillServiceGraph()",
+      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.fillServiceGraph"
+    ]
+  },
+  {
+    "name": "private fun fillWidgetGraph()",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.fillWidgetGraph",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/fill-widget-graph.html",
+    "searchKeys": [
+      "fillWidgetGraph",
+      "private fun fillWidgetGraph()",
+      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.fillWidgetGraph"
     ]
   },
   {
@@ -3580,6 +3660,16 @@
     ]
   },
   {
+    "name": "private lateinit var chartSpinner: Spinner",
+    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveFragment.chartSpinner",
+    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-fragment/chart-spinner.html",
+    "searchKeys": [
+      "chartSpinner",
+      "private lateinit var chartSpinner: Spinner",
+      "com.vadimko.curforeckotlin.ui.archive.ArchiveFragment.chartSpinner"
+    ]
+  },
+  {
     "name": "private lateinit var coinsAnimator: CoinsAnimator",
     "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.coinsAnimator",
     "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/coins-animator.html",
@@ -3747,6 +3837,16 @@
       "linearChartTCsWidget",
       "private lateinit var linearChartTCsWidget: LineChart",
       "com.vadimko.curforeckotlin.ui.calc.CalcFragment.linearChartTCsWidget"
+    ]
+  },
+  {
+    "name": "private lateinit var mContext: Context",
+    "description": "com.vadimko.curforeckotlin.BootReceiver.mContext",
+    "location": "app/com.vadimko.curforeckotlin/-boot-receiver/m-context.html",
+    "searchKeys": [
+      "mContext",
+      "private lateinit var mContext: Context",
+      "com.vadimko.curforeckotlin.BootReceiver.mContext"
     ]
   },
   {
@@ -4000,6 +4100,16 @@
     ]
   },
   {
+    "name": "private val cbxmlRepository: CBxmlRepository",
+    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.cbxmlRepository",
+    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/cbxml-repository.html",
+    "searchKeys": [
+      "cbxmlRepository",
+      "private val cbxmlRepository: CBxmlRepository",
+      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.cbxmlRepository"
+    ]
+  },
+  {
     "name": "private val coinsArrayImage: IntArray",
     "description": "com.vadimko.curforeckotlin.utils.CoinsAnimator.coinsArrayImage",
     "location": "app/com.vadimko.curforeckotlin.utils/-coins-animator/coins-array-image.html",
@@ -4027,6 +4137,26 @@
       "color",
       "private val color: Int",
       "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.color"
+    ]
+  },
+  {
+    "name": "private val color: Int",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.color",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/color.html",
+    "searchKeys": [
+      "color",
+      "private val color: Int",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.color"
+    ]
+  },
+  {
+    "name": "private val color: Int",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.color",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/color.html",
+    "searchKeys": [
+      "color",
+      "private val color: Int",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.color"
     ]
   },
   {
@@ -4151,6 +4281,26 @@
   },
   {
     "name": "private val context: Context",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.context",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/context.html",
+    "searchKeys": [
+      "context",
+      "private val context: Context",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.context"
+    ]
+  },
+  {
+    "name": "private val context: Context",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.context",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/context.html",
+    "searchKeys": [
+      "context",
+      "private val context: Context",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.context"
+    ]
+  },
+  {
+    "name": "private val context: Context",
     "description": "com.vadimko.curforeckotlin.utils.CheckConnection.context",
     "location": "app/com.vadimko.curforeckotlin.utils/-check-connection/context.html",
     "searchKeys": [
@@ -4270,6 +4420,26 @@
     ]
   },
   {
+    "name": "private val currenciesRepository: CurrenciesRepository",
+    "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository.currenciesRepository",
+    "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/currencies-repository.html",
+    "searchKeys": [
+      "currenciesRepository",
+      "private val currenciesRepository: CurrenciesRepository",
+      "com.vadimko.curforeckotlin.tcsApi.TCSRepository.currenciesRepository"
+    ]
+  },
+  {
+    "name": "private val currenciesRepository: CurrenciesRepository",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.currenciesRepository",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/currencies-repository.html",
+    "searchKeys": [
+      "currenciesRepository",
+      "private val currenciesRepository: CurrenciesRepository",
+      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.currenciesRepository"
+    ]
+  },
+  {
     "name": "private val currencyDao: CurrencyDao",
     "description": "com.vadimko.curforeckotlin.database.CurrenciesRepository.currencyDao",
     "location": "app/com.vadimko.curforeckotlin.database/-currencies-repository/currency-dao.html",
@@ -4330,6 +4500,26 @@
     ]
   },
   {
+    "name": "private val datesTime: MutableList<String>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.datesTime",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/dates-time.html",
+    "searchKeys": [
+      "datesTime",
+      "private val datesTime: MutableList<String>",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.datesTime"
+    ]
+  },
+  {
+    "name": "private val datesTime: MutableList<String>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.datesTime",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/dates-time.html",
+    "searchKeys": [
+      "datesTime",
+      "private val datesTime: MutableList<String>",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.datesTime"
+    ]
+  },
+  {
     "name": "private val eurDataBuy: MutableList<Double>",
     "description": "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.eurDataBuy",
     "location": "app/com.vadimko.curforeckotlin.utils/-calc-line-chart-builder/eur-data-buy.html",
@@ -4340,6 +4530,26 @@
     ]
   },
   {
+    "name": "private val eurDataBuy: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.eurDataBuy",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/eur-data-buy.html",
+    "searchKeys": [
+      "eurDataBuy",
+      "private val eurDataBuy: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.eurDataBuy"
+    ]
+  },
+  {
+    "name": "private val eurDataBuy: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.eurDataBuy",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/eur-data-buy.html",
+    "searchKeys": [
+      "eurDataBuy",
+      "private val eurDataBuy: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.eurDataBuy"
+    ]
+  },
+  {
     "name": "private val eurDataSell: MutableList<Double>",
     "description": "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.eurDataSell",
     "location": "app/com.vadimko.curforeckotlin.utils/-calc-line-chart-builder/eur-data-sell.html",
@@ -4347,6 +4557,26 @@
       "eurDataSell",
       "private val eurDataSell: MutableList<Double>",
       "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.eurDataSell"
+    ]
+  },
+  {
+    "name": "private val eurDataSell: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.eurDataSell",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/eur-data-sell.html",
+    "searchKeys": [
+      "eurDataSell",
+      "private val eurDataSell: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.eurDataSell"
+    ]
+  },
+  {
+    "name": "private val eurDataSell: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.eurDataSell",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/eur-data-sell.html",
+    "searchKeys": [
+      "eurDataSell",
+      "private val eurDataSell: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.eurDataSell"
     ]
   },
   {
@@ -4370,6 +4600,26 @@
     ]
   },
   {
+    "name": "private val gbpDataBuy: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.gbpDataBuy",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/gbp-data-buy.html",
+    "searchKeys": [
+      "gbpDataBuy",
+      "private val gbpDataBuy: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.gbpDataBuy"
+    ]
+  },
+  {
+    "name": "private val gbpDataBuy: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.gbpDataBuy",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/gbp-data-buy.html",
+    "searchKeys": [
+      "gbpDataBuy",
+      "private val gbpDataBuy: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.gbpDataBuy"
+    ]
+  },
+  {
     "name": "private val gbpDataSell: MutableList<Double>",
     "description": "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.gbpDataSell",
     "location": "app/com.vadimko.curforeckotlin.utils/-calc-line-chart-builder/gbp-data-sell.html",
@@ -4377,6 +4627,26 @@
       "gbpDataSell",
       "private val gbpDataSell: MutableList<Double>",
       "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.gbpDataSell"
+    ]
+  },
+  {
+    "name": "private val gbpDataSell: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.gbpDataSell",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/gbp-data-sell.html",
+    "searchKeys": [
+      "gbpDataSell",
+      "private val gbpDataSell: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.gbpDataSell"
+    ]
+  },
+  {
+    "name": "private val gbpDataSell: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.gbpDataSell",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/gbp-data-sell.html",
+    "searchKeys": [
+      "gbpDataSell",
+      "private val gbpDataSell: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.gbpDataSell"
     ]
   },
   {
@@ -4420,6 +4690,26 @@
     ]
   },
   {
+    "name": "private val moexRepository: MOEXRepository",
+    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.moexRepository",
+    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/moex-repository.html",
+    "searchKeys": [
+      "moexRepository",
+      "private val moexRepository: MOEXRepository",
+      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.moexRepository"
+    ]
+  },
+  {
+    "name": "private val moexRepository: MOEXRepository",
+    "description": "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion.moexRepository",
+    "location": "app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/moex-repository.html",
+    "searchKeys": [
+      "moexRepository",
+      "private val moexRepository: MOEXRepository",
+      "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion.moexRepository"
+    ]
+  },
+  {
     "name": "private val nowViewModel: NowViewModel",
     "description": "com.vadimko.curforeckotlin.ui.now.NowFragment.nowViewModel",
     "location": "app/com.vadimko.curforeckotlin.ui.now/-now-fragment/now-view-model.html",
@@ -4460,6 +4750,16 @@
     ]
   },
   {
+    "name": "private val tcsRepository: TCSRepository",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.tcsRepository",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/-companion/tcs-repository.html",
+    "searchKeys": [
+      "tcsRepository",
+      "private val tcsRepository: TCSRepository",
+      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.tcsRepository"
+    ]
+  },
+  {
     "name": "private val timer: Timer",
     "description": "com.vadimko.curforeckotlin.utils.CoinsAnimator.timer",
     "location": "app/com.vadimko.curforeckotlin.utils/-coins-animator/timer.html",
@@ -4490,6 +4790,26 @@
     ]
   },
   {
+    "name": "private val usdDataBuy: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.usdDataBuy",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/usd-data-buy.html",
+    "searchKeys": [
+      "usdDataBuy",
+      "private val usdDataBuy: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.usdDataBuy"
+    ]
+  },
+  {
+    "name": "private val usdDataBuy: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.usdDataBuy",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/usd-data-buy.html",
+    "searchKeys": [
+      "usdDataBuy",
+      "private val usdDataBuy: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.usdDataBuy"
+    ]
+  },
+  {
     "name": "private val usdDataSell: MutableList<Double>",
     "description": "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.usdDataSell",
     "location": "app/com.vadimko.curforeckotlin.utils/-calc-line-chart-builder/usd-data-sell.html",
@@ -4497,6 +4817,26 @@
       "usdDataSell",
       "private val usdDataSell: MutableList<Double>",
       "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.usdDataSell"
+    ]
+  },
+  {
+    "name": "private val usdDataSell: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.usdDataSell",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/usd-data-sell.html",
+    "searchKeys": [
+      "usdDataSell",
+      "private val usdDataSell: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.usdDataSell"
+    ]
+  },
+  {
+    "name": "private val usdDataSell: MutableList<Double>",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.usdDataSell",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/usd-data-sell.html",
+    "searchKeys": [
+      "usdDataSell",
+      "private val usdDataSell: MutableList<Double>",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.usdDataSell"
     ]
   },
   {
@@ -4710,12 +5050,12 @@
     ]
   },
   {
-    "name": "private var dataCB: MutableStateFlow<List<CurrencyCBarhive>>",
+    "name": "private var dataCB: MutableLiveData<List<CurrencyCBarhive>>",
     "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB",
     "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/data-c-b.html",
     "searchKeys": [
       "dataCB",
-      "private var dataCB: MutableStateFlow<List<CurrencyCBarhive>>",
+      "private var dataCB: MutableLiveData<List<CurrencyCBarhive>>",
       "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB"
     ]
   },
@@ -4730,12 +5070,12 @@
     ]
   },
   {
-    "name": "private var dataMOEX: MutableStateFlow<List<CurrencyMOEX>>",
+    "name": "private var dataMOEX: MutableLiveData<List<CurrencyMOEX>>",
     "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataMOEX",
     "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/data-m-o-e-x.html",
     "searchKeys": [
       "dataMOEX",
-      "private var dataMOEX: MutableStateFlow<List<CurrencyMOEX>>",
+      "private var dataMOEX: MutableLiveData<List<CurrencyMOEX>>",
       "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataMOEX"
     ]
   },
@@ -5040,6 +5380,16 @@
     ]
   },
   {
+    "name": "private var serviceSpinnerValue: Int = 0",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.serviceSpinnerValue",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/service-spinner-value.html",
+    "searchKeys": [
+      "serviceSpinnerValue",
+      "private var serviceSpinnerValue: Int = 0",
+      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.serviceSpinnerValue"
+    ]
+  },
+  {
     "name": "private var serviceUpdateData: List<List<CurrencyTCS>>",
     "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.serviceUpdateData",
     "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/service-update-data.html",
@@ -5047,6 +5397,26 @@
       "serviceUpdateData",
       "private var serviceUpdateData: List<List<CurrencyTCS>>",
       "com.vadimko.curforeckotlin.ui.calc.CalcFragment.serviceUpdateData"
+    ]
+  },
+  {
+    "name": "private var showServiceGraph: Boolean = false",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.showServiceGraph",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/show-service-graph.html",
+    "searchKeys": [
+      "showServiceGraph",
+      "private var showServiceGraph: Boolean = false",
+      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.showServiceGraph"
+    ]
+  },
+  {
+    "name": "private var showWidgetGraph: Boolean = false",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.showWidgetGraph",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/show-widget-graph.html",
+    "searchKeys": [
+      "showWidgetGraph",
+      "private var showWidgetGraph: Boolean = false",
+      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.showWidgetGraph"
     ]
   },
   {
@@ -5127,16 +5497,6 @@
       "uo1",
       "private var uo1: Float = 0f",
       "com.vadimko.curforeckotlin.forecastsMethods.ExponentSmooth.uo1"
-    ]
-  },
-  {
-    "name": "private var updateSpinnerValue: Int = 0",
-    "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.updateSpinnerValue",
-    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/update-spinner-value.html",
-    "searchKeys": [
-      "updateSpinnerValue",
-      "private var updateSpinnerValue: Int = 0",
-      "com.vadimko.curforeckotlin.ui.calc.CalcFragment.updateSpinnerValue"
     ]
   },
   {
@@ -5240,46 +5600,6 @@
     ]
   },
   {
-    "name": "val appWidgetID: Int?",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.appWidgetID",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-repository/app-widget-i-d.html",
-    "searchKeys": [
-      "appWidgetID",
-      "val appWidgetID: Int?",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.appWidgetID"
-    ]
-  },
-  {
-    "name": "val appWidgetID: Int?",
-    "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository.appWidgetID",
-    "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/app-widget-i-d.html",
-    "searchKeys": [
-      "appWidgetID",
-      "val appWidgetID: Int?",
-      "com.vadimko.curforeckotlin.tcsApi.TCSRepository.appWidgetID"
-    ]
-  },
-  {
-    "name": "val appWidgetManager: AppWidgetManager?",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.appWidgetManager",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-repository/app-widget-manager.html",
-    "searchKeys": [
-      "appWidgetManager",
-      "val appWidgetManager: AppWidgetManager?",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.appWidgetManager"
-    ]
-  },
-  {
-    "name": "val appWidgetManager: AppWidgetManager?",
-    "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository.appWidgetManager",
-    "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/app-widget-manager.html",
-    "searchKeys": [
-      "appWidgetManager",
-      "val appWidgetManager: AppWidgetManager?",
-      "com.vadimko.curforeckotlin.tcsApi.TCSRepository.appWidgetManager"
-    ]
-  },
-  {
     "name": "val close: Double = 0.0",
     "description": "com.vadimko.curforeckotlin.moexApi.CurrencyMOEX.close",
     "location": "app/com.vadimko.curforeckotlin.moexApi/-currency-m-o-e-x/close.html",
@@ -5361,12 +5681,12 @@
   },
   {
     "name": "val name: String",
-    "description": "com.vadimko.curforeckotlin.tcsApi.fromCurrency.name",
-    "location": "app/com.vadimko.curforeckotlin.tcsApi/from-currency/name.html",
+    "description": "com.vadimko.curforeckotlin.tcsApi.FromCurrency.name",
+    "location": "app/com.vadimko.curforeckotlin.tcsApi/-from-currency/name.html",
     "searchKeys": [
       "name",
       "val name: String",
-      "com.vadimko.curforeckotlin.tcsApi.fromCurrency.name"
+      "com.vadimko.curforeckotlin.tcsApi.FromCurrency.name"
     ]
   },
   {
@@ -5380,26 +5700,6 @@
     ]
   },
   {
-    "name": "val requestMode: Boolean",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.requestMode",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-repository/request-mode.html",
-    "searchKeys": [
-      "requestMode",
-      "val requestMode: Boolean",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.requestMode"
-    ]
-  },
-  {
-    "name": "val requestMode: Boolean",
-    "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository.requestMode",
-    "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/request-mode.html",
-    "searchKeys": [
-      "requestMode",
-      "val requestMode: Boolean",
-      "com.vadimko.curforeckotlin.tcsApi.TCSRepository.requestMode"
-    ]
-  },
-  {
     "name": "val warprice: Double = 0.0",
     "description": "com.vadimko.curforeckotlin.moexApi.CurrencyMOEX.warprice",
     "location": "app/com.vadimko.curforeckotlin.moexApi/-currency-m-o-e-x/warprice.html",
@@ -5407,16 +5707,6 @@
       "warprice",
       "val warprice: Double = 0.0",
       "com.vadimko.curforeckotlin.moexApi.CurrencyMOEX.warprice"
-    ]
-  },
-  {
-    "name": "var Date: String",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse.Date",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-response/-date.html",
-    "searchKeys": [
-      "Date",
-      "var Date: String",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse.Date"
     ]
   },
   {
@@ -5437,26 +5727,6 @@
       "NOTIFICATION_ID",
       "var NOTIFICATION_ID: Int = 5555",
       "com.vadimko.curforeckotlin.NOTIFICATION_ID"
-    ]
-  },
-  {
-    "name": "var Previous: Double = 0.0",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute.Previous",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute/-previous.html",
-    "searchKeys": [
-      "Previous",
-      "var Previous: Double = 0.0",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute.Previous"
-    ]
-  },
-  {
-    "name": "var Value: Double = 0.0",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute.Value",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute/-value.html",
-    "searchKeys": [
-      "Value",
-      "var Value: Double = 0.0",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute.Value"
     ]
   },
   {
@@ -5507,6 +5777,16 @@
       "curr",
       "var curr: String?",
       "com.vadimko.curforeckotlin.tcsApi.CurrencyTCS.curr"
+    ]
+  },
+  {
+    "name": "var date: String",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse.date",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-response/date.html",
+    "searchKeys": [
+      "date",
+      "var date: String",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonResponse.date"
     ]
   },
   {
@@ -5650,6 +5930,16 @@
     ]
   },
   {
+    "name": "var previous: Double = 0.0",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute.previous",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute/previous.html",
+    "searchKeys": [
+      "previous",
+      "var previous: Double = 0.0",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute.previous"
+    ]
+  },
+  {
     "name": "var record: List<Record>? = null",
     "description": "com.vadimko.curforeckotlin.cbxmlApi.CBXXMLResponse.record",
     "location": "app/com.vadimko.curforeckotlin.cbxmlApi/-c-b-x-x-m-l-response/record.html",
@@ -5707,6 +5997,16 @@
       "usdSell",
       "var usdSell: Double = 0.0",
       "com.vadimko.curforeckotlin.database.Currencies.usdSell"
+    ]
+  },
+  {
+    "name": "var value: Double = 0.0",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute.value",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-valute/value.html",
+    "searchKeys": [
+      "value",
+      "var value: Double = 0.0",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonValute.value"
     ]
   },
   {
