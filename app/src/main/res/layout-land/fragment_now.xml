@@ -101,7 +101,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:textColor="@color/white"
-                                android:text="xxx"
+                                tools:text="xxx"
                                 android:autoLink="web"
                                 android:layout_marginBottom="5dp"
                                 android:id="@+id/lastchk" />
@@ -146,7 +146,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="xxx"
+                                tools:text="xxx"
                                 android:textColor="@color/white"
                                 android:autoLink="web"
                                 android:layout_marginBottom="5dp"

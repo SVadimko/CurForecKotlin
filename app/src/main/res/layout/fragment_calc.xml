@@ -68,7 +68,6 @@
                                     android:textSize="20sp"
                                     android:layout_width="match_parent"
                                     android:layout_marginEnd="10dp"
-                                    android:pointerIcon="hand"
                                     android:textColor="@color/MainTextColor"
                                     android:layout_height="wrap_content"
                                     android:gravity="center_horizontal"
@@ -100,11 +99,13 @@
                                 android:textSize="35sp"
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/digital"
+                                android:autofillHints="@string/underscore"
                                 android:hint="@string/underscore"
                                 android:textColor="@color/colorCalc2"
                                 android:background="@color/colorCalc"
                                 android:gravity="center"
                                 android:enabled="false"
+                                android:forceDarkAllowed="false"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
@@ -121,10 +122,11 @@
                                 android:background="@color/colorCalc"
                                 android:gravity="center_vertical"
                                 android:id="@+id/cursign"
+                                android:forceDarkAllowed="false"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_height="35dp"
-                                android:text="$" />
+                                tools:text="$" />
 
                         <TextView
                                 android:layout_width="0dp"
@@ -136,6 +138,7 @@
                                 android:background="@color/colorCalc"
                                 android:gravity="center"
                                 android:id="@+id/eqtv"
+                                android:forceDarkAllowed="false"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_height="35dp"
@@ -155,6 +158,8 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_height="35dp"
+                                android:forceDarkAllowed="false"
+                                android:autofillHints="@string/underscore2"
                                 android:hint="@string/underscore2"
                                 android:id="@+id/rubvaluecalc" />
 
@@ -167,10 +172,11 @@
                                 android:textColor="@color/colorCalc2"
                                 android:background="@color/colorCalc"
                                 android:layout_marginTop="5dp"
+                                android:forceDarkAllowed="false"
                                 android:layout_marginBottom="5dp"
                                 android:layout_marginEnd="5dp"
                                 android:layout_height="35dp"
-                                android:text="₽" />
+                                tools:text="₽" />
 
 
                     </LinearLayout>
@@ -200,7 +206,7 @@
                                 android:id="@+id/calcul"
                                 android:forceDarkAllowed="false"
                                 android:hapticFeedbackEnabled="true"
-                                android:text="="
+                                android:text="@string/equalsign"
                                 android:enabled="false"
                                 android:textSize="40sp"
                                 android:backgroundTint="@color/colorOrange"

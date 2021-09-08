@@ -3,6 +3,7 @@
 <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -21,7 +22,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/usd"
+                tools:src="@drawable/usd"
                 android:id="@+id/flag"
                 android:layout_height="30dp" />
 
@@ -29,7 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1.2"
                 android:layout_height="wrap_content"
-                android:text="USD"
+                tools:text="USD"
                 android:id="@+id/curr"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
@@ -41,7 +42,7 @@
                 android:layout_width="30dp"
                 android:layout_gravity="center"
                 android:background="@color/colorDigBack"
-                android:src="@drawable/arrdown"
+                tools:src="@drawable/arrdown"
                 android:layout_margin="5dp"
                 android:id="@+id/arrow"
                 android:layout_height="30dp" />
@@ -56,7 +57,7 @@
                 android:fontFamily="@font/digital"
                 android:textColor="@color/colorRed"
                 android:background="@color/colorDigBack"
-                android:text="70.0"
+                tools:text="70.0"
                 android:id="@+id/value"
                 android:layout_margin="5dp" />
 
@@ -69,7 +70,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:background="@color/colorDigBack"
-                android:text="70.0"
+                tools:text="70.0"
                 android:id="@+id/val_was"
                 android:layout_margin="5dp" />
     </LinearLayout>

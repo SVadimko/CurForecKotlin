@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
-
+<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -21,7 +20,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/usd"
+                tools:src="@drawable/usd"
                 android:id="@+id/flag"
                 android:layout_height="40dp" />
 
@@ -29,7 +28,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="USD"
+                tools:text="USD"
                 android:id="@+id/curr"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
@@ -46,7 +45,7 @@
                 android:textColor="@color/colorRed"
                 android:background="@color/colorDigBack"
                 android:layout_gravity="center"
-                android:text="70.0"
+                tools:text="70.0"
                 android:id="@+id/buy"
                 android:layout_margin="5dp" />
 
@@ -56,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:text="75.0"
+                tools:text="75.0"
                 android:background="@color/colorDigBack"
                 android:id="@+id/cell"
                 android:layout_margin="5dp"

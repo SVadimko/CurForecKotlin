@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:theme="@style/ThemeOverlay.CurForecKotlin.AppWidgetContainer"
+        xmlns:tools="http://schemas.android.com/tools"
         android:background="@color/colorWidgetBack"
         android:layout_width="match_parent"
         android:id="@+id/startAPP"
@@ -57,7 +58,7 @@
                 android:textColor="@color/colorWhite"
                 android:layout_marginStart="10dp"
                 android:layout_height="wrap_content"
-                android:text="$" />
+                android:text="@string/usdsign" />
 
         <TextView
                 android:layout_width="0dp"
@@ -65,7 +66,7 @@
                 android:id="@+id/usd_buy"
                 android:textColor="@color/colorWhite"
                 android:layout_height="wrap_content"
-                android:text="30.20₽" />
+                tools:text="30.20₽" />
 
         <TextView
                 android:layout_width="0dp"
@@ -73,7 +74,7 @@
                 android:id="@+id/usd_sell"
                 android:textColor="@color/colorWhite"
                 android:layout_height="wrap_content"
-                android:text="40.15₽" />
+                tools:text="40.15₽" />
 
         <TextView
                 android:layout_width="0dp"
@@ -81,7 +82,7 @@
                 android:id="@+id/cbrf_usd"
                 android:textColor="@color/colorWhite"
                 android:layout_height="wrap_content"
-                android:text="45.15(-0.03)₽" />
+                tools:text="45.15(-0.03)₽" />
     </LinearLayout>
 
     <LinearLayout
@@ -95,7 +96,7 @@
                 android:textColor="@color/colorWhite"
                 android:layout_marginStart="10dp"
                 android:layout_height="wrap_content"
-                android:text="€" />
+                android:text="@string/eursign" />
 
         <TextView
                 android:layout_width="0dp"
@@ -103,7 +104,7 @@
                 android:id="@+id/eur_buy"
                 android:textColor="@color/colorWhite"
                 android:layout_height="wrap_content"
-                android:text="60.₽" />
+                tools:text="60.₽" />
 
         <TextView
                 android:layout_width="0dp"
@@ -111,7 +112,7 @@
                 android:id="@+id/eur_sell"
                 android:textColor="@color/colorWhite"
                 android:layout_height="wrap_content"
-                android:text="75.15₽" />
+                tools:text="75.15₽" />
 
         <TextView
                 android:layout_width="0dp"
@@ -119,7 +120,7 @@
                 android:id="@+id/cbrf_euro"
                 android:textColor="@color/colorWhite"
                 android:layout_height="wrap_content"
-                android:text="69.15(+0.07)₽" />
+                tools:text="69.15(+0.07)₽" />
     </LinearLayout>
 
     <LinearLayout
@@ -140,17 +141,17 @@
                     android:textColor="@color/MainTextColor"
                     android:layout_marginStart="10dp"
                     android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:text="ТКС от 09.12.20" />
+                    android:textSize="11sp"
+                    tools:text="ТКС от 09.12.20" />
 
             <TextView
                     android:layout_width="match_parent"
                     android:id="@+id/dt2"
                     android:textColor="@color/MainTextColor"
                     android:layout_marginStart="10dp"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:layout_height="wrap_content"
-                    android:text="ЦБРФ от 09.12.20" />
+                    tools:text="ЦБРФ от 09.12.20" />
         </LinearLayout>
 
         <ImageView

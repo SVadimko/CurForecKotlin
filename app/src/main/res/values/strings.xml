@@ -89,6 +89,9 @@
     <string name="wrongcountCB">Choose more than 2 work days range to see CB graph!</string>
     <string name="listisempty">List is already empty!</string>
     <string name="notify_sound">Animation with sound</string>
+    <string name="equalsign">=</string>
+    <string name="usdsign">$</string>
+    <string name="eursign">€</string>
 
 
 </resources>

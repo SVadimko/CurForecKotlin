@@ -23,7 +23,7 @@
             android:textColor="@color/spinnerTextColor"
             android:id="@+id/title"
             android:layout_margin="6dp"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_margin="6dp"

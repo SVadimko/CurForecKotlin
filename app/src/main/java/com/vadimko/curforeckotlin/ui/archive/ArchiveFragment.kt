@@ -204,10 +204,8 @@ class ArchiveFragment : Fragment() {
                 tillDate = bundle.get("bundleKey") as Date
                 tillTv.text = DateConverter.dateWithOutTimeFormat(tillDate)
             }
-        /**
-         * dontShowCB and dontShowMOEX flags, used for hiding warning Toast on first time because of
-         * MutableStateFlow needs initial value, which replaced by lists with empty data
-         */
+
+
         /*    var dontShowCB = true
             var dontShowMOEX = true
             lifecycleScope.launchWhenStarted {

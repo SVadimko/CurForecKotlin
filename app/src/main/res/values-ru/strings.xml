@@ -91,6 +91,9 @@
     <string name="wrongcountCB">Для корректного отображения графика ЦБ требуется указать более 2х рабочих дней!</string>
     <string name="listisempty">Данные отсутствуют!</string>
     <string name="notify_sound">Анимация со звуком</string>
+    <string name="equalsign">=</string>
+    <string name="usdsign">$</string>
+    <string name="eursign">€</string>
 
     <string-array name="chartsource">
         <item>МОEX</item>

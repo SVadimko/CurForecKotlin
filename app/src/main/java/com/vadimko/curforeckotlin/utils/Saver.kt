@@ -17,6 +17,8 @@ import java.io.*
  * @property path get files directory path
  */
 
+const val FILENAME = "TCSlast.sav"
+
 object Saver : KoinComponent {
 
 
@@ -31,7 +33,7 @@ object Saver : KoinComponent {
         val temp: MutableList<MutableList<CurrencyTCS>> = loadTcsLast()
         temp.add(newData)
         try {
-            ObjectOutputStream(FileOutputStream(path + "TCSlast.sav")).use {
+            ObjectOutputStream(FileOutputStream(path + FILENAME)).use {
                 it.writeObject(temp)
                 CalcViewModel.loadServiceUpdateData()
             }
@@ -47,7 +49,7 @@ object Saver : KoinComponent {
     fun loadTcsLast(): MutableList<MutableList<CurrencyTCS>> {
         var tcsList: MutableList<MutableList<CurrencyTCS>> = mutableListOf()
         try {
-            ObjectInputStream(FileInputStream(path + "TCSlast.sav")).use {
+            ObjectInputStream(FileInputStream(path + FILENAME)).use {
                 tcsList = it.readObject() as MutableList<MutableList<CurrencyTCS>>
             }
         } catch (ex: Exception) {
@@ -62,7 +64,7 @@ object Saver : KoinComponent {
     fun deleteTcsLast(temp: List<List<CurrencyTCS>>) {
         val delArray = temp.filter { it == temp.last() }
         try {
-            ObjectOutputStream(FileOutputStream(path + "TCSlast.sav")).use {
+            ObjectOutputStream(FileOutputStream(path + FILENAME)).use {
                 it.writeObject(delArray)
             }
         } catch (ex: IOException) {
