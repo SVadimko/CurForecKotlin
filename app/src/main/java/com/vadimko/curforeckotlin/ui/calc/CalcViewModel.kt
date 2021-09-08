@@ -12,8 +12,8 @@ import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
 import com.vadimko.curforeckotlin.utils.Saver
+import com.vadimko.curforeckotlin.utils.ScopeCreator
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -138,7 +138,9 @@ class CalcViewModel : ViewModel(), KoinComponent {
      * @property dataServiceUpdate Currency data saved as a result of work [TCSUpdateService]
      */
     companion object : KoinComponent {
+        private val scopeCreator: ScopeCreator by inject()
         private val tcsRepository: TCSRepository by inject()
+
         private var dataForCalc: StateFlow<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
 
         /**
@@ -158,7 +160,7 @@ class CalcViewModel : ViewModel(), KoinComponent {
          * Load currencies values from storage through [Saver] to [dataServiceUpdate]
          */
         internal fun loadServiceUpdateData() {
-            GlobalScope.launch(Dispatchers.IO) {
+            scopeCreator.getScope().launch(Dispatchers.IO) {
                 dataServiceUpdate.postValue(Saver.loadTcsLast())
             }
         }

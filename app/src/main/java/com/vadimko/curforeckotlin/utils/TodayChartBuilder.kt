@@ -15,7 +15,6 @@ import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
@@ -28,6 +27,7 @@ import java.util.*
 object TodayChartBuilder : KoinComponent {
 
     private val context: Context by inject()
+    private val scopeCreator: ScopeCreator by inject()
     private val color = context.getColor(R.color.white)
 
     /**
@@ -35,13 +35,11 @@ object TodayChartBuilder : KoinComponent {
      * @param comboChartForec - takes chart to configure
      * @param dataList used to build x Axis values
      * @param period used to add to forecast x Axis values type of period
-     * @param animationLong how lasts animation of chart drawing
      */
     fun createChart(
         comboChartForec: CombinedChart,
         dataList: List<CurrencyMOEX>,
-        period: String,
-        animationLong: Int,
+        period: String
     ): CombinedChart {
         val dates: MutableList<String> = mutableListOf()
         dataList.forEach {
@@ -106,7 +104,8 @@ object TodayChartBuilder : KoinComponent {
         comboChartForec.setTouchEnabled(true)
         comboChartForec.isDragEnabled = true
         comboChartForec.setScaleEnabled(true)
-        comboChartForec.animateX(animationLong)
+        val animationInt = 500
+        comboChartForec.animateX(animationInt)
         comboChartForec.setPinchZoom(true)
         return comboChartForec
     }
@@ -123,7 +122,7 @@ object TodayChartBuilder : KoinComponent {
         s: String,
         dataList: List<CurrencyMOEX>,
     ) {
-        GlobalScope.launch(Dispatchers.IO) {
+        scopeCreator.getScope().launch(Dispatchers.IO) {
             val dates: MutableList<String> = mutableListOf()
             val open: MutableList<Double> = mutableListOf()
             val close: MutableList<Double> = mutableListOf()

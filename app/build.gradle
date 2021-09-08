@@ -138,7 +138,7 @@ dependencies {
     //KOIN
     def koin_version = "3.1.2"
 
-    // Koin main features for Android (Scope,ViewModel ...)
+    // Koin main features for Android (ScopeCreator,ViewModel ...)
     implementation "io.insert-koin:koin-android:$koin_version"
 
     implementation "io.insert-koin:koin-core:$koin_version"

@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vadimko.curforeckotlin.databinding.ActivityMainBinding
 import com.vadimko.curforeckotlin.updateWorkers.ServiceCheckWorker
 import com.vadimko.curforeckotlin.utils.CheckTCSUpdateServiceIsRunning
+import com.vadimko.curforeckotlin.utils.ScopeCreator
 import com.vadimko.curforeckotlin.utils.SoundPlayer
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -39,13 +40,14 @@ private const val SERVICE_WORKER_TAG = "serviceChecker"
  * MainActivity class
  */
 class MainActivity : AppCompatActivity(), KoinComponent {
-
+    private val scopeCreator: ScopeCreator by inject()
     private val context: Context by inject()
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         createNotificationChannel()
         SoundPlayer.onInit()
+        scopeCreator.createScope()
         super.onCreate(savedInstanceState)
 
 
@@ -95,6 +97,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
 
     override fun onDestroy() {
         SoundPlayer.onDestroy()
+        scopeCreator.cancelScope()
         super.onDestroy()
     }
 

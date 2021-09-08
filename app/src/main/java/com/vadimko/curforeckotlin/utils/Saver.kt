@@ -3,7 +3,6 @@ package com.vadimko.curforeckotlin.utils
 import android.content.Context
 import com.vadimko.curforeckotlin.TCSUpdateService
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
-import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import com.vadimko.curforeckotlin.utils.Saver.context
 import com.vadimko.curforeckotlin.utils.Saver.path
 import org.koin.core.component.KoinComponent
@@ -35,7 +34,6 @@ object Saver : KoinComponent {
         try {
             ObjectOutputStream(FileOutputStream(path + FILENAME)).use {
                 it.writeObject(temp)
-                CalcViewModel.loadServiceUpdateData()
             }
         } catch (ex: IOException) {
             ex.printStackTrace()

@@ -14,7 +14,6 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.database.Currencies
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
@@ -25,6 +24,7 @@ import org.koin.core.component.inject
  */
 object CalcWidgetChartBuilder : KoinComponent {
     private val context: Context by inject()
+    private val scopeCreator: ScopeCreator by inject()
     private val color = context.getColor(R.color.white)
 
     private val datesTime: MutableList<String> = mutableListOf()
@@ -85,9 +85,8 @@ object CalcWidgetChartBuilder : KoinComponent {
         chart.isDragEnabled = true
         chart.setScaleEnabled(true)
         chart.setPinchZoom(true)
-        val animationLong: Int = if (timeDate.size < 20) 200
-        else 500
-        chart.animateX(animationLong)
+        val animationInt = 500
+        chart.animateX(animationInt)
         val l: Legend = chart.legend
         l.isWordWrapEnabled = true
         l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
@@ -159,7 +158,7 @@ object CalcWidgetChartBuilder : KoinComponent {
         buy: List<Double>,
         sell: List<Double>
     ) {
-        GlobalScope.launch(Dispatchers.IO) {
+        scopeCreator.getScope().launch(Dispatchers.IO) {
             val dataSets: MutableList<ILineDataSet> = mutableListOf()
             val buyEntries: MutableList<Entry> = mutableListOf()
             val sellEntries: MutableList<Entry> = mutableListOf()

@@ -14,9 +14,11 @@ import com.vadimko.curforeckotlin.tcsApi.*
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import com.vadimko.curforeckotlin.utils.CheckConnection
 import com.vadimko.curforeckotlin.utils.Saver
+import com.vadimko.curforeckotlin.utils.ScopeCreator
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,10 +33,10 @@ private const val notificationId = 11
 /**
  * Service for auto-updating the rates of the Tinkov bank
  */
-class TCSUpdateService : Service() {
+class TCSUpdateService : Service(), KoinComponent {
 
     private val tcsApi: TCSApi
-
+    private val scopeCreator: ScopeCreator by inject()
     private var period: Long = 5
 
     init {
@@ -85,7 +87,7 @@ class TCSUpdateService : Service() {
     }
 
     private fun updateTask() {
-        GlobalScope.launch(Dispatchers.IO) {
+        scopeCreator.getScope().launch(Dispatchers.IO) {
             var allRequest = 1
             while (true) {
                 period = PreferenceManager.getDefaultSharedPreferences(applicationContext)
@@ -155,8 +157,10 @@ class TCSUpdateService : Service() {
                         getCurrentTCS()
                     } else {
                         currentTCS = mutableListOf(usdTCS, eurTCS, gbpTCS)
-                        GlobalScope.launch(Dispatchers.IO) {
+                        scopeCreator.getScope().launch(Dispatchers.IO) {
                             Saver.saveTcsLast(currentTCS)
+                            CalcViewModel.loadServiceUpdateData()
+
                         }
                         val usdBuy = String.format("%.2f", currentTCS[0].buy)
                         val usdSell = String.format("%.2f", currentTCS[0].sell)

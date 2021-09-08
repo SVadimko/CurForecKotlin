@@ -202,18 +202,10 @@ class TodayFragment : Fragment() {
      * Create a combined candlestick and line chart
      */
     private fun createComboChartForecast(dataList: List<CurrencyMOEX>) {
-        val animationTime =
-            5 * Integer.parseInt(
-                (perSpinner.selectedItem as String)
-                    .split(" ")[0]
-            ) * Integer.parseInt(
-                (rateSpinner.selectedItem as String).split(" ")[0]
-            )
         comboChartForec = TodayChartBuilder.createChart(
             comboChartForec,
             dataList,
             rateSpinner.selectedItem as String,
-            animationTime,
         )
         TodayChartBuilder.fillComboChartForecast(
             comboChartForec,

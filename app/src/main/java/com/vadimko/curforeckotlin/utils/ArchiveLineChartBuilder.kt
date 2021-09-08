@@ -18,7 +18,6 @@ import com.vadimko.curforeckotlin.forecastsMethods.LessSquare
 import com.vadimko.curforeckotlin.forecastsMethods.WMA
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
@@ -28,6 +27,7 @@ import org.koin.core.component.inject
  * Utility class to configure and fill linear charts for Archive fragment
  */
 object ArchiveLineChartBuilder : KoinComponent {
+    private val scopeCreator: ScopeCreator by inject()
     private val context: Context by inject()
     private val color = context.getColor(R.color.white)
 
@@ -99,8 +99,8 @@ object ArchiveLineChartBuilder : KoinComponent {
         linearChart.isDragEnabled = true
         linearChart.setScaleEnabled(true)
         linearChart.setPinchZoom(true)
-        val animationLong = 5 * dates.size
-        linearChart.animateX(animationLong)
+        val animationInt = 500
+        linearChart.animateX(animationInt)
         val l: Legend = linearChart.legend
         l.isWordWrapEnabled = true
         l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
@@ -122,7 +122,7 @@ object ArchiveLineChartBuilder : KoinComponent {
      * @param s - currency name
      */
     fun fillClearCbrfGraph(linearCbrf: LineChart, s: String, dataListCB: List<CurrencyCBarhive>) {
-        GlobalScope.launch(Dispatchers.IO) {
+        scopeCreator.getScope().launch(Dispatchers.IO) {
             val dataSets = ArrayList<ILineDataSet>()
             val entries = ArrayList<Entry>()
             for (i in dataListCB.indices) {
@@ -152,7 +152,7 @@ object ArchiveLineChartBuilder : KoinComponent {
         s: String,
         dataListMOEX: List<CurrencyMOEX>
     ) {
-        GlobalScope.launch(Dispatchers.IO) {
+        scopeCreator.getScope().launch(Dispatchers.IO) {
             val warprice: MutableList<Float> = mutableListOf()
             warprice.clear()
             dataListMOEX.forEach {
