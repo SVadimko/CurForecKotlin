@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.TCSUpdateService
 import com.vadimko.curforeckotlin.database.Currencies
@@ -24,7 +25,8 @@ import java.util.*
 /**
  * ViewModel for Calc fragment
  * @property context Application context injected by Koin
- * @property rubValue Contains ruble result for buying and selling which calcs in [calculating]
+ * @property rubValue Contains ruble result for buying and selling which calcs in [calculating] as
+ * [MutableStateFlow]
  * @property dataWidgetUpdate Getting information about courses from the database,
  * which is updated every time the widget is updated
  */
@@ -34,6 +36,14 @@ class CalcViewModel : ViewModel(), KoinComponent {
     private val context: Context by inject()
 
     private val currenciesRepository: CurrenciesRepository by inject()
+
+    private var rubValue: MutableStateFlow<String> = MutableStateFlow("")
+
+    /**
+     * @return [rubValue] MutableStateFlow
+     */
+    fun getRubvalue() = rubValue
+
 
     /**
      * Request to create/return [dataForCalc]
@@ -47,7 +57,7 @@ class CalcViewModel : ViewModel(), KoinComponent {
 
     /**
      * Request to create/return [dataServiceUpdate]
-     * @return data stored by [TCSUpdateService] dataServiceCalc
+     * @return data data stored by [TCSUpdateService] dataServiceCalc
      */
     fun getServiceUpdateData(): MutableLiveData<List<List<CurrencyTCS>>> {
         if (dataServiceUpdate.value?.size == null) {
@@ -66,10 +76,14 @@ class CalcViewModel : ViewModel(), KoinComponent {
 
     }
 
-    var rubValue: MutableStateFlow<String> = MutableStateFlow("")
 
+    private val dataWidgetUpdate = currenciesRepository.getCurrencies().asLiveData()
 
-    internal val dataWidgetUpdate = currenciesRepository.getCurrencies()
+    /**
+     * @return [dataWidgetUpdate]
+     */
+    fun getDataWidgetUpdate() = dataWidgetUpdate
+
 
     /**
      * Request to delete [dataWidgetUpdate] data, except last value, if already deleted, show [Toast]
@@ -147,8 +161,6 @@ class CalcViewModel : ViewModel(), KoinComponent {
          * Load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
          */
         internal fun loadDataForCalc() {
-            //val tcsRepository = TCSRepository(false, null, null)
-            //tcsRepository.getCurrentTCS()
             tcsRepository.getCurrentTCS(false, null, null)
         }
 

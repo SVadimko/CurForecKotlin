@@ -1,13 +1,13 @@
 package com.vadimko.curforeckotlin.database
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.room.Room
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import com.vadimko.curforeckotlin.utils.ScopeCreator
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import java.util.concurrent.Executors
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 private const val DATABASE_NAME = "currencies-database"
 
@@ -17,8 +17,8 @@ private const val DATABASE_NAME = "currencies-database"
  * same time updating several widgets
  */
 
-class CurrenciesRepository constructor(context: Context) {
-    private val executor = Executors.newSingleThreadExecutor()
+class CurrenciesRepository constructor(context: Context) : KoinComponent {
+    private val scopeCreator: ScopeCreator by inject()
     private val database: CurrenciesDataBase = Room.databaseBuilder(
         context.applicationContext,
         CurrenciesDataBase::class.java,
@@ -33,21 +33,22 @@ class CurrenciesRepository constructor(context: Context) {
     private var stopWrite = false
 
     /**
-     * @return Livedata of list [Currencies]
+     * @return Flow of list [Currencies]
      */
-    fun getCurrencies(): LiveData<List<Currencies>> = currencyDao.getCurrencies()
+    fun getCurrencies(): Flow<List<Currencies>> = currencyDao.getCurrencies()
+    //fun getCurrencies(): LiveData<List<Currencies>> = currencyDao.getCurrencies()
+
 
     /**
      * Add [Currencies] value to DB if [stopWrite] allows it
      */
     fun insertCurrencies(currencies: Currencies) {
-
-        executor.execute {
+        scopeCreator.getScope().launch {
             if (!stopWrite) {
                 currencyDao.addCurrencies(currencies)
             }
             stopWrite = true
-            GlobalScope.launch(Dispatchers.IO) {
+            launch {
                 delay(60000)
                 stopWrite = false
             }
@@ -58,7 +59,7 @@ class CurrenciesRepository constructor(context: Context) {
      * Delete all [Currencies] except last in DB
      */
     fun clearCurrencies(list: MutableList<Currencies>) {
-        executor.execute {
+        scopeCreator.getScope().launch {
             if (!list.isNullOrEmpty()) {
                 list.removeLast()
                 currencyDao.clearCurrencies(list)

@@ -1,19 +1,19 @@
 package com.vadimko.curforeckotlin.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CurrencyDao {
 
     @Query("SELECT * FROM currencies")
-    fun getCurrencies(): LiveData<List<Currencies>>
+    fun getCurrencies(): Flow<List<Currencies>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addCurrencies(currencies: Currencies)
+    suspend fun addCurrencies(currencies: Currencies)
 
     @Delete
-    fun clearCurrencies(list: List<Currencies>)
+    suspend fun clearCurrencies(list: List<Currencies>)
 
     @Query("DELETE FROM currencies")
     fun nukeTable()

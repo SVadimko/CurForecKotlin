@@ -294,7 +294,8 @@ class CalcFragment : Fragment() {
             }
         })
 
-        calcViewModel.dataWidgetUpdate.observe(viewLifecycleOwner) {
+
+        calcViewModel.getDataWidgetUpdate().observe(viewLifecycleOwner) {
             widgetUpdateData = it as MutableList<Currencies>
 
             if (it.isNotEmpty()) {
@@ -304,7 +305,7 @@ class CalcFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenStarted {
-            calcViewModel.rubValue.collect {
+            calcViewModel.getRubvalue().collect {
                 rubValue.text = it
             }
         }
