@@ -6,12 +6,12 @@ import org.junit.Before
 import org.junit.Test
 
 class ExponentSmoothTest {
-    lateinit var exponentSmooth: ExponentSmooth
-    val forec = listOf<Float>(10.0F, 10.0F)
+    private lateinit var exponentSmooth: ExponentSmooth
+    private val forec = listOf(10.0F, 10.0F)
 
     @Before
     fun setUp() {
-        val listToForec = mutableListOf<Float>(10.0F, 10.0F, 10.0F, 10.0F, 10.0F)
+        val listToForec = mutableListOf(10.0F, 10.0F, 10.0F, 10.0F, 10.0F)
         exponentSmooth = ExponentSmooth(listToForec)
         exponentSmooth.calc()
 
