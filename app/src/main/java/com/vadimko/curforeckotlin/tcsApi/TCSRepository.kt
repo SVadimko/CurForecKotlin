@@ -35,6 +35,7 @@ class TCSRepository : KoinComponent {
     private val currenciesRepository: CurrenciesRepository by inject()
     private val context: Context by inject()
     private val tcsApi: TCSApi
+    private val nowViewModel: NowViewModel by inject()
 
 
     init {

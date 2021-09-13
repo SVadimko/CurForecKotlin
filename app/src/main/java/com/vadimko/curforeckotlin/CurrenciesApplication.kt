@@ -5,18 +5,44 @@ import android.content.Context
 import com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
+import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import com.vadimko.curforeckotlin.ui.now.NowViewModel
 import com.vadimko.curforeckotlin.ui.today.TodayViewModel
-import com.vadimko.curforeckotlin.utils.Saver
-import com.vadimko.curforeckotlin.utils.ScopeCreator
+import com.vadimko.curforeckotlin.utils.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
+val appModule = module {
+
+    single { Saver }
+
+    viewModel { CalcViewModel() }
+
+    viewModel { NowViewModel() }
+
+    viewModel { TodayViewModel() }
+
+    viewModel { ArchiveViewModel() }
+
+    single<MOEXRepository> { MOEXRepository() }
+
+    single<CBxmlRepository> { CBxmlRepository() }
+
+    single<CurrenciesRepository> { CurrenciesRepository(get()) }
+
+    single { ScopeCreator }
+
+    single { TodayPreferences }
+
+    single { ArchivePreferences }
+
+    single { NowPreference }
+}
 /**
  * Start KOIN, init DataBase and creating application context singleton(not used)
  * @property appModule KOIN module for inject dependencies
@@ -27,27 +53,26 @@ class CurrenciesApplication : Application() {
         instance = this
     }
 
-    private val appModule = module {
+    /*  private val appModule = module {
 
-        single { Saver }
+          single { Saver }
 
-        viewModel { CalcViewModel() }
+          viewModel { CalcViewModel() }
 
-        viewModel { NowViewModel() }
+          viewModel { NowViewModel() }
 
-        viewModel { TodayViewModel() }
+          viewModel { TodayViewModel() }
 
-        viewModel { ArchiveViewModel() }
+          viewModel { ArchiveViewModel() }
 
-        single<MOEXRepository> { MOEXRepository() }
+          single<MOEXRepository> { MOEXRepository() }
 
-        single<CBxmlRepository> { CBxmlRepository() }
+          single<CBxmlRepository> { CBxmlRepository() }
 
-        single<CurrenciesRepository> { CurrenciesRepository(get()) }
+          single<CurrenciesRepository> { CurrenciesRepository(get()) }
 
-        single { ScopeCreator }
-
-    }
+          single { ScopeCreator }
+      }*/
 
 
     override fun onCreate() {

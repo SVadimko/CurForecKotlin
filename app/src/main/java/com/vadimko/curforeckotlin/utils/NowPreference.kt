@@ -28,7 +28,6 @@ object NowPreference : KoinComponent {
         when (fontSelector) {
             "Tahoma" -> {
                 typefaceTv = ResourcesCompat.getFont(
-                    //CurrenciesApplication.applicationContext(),
                     context,
                     com.vadimko.curforeckotlin.R.font.tahoma
                 )!!
@@ -36,15 +35,13 @@ object NowPreference : KoinComponent {
             }
             "NotoSerif" -> {
                 typefaceTv = ResourcesCompat.getFont(
-                    //CurrenciesApplication.applicationContext(),
                     context,
                     com.vadimko.curforeckotlin.R.font.notoserif
                 )!!
-                textSizeFlt = 23F
+                textSizeFlt = 24F
             }
             else -> {
                 typefaceTv = ResourcesCompat.getFont(
-                    //CurrenciesApplication.applicationContext(),
                     context,
                     com.vadimko.curforeckotlin.R.font.digital
                 )!!
