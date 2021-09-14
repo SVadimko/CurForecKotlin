@@ -6,11 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
-import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.loadDataMOEX
-import com.vadimko.curforeckotlin.utils.CheckConnection
-import com.vadimko.curforeckotlin.utils.DateConverter
-import com.vadimko.curforeckotlin.utils.TodayPreferences
+//import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.loadDataMOEX
+import com.vadimko.curforeckotlin.utils.*
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.*
@@ -18,11 +17,46 @@ import java.util.*
 /**
  * ViewModel for Today fragment
  * @property context Application context injected by Koin
+ * @property moexRepository repository for retrofit request to MOEX
+ * @property scopeCreator provide Coroutine context
+ * @property dataMOEX MutableStateFlow contains list of actual currency values [CurrencyMOEX]
+ * from MOEX through [MOEXRepository]
  */
 
 class TodayViewModel : ViewModel(), KoinComponent {
 
     private val context: Context by inject()
+    private val moexRepository: MOEXRepository by inject()
+    private val scopeCreator: ScopeCreator by inject()
+
+    /* private val dataMOEX: MutableStateFlow<List<CurrencyMOEX>> = MutableStateFlow(
+         listOf(
+             CurrencyMOEX(), CurrencyMOEX(), CurrencyMOEX()
+         )
+     )*/
+
+    /**
+     * Load currencies values from MOEX through [CurrencyMOEX] which post it to [dataMOEX]
+     */
+    private fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
+        if (CheckConnection.checkConnect()) {
+            //val moexRepository = MOEXRepository()
+
+
+            //moexRepository.getMOEX(request, from, till, interval, false)
+            scopeCreator.getScope().launch {
+                val list: List<CurrencyMOEX> =
+                    moexRepository.getResponse(
+                        request,
+                        from,
+                        till,
+                        interval,
+                        false
+                    )
+                dataMOEX.value = list
+            }
+        }
+    }
 
     /**
      * If [dataMOEX] is null, load last user request params and send
@@ -120,6 +154,7 @@ class TodayViewModel : ViewModel(), KoinComponent {
         ).show()
     }
 
+
     /**
      *  Companion object for operating with MutableStateFlow [dataMOEX] and loading
      *  it by [loadDataMOEX]
@@ -127,29 +162,45 @@ class TodayViewModel : ViewModel(), KoinComponent {
      * from MOEX through [MOEXRepository]
      */
     companion object : KoinComponent {
-        private val moexRepository: MOEXRepository by inject()
-
+        //        private val moexRepository: MOEXRepository by inject()
+//        private val scopeCreator: ScopeCreator by inject()
         private val dataMOEX: MutableStateFlow<List<CurrencyMOEX>> = MutableStateFlow(
             listOf(
                 CurrencyMOEX(), CurrencyMOEX(), CurrencyMOEX()
             )
         )
-
-        /**
-         * Set value for [MutableStateFlow] [dataMOEX]
-         */
-        internal fun setDataMOEX(data: List<CurrencyMOEX>) {
-            dataMOEX.value = data
-        }
-
-        /**
-         * Load currencies values from MOEX through [CurrencyMOEX] which post it to [dataMOEX]
-         */
-        fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
-            if (CheckConnection.checkConnect()) {
-                //val moexRepository = MOEXRepository()
-                moexRepository.getMOEX(request, from, till, interval, false)
-            }
-        }
     }
 }
+/**
+ * Set value for [MutableStateFlow] [dataMOEX]
+ */
+/*   internal fun setDataMOEX(data: List<CurrencyMOEX>) {
+       dataMOEX.value = data
+   }*/
+
+/**
+ * Load currencies values from MOEX through [CurrencyMOEX] which post it to [dataMOEX]
+ */
+/*  private fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
+       if (CheckConnection.checkConnect()) {
+           //val moexRepository = MOEXRepository()
+
+
+           //moexRepository.getMOEX(request, from, till, interval, false)
+           scopeCreator.getScope().launch {
+               val list: List<CurrencyMOEX> = Parser.parseMoexResponse(
+                   moexRepository.getResponse(
+                       request,
+                       from,
+                       till,
+                       interval,
+                       false
+                   )
+               )
+               dataMOEX.value = list
+           }
+       }
+   }*/
+/*
+    }
+}*/

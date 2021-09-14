@@ -92,6 +92,7 @@
     <string name="equalsign">=</string>
     <string name="usdsign">$</string>
     <string name="eursign">€</string>
+    <string name="needrefresh">Please refresh actual currency values on the Now screen</string>
 
 
 </resources>

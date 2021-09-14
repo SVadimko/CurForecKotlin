@@ -1,5 +1,6 @@
 package com.vadimko.curforeckotlin.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import com.vadimko.curforeckotlin.utils.DateConverter.androidHigherN
@@ -77,5 +78,15 @@ object DateConverter : KoinComponent {
                 Date(time)
             )
         }
+    }
+
+    /**
+     * Used to format data for response from CB in xml
+     */
+    @SuppressLint("SimpleDateFormat")
+    fun dateFormatForCbXML(datesOFF: String): String {
+        val dateConvert = SimpleDateFormat("dd.MM.yyyy").parse(datesOFF)
+        val jdf = SimpleDateFormat("yyyy-MM-dd")
+        return jdf.format(dateConvert!!)
     }
 }

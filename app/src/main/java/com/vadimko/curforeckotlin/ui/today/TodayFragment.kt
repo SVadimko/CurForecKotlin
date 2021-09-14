@@ -40,7 +40,7 @@ class TodayFragment : Fragment() {
     private lateinit var comboChartForec: CombinedChart
     private val yValsCandleStick = ArrayList<CandleEntry>()
 
-    private val todayViewModel by viewModel<TodayViewModel>()
+    private val todayViewModel: TodayViewModel by viewModel()
 
     private var _binding: FragmentTodayBinding? = null
     private var chosenCurrency = ""

@@ -5,7 +5,6 @@ import android.animation.ValueAnimator.AnimatorUpdateListener
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
-import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
@@ -13,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.widget.FrameLayout
-import android.widget.ImageView
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.R
 import com.vadimko.curforeckotlin.utils.CoinsAnimator.Companion.stop
@@ -61,13 +59,14 @@ class CoinsAnimator(
         timer.schedule(ExeTimerTask(), 0, 100)
         enableSound = PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean("onAnimationSound", false)
-        SoundPlayer.onResume()
+        //SoundPlayer.onResume()
     }
 
     /**
      * Takes ImageView and use [ValueAnimator] to animate it
      */
-    private fun startAnimation(aniView: ImageView) {
+    //private fun startAnimation(aniView: ImageView) {
+    private fun startAnimation(aniView: View) {
         var alreadyPlayed = false
         aniView.pivotX = (aniView.width / 2).toFloat()
         aniView.pivotY = (aniView.height / 2).toFloat()
@@ -88,7 +87,8 @@ class CoinsAnimator(
             var angle = 90 + (Math.random() * 501).toInt()
             var moveX = Random().nextInt(mDisplaySize.right)
             override fun onAnimationUpdate(animation: ValueAnimator) {
-                val value = (animation.animatedValue as Float).toFloat()
+                //val value = (animation.animatedValue as Float).toFloat()
+                val value = animation.animatedValue as Float
                 aniView.rotation = angle * value
                 aniView.translationX = (moveX - 40) * value
                 aniView.translationY = (mDisplaySize.bottom + 150 * mScale) * value
@@ -114,53 +114,54 @@ class CoinsAnimator(
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             val viewId = Random().nextInt(coinsArrayImage.size)
-            val d: Drawable? =
-                context.getDrawable(coinsArrayImage[viewId])
+            /* val d: Drawable? =
+                 context.getDrawable(coinsArrayImage[viewId])*/
             val inflate = LayoutInflater.from(context)
-            val imageView = inflate.inflate(R.layout.ani_image_view, null) as ImageView
-            imageView.setImageDrawable(d)
-            imageView.requestLayout()
-            layout.get()?.addView(imageView)
-            var animationLayout = imageView.layoutParams as FrameLayout.LayoutParams
-            mAllImageViews.add(imageView)
-            imageView.requestLayout()
+            val view = inflate.inflate(R.layout.ani_image_view, null)// as ImageView
+            //imageView.setImageDrawable(d)
+            view.setBackgroundResource(coinsArrayImage[viewId])
+            view.requestLayout()
+            layout.get()?.addView(view)
+            var animationLayout = view.layoutParams as FrameLayout.LayoutParams
+            mAllImageViews.add(view)
+            view.requestLayout()
             when (Random().nextInt(5)) {
                 0 -> {
-                    imageView.requestLayout()
-                    animationLayout = imageView.layoutParams as FrameLayout.LayoutParams
+                    view.requestLayout()
+                    animationLayout = view.layoutParams as FrameLayout.LayoutParams
                     animationLayout.setMargins(0, (-150 * mScale).toInt(), 700, 0)
-                    imageView.requestLayout()
+                    view.requestLayout()
                 }
                 1 -> {
-                    imageView.requestLayout()
-                    animationLayout = imageView.layoutParams as FrameLayout.LayoutParams
+                    view.requestLayout()
+                    animationLayout = view.layoutParams as FrameLayout.LayoutParams
                     animationLayout.setMargins(700, (-150 * mScale).toInt(), 0, 0)
-                    imageView.requestLayout()
+                    view.requestLayout()
                 }
                 2 -> {
-                    imageView.requestLayout()
-                    animationLayout = imageView.layoutParams as FrameLayout.LayoutParams
+                    view.requestLayout()
+                    animationLayout = view.layoutParams as FrameLayout.LayoutParams
                     animationLayout.setMargins(350, (-150 * mScale).toInt(), 0, 0)
-                    imageView.requestLayout()
+                    view.requestLayout()
                 }
                 3 -> {
-                    imageView.requestLayout()
-                    animationLayout = imageView.layoutParams as FrameLayout.LayoutParams
+                    view.requestLayout()
+                    animationLayout = view.layoutParams as FrameLayout.LayoutParams
                     animationLayout.setMargins(0, (-150 * mScale).toInt(), 350, 0)
-                    imageView.requestLayout()
+                    view.requestLayout()
                 }
                 4 -> {
-                    imageView.requestLayout()
-                    animationLayout = imageView.layoutParams as FrameLayout.LayoutParams
+                    view.requestLayout()
+                    animationLayout = view.layoutParams as FrameLayout.LayoutParams
                     animationLayout.setMargins(0, (-150 * mScale).toInt(), 0, 0)
-                    imageView.requestLayout()
+                    view.requestLayout()
                 }
             }
-            imageView.requestLayout()
+            view.requestLayout()
             val place2 = Random().nextInt(10) + 20
             animationLayout.width = (place2 * mScale).toInt()
             animationLayout.height = (place2 * mScale).toInt()
-            startAnimation(imageView)
+            startAnimation(view)
         }
     }
 

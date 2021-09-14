@@ -8,8 +8,6 @@ import retrofit2.http.GET
  */
 
 interface TCSApi {
-
     @GET("currency_rates/")
     fun getTCSForec(): Call<TCSResponse>
-
 }

@@ -16,10 +16,10 @@ import java.io.*
  * @property path get files directory path
  */
 
-const val FILENAME = "TCSlast.sav"
 
 object Saver : KoinComponent {
 
+    private const val FILENAME = "TCSlast.sav"
 
     private val context: Context by inject()
 

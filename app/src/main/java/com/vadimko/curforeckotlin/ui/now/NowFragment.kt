@@ -34,7 +34,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NowFragment : Fragment() {
 
-    private val nowViewModel by viewModel<NowViewModel>()
+    private val nowViewModel: NowViewModel by viewModel()
 
     private var _binding: FragmentNowBinding? = null
     private val binding get() = _binding!!
@@ -76,22 +76,27 @@ class NowFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        SoundPlayer.onResume()
 
         lifecycleScope.launchWhenStarted {
             nowViewModel.getDataTCs().collect {
-                setupAdapterTCS(it)
-                binding.lastchk.text =
-                    "${getString(R.string.lastupdateTCS)} ${it[0].curr} ${getString(R.string.NOWFRAGsource)} tinkoff.ru"
-                binding.swipe.isRefreshing = false
+                if (!it.isNullOrEmpty()) {
+                    setupAdapterTCS(it)
+                    binding.lastchk.text =
+                        "${getString(R.string.lastupdateTCS)} ${it[0].curr} ${getString(R.string.NOWFRAGsource)} tinkoff.ru"
+                    binding.swipe.isRefreshing = false
+                }
             }
         }
 
 
         lifecycleScope.launchWhenStarted {
-            nowViewModel.getDataCD().collect {
-                setupAdapterCB(it)
-                binding.lastchkcbrf.text =
-                    "${getString(R.string.lastupdateTCS)} ${it[0].dateTime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
+            nowViewModel.getDataCB().collect {
+                if (!it.isNullOrEmpty()) {
+                    setupAdapterCB(it)
+                    binding.lastchkcbrf.text =
+                        "${getString(R.string.lastupdateTCS)} ${it[0].dateTime} ${getString(R.string.NOWFRAGsource)} cbr-xml-daily.ru"
+                }
             }
         }
     }

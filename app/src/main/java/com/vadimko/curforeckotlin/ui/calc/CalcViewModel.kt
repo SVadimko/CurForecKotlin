@@ -11,10 +11,9 @@ import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
-import com.vadimko.curforeckotlin.ui.now.NowViewModel
+import com.vadimko.curforeckotlin.utils.LastValueHolder
 import com.vadimko.curforeckotlin.utils.Saver
 import com.vadimko.curforeckotlin.utils.ScopeCreator
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -29,6 +28,8 @@ import java.util.*
  * [MutableStateFlow]
  * @property dataWidgetUpdate Getting information about courses from the database,
  * which is updated every time the widget is updated
+ * @property currenciesRepository repository for Room database
+ * @property dataForCalc Currency data used for calculating values
  */
 
 class CalcViewModel : ViewModel(), KoinComponent {
@@ -42,18 +43,24 @@ class CalcViewModel : ViewModel(), KoinComponent {
     /**
      * @return [rubValue] MutableStateFlow
      */
-    fun getRubvalue() = rubValue
+    fun getRubValue() = rubValue
+
+
+    private var dataForCalc: MutableStateFlow<List<CurrencyTCS>> =
+        MutableStateFlow(listOf(CurrencyTCS(), CurrencyTCS()))
 
 
     /**
      * Request to create/return [dataForCalc]
      */
     fun getDataForCalc(): StateFlow<List<CurrencyTCS>> {
-        if (dataForCalc.value[0].name == "") {
-            loadDataForCalc()
-        }
+        //if (dataForCalc.value.size != 3) {
+        // loadDataForCalc()
+        dataForCalc.value = LastValueHolder.lastValueList
+        // }
         return dataForCalc
     }
+
 
     /**
      * Request to create/return [dataServiceUpdate]
@@ -104,45 +111,47 @@ class CalcViewModel : ViewModel(), KoinComponent {
         toSell: Boolean,
         currValue: String
     ) {
-        val usdBuy = dataList[0].buy!!
-        val usdSell = dataList[0].sell!!
-        val eurBuy = dataList[1].buy!!
-        val eurSell = dataList[1].sell!!
-        val gbpBuy = dataList[2].buy!!
-        val gbpSell = dataList[2].sell!!
-        var result: Double
-        var convertValue: Double
-        var buyValue = 0.0
-        var sellValue = 0.0
-        try {
-            when (currSpinnerPos) {
-                0 -> {
-                    buyValue = usdBuy
-                    sellValue = usdSell
+        if (dataList.size == 3) {
+            val usdBuy = dataList[0].buy!!
+            val usdSell = dataList[0].sell!!
+            val eurBuy = dataList[1].buy!!
+            val eurSell = dataList[1].sell!!
+            val gbpBuy = dataList[2].buy!!
+            val gbpSell = dataList[2].sell!!
+            var result: Double
+            var convertValue: Double
+            var buyValue = 0.0
+            var sellValue = 0.0
+            try {
+                when (currSpinnerPos) {
+                    0 -> {
+                        buyValue = usdBuy
+                        sellValue = usdSell
+                    }
+                    1 -> {
+                        buyValue = eurBuy
+                        sellValue = eurSell
+                    }
+                    2 -> {
+                        buyValue = gbpBuy
+                        sellValue = gbpSell
+                    }
                 }
-                1 -> {
-                    buyValue = eurBuy
-                    sellValue = eurSell
+                if (toBuy) {
+                    convertValue = currValue.toDouble()
+                    result = convertValue * sellValue
+                    rubValue.value = String.format(Locale.US, "%.2f", result)
                 }
-                2 -> {
-                    buyValue = gbpBuy
-                    sellValue = gbpSell
+                if (toSell) {
+                    convertValue = currValue.toDouble()
+                    result = convertValue * buyValue
+                    rubValue.value = String.format(Locale.US, "%.2f", result)
                 }
+            } catch (ex: NumberFormatException) {
+                Toast.makeText(context, R.string.incorrect_number, Toast.LENGTH_SHORT).show()
+                //currValue.requestFocus()
             }
-            if (toBuy) {
-                convertValue = currValue.toDouble()
-                result = convertValue * sellValue
-                rubValue.value = String.format(Locale.US, "%.2f", result)
-            }
-            if (toSell) {
-                convertValue = currValue.toDouble()
-                result = convertValue * buyValue
-                rubValue.value = String.format(Locale.US, "%.2f", result)
-            }
-        } catch (ex: NumberFormatException) {
-            Toast.makeText(context, R.string.incorrect_number, Toast.LENGTH_SHORT).show()
-            //currValue.requestFocus()
-        }
+        } else Toast.makeText(context, R.string.needrefresh, Toast.LENGTH_SHORT).show()
 
     }
 
@@ -153,15 +162,29 @@ class CalcViewModel : ViewModel(), KoinComponent {
      */
     companion object : KoinComponent {
         private val scopeCreator: ScopeCreator by inject()
-        private val tcsRepository: TCSRepository by inject()
+        // private val tcsRepository: TCSRepository by inject()
 
-        private var dataForCalc: StateFlow<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
+        //private var dataForCalc: StateFlow<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
+//        private var dataForCalc: MutableStateFlow<List<CurrencyTCS>> =
+//            MutableStateFlow(listOf(CurrencyTCS(), CurrencyTCS()))
+
 
         /**
          * Load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
          */
-        internal fun loadDataForCalc() {
-            tcsRepository.getCurrentTCS(false, null, null)
+        private fun loadDataForCalc() {
+            /*    if (CheckConnection.checkConnect()) {
+                    //val tcsRepository = TCSRepository()
+                    //tcsRepository.getCurrentTCS(false, null, null)
+
+                    scopeCreator.getScope().launch {
+                        var list: List<CurrencyTCS>
+                        do {
+                            list = Parser.parseTcsResponse(tcsRepository.getResponse())
+                        } while (list.size != 3)*/
+            //dataForCalc.value = LastValueHolder.lastValueList
+            //}
+            //}
         }
 
 
@@ -172,7 +195,7 @@ class CalcViewModel : ViewModel(), KoinComponent {
          * Load currencies values from storage through [Saver] to [dataServiceUpdate]
          */
         internal fun loadServiceUpdateData() {
-            scopeCreator.getScope().launch(Dispatchers.IO) {
+            scopeCreator.getScope().launch {
                 dataServiceUpdate.postValue(Saver.loadTcsLast())
             }
         }

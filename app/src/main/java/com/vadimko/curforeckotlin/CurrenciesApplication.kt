@@ -2,6 +2,7 @@ package com.vadimko.curforeckotlin
 
 import android.app.Application
 import android.content.Context
+import com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository
 import com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
@@ -35,6 +36,10 @@ val appModule = module {
 
     single<CurrenciesRepository> { CurrenciesRepository(get()) }
 
+    single { TCSRepository() }
+
+    single { CBjsonRepository() }
+
     single { ScopeCreator }
 
     single { TodayPreferences }
@@ -43,6 +48,7 @@ val appModule = module {
 
     single { NowPreference }
 }
+
 /**
  * Start KOIN, init DataBase and creating application context singleton(not used)
  * @property appModule KOIN module for inject dependencies

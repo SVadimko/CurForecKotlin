@@ -1,16 +1,17 @@
 package com.vadimko.curforeckotlin.cbxmlApi
 
 
-import android.annotation.SuppressLint
+import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
 import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
+import com.vadimko.curforeckotlin.utils.Parser
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
-import java.text.SimpleDateFormat
 
 /**
  * Request using Retrofit to https://www.cbr.ru/scripts/
@@ -32,16 +33,17 @@ class CBxmlRepository {
         cbxmlApi = retrofit.create(CBxmlApi::class.java)
     }
 
-    fun getXMLarchive(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
+/*    fun getXMLarchive(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
         val currentRequest: Call<CBXXMLResponse> = cbxmlApi.getCBXmlForec(
             date_req1,
             date_req2,
             VAL_NM_RQ
         )
         currentRequest.enqueue(object : Callback<CBXXMLResponse> {
-            /**
-             * Get list of [CurrencyCBarhive] and post it to [ArchiveViewModel]
-             */
+            */
+    /**
+     * Get list of [CurrencyCBarhive] and post it to [ArchiveViewModel]
+     *//*
             override fun onResponse(
                 call: Call<CBXXMLResponse>,
                 response: Response<CBXXMLResponse>
@@ -65,10 +67,24 @@ class CBxmlRepository {
 
     }
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat")m
     fun dateFormat(datesOFF: String): String {
         val dateConvert = SimpleDateFormat("dd.MM.yyyy").parse(datesOFF)
         val jdf = SimpleDateFormat("yyyy-MM-dd")
         return jdf.format(dateConvert!!)
+    }*/
+
+    @Suppress("BlockingMethodInNonBlockingContext")
+    suspend fun getResponse(
+        date_req1: String,
+        date_req2: String,
+        VAL_NM_RQ: String
+    ): List<CurrencyCBarhive> {
+        val currentRequest: Call<CBXXMLResponse> = cbxmlApi.getCBXmlForec(
+            date_req1,
+            date_req2,
+            VAL_NM_RQ
+        )
+        return withContext(Dispatchers.IO) { Parser.parseCbXmlResponse(currentRequest.execute()) }
     }
 }

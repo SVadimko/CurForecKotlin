@@ -54,7 +54,7 @@ class ArchiveFragment : Fragment() {
          ViewModelProvider(this).get(ArchiveViewModel::class.java)
      }*/
 
-    private val archiveViewModel by viewModel<ArchiveViewModel>()
+    private val archiveViewModel: ArchiveViewModel by viewModel()
 
     private var _binding: FragmentArchiveBinding? = null
 

@@ -94,6 +94,7 @@
     <string name="equalsign">=</string>
     <string name="usdsign">$</string>
     <string name="eursign">€</string>
+    <string name="needrefresh">Пожалуйста, обновите курсы на экране "Сейчас"</string>
 
     <string-array name="chartsource">
         <item>МОEX</item>

@@ -49,7 +49,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 
 class CalcFragment : Fragment() {
-    private val calcViewModel by viewModel<CalcViewModel>()
+    private val calcViewModel: CalcViewModel by viewModel()
     private lateinit var linearChartTCsService: LineChart
     private lateinit var linearChartTCsWidget: LineChart
     private lateinit var viewAcceptService: LinearLayout
@@ -150,13 +150,14 @@ class CalcFragment : Fragment() {
         rubValue = binding.rubvaluecalc
 
         binding.calcul.setOnClickListener {
-            calcViewModel.calculating(
-                currSpinner.selectedItemPosition,
-                dataToCalc,
-                toBuy.isChecked,
-                toSell.isChecked,
-                currValue.text.toString()
-            )
+            if (dataToCalc.size == 3)
+                calcViewModel.calculating(
+                    currSpinner.selectedItemPosition,
+                    dataToCalc,
+                    toBuy.isChecked,
+                    toSell.isChecked,
+                    currValue.text.toString()
+                )
         }
         binding.calcul.isEnabled = true
 
@@ -305,7 +306,7 @@ class CalcFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenStarted {
-            calcViewModel.getRubvalue().collect {
+            calcViewModel.getRubValue().collect {
                 rubValue.text = it
             }
         }

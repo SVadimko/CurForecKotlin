@@ -32,7 +32,7 @@ class AppWidget : AppWidgetProvider() {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_ONE_SHOT
         )
         views.setOnClickPendingIntent(R.id.refresh_Widget, pIntent)
-        WidgetUpdater(appWidgetManager, appWidgetId)
+        WidgetUpdater(context, appWidgetManager, appWidgetId)
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }
 
