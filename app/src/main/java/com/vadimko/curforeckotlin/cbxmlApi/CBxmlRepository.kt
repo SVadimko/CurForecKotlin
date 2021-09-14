@@ -1,15 +1,12 @@
 package com.vadimko.curforeckotlin.cbxmlApi
 
 
-import com.vadimko.curforeckotlin.cbjsonApi.CurrencyCBjs
-import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
 import com.vadimko.curforeckotlin.utils.Parser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
@@ -33,47 +30,10 @@ class CBxmlRepository {
         cbxmlApi = retrofit.create(CBxmlApi::class.java)
     }
 
-/*    fun getXMLarchive(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
-        val currentRequest: Call<CBXXMLResponse> = cbxmlApi.getCBXmlForec(
-            date_req1,
-            date_req2,
-            VAL_NM_RQ
-        )
-        currentRequest.enqueue(object : Callback<CBXXMLResponse> {
-            */
     /**
-     * Get list of [CurrencyCBarhive] and post it to [ArchiveViewModel]
-     *//*
-            override fun onResponse(
-                call: Call<CBXXMLResponse>,
-                response: Response<CBXXMLResponse>
-            ) {
-                val listData: MutableList<CurrencyCBarhive> = mutableListOf()
-                val cBXMLResponse = response.body()
-                val listRec = cBXMLResponse?.record
-                listRec?.forEach { it ->
-                    val offCur = it.Value
-                    val dateTime = it.Date
-                    val dateTimeConv = dateFormat(dateTime)
-                    listData.add(CurrencyCBarhive(offCur, dateTime, dateTimeConv))
-                }
-                ArchiveViewModel.setDataCB(listData)
-            }
-
-            override fun onFailure(call: Call<CBXXMLResponse>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-
-    }
-
-    @SuppressLint("SimpleDateFormat")m
-    fun dateFormat(datesOFF: String): String {
-        val dateConvert = SimpleDateFormat("dd.MM.yyyy").parse(datesOFF)
-        val jdf = SimpleDateFormat("yyyy-MM-dd")
-        return jdf.format(dateConvert!!)
-    }*/
-
+     * Perform request to server
+     * @return list of [CurrencyCBarhive]
+     */
     @Suppress("BlockingMethodInNonBlockingContext")
     suspend fun getResponse(
         date_req1: String,

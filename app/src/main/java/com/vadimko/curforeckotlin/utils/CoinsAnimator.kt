@@ -59,13 +59,11 @@ class CoinsAnimator(
         timer.schedule(ExeTimerTask(), 0, 100)
         enableSound = PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean("onAnimationSound", false)
-        //SoundPlayer.onResume()
     }
 
     /**
      * Takes ImageView and use [ValueAnimator] to animate it
      */
-    //private fun startAnimation(aniView: ImageView) {
     private fun startAnimation(aniView: View) {
         var alreadyPlayed = false
         aniView.pivotX = (aniView.width / 2).toFloat()
@@ -87,7 +85,6 @@ class CoinsAnimator(
             var angle = 90 + (Math.random() * 501).toInt()
             var moveX = Random().nextInt(mDisplaySize.right)
             override fun onAnimationUpdate(animation: ValueAnimator) {
-                //val value = (animation.animatedValue as Float).toFloat()
                 val value = animation.animatedValue as Float
                 aniView.rotation = angle * value
                 aniView.translationX = (moveX - 40) * value
@@ -114,11 +111,8 @@ class CoinsAnimator(
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             val viewId = Random().nextInt(coinsArrayImage.size)
-            /* val d: Drawable? =
-                 context.getDrawable(coinsArrayImage[viewId])*/
             val inflate = LayoutInflater.from(context)
-            val view = inflate.inflate(R.layout.ani_image_view, null)// as ImageView
-            //imageView.setImageDrawable(d)
+            val view = inflate.inflate(R.layout.ani_image_view, null)
             view.setBackgroundResource(coinsArrayImage[viewId])
             view.requestLayout()
             layout.get()?.addView(view)

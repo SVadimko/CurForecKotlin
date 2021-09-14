@@ -1,14 +1,12 @@
 package com.vadimko.curforeckotlin.moexApi
 
-import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel
-import com.vadimko.curforeckotlin.ui.today.TodayViewModel
+import com.vadimko.curforeckotlin.cbxmlApi.CurrencyCBarhive
 import com.vadimko.curforeckotlin.utils.Parser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -37,46 +35,9 @@ class MOEXRepository {
     }
 
     /**
-     * In case of response get list of [CurrencyMOEX] and post it to [ArchiveViewModel] or
-     * [TodayViewModel] depends
-     * of from which fragment request was send
+     * Perform request to server
+     * @return list of [CurrencyCBarhive]
      */
-    /*   fun getMOEX(request: String, from: String, till: String, interval: String, todayArch: Boolean) {
-           val currentRequest: Call<MOEXResponse> = if (!todayArch) {
-               moexApi.getMOEXForec(request, from, till, interval)
-           } else {
-               moexApi.getMOEXForec(request, from, till, "24")
-           }
-           currentRequest.enqueue(object : Callback<MOEXResponse> {
-               override fun onResponse(call: Call<MOEXResponse>, response: Response<MOEXResponse>) {
-                   val moexResponse: MOEXResponse? = response.body()
-                   val moexCandles: MOEXCandles? = moexResponse?.candles
-                   //val moexcolumns = moexCandles?.columns
-                   val moexdata = moexCandles?.data
-                   val moexcurrency: MutableList<CurrencyMOEX> = mutableListOf()
-                   moexcurrency.clear()
-                   moexdata?.forEach { it ->
-                       val currencyMoex = CurrencyMOEX(
-                           it[6] as String,
-                           it[0] as Double,
-                           it[3] as Double,
-                           it[2] as Double,
-                           it[1] as Double,
-                           (it[3] as Double + it[2] as Double) / 2
-                       )
-                       moexcurrency.add(currencyMoex)
-                   }
-                   if (!todayArch)
-                       TodayViewModel.setDataMOEX(moexcurrency)
-                   else
-                       ArchiveViewModel.setDataMOEX(moexcurrency)
-               }
-
-
-               override fun onFailure(call: Call<MOEXResponse>, t: Throwable) {
-               }
-           })
-       }*/
     @Suppress("BlockingMethodInNonBlockingContext")
     suspend fun getResponse(
         request: String,

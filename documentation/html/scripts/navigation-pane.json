@@ -16,6 +16,14 @@
     ]
   },
   {
+    "name": "appModule",
+    "description": null,
+    "location": "app/com.vadimko.curforeckotlin/app-module.html",
+    "searchKeys": [
+      "appModule"
+    ]
+  },
+  {
     "name": "BOOT_ACTION",
     "description": null,
     "location": "app/com.vadimko.curforeckotlin/-b-o-o-t_-a-c-t-i-o-n.html",
@@ -568,43 +576,11 @@
     ]
   },
   {
-    "name": "ArchiveMOEXWorker",
-    "description": null,
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-archive-m-o-e-x-worker/index.html",
-    "searchKeys": [
-      "ArchiveMOEXWorker"
-    ]
-  },
-  {
-    "name": "ArchiveWorker",
-    "description": null,
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-archive-worker/index.html",
-    "searchKeys": [
-      "ArchiveWorker"
-    ]
-  },
-  {
-    "name": "NowWorker",
-    "description": null,
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-now-worker/index.html",
-    "searchKeys": [
-      "NowWorker"
-    ]
-  },
-  {
     "name": "ServiceCheckWorker",
     "description": null,
     "location": "app/com.vadimko.curforeckotlin.updateWorkers/-service-check-worker/index.html",
     "searchKeys": [
       "ServiceCheckWorker"
-    ]
-  },
-  {
-    "name": "TodayWorker",
-    "description": null,
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-today-worker/index.html",
-    "searchKeys": [
-      "TodayWorker"
     ]
   },
   {
@@ -688,6 +664,14 @@
     ]
   },
   {
+    "name": "LastValueHolder",
+    "description": null,
+    "location": "app/com.vadimko.curforeckotlin.utils/-last-value-holder/index.html",
+    "searchKeys": [
+      "LastValueHolder"
+    ]
+  },
+  {
     "name": "LinearDataSetsConfigure",
     "description": null,
     "location": "app/com.vadimko.curforeckotlin.utils/-linear-data-sets-configure/index.html",
@@ -704,11 +688,27 @@
     ]
   },
   {
+    "name": "Parser",
+    "description": null,
+    "location": "app/com.vadimko.curforeckotlin.utils/-parser/index.html",
+    "searchKeys": [
+      "Parser"
+    ]
+  },
+  {
     "name": "Saver",
     "description": null,
     "location": "app/com.vadimko.curforeckotlin.utils/-saver/index.html",
     "searchKeys": [
       "Saver"
+    ]
+  },
+  {
+    "name": "ScopeCreator",
+    "description": null,
+    "location": "app/com.vadimko.curforeckotlin.utils/-scope-creator/index.html",
+    "searchKeys": [
+      "ScopeCreator"
     ]
   },
   {

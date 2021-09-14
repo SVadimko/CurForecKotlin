@@ -1,6 +1,7 @@
 package com.vadimko.curforeckotlin.utils
 
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
+import com.vadimko.curforeckotlin.utils.LastValueHolder.lastValueList
 
 /**
  * Holder for actual values of last update currency from Tinkov bank

@@ -102,8 +102,6 @@ class NowFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        /* nowViewModel.stopAnimation()
-         SoundPlayer.onStop()*/
         _binding = null
         super.onDestroyView()
     }

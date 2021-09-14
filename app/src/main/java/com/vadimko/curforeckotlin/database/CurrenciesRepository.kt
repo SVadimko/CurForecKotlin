@@ -36,7 +36,6 @@ class CurrenciesRepository constructor(context: Context) : KoinComponent {
      * @return Flow of list [Currencies]
      */
     fun getCurrencies(): Flow<List<Currencies>> = currencyDao.getCurrencies()
-    //fun getCurrencies(): LiveData<List<Currencies>> = currencyDao.getCurrencies()
 
 
     /**

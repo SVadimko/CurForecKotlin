@@ -15,8 +15,8 @@ android {
         applicationId "com.vadimko.curforeckotlin"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 9
-        versionName "1.6"
+        versionCode 10
+        versionName "1.6.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

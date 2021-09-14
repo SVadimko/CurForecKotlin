@@ -12,8 +12,6 @@ import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 import com.vadimko.curforeckotlin.utils.DateConverter
-import com.vadimko.curforeckotlin.utils.Parser
-import com.vadimko.curforeckotlin.utils.ScopeCreator
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -32,8 +30,6 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
     private val mappWidgetID = appWidgetID
     private val currenciesRepository: CurrenciesRepository by inject()
     private val mContext = context
-    //private val tcsRepository: TCSRepository by inject()
-    //private val cBjsonRepository: CBjsonRepository by inject()
 
     init {
         updateTCs()
@@ -45,11 +41,9 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
      */
     private fun updateTCs() {
         val tcsRepository = TCSRepository()
-        //tcsRepository.getCurrentTCS(true, mappWidgetManager, mappWidgetID)
         GlobalScope.launch {
-            var list: List<CurrencyTCS> = listOf()
+            var list: List<CurrencyTCS>
             do {
-                //list = Parser.parseTcsResponse(tcsRepository.getResponse())
                 list = tcsRepository.getResponse()
             } while (list.size != 3)
             refreshTCsPart(list)
@@ -61,7 +55,6 @@ class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWid
      */
     private fun updateCB() {
         val cBjsonRepository = CBjsonRepository()
-        //cbJsonRepository.getCurrentCB(true, mappWidgetManager, mappWidgetID)
         GlobalScope.launch {
             val list = cBjsonRepository.getResponse()
             refreshCBPart(list)

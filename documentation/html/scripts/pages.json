@@ -10,26 +10,6 @@
     ]
   },
   {
-    "name": "abstract fun addCurrencies(currencies: Currencies)",
-    "description": "com.vadimko.curforeckotlin.database.CurrencyDao.addCurrencies",
-    "location": "app/com.vadimko.curforeckotlin.database/-currency-dao/add-currencies.html",
-    "searchKeys": [
-      "addCurrencies",
-      "abstract fun addCurrencies(currencies: Currencies)",
-      "com.vadimko.curforeckotlin.database.CurrencyDao.addCurrencies"
-    ]
-  },
-  {
-    "name": "abstract fun clearCurrencies(list: List<Currencies>)",
-    "description": "com.vadimko.curforeckotlin.database.CurrencyDao.clearCurrencies",
-    "location": "app/com.vadimko.curforeckotlin.database/-currency-dao/clear-currencies.html",
-    "searchKeys": [
-      "clearCurrencies",
-      "abstract fun clearCurrencies(list: List<Currencies>)",
-      "com.vadimko.curforeckotlin.database.CurrencyDao.clearCurrencies"
-    ]
-  },
-  {
     "name": "abstract fun currenciesDao(): CurrencyDao",
     "description": "com.vadimko.curforeckotlin.database.CurrenciesDataBase.currenciesDao",
     "location": "app/com.vadimko.curforeckotlin.database/-currencies-data-base/currencies-dao.html",
@@ -60,12 +40,12 @@
     ]
   },
   {
-    "name": "abstract fun getCurrencies(): LiveData<List<Currencies>>",
+    "name": "abstract fun getCurrencies(): Flow<List<Currencies>>",
     "description": "com.vadimko.curforeckotlin.database.CurrencyDao.getCurrencies",
     "location": "app/com.vadimko.curforeckotlin.database/-currency-dao/get-currencies.html",
     "searchKeys": [
       "getCurrencies",
-      "abstract fun getCurrencies(): LiveData<List<Currencies>>",
+      "abstract fun getCurrencies(): Flow<List<Currencies>>",
       "com.vadimko.curforeckotlin.database.CurrencyDao.getCurrencies"
     ]
   },
@@ -100,6 +80,26 @@
     ]
   },
   {
+    "name": "abstract suspend fun addCurrencies(currencies: Currencies)",
+    "description": "com.vadimko.curforeckotlin.database.CurrencyDao.addCurrencies",
+    "location": "app/com.vadimko.curforeckotlin.database/-currency-dao/add-currencies.html",
+    "searchKeys": [
+      "addCurrencies",
+      "abstract suspend fun addCurrencies(currencies: Currencies)",
+      "com.vadimko.curforeckotlin.database.CurrencyDao.addCurrencies"
+    ]
+  },
+  {
+    "name": "abstract suspend fun clearCurrencies(list: List<Currencies>)",
+    "description": "com.vadimko.curforeckotlin.database.CurrencyDao.clearCurrencies",
+    "location": "app/com.vadimko.curforeckotlin.database/-currency-dao/clear-currencies.html",
+    "searchKeys": [
+      "clearCurrencies",
+      "abstract suspend fun clearCurrencies(list: List<Currencies>)",
+      "com.vadimko.curforeckotlin.database.CurrencyDao.clearCurrencies"
+    ]
+  },
+  {
     "name": "class AppWidget : AppWidgetProvider",
     "description": "com.vadimko.curforeckotlin.widget.AppWidget",
     "location": "app/com.vadimko.curforeckotlin.widget/-app-widget/index.html",
@@ -120,16 +120,6 @@
     ]
   },
   {
-    "name": "class ArchiveMOEXWorker(context: Context, workerParams: WorkerParameters) : Worker",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-archive-m-o-e-x-worker/index.html",
-    "searchKeys": [
-      "ArchiveMOEXWorker",
-      "class ArchiveMOEXWorker(context: Context, workerParams: WorkerParameters) : Worker",
-      "com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker"
-    ]
-  },
-  {
     "name": "class ArchiveViewModel : ViewModel, KoinComponent",
     "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel",
     "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/index.html",
@@ -137,16 +127,6 @@
       "ArchiveViewModel",
       "class ArchiveViewModel : ViewModel, KoinComponent",
       "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel"
-    ]
-  },
-  {
-    "name": "class ArchiveWorker(context: Context, workerParams: WorkerParameters) : Worker",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-archive-worker/index.html",
-    "searchKeys": [
-      "ArchiveWorker",
-      "class ArchiveWorker(context: Context, workerParams: WorkerParameters) : Worker",
-      "com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker"
     ]
   },
   {
@@ -260,12 +240,12 @@
     ]
   },
   {
-    "name": "class CurrenciesRepository(context: Context)",
+    "name": "class CurrenciesRepository(context: Context) : KoinComponent",
     "description": "com.vadimko.curforeckotlin.database.CurrenciesRepository",
     "location": "app/com.vadimko.curforeckotlin.database/-currencies-repository/index.html",
     "searchKeys": [
       "CurrenciesRepository",
-      "class CurrenciesRepository(context: Context)",
+      "class CurrenciesRepository(context: Context) : KoinComponent",
       "com.vadimko.curforeckotlin.database.CurrenciesRepository"
     ]
   },
@@ -360,16 +340,6 @@
     ]
   },
   {
-    "name": "class NowWorker(context: Context, workerParams: WorkerParameters) : Worker",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.NowWorker",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-now-worker/index.html",
-    "searchKeys": [
-      "NowWorker",
-      "class NowWorker(context: Context, workerParams: WorkerParameters) : Worker",
-      "com.vadimko.curforeckotlin.updateWorkers.NowWorker"
-    ]
-  },
-  {
     "name": "class ServiceCheckWorker(context: Context, workerParams: WorkerParameters) : Worker",
     "description": "com.vadimko.curforeckotlin.updateWorkers.ServiceCheckWorker",
     "location": "app/com.vadimko.curforeckotlin.updateWorkers/-service-check-worker/index.html",
@@ -460,12 +430,12 @@
     ]
   },
   {
-    "name": "class TCSUpdateService : Service",
+    "name": "class TCSUpdateService : Service, KoinComponent",
     "description": "com.vadimko.curforeckotlin.TCSUpdateService",
     "location": "app/com.vadimko.curforeckotlin/-t-c-s-update-service/index.html",
     "searchKeys": [
       "TCSUpdateService",
-      "class TCSUpdateService : Service",
+      "class TCSUpdateService : Service, KoinComponent",
       "com.vadimko.curforeckotlin.TCSUpdateService"
     ]
   },
@@ -490,16 +460,6 @@
     ]
   },
   {
-    "name": "class TodayWorker(context: Context, workerParams: WorkerParameters) : Worker",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.TodayWorker",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-today-worker/index.html",
-    "searchKeys": [
-      "TodayWorker",
-      "class TodayWorker(context: Context, workerParams: WorkerParameters) : Worker",
-      "com.vadimko.curforeckotlin.updateWorkers.TodayWorker"
-    ]
-  },
-  {
     "name": "class WMA(inp: MutableList<Float>, a: Int)",
     "description": "com.vadimko.curforeckotlin.forecastsMethods.WMA",
     "location": "app/com.vadimko.curforeckotlin.forecastsMethods/-w-m-a/index.html",
@@ -510,12 +470,12 @@
     ]
   },
   {
-    "name": "class WidgetUpdater(appWidgetManager: AppWidgetManager, appWidgetID: Int) : KoinComponent",
+    "name": "class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWidgetID: Int) : KoinComponent",
     "description": "com.vadimko.curforeckotlin.widget.WidgetUpdater",
     "location": "app/com.vadimko.curforeckotlin.widget/-widget-updater/index.html",
     "searchKeys": [
       "WidgetUpdater",
-      "class WidgetUpdater(appWidgetManager: AppWidgetManager, appWidgetID: Int) : KoinComponent",
+      "class WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWidgetID: Int) : KoinComponent",
       "com.vadimko.curforeckotlin.widget.WidgetUpdater"
     ]
   },
@@ -640,16 +600,6 @@
     ]
   },
   {
-    "name": "fun ArchiveMOEXWorker(context: Context, workerParams: WorkerParameters)",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker.ArchiveMOEXWorker",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-archive-m-o-e-x-worker/-archive-m-o-e-x-worker.html",
-    "searchKeys": [
-      "ArchiveMOEXWorker",
-      "fun ArchiveMOEXWorker(context: Context, workerParams: WorkerParameters)",
-      "com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker.ArchiveMOEXWorker"
-    ]
-  },
-  {
     "name": "fun ArchiveViewModel()",
     "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.ArchiveViewModel",
     "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-archive-view-model.html",
@@ -657,16 +607,6 @@
       "ArchiveViewModel",
       "fun ArchiveViewModel()",
       "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.ArchiveViewModel"
-    ]
-  },
-  {
-    "name": "fun ArchiveWorker(context: Context, workerParams: WorkerParameters)",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker.ArchiveWorker",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-archive-worker/-archive-worker.html",
-    "searchKeys": [
-      "ArchiveWorker",
-      "fun ArchiveWorker(context: Context, workerParams: WorkerParameters)",
-      "com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker.ArchiveWorker"
     ]
   },
   {
@@ -1000,16 +940,6 @@
     ]
   },
   {
-    "name": "fun NowWorker(context: Context, workerParams: WorkerParameters)",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.NowWorker.NowWorker",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-now-worker/-now-worker.html",
-    "searchKeys": [
-      "NowWorker",
-      "fun NowWorker(context: Context, workerParams: WorkerParameters)",
-      "com.vadimko.curforeckotlin.updateWorkers.NowWorker.NowWorker"
-    ]
-  },
-  {
     "name": "fun Record(Value: String = \"0.0\", Date: String = \"\")",
     "description": "com.vadimko.curforeckotlin.cbxmlApi.Record.Record",
     "location": "app/com.vadimko.curforeckotlin.cbxmlApi/-record/-record.html",
@@ -1140,16 +1070,6 @@
     ]
   },
   {
-    "name": "fun TodayWorker(context: Context, workerParams: WorkerParameters)",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.TodayWorker.TodayWorker",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-today-worker/-today-worker.html",
-    "searchKeys": [
-      "TodayWorker",
-      "fun TodayWorker(context: Context, workerParams: WorkerParameters)",
-      "com.vadimko.curforeckotlin.updateWorkers.TodayWorker.TodayWorker"
-    ]
-  },
-  {
     "name": "fun WMA(inp: MutableList<Float>, a: Int)",
     "description": "com.vadimko.curforeckotlin.forecastsMethods.WMA.WMA",
     "location": "app/com.vadimko.curforeckotlin.forecastsMethods/-w-m-a/-w-m-a.html",
@@ -1160,12 +1080,12 @@
     ]
   },
   {
-    "name": "fun WidgetUpdater(appWidgetManager: AppWidgetManager, appWidgetID: Int)",
+    "name": "fun WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWidgetID: Int)",
     "description": "com.vadimko.curforeckotlin.widget.WidgetUpdater.WidgetUpdater",
     "location": "app/com.vadimko.curforeckotlin.widget/-widget-updater/-widget-updater.html",
     "searchKeys": [
       "WidgetUpdater",
-      "fun WidgetUpdater(appWidgetManager: AppWidgetManager, appWidgetID: Int)",
+      "fun WidgetUpdater(context: Context, appWidgetManager: AppWidgetManager, appWidgetID: Int)",
       "com.vadimko.curforeckotlin.widget.WidgetUpdater.WidgetUpdater"
     ]
   },
@@ -1240,6 +1160,16 @@
     ]
   },
   {
+    "name": "fun cancelScope()",
+    "description": "com.vadimko.curforeckotlin.utils.ScopeCreator.cancelScope",
+    "location": "app/com.vadimko.curforeckotlin.utils/-scope-creator/cancel-scope.html",
+    "searchKeys": [
+      "cancelScope",
+      "fun cancelScope()",
+      "com.vadimko.curforeckotlin.utils.ScopeCreator.cancelScope"
+    ]
+  },
+  {
     "name": "fun checkAutoUpdate()",
     "description": "com.vadimko.curforeckotlin.utils.CheckTCSUpdateServiceIsRunning.checkAutoUpdate",
     "location": "app/com.vadimko.curforeckotlin.utils/-check-t-c-s-update-service-is-running/check-auto-update.html",
@@ -1290,12 +1220,12 @@
     ]
   },
   {
-    "name": "fun createChart(comboChartForec: CombinedChart, dataList: List<CurrencyMOEX>, period: String, animationLong: Int): CombinedChart",
+    "name": "fun createChart(comboChartForec: CombinedChart, dataList: List<CurrencyMOEX>, period: String): CombinedChart",
     "description": "com.vadimko.curforeckotlin.utils.TodayChartBuilder.createChart",
     "location": "app/com.vadimko.curforeckotlin.utils/-today-chart-builder/create-chart.html",
     "searchKeys": [
       "createChart",
-      "fun createChart(comboChartForec: CombinedChart, dataList: List<CurrencyMOEX>, period: String, animationLong: Int): CombinedChart",
+      "fun createChart(comboChartForec: CombinedChart, dataList: List<CurrencyMOEX>, period: String): CombinedChart",
       "com.vadimko.curforeckotlin.utils.TodayChartBuilder.createChart"
     ]
   },
@@ -1360,13 +1290,23 @@
     ]
   },
   {
-    "name": "fun dateFormat(datesOFF: String): String",
-    "description": "com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository.dateFormat",
-    "location": "app/com.vadimko.curforeckotlin.cbxmlApi/-c-bxml-repository/date-format.html",
+    "name": "fun createScope()",
+    "description": "com.vadimko.curforeckotlin.utils.ScopeCreator.createScope",
+    "location": "app/com.vadimko.curforeckotlin.utils/-scope-creator/create-scope.html",
     "searchKeys": [
-      "dateFormat",
-      "fun dateFormat(datesOFF: String): String",
-      "com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository.dateFormat"
+      "createScope",
+      "fun createScope()",
+      "com.vadimko.curforeckotlin.utils.ScopeCreator.createScope"
+    ]
+  },
+  {
+    "name": "fun dateFormatForCbXML(datesOFF: String): String",
+    "description": "com.vadimko.curforeckotlin.utils.DateConverter.dateFormatForCbXML",
+    "location": "app/com.vadimko.curforeckotlin.utils/-date-converter/date-format-for-cb-x-m-l.html",
+    "searchKeys": [
+      "dateFormatForCbXML",
+      "fun dateFormatForCbXML(datesOFF: String): String",
+      "com.vadimko.curforeckotlin.utils.DateConverter.dateFormatForCbXML"
     ]
   },
   {
@@ -1510,43 +1450,13 @@
     ]
   },
   {
-    "name": "fun getCurrencies(): LiveData<List<Currencies>>",
+    "name": "fun getCurrencies(): Flow<List<Currencies>>",
     "description": "com.vadimko.curforeckotlin.database.CurrenciesRepository.getCurrencies",
     "location": "app/com.vadimko.curforeckotlin.database/-currencies-repository/get-currencies.html",
     "searchKeys": [
       "getCurrencies",
-      "fun getCurrencies(): LiveData<List<Currencies>>",
+      "fun getCurrencies(): Flow<List<Currencies>>",
       "com.vadimko.curforeckotlin.database.CurrenciesRepository.getCurrencies"
-    ]
-  },
-  {
-    "name": "fun getCurrentCB(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.getCurrentCB",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-repository/get-current-c-b.html",
-    "searchKeys": [
-      "getCurrentCB",
-      "fun getCurrentCB(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.getCurrentCB"
-    ]
-  },
-  {
-    "name": "fun getCurrentTCS()",
-    "description": "com.vadimko.curforeckotlin.TCSUpdateService.getCurrentTCS",
-    "location": "app/com.vadimko.curforeckotlin/-t-c-s-update-service/get-current-t-c-s.html",
-    "searchKeys": [
-      "getCurrentTCS",
-      "fun getCurrentTCS()",
-      "com.vadimko.curforeckotlin.TCSUpdateService.getCurrentTCS"
-    ]
-  },
-  {
-    "name": "fun getCurrentTCS(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
-    "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository.getCurrentTCS",
-    "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/get-current-t-c-s.html",
-    "searchKeys": [
-      "getCurrentTCS",
-      "fun getCurrentTCS(requestMode: Boolean, appWidgetManager: AppWidgetManager?, appWidgetID: Int?)",
-      "com.vadimko.curforeckotlin.tcsApi.TCSRepository.getCurrentTCS"
     ]
   },
   {
@@ -1570,13 +1480,13 @@
     ]
   },
   {
-    "name": "fun getDataCD(): MutableStateFlow<List<CurrencyCBjs>>",
-    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.getDataCD",
-    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/get-data-c-d.html",
+    "name": "fun getDataCB(): MutableStateFlow<List<CurrencyCBjs>>",
+    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.getDataCB",
+    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/get-data-c-b.html",
     "searchKeys": [
-      "getDataCD",
-      "fun getDataCD(): MutableStateFlow<List<CurrencyCBjs>>",
-      "com.vadimko.curforeckotlin.ui.now.NowViewModel.getDataCD"
+      "getDataCB",
+      "fun getDataCB(): MutableStateFlow<List<CurrencyCBjs>>",
+      "com.vadimko.curforeckotlin.ui.now.NowViewModel.getDataCB"
     ]
   },
   {
@@ -1607,6 +1517,16 @@
       "getDataTCs",
       "fun getDataTCs(): MutableStateFlow<List<CurrencyTCS>>",
       "com.vadimko.curforeckotlin.ui.now.NowViewModel.getDataTCs"
+    ]
+  },
+  {
+    "name": "fun getDataWidgetUpdate(): LiveData<List<Currencies>>",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.getDataWidgetUpdate",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/get-data-widget-update.html",
+    "searchKeys": [
+      "getDataWidgetUpdate",
+      "fun getDataWidgetUpdate(): LiveData<List<Currencies>>",
+      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.getDataWidgetUpdate"
     ]
   },
   {
@@ -1670,16 +1590,6 @@
     ]
   },
   {
-    "name": "fun getMOEX(request: String, from: String, till: String, interval: String, todayArch: Boolean)",
-    "description": "com.vadimko.curforeckotlin.moexApi.MOEXRepository.getMOEX",
-    "location": "app/com.vadimko.curforeckotlin.moexApi/-m-o-e-x-repository/get-m-o-e-x.html",
-    "searchKeys": [
-      "getMOEX",
-      "fun getMOEX(request: String, from: String, till: String, interval: String, todayArch: Boolean)",
-      "com.vadimko.curforeckotlin.moexApi.MOEXRepository.getMOEX"
-    ]
-  },
-  {
     "name": "fun getOutputVal(): MutableList<Float>",
     "description": "com.vadimko.curforeckotlin.forecastsMethods.LessSquare.getOutputVal",
     "location": "app/com.vadimko.curforeckotlin.forecastsMethods/-less-square/get-output-val.html",
@@ -1687,6 +1597,26 @@
       "getOutputVal",
       "fun getOutputVal(): MutableList<Float>",
       "com.vadimko.curforeckotlin.forecastsMethods.LessSquare.getOutputVal"
+    ]
+  },
+  {
+    "name": "fun getRubValue(): MutableStateFlow<String>",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.getRubValue",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/get-rub-value.html",
+    "searchKeys": [
+      "getRubValue",
+      "fun getRubValue(): MutableStateFlow<String>",
+      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.getRubValue"
+    ]
+  },
+  {
+    "name": "fun getScope(): CoroutineScope",
+    "description": "com.vadimko.curforeckotlin.utils.ScopeCreator.getScope",
+    "location": "app/com.vadimko.curforeckotlin.utils/-scope-creator/get-scope.html",
+    "searchKeys": [
+      "getScope",
+      "fun getScope(): CoroutineScope",
+      "com.vadimko.curforeckotlin.utils.ScopeCreator.getScope"
     ]
   },
   {
@@ -1720,16 +1650,6 @@
     ]
   },
   {
-    "name": "fun getXMLarchive(date_req1: String, date_req2: String, VAL_NM_RQ: String)",
-    "description": "com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository.getXMLarchive",
-    "location": "app/com.vadimko.curforeckotlin.cbxmlApi/-c-bxml-repository/get-x-m-larchive.html",
-    "searchKeys": [
-      "getXMLarchive",
-      "fun getXMLarchive(date_req1: String, date_req2: String, VAL_NM_RQ: String)",
-      "com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository.getXMLarchive"
-    ]
-  },
-  {
     "name": "fun initialize(context: Context)",
     "description": "com.vadimko.curforeckotlin.database.CurrenciesRepository.Companion.initialize",
     "location": "app/com.vadimko.curforeckotlin.database/-currencies-repository/-companion/initialize.html",
@@ -1757,36 +1677,6 @@
       "landscapeMode",
       "fun landscapeMode(mainActivity: MainActivity)",
       "com.vadimko.curforeckotlin.MainActivity.Companion.landscapeMode"
-    ]
-  },
-  {
-    "name": "fun loadCBArchive(date_req1: String, date_req2: String, VAL_NM_RQ: String)",
-    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.loadCBArchive",
-    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/load-c-b-archive.html",
-    "searchKeys": [
-      "loadCBArchive",
-      "fun loadCBArchive(date_req1: String, date_req2: String, VAL_NM_RQ: String)",
-      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.loadCBArchive"
-    ]
-  },
-  {
-    "name": "fun loadDataMOEX(request: String, from: String, till: String, interval: String)",
-    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.loadDataMOEX",
-    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/load-data-m-o-e-x.html",
-    "searchKeys": [
-      "loadDataMOEX",
-      "fun loadDataMOEX(request: String, from: String, till: String, interval: String)",
-      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.loadDataMOEX"
-    ]
-  },
-  {
-    "name": "fun loadDataMOEX(request: String, from: String, till: String, interval: String)",
-    "description": "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion.loadDataMOEX",
-    "location": "app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/load-data-m-o-e-x.html",
-    "searchKeys": [
-      "loadDataMOEX",
-      "fun loadDataMOEX(request: String, from: String, till: String, interval: String)",
-      "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion.loadDataMOEX"
     ]
   },
   {
@@ -1870,16 +1760,6 @@
     ]
   },
   {
-    "name": "fun onRefreshRatesActions()",
-    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.onRefreshRatesActions",
-    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/on-refresh-rates-actions.html",
-    "searchKeys": [
-      "onRefreshRatesActions",
-      "fun onRefreshRatesActions()",
-      "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.onRefreshRatesActions"
-    ]
-  },
-  {
     "name": "fun onResume()",
     "description": "com.vadimko.curforeckotlin.utils.SoundPlayer.onResume",
     "location": "app/com.vadimko.curforeckotlin.utils/-sound-player/on-resume.html",
@@ -1897,6 +1777,46 @@
       "onStop",
       "fun onStop()",
       "com.vadimko.curforeckotlin.utils.SoundPlayer.onStop"
+    ]
+  },
+  {
+    "name": "fun parseCBResponse(response: Response<CBjsonResponse>): List<CurrencyCBjs>",
+    "description": "com.vadimko.curforeckotlin.utils.Parser.parseCBResponse",
+    "location": "app/com.vadimko.curforeckotlin.utils/-parser/parse-c-b-response.html",
+    "searchKeys": [
+      "parseCBResponse",
+      "fun parseCBResponse(response: Response<CBjsonResponse>): List<CurrencyCBjs>",
+      "com.vadimko.curforeckotlin.utils.Parser.parseCBResponse"
+    ]
+  },
+  {
+    "name": "fun parseCbXmlResponse(response: Response<CBXXMLResponse>): List<CurrencyCBarhive>",
+    "description": "com.vadimko.curforeckotlin.utils.Parser.parseCbXmlResponse",
+    "location": "app/com.vadimko.curforeckotlin.utils/-parser/parse-cb-xml-response.html",
+    "searchKeys": [
+      "parseCbXmlResponse",
+      "fun parseCbXmlResponse(response: Response<CBXXMLResponse>): List<CurrencyCBarhive>",
+      "com.vadimko.curforeckotlin.utils.Parser.parseCbXmlResponse"
+    ]
+  },
+  {
+    "name": "fun parseMoexResponse(response: Response<MOEXResponse>): List<CurrencyMOEX>",
+    "description": "com.vadimko.curforeckotlin.utils.Parser.parseMoexResponse",
+    "location": "app/com.vadimko.curforeckotlin.utils/-parser/parse-moex-response.html",
+    "searchKeys": [
+      "parseMoexResponse",
+      "fun parseMoexResponse(response: Response<MOEXResponse>): List<CurrencyMOEX>",
+      "com.vadimko.curforeckotlin.utils.Parser.parseMoexResponse"
+    ]
+  },
+  {
+    "name": "fun parseTcsResponse(response: Response<TCSResponse>): List<CurrencyTCS>",
+    "description": "com.vadimko.curforeckotlin.utils.Parser.parseTcsResponse",
+    "location": "app/com.vadimko.curforeckotlin.utils/-parser/parse-tcs-response.html",
+    "searchKeys": [
+      "parseTcsResponse",
+      "fun parseTcsResponse(response: Response<TCSResponse>): List<CurrencyTCS>",
+      "com.vadimko.curforeckotlin.utils.Parser.parseTcsResponse"
     ]
   },
   {
@@ -2110,46 +2030,6 @@
     ]
   },
   {
-    "name": "internal fun getDataForCalc(): StateFlow<List<CurrencyTCS>>",
-    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.getDataForCalc",
-    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/get-data-for-calc.html",
-    "searchKeys": [
-      "getDataForCalc",
-      "internal fun getDataForCalc(): StateFlow<List<CurrencyTCS>>",
-      "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.getDataForCalc"
-    ]
-  },
-  {
-    "name": "internal fun loadDataCB()",
-    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.loadDataCB",
-    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/load-data-c-b.html",
-    "searchKeys": [
-      "loadDataCB",
-      "internal fun loadDataCB()",
-      "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.loadDataCB"
-    ]
-  },
-  {
-    "name": "internal fun loadDataForCalc()",
-    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.loadDataForCalc",
-    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/-companion/load-data-for-calc.html",
-    "searchKeys": [
-      "loadDataForCalc",
-      "internal fun loadDataForCalc()",
-      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.loadDataForCalc"
-    ]
-  },
-  {
-    "name": "internal fun loadDataTCs()",
-    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.loadDataTCs",
-    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/load-data-t-cs.html",
-    "searchKeys": [
-      "loadDataTCs",
-      "internal fun loadDataTCs()",
-      "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.loadDataTCs"
-    ]
-  },
-  {
     "name": "internal fun loadServiceUpdateData()",
     "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.loadServiceUpdateData",
     "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/-companion/load-service-update-data.html",
@@ -2157,66 +2037,6 @@
       "loadServiceUpdateData",
       "internal fun loadServiceUpdateData()",
       "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.loadServiceUpdateData"
-    ]
-  },
-  {
-    "name": "internal fun setDataCB(data: List<CurrencyCBarhive>)",
-    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.setDataCB",
-    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/set-data-c-b.html",
-    "searchKeys": [
-      "setDataCB",
-      "internal fun setDataCB(data: List<CurrencyCBarhive>)",
-      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.setDataCB"
-    ]
-  },
-  {
-    "name": "internal fun setDataCB(data: List<CurrencyCBjs>)",
-    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.setDataCB",
-    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/set-data-c-b.html",
-    "searchKeys": [
-      "setDataCB",
-      "internal fun setDataCB(data: List<CurrencyCBjs>)",
-      "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.setDataCB"
-    ]
-  },
-  {
-    "name": "internal fun setDataMOEX(data: List<CurrencyMOEX>)",
-    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.setDataMOEX",
-    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/set-data-m-o-e-x.html",
-    "searchKeys": [
-      "setDataMOEX",
-      "internal fun setDataMOEX(data: List<CurrencyMOEX>)",
-      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.setDataMOEX"
-    ]
-  },
-  {
-    "name": "internal fun setDataMOEX(data: List<CurrencyMOEX>)",
-    "description": "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion.setDataMOEX",
-    "location": "app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/set-data-m-o-e-x.html",
-    "searchKeys": [
-      "setDataMOEX",
-      "internal fun setDataMOEX(data: List<CurrencyMOEX>)",
-      "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion.setDataMOEX"
-    ]
-  },
-  {
-    "name": "internal fun setDataTCs(data: List<CurrencyTCS>)",
-    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.setDataTCs",
-    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/set-data-t-cs.html",
-    "searchKeys": [
-      "setDataTCs",
-      "internal fun setDataTCs(data: List<CurrencyTCS>)",
-      "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.setDataTCs"
-    ]
-  },
-  {
-    "name": "internal val dataWidgetUpdate: LiveData<List<Currencies>>",
-    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.dataWidgetUpdate",
-    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/data-widget-update.html",
-    "searchKeys": [
-      "dataWidgetUpdate",
-      "internal val dataWidgetUpdate: LiveData<List<Currencies>>",
-      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.dataWidgetUpdate"
     ]
   },
   {
@@ -2297,6 +2117,16 @@
       "lastUpdate",
       "lateinit var lastUpdate: TCSLastUpdate",
       "com.vadimko.curforeckotlin.tcsApi.TCSPayload.lastUpdate"
+    ]
+  },
+  {
+    "name": "lateinit var lastValueList: List<CurrencyTCS>",
+    "description": "com.vadimko.curforeckotlin.utils.LastValueHolder.lastValueList",
+    "location": "app/com.vadimko.curforeckotlin.utils/-last-value-holder/last-value-list.html",
+    "searchKeys": [
+      "lastValueList",
+      "lateinit var lastValueList: List<CurrencyTCS>",
+      "com.vadimko.curforeckotlin.utils.LastValueHolder.lastValueList"
     ]
   },
   {
@@ -2530,6 +2360,16 @@
     ]
   },
   {
+    "name": "object LastValueHolder",
+    "description": "com.vadimko.curforeckotlin.utils.LastValueHolder",
+    "location": "app/com.vadimko.curforeckotlin.utils/-last-value-holder/index.html",
+    "searchKeys": [
+      "LastValueHolder",
+      "object LastValueHolder",
+      "com.vadimko.curforeckotlin.utils.LastValueHolder"
+    ]
+  },
+  {
     "name": "object LinearDataSetsConfigure : KoinComponent",
     "description": "com.vadimko.curforeckotlin.utils.LinearDataSetsConfigure",
     "location": "app/com.vadimko.curforeckotlin.utils/-linear-data-sets-configure/index.html",
@@ -2550,6 +2390,16 @@
     ]
   },
   {
+    "name": "object Parser",
+    "description": "com.vadimko.curforeckotlin.utils.Parser",
+    "location": "app/com.vadimko.curforeckotlin.utils/-parser/index.html",
+    "searchKeys": [
+      "Parser",
+      "object Parser",
+      "com.vadimko.curforeckotlin.utils.Parser"
+    ]
+  },
+  {
     "name": "object Saver : KoinComponent",
     "description": "com.vadimko.curforeckotlin.utils.Saver",
     "location": "app/com.vadimko.curforeckotlin.utils/-saver/index.html",
@@ -2557,6 +2407,16 @@
       "Saver",
       "object Saver : KoinComponent",
       "com.vadimko.curforeckotlin.utils.Saver"
+    ]
+  },
+  {
+    "name": "object ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.utils.ScopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.utils/-scope-creator/index.html",
+    "searchKeys": [
+      "ScopeCreator",
+      "object ScopeCreator",
+      "com.vadimko.curforeckotlin.utils.ScopeCreator"
     ]
   },
   {
@@ -2601,52 +2461,12 @@
   },
   {
     "name": "open override fun doWork(): ListenableWorker.Result",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker.doWork",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-archive-m-o-e-x-worker/do-work.html",
-    "searchKeys": [
-      "doWork",
-      "open override fun doWork(): ListenableWorker.Result",
-      "com.vadimko.curforeckotlin.updateWorkers.ArchiveMOEXWorker.doWork"
-    ]
-  },
-  {
-    "name": "open override fun doWork(): ListenableWorker.Result",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker.doWork",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-archive-worker/do-work.html",
-    "searchKeys": [
-      "doWork",
-      "open override fun doWork(): ListenableWorker.Result",
-      "com.vadimko.curforeckotlin.updateWorkers.ArchiveWorker.doWork"
-    ]
-  },
-  {
-    "name": "open override fun doWork(): ListenableWorker.Result",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.NowWorker.doWork",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-now-worker/do-work.html",
-    "searchKeys": [
-      "doWork",
-      "open override fun doWork(): ListenableWorker.Result",
-      "com.vadimko.curforeckotlin.updateWorkers.NowWorker.doWork"
-    ]
-  },
-  {
-    "name": "open override fun doWork(): ListenableWorker.Result",
     "description": "com.vadimko.curforeckotlin.updateWorkers.ServiceCheckWorker.doWork",
     "location": "app/com.vadimko.curforeckotlin.updateWorkers/-service-check-worker/do-work.html",
     "searchKeys": [
       "doWork",
       "open override fun doWork(): ListenableWorker.Result",
       "com.vadimko.curforeckotlin.updateWorkers.ServiceCheckWorker.doWork"
-    ]
-  },
-  {
-    "name": "open override fun doWork(): ListenableWorker.Result",
-    "description": "com.vadimko.curforeckotlin.updateWorkers.TodayWorker.doWork",
-    "location": "app/com.vadimko.curforeckotlin.updateWorkers/-today-worker/do-work.html",
-    "searchKeys": [
-      "doWork",
-      "open override fun doWork(): ListenableWorker.Result",
-      "com.vadimko.curforeckotlin.updateWorkers.TodayWorker.doWork"
     ]
   },
   {
@@ -3160,6 +2980,16 @@
     ]
   },
   {
+    "name": "private const val FILENAME: String",
+    "description": "com.vadimko.curforeckotlin.utils.Saver.FILENAME",
+    "location": "app/com.vadimko.curforeckotlin.utils/-saver/-f-i-l-e-n-a-m-e.html",
+    "searchKeys": [
+      "FILENAME",
+      "private const val FILENAME: String",
+      "com.vadimko.curforeckotlin.utils.Saver.FILENAME"
+    ]
+  },
+  {
     "name": "private const val SERVICE_WORKER_TAG: String",
     "description": "com.vadimko.curforeckotlin.SERVICE_WORKER_TAG",
     "location": "app/com.vadimko.curforeckotlin/-s-e-r-v-i-c-e_-w-o-r-k-e-r_-t-a-g.html",
@@ -3490,6 +3320,16 @@
     ]
   },
   {
+    "name": "private fun getCurrentTCS()",
+    "description": "com.vadimko.curforeckotlin.TCSUpdateService.getCurrentTCS",
+    "location": "app/com.vadimko.curforeckotlin/-t-c-s-update-service/get-current-t-c-s.html",
+    "searchKeys": [
+      "getCurrentTCS",
+      "private fun getCurrentTCS()",
+      "com.vadimko.curforeckotlin.TCSUpdateService.getCurrentTCS"
+    ]
+  },
+  {
     "name": "private fun getDisplayParams()",
     "description": "com.vadimko.curforeckotlin.ui.now.NowFragment.getDisplayParams",
     "location": "app/com.vadimko.curforeckotlin.ui.now/-now-fragment/get-display-params.html",
@@ -3510,6 +3350,56 @@
     ]
   },
   {
+    "name": "private fun loadCBArchive(date_req1: String, date_req2: String, VAL_NM_RQ: String)",
+    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.loadCBArchive",
+    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/load-c-b-archive.html",
+    "searchKeys": [
+      "loadCBArchive",
+      "private fun loadCBArchive(date_req1: String, date_req2: String, VAL_NM_RQ: String)",
+      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.loadCBArchive"
+    ]
+  },
+  {
+    "name": "private fun loadDataCB()",
+    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.loadDataCB",
+    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/load-data-c-b.html",
+    "searchKeys": [
+      "loadDataCB",
+      "private fun loadDataCB()",
+      "com.vadimko.curforeckotlin.ui.now.NowViewModel.loadDataCB"
+    ]
+  },
+  {
+    "name": "private fun loadDataMOEX(request: String, from: String, till: String, interval: String)",
+    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.loadDataMOEX",
+    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/load-data-m-o-e-x.html",
+    "searchKeys": [
+      "loadDataMOEX",
+      "private fun loadDataMOEX(request: String, from: String, till: String, interval: String)",
+      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.loadDataMOEX"
+    ]
+  },
+  {
+    "name": "private fun loadDataMOEX(request: String, from: String, till: String, interval: String)",
+    "description": "com.vadimko.curforeckotlin.ui.today.TodayViewModel.loadDataMOEX",
+    "location": "app/com.vadimko.curforeckotlin.ui.today/-today-view-model/load-data-m-o-e-x.html",
+    "searchKeys": [
+      "loadDataMOEX",
+      "private fun loadDataMOEX(request: String, from: String, till: String, interval: String)",
+      "com.vadimko.curforeckotlin.ui.today.TodayViewModel.loadDataMOEX"
+    ]
+  },
+  {
+    "name": "private fun loadDataTCs()",
+    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.loadDataTCs",
+    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/load-data-t-cs.html",
+    "searchKeys": [
+      "loadDataTCs",
+      "private fun loadDataTCs()",
+      "com.vadimko.curforeckotlin.ui.now.NowViewModel.loadDataTCs"
+    ]
+  },
+  {
     "name": "private fun loadSound(fileName: String): Int",
     "description": "com.vadimko.curforeckotlin.utils.SoundPlayer.loadSound",
     "location": "app/com.vadimko.curforeckotlin.utils/-sound-player/load-sound.html",
@@ -3527,6 +3417,16 @@
       "notification",
       "private fun notification(textMessage: String)",
       "com.vadimko.curforeckotlin.TCSUpdateService.notification"
+    ]
+  },
+  {
+    "name": "private fun onRefreshRatesActions()",
+    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.onRefreshRatesActions",
+    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/on-refresh-rates-actions.html",
+    "searchKeys": [
+      "onRefreshRatesActions",
+      "private fun onRefreshRatesActions()",
+      "com.vadimko.curforeckotlin.ui.now.NowViewModel.onRefreshRatesActions"
     ]
   },
   {
@@ -3560,6 +3460,26 @@
     ]
   },
   {
+    "name": "private fun refreshCBPart(currentCB: List<CurrencyCBjs>)",
+    "description": "com.vadimko.curforeckotlin.widget.WidgetUpdater.refreshCBPart",
+    "location": "app/com.vadimko.curforeckotlin.widget/-widget-updater/refresh-c-b-part.html",
+    "searchKeys": [
+      "refreshCBPart",
+      "private fun refreshCBPart(currentCB: List<CurrencyCBjs>)",
+      "com.vadimko.curforeckotlin.widget.WidgetUpdater.refreshCBPart"
+    ]
+  },
+  {
+    "name": "private fun refreshTCsPart(currentTCS: List<CurrencyTCS>)",
+    "description": "com.vadimko.curforeckotlin.widget.WidgetUpdater.refreshTCsPart",
+    "location": "app/com.vadimko.curforeckotlin.widget/-widget-updater/refresh-t-cs-part.html",
+    "searchKeys": [
+      "refreshTCsPart",
+      "private fun refreshTCsPart(currentTCS: List<CurrencyTCS>)",
+      "com.vadimko.curforeckotlin.widget.WidgetUpdater.refreshTCsPart"
+    ]
+  },
+  {
     "name": "private fun setFullscreen(fullscreen: Boolean, mainActivity: MainActivity)",
     "description": "com.vadimko.curforeckotlin.MainActivity.Companion.setFullscreen",
     "location": "app/com.vadimko.curforeckotlin/-main-activity/-companion/set-fullscreen.html",
@@ -3590,12 +3510,12 @@
     ]
   },
   {
-    "name": "private fun startAnimation(aniView: ImageView)",
+    "name": "private fun startAnimation(aniView: View)",
     "description": "com.vadimko.curforeckotlin.utils.CoinsAnimator.startAnimation",
     "location": "app/com.vadimko.curforeckotlin.utils/-coins-animator/start-animation.html",
     "searchKeys": [
       "startAnimation",
-      "private fun startAnimation(aniView: ImageView)",
+      "private fun startAnimation(aniView: View)",
       "com.vadimko.curforeckotlin.utils.CoinsAnimator.startAnimation"
     ]
   },
@@ -3671,12 +3591,12 @@
   },
   {
     "name": "private lateinit var coinsAnimator: CoinsAnimator",
-    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.coinsAnimator",
-    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/coins-animator.html",
+    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.coinsAnimator",
+    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/coins-animator.html",
     "searchKeys": [
       "coinsAnimator",
       "private lateinit var coinsAnimator: CoinsAnimator",
-      "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.coinsAnimator"
+      "com.vadimko.curforeckotlin.ui.now.NowViewModel.coinsAnimator"
     ]
   },
   {
@@ -3990,16 +3910,6 @@
     ]
   },
   {
-    "name": "private val appModule: Module",
-    "description": "com.vadimko.curforeckotlin.CurrenciesApplication.appModule",
-    "location": "app/com.vadimko.curforeckotlin/-currencies-application/app-module.html",
-    "searchKeys": [
-      "appModule",
-      "private val appModule: Module",
-      "com.vadimko.curforeckotlin.CurrenciesApplication.appModule"
-    ]
-  },
-  {
     "name": "private val archiveViewModel: ArchiveViewModel",
     "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveFragment.archiveViewModel",
     "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-fragment/archive-view-model.html",
@@ -4060,6 +3970,16 @@
     ]
   },
   {
+    "name": "private val cBjsonRepository: CBjsonRepository",
+    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.cBjsonRepository",
+    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/c-bjson-repository.html",
+    "searchKeys": [
+      "cBjsonRepository",
+      "private val cBjsonRepository: CBjsonRepository",
+      "com.vadimko.curforeckotlin.ui.now.NowViewModel.cBjsonRepository"
+    ]
+  },
+  {
     "name": "private val calcViewModel: CalcViewModel",
     "description": "com.vadimko.curforeckotlin.ui.calc.CalcFragment.calcViewModel",
     "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-fragment/calc-view-model.html",
@@ -4101,12 +4021,12 @@
   },
   {
     "name": "private val cbxmlRepository: CBxmlRepository",
-    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.cbxmlRepository",
-    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/cbxml-repository.html",
+    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.cbxmlRepository",
+    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/cbxml-repository.html",
     "searchKeys": [
       "cbxmlRepository",
       "private val cbxmlRepository: CBxmlRepository",
-      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.cbxmlRepository"
+      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.cbxmlRepository"
     ]
   },
   {
@@ -4181,26 +4101,6 @@
   },
   {
     "name": "private val context: Context",
-    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.context",
-    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-repository/context.html",
-    "searchKeys": [
-      "context",
-      "private val context: Context",
-      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.context"
-    ]
-  },
-  {
-    "name": "private val context: Context",
-    "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository.context",
-    "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/context.html",
-    "searchKeys": [
-      "context",
-      "private val context: Context",
-      "com.vadimko.curforeckotlin.tcsApi.TCSRepository.context"
-    ]
-  },
-  {
-    "name": "private val context: Context",
     "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.context",
     "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/context.html",
     "searchKeys": [
@@ -4217,16 +4117,6 @@
       "context",
       "private val context: Context",
       "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.context"
-    ]
-  },
-  {
-    "name": "private val context: Context",
-    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.context",
-    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/-companion/context.html",
-    "searchKeys": [
-      "context",
-      "private val context: Context",
-      "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.context"
     ]
   },
   {
@@ -4421,22 +4311,22 @@
   },
   {
     "name": "private val currenciesRepository: CurrenciesRepository",
-    "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository.currenciesRepository",
-    "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/currencies-repository.html",
-    "searchKeys": [
-      "currenciesRepository",
-      "private val currenciesRepository: CurrenciesRepository",
-      "com.vadimko.curforeckotlin.tcsApi.TCSRepository.currenciesRepository"
-    ]
-  },
-  {
-    "name": "private val currenciesRepository: CurrenciesRepository",
     "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.currenciesRepository",
     "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/currencies-repository.html",
     "searchKeys": [
       "currenciesRepository",
       "private val currenciesRepository: CurrenciesRepository",
       "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.currenciesRepository"
+    ]
+  },
+  {
+    "name": "private val currenciesRepository: CurrenciesRepository",
+    "description": "com.vadimko.curforeckotlin.widget.WidgetUpdater.currenciesRepository",
+    "location": "app/com.vadimko.curforeckotlin.widget/-widget-updater/currencies-repository.html",
+    "searchKeys": [
+      "currenciesRepository",
+      "private val currenciesRepository: CurrenciesRepository",
+      "com.vadimko.curforeckotlin.widget.WidgetUpdater.currenciesRepository"
     ]
   },
   {
@@ -4477,6 +4367,16 @@
       "dataTCs",
       "private val dataTCs: MutableStateFlow<List<CurrencyTCS>>",
       "com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataTCs"
+    ]
+  },
+  {
+    "name": "private val dataWidgetUpdate: LiveData<List<Currencies>>",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.dataWidgetUpdate",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/data-widget-update.html",
+    "searchKeys": [
+      "dataWidgetUpdate",
+      "private val dataWidgetUpdate: LiveData<List<Currencies>>",
+      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.dataWidgetUpdate"
     ]
   },
   {
@@ -4580,16 +4480,6 @@
     ]
   },
   {
-    "name": "private val executor: ExecutorService",
-    "description": "com.vadimko.curforeckotlin.database.CurrenciesRepository.executor",
-    "location": "app/com.vadimko.curforeckotlin.database/-currencies-repository/executor.html",
-    "searchKeys": [
-      "executor",
-      "private val executor: ExecutorService",
-      "com.vadimko.curforeckotlin.database.CurrenciesRepository.executor"
-    ]
-  },
-  {
     "name": "private val gbpDataBuy: MutableList<Double>",
     "description": "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.gbpDataBuy",
     "location": "app/com.vadimko.curforeckotlin.utils/-calc-line-chart-builder/gbp-data-buy.html",
@@ -4650,6 +4540,26 @@
     ]
   },
   {
+    "name": "private val handler: CoroutineExceptionHandler",
+    "description": "com.vadimko.curforeckotlin.utils.ScopeCreator.handler",
+    "location": "app/com.vadimko.curforeckotlin.utils/-scope-creator/handler.html",
+    "searchKeys": [
+      "handler",
+      "private val handler: CoroutineExceptionHandler",
+      "com.vadimko.curforeckotlin.utils.ScopeCreator.handler"
+    ]
+  },
+  {
+    "name": "private val mContext: Context",
+    "description": "com.vadimko.curforeckotlin.widget.WidgetUpdater.mContext",
+    "location": "app/com.vadimko.curforeckotlin.widget/-widget-updater/m-context.html",
+    "searchKeys": [
+      "mContext",
+      "private val mContext: Context",
+      "com.vadimko.curforeckotlin.widget.WidgetUpdater.mContext"
+    ]
+  },
+  {
     "name": "private val mHandler: Handler",
     "description": "com.vadimko.curforeckotlin.utils.CoinsAnimator.mHandler",
     "location": "app/com.vadimko.curforeckotlin.utils/-coins-animator/m-handler.html",
@@ -4691,22 +4601,22 @@
   },
   {
     "name": "private val moexRepository: MOEXRepository",
-    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.moexRepository",
-    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/-companion/moex-repository.html",
+    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.moexRepository",
+    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/moex-repository.html",
     "searchKeys": [
       "moexRepository",
       "private val moexRepository: MOEXRepository",
-      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.moexRepository"
+      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.moexRepository"
     ]
   },
   {
     "name": "private val moexRepository: MOEXRepository",
-    "description": "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion.moexRepository",
-    "location": "app/com.vadimko.curforeckotlin.ui.today/-today-view-model/-companion/moex-repository.html",
+    "description": "com.vadimko.curforeckotlin.ui.today.TodayViewModel.moexRepository",
+    "location": "app/com.vadimko.curforeckotlin.ui.today/-today-view-model/moex-repository.html",
     "searchKeys": [
       "moexRepository",
       "private val moexRepository: MOEXRepository",
-      "com.vadimko.curforeckotlin.ui.today.TodayViewModel.Companion.moexRepository"
+      "com.vadimko.curforeckotlin.ui.today.TodayViewModel.moexRepository"
     ]
   },
   {
@@ -4730,13 +4640,123 @@
     ]
   },
   {
-    "name": "private val tcsApi: TCSApi",
-    "description": "com.vadimko.curforeckotlin.TCSUpdateService.tcsApi",
-    "location": "app/com.vadimko.curforeckotlin/-t-c-s-update-service/tcs-api.html",
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.MainActivity.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin/-main-activity/scope-creator.html",
     "searchKeys": [
-      "tcsApi",
-      "private val tcsApi: TCSApi",
-      "com.vadimko.curforeckotlin.TCSUpdateService.tcsApi"
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.MainActivity.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.TCSUpdateService.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin/-t-c-s-update-service/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.TCSUpdateService.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.database.CurrenciesRepository.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.database/-currencies-repository/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.database.CurrenciesRepository.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.ui.archive/-archive-view-model/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/-companion/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.ui.now.NowViewModel.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.ui.today.TodayViewModel.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.ui.today/-today-view-model/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.ui.today.TodayViewModel.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.utils.ArchiveLineChartBuilder.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.utils/-archive-line-chart-builder/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.utils.ArchiveLineChartBuilder.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-line-chart-builder/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.utils.CalcLineChartBuilder.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-service-chart-builder/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.utils.CalcServiceChartBuilder.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.utils/-calc-widget-chart-builder/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.utils.CalcWidgetChartBuilder.scopeCreator"
+    ]
+  },
+  {
+    "name": "private val scopeCreator: ScopeCreator",
+    "description": "com.vadimko.curforeckotlin.utils.TodayChartBuilder.scopeCreator",
+    "location": "app/com.vadimko.curforeckotlin.utils/-today-chart-builder/scope-creator.html",
+    "searchKeys": [
+      "scopeCreator",
+      "private val scopeCreator: ScopeCreator",
+      "com.vadimko.curforeckotlin.utils.TodayChartBuilder.scopeCreator"
     ]
   },
   {
@@ -4751,12 +4771,22 @@
   },
   {
     "name": "private val tcsRepository: TCSRepository",
-    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.tcsRepository",
-    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/-companion/tcs-repository.html",
+    "description": "com.vadimko.curforeckotlin.TCSUpdateService.tcsRepository",
+    "location": "app/com.vadimko.curforeckotlin/-t-c-s-update-service/tcs-repository.html",
     "searchKeys": [
       "tcsRepository",
       "private val tcsRepository: TCSRepository",
-      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.tcsRepository"
+      "com.vadimko.curforeckotlin.TCSUpdateService.tcsRepository"
+    ]
+  },
+  {
+    "name": "private val tcsRepository: TCSRepository",
+    "description": "com.vadimko.curforeckotlin.ui.now.NowViewModel.tcsRepository",
+    "location": "app/com.vadimko.curforeckotlin.ui.now/-now-view-model/tcs-repository.html",
+    "searchKeys": [
+      "tcsRepository",
+      "private val tcsRepository: TCSRepository",
+      "com.vadimko.curforeckotlin.ui.now.NowViewModel.tcsRepository"
     ]
   },
   {
@@ -5060,13 +5090,13 @@
     ]
   },
   {
-    "name": "private var dataForCalc: StateFlow<List<CurrencyTCS>>",
-    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.dataForCalc",
-    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/-companion/data-for-calc.html",
+    "name": "private var dataForCalc: MutableStateFlow<List<CurrencyTCS>>",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.dataForCalc",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/data-for-calc.html",
     "searchKeys": [
       "dataForCalc",
-      "private var dataForCalc: StateFlow<List<CurrencyTCS>>",
-      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.Companion.dataForCalc"
+      "private var dataForCalc: MutableStateFlow<List<CurrencyTCS>>",
+      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.dataForCalc"
     ]
   },
   {
@@ -5330,6 +5360,16 @@
     ]
   },
   {
+    "name": "private var rubValue: MutableStateFlow<String>",
+    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.rubValue",
+    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/rub-value.html",
+    "searchKeys": [
+      "rubValue",
+      "private var rubValue: MutableStateFlow<String>",
+      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.rubValue"
+    ]
+  },
+  {
     "name": "private var s1: Int = 0",
     "description": "com.vadimko.curforeckotlin.utils.SoundPlayer.s1",
     "location": "app/com.vadimko.curforeckotlin.utils/-sound-player/s1.html",
@@ -5367,6 +5407,16 @@
       "s4",
       "private var s4: Int = 0",
       "com.vadimko.curforeckotlin.utils.SoundPlayer.s4"
+    ]
+  },
+  {
+    "name": "private var scope: CoroutineScope",
+    "description": "com.vadimko.curforeckotlin.utils.ScopeCreator.scope",
+    "location": "app/com.vadimko.curforeckotlin.utils/-scope-creator/scope.html",
+    "searchKeys": [
+      "scope",
+      "private var scope: CoroutineScope",
+      "com.vadimko.curforeckotlin.utils.ScopeCreator.scope"
     ]
   },
   {
@@ -5597,6 +5647,56 @@
       "onResume",
       "protected open override fun onResume()",
       "com.vadimko.curforeckotlin.MainActivity.onResume"
+    ]
+  },
+  {
+    "name": "suspend fun getResponse(): List<CurrencyCBjs>",
+    "description": "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.getResponse",
+    "location": "app/com.vadimko.curforeckotlin.cbjsonApi/-c-bjson-repository/get-response.html",
+    "searchKeys": [
+      "getResponse",
+      "suspend fun getResponse(): List<CurrencyCBjs>",
+      "com.vadimko.curforeckotlin.cbjsonApi.CBjsonRepository.getResponse"
+    ]
+  },
+  {
+    "name": "suspend fun getResponse(): List<CurrencyTCS>",
+    "description": "com.vadimko.curforeckotlin.tcsApi.TCSRepository.getResponse",
+    "location": "app/com.vadimko.curforeckotlin.tcsApi/-t-c-s-repository/get-response.html",
+    "searchKeys": [
+      "getResponse",
+      "suspend fun getResponse(): List<CurrencyTCS>",
+      "com.vadimko.curforeckotlin.tcsApi.TCSRepository.getResponse"
+    ]
+  },
+  {
+    "name": "suspend fun getResponse(date_req1: String, date_req2: String, VAL_NM_RQ: String): List<CurrencyCBarhive>",
+    "description": "com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository.getResponse",
+    "location": "app/com.vadimko.curforeckotlin.cbxmlApi/-c-bxml-repository/get-response.html",
+    "searchKeys": [
+      "getResponse",
+      "suspend fun getResponse(date_req1: String, date_req2: String, VAL_NM_RQ: String): List<CurrencyCBarhive>",
+      "com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository.getResponse"
+    ]
+  },
+  {
+    "name": "suspend fun getResponse(request: String, from: String, till: String, interval: String, todayArch: Boolean): List<CurrencyMOEX>",
+    "description": "com.vadimko.curforeckotlin.moexApi.MOEXRepository.getResponse",
+    "location": "app/com.vadimko.curforeckotlin.moexApi/-m-o-e-x-repository/get-response.html",
+    "searchKeys": [
+      "getResponse",
+      "suspend fun getResponse(request: String, from: String, till: String, interval: String, todayArch: Boolean): List<CurrencyMOEX>",
+      "com.vadimko.curforeckotlin.moexApi.MOEXRepository.getResponse"
+    ]
+  },
+  {
+    "name": "val appModule: Module",
+    "description": "com.vadimko.curforeckotlin.appModule",
+    "location": "app/com.vadimko.curforeckotlin/app-module.html",
+    "searchKeys": [
+      "appModule",
+      "val appModule: Module",
+      "com.vadimko.curforeckotlin.appModule"
     ]
   },
   {
@@ -5947,16 +6047,6 @@
       "record",
       "var record: List<Record>? = null",
       "com.vadimko.curforeckotlin.cbxmlApi.CBXXMLResponse.record"
-    ]
-  },
-  {
-    "name": "var rubValue: MutableStateFlow<String>",
-    "description": "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.rubValue",
-    "location": "app/com.vadimko.curforeckotlin.ui.calc/-calc-view-model/rub-value.html",
-    "searchKeys": [
-      "rubValue",
-      "var rubValue: MutableStateFlow<String>",
-      "com.vadimko.curforeckotlin.ui.calc.CalcViewModel.rubValue"
     ]
   },
   {

@@ -10,7 +10,6 @@ import com.vadimko.curforeckotlin.TCSUpdateService
 import com.vadimko.curforeckotlin.database.Currencies
 import com.vadimko.curforeckotlin.database.CurrenciesRepository
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
-import com.vadimko.curforeckotlin.tcsApi.TCSRepository
 import com.vadimko.curforeckotlin.utils.LastValueHolder
 import com.vadimko.curforeckotlin.utils.Saver
 import com.vadimko.curforeckotlin.utils.ScopeCreator
@@ -54,10 +53,7 @@ class CalcViewModel : ViewModel(), KoinComponent {
      * Request to create/return [dataForCalc]
      */
     fun getDataForCalc(): StateFlow<List<CurrencyTCS>> {
-        //if (dataForCalc.value.size != 3) {
-        // loadDataForCalc()
         dataForCalc.value = LastValueHolder.lastValueList
-        // }
         return dataForCalc
     }
 
@@ -96,7 +92,6 @@ class CalcViewModel : ViewModel(), KoinComponent {
      * Request to delete [dataWidgetUpdate] data, except last value, if already deleted, show [Toast]
      */
     fun deleteWidgetUpdateData(data: MutableList<Currencies>) {
-        //val currenciesRepository = CurrenciesRepository.get()
         currenciesRepository.clearCurrencies(data)
     }
 
@@ -162,30 +157,6 @@ class CalcViewModel : ViewModel(), KoinComponent {
      */
     companion object : KoinComponent {
         private val scopeCreator: ScopeCreator by inject()
-        // private val tcsRepository: TCSRepository by inject()
-
-        //private var dataForCalc: StateFlow<List<CurrencyTCS>> = NowViewModel.getDataForCalc()
-//        private var dataForCalc: MutableStateFlow<List<CurrencyTCS>> =
-//            MutableStateFlow(listOf(CurrencyTCS(), CurrencyTCS()))
-
-
-        /**
-         * Load currencies values from Tinkov through [TCSRepository] which post it to [dataForCalc]
-         */
-        private fun loadDataForCalc() {
-            /*    if (CheckConnection.checkConnect()) {
-                    //val tcsRepository = TCSRepository()
-                    //tcsRepository.getCurrentTCS(false, null, null)
-
-                    scopeCreator.getScope().launch {
-                        var list: List<CurrencyTCS>
-                        do {
-                            list = Parser.parseTcsResponse(tcsRepository.getResponse())
-                        } while (list.size != 3)*/
-            //dataForCalc.value = LastValueHolder.lastValueList
-            //}
-            //}
-        }
 
 
         private var dataServiceUpdate: MutableLiveData<List<List<CurrencyTCS>>> =

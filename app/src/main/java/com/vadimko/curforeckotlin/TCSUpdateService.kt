@@ -12,10 +12,8 @@ import androidx.core.app.TaskStackBuilder
 import androidx.preference.PreferenceManager
 import com.vadimko.curforeckotlin.tcsApi.CurrencyTCS
 import com.vadimko.curforeckotlin.tcsApi.TCSRepository
-import com.vadimko.curforeckotlin.tcsApi.TCSResponse
 import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
 import com.vadimko.curforeckotlin.utils.CheckConnection
-import com.vadimko.curforeckotlin.utils.Parser
 import com.vadimko.curforeckotlin.utils.Saver
 import com.vadimko.curforeckotlin.utils.ScopeCreator
 import kotlinx.coroutines.Dispatchers
@@ -33,20 +31,9 @@ private const val notificationId = 11
  */
 class TCSUpdateService : Service(), KoinComponent {
     private val tcsRepository: TCSRepository by inject()
-
-    //private val tcsApi: TCSApi
     private val scopeCreator: ScopeCreator by inject()
     private var period: Long = 5
 
-    /*  init {
-          val retrofit: Retrofit = Retrofit.Builder()
-              .baseUrl("https://www.tinkoff.ru/api/v1/")
-              .addConverterFactory(GsonConverterFactory.create())
-              .build()
-          tcsApi = retrofit.create(TCSApi::class.java)
-
-      }
-  */
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -59,7 +46,6 @@ class TCSUpdateService : Service(), KoinComponent {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        //if (checkConnection()) updateTask()
         updateTask()
         startForeground(
             NOTIFICATION_ID,
@@ -122,77 +108,13 @@ class TCSUpdateService : Service(), KoinComponent {
     }
 
     /**
-     * Performs request to Tinkov server through Retrofit [TCSResponse] and then saved it with [Saver]
+     * Performs request to Tinkov server through Retrofit [tcsRepository] and then saved it with [Saver]
      * and post value to [CalcViewModel] dataServiceUpdate
      */
-    /*   fun getCurrentTCS() {
-           var currentTCS: MutableList<CurrencyTCS>
-           try {
-               val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
-               currentRequest.enqueue(object : Callback<TCSResponse> {
-                   override fun onResponse(call: Call<TCSResponse>, response: Response<TCSResponse>) {
-                       val tcsResponse: TCSResponse? = response.body()
-                       val tcsPayload: TCSPayload? = tcsResponse?.payload
-                       val tcsRates: List<TCSRates>? = tcsPayload?.rates
-                       val tcslastUpdate: TCSLastUpdate? = tcsPayload?.lastUpdate
-                       val flagUSD = R.drawable.usd
-                       val nameUSD = tcsRates?.get(15)?.fromCurrency?.name
-                       val buyUSD = tcsRates?.get(15)?.buy
-                       val sellUSD = tcsRates?.get(15)?.sell
-                       val dt = tcslastUpdate?.milliseconds
-                       val flagEUR = R.drawable.eur
-                       val nameEUR = tcsRates?.get(18)?.fromCurrency?.name
-                       val buyEUR = tcsRates?.get(18)?.buy
-                       val sellEUR = tcsRates?.get(18)?.sell
-                       val flagGBP = R.drawable.gbp
-                       val nameGBP = tcsRates?.get(21)?.fromCurrency?.name
-                       val buyGBP = tcsRates?.get(21)?.buy
-                       val sellGBP = tcsRates?.get(21)?.sell
-                       val usdTCS = CurrencyTCS(flagUSD, dt, sellUSD, buyUSD, nameUSD)
-                       val eurTCS = CurrencyTCS(flagEUR, dt, sellEUR, buyEUR, nameEUR)
-                       val gbpTCS = CurrencyTCS(flagGBP, dt, sellGBP, buyGBP, nameGBP)
-
-                       if (usdTCS.buy == 0.0 || eurTCS.buy == 0.0 || gbpTCS.buy == 0.0) {
-                           getCurrentTCS()
-                       } else {
-                           currentTCS = mutableListOf(usdTCS, eurTCS, gbpTCS)
-                           scopeCreator.getScope().launch(Dispatchers.IO) {
-                               Saver.saveTcsLast(currentTCS)
-                               CalcViewModel.loadServiceUpdateData()
-
-                           }
-                           val usdBuy = String.format("%.2f", currentTCS[0].buy)
-                           val usdSell = String.format("%.2f", currentTCS[0].sell)
-                           val eurBuy = String.format("%.2f", currentTCS[1].buy)
-                           val eurSell = String.format("%.2f", currentTCS[1].sell)
-                           val gbpBuy = String.format("%.2f", currentTCS[2].buy)
-                           val gbpSell = String.format("%.2f", currentTCS[2].sell)
-                           startForeground(
-                               NOTIFICATION_ID,
-                               buildForegroundNotification(
-                                   "USD: $usdBuy - $usdSell",
-                                   "EUR $eurBuy $eurSell | GBP $gbpBuy $gbpSell"
-                               )
-                           )
-                           checkCurrencyLevel(currentTCS)
-                       }
-                   }
-
-                   override fun onFailure(call: Call<TCSResponse>, t: Throwable) {
-                   }
-               })
-           } catch (th: Throwable) {
-               th.printStackTrace()
-           }
-       }*/
-
-
     private fun getCurrentTCS() {
-        // val tcsRepository = TCSRepository()
         scopeCreator.getScope().launch {
             var list: List<CurrencyTCS>
             do {
-                //list = Parser.parseTcsResponse(tcsRepository.getResponse())
                 list = tcsRepository.getResponse()
             } while (list.size != 3)
             scopeCreator.getScope().launch(Dispatchers.IO) {

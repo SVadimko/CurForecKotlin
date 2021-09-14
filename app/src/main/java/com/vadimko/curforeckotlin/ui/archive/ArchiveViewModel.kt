@@ -1,6 +1,5 @@
 package com.vadimko.curforeckotlin.ui.archive
 
-//import com.vadimko.curforeckotlin.ui.now.NowViewModel.Companion.dataCB
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -10,8 +9,12 @@ import com.vadimko.curforeckotlin.cbxmlApi.CBxmlRepository
 import com.vadimko.curforeckotlin.cbxmlApi.CurrencyCBarhive
 import com.vadimko.curforeckotlin.moexApi.CurrencyMOEX
 import com.vadimko.curforeckotlin.moexApi.MOEXRepository
-//import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB
-import com.vadimko.curforeckotlin.utils.*
+import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataCB
+import com.vadimko.curforeckotlin.ui.archive.ArchiveViewModel.Companion.dataMOEX
+import com.vadimko.curforeckotlin.utils.ArchivePreferences
+import com.vadimko.curforeckotlin.utils.CheckConnection
+import com.vadimko.curforeckotlin.utils.DateConverter
+import com.vadimko.curforeckotlin.utils.ScopeCreator
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -37,9 +40,6 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
     private val scopeCreator: ScopeCreator by inject()
 
 
-    /* private var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
-        MutableLiveData<List<CurrencyCBarhive>>()*/
-
     /**
      * If [dataCB] is null get last request from [ArchivePreferences] and load it by [loadCBArchive]
      * @return [dataCB]
@@ -58,11 +58,6 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
      */
     private fun loadCBArchive(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
         if (CheckConnection.checkConnect()) {
-            //val cbxmlRepository = CBxmlRepository()
-
-
-            //cbxmlRepository.getXMLarchive(date_req1, date_req2, VAL_NM_RQ)
-
             scopeCreator.getScope().launch {
                 val list: List<CurrencyCBarhive> =
                     cbxmlRepository.getResponse(date_req1, date_req2, VAL_NM_RQ)
@@ -71,9 +66,6 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
         }
     }
 
-
-    /* private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
-        MutableLiveData<List<CurrencyMOEX>>()*/
 
     /**
      * If [dataMOEX] is null, load last user request params from [ArchivePreferences] and send
@@ -140,11 +132,6 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
      */
     private fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
         if (CheckConnection.checkConnect()) {
-            //val moexRepository = MOEXRepository()
-
-
-            //moexRepository.getMOEX(request, from, till, interval, true)
-
             scopeCreator.getScope().launch {
                 val list: List<CurrencyMOEX> =
                     moexRepository.getResponse(
@@ -182,16 +169,6 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
     }
 
 
-    /* internal fun setDataCB(data: List<CurrencyCBarhive>) {
-         dataCB.value = data
-     }*/
-
-
-    /*   internal fun setDataMOEX(data: List<CurrencyMOEX>) {
-           dataMOEX.value = data
-       }*/
-
-
     /**
      * Companion object for operating with MutableStateFlow [dataCB], [dataMOEX] and load them through
      * [loadCBArchive], [loadDataMOEX]
@@ -201,76 +178,9 @@ class ArchiveViewModel : ViewModel(), KoinComponent {
      * from MOEX through [MOEXRepository]
      */
     companion object : KoinComponent {
-        /* private val moexRepository: MOEXRepository by inject()
-         private val cbxmlRepository: CBxmlRepository by inject()
-         private val scopeCreator: ScopeCreator by inject()*/
-
         private var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
             MutableLiveData<List<CurrencyCBarhive>>()
         private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
             MutableLiveData<List<CurrencyMOEX>>()
     }
 }
-
-/*private var dataCB: MutableLiveData<List<CurrencyCBarhive>> =
-    MutableLiveData<List<CurrencyCBarhive>>()
-
- internal fun setDataCB(data: List<CurrencyCBarhive>) {
-     dataCB.value = data
- }
-
-private var dataMOEX: MutableLiveData<List<CurrencyMOEX>> =
-    MutableLiveData<List<CurrencyMOEX>>()
-
-   internal fun setDataMOEX(data: List<CurrencyMOEX>) {
-       dataMOEX.value = data
-   }
-
-
-*/
-/**
- * Load currencies values from CB through [CBxmlRepository] which post it to [dataCB]
- *//*
-        private fun loadCBArchive(date_req1: String, date_req2: String, VAL_NM_RQ: String) {
-            if (CheckConnection.checkConnect()) {
-                //val cbxmlRepository = CBxmlRepository()
-
-
-                //cbxmlRepository.getXMLarchive(date_req1, date_req2, VAL_NM_RQ)
-
-                scopeCreator.getScope().launch {
-                    val list: List<CurrencyCBarhive> = Parser.parseCbXmlResponse(
-                        cbxmlRepository.getResponse(date_req1, date_req2, VAL_NM_RQ)
-                    )
-                    dataCB.postValue(list)
-                }
-            }
-        }
-
-        */
-/**
- * Load currencies values from MOEX through [MOEXRepository] which post it to [dataMOEX]
- *//*
-        fun loadDataMOEX(request: String, from: String, till: String, interval: String) {
-            if (CheckConnection.checkConnect()) {
-                //val moexRepository = MOEXRepository()
-
-
-                //moexRepository.getMOEX(request, from, till, interval, true)
-
-                scopeCreator.getScope().launch {
-                    val list: List<CurrencyMOEX> = Parser.parseMoexResponse(
-                        moexRepository.getResponse(
-                            request,
-                            from,
-                            till,
-                            interval,
-                            true
-                        )
-                    )
-                    dataMOEX.postValue(list)
-                }
-            }
-        }
-    }*/
-//}

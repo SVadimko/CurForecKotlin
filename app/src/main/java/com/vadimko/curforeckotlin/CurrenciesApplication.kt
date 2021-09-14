@@ -30,11 +30,11 @@ val appModule = module {
 
     viewModel { ArchiveViewModel() }
 
-    single<MOEXRepository> { MOEXRepository() }
+    single { MOEXRepository() }
 
-    single<CBxmlRepository> { CBxmlRepository() }
+    single { CBxmlRepository() }
 
-    single<CurrenciesRepository> { CurrenciesRepository(get()) }
+    single { CurrenciesRepository(get()) }
 
     single { TCSRepository() }
 
@@ -58,27 +58,6 @@ class CurrenciesApplication : Application() {
     init {
         instance = this
     }
-
-    /*  private val appModule = module {
-
-          single { Saver }
-
-          viewModel { CalcViewModel() }
-
-          viewModel { NowViewModel() }
-
-          viewModel { TodayViewModel() }
-
-          viewModel { ArchiveViewModel() }
-
-          single<MOEXRepository> { MOEXRepository() }
-
-          single<CBxmlRepository> { CBxmlRepository() }
-
-          single<CurrenciesRepository> { CurrenciesRepository(get()) }
-
-          single { ScopeCreator }
-      }*/
 
 
     override fun onCreate() {

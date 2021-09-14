@@ -1,8 +1,5 @@
 package com.vadimko.curforeckotlin.tcsApi
 
-import android.appwidget.AppWidgetManager
-import com.vadimko.curforeckotlin.ui.calc.CalcViewModel
-import com.vadimko.curforeckotlin.ui.now.NowViewModel
 import com.vadimko.curforeckotlin.utils.Parser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -10,10 +7,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.component.KoinComponent
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 
 
 /**
@@ -43,155 +38,13 @@ class TCSRepository : KoinComponent {
     }
 
     /**
-     * Depends of flag [requestMode] if received from server some 0 value, repeat [getCurrentTCS]
-     * else post list of [CurrencyTCS] to [NowViewModel] and [CalcViewModel] or update widget
-     * through [AppWidgetManager]
-     */
-/*    fun getCurrentTCS(
-        requestMode: Boolean,
-        appWidgetManager: AppWidgetManager?,
-        appWidgetID: Int?
-    ) {
-        //val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
-        if (!requestMode) {
-            scopeCreator.getScope().launch {
-                val response = getResponse()
-                parseResponse(response, requestMode, appWidgetManager, appWidgetID)
-            }
-        } else {
-            GlobalScope.launch {
-                val response = getResponse()
-                parseResponse(response, requestMode, appWidgetManager, appWidgetID)
-            }
-        }
-    }*/
-
-
-    /**
      * Perform request to server
+     * @return list of [CurrencyTCS]
      */
     @Suppress("BlockingMethodInNonBlockingContext")
-    //suspend fun getResponse(): Response<TCSResponse> {
     suspend fun getResponse(): List<CurrencyTCS> {
         val currentRequest: Call<TCSResponse> = tcsApi.getTCSForec()
         return withContext(Dispatchers.IO) { Parser.parseTcsResponse(currentRequest.execute()) }
     }
-
-    /**
-     * Parse response and according [requestMode] update data for NowViewModel or widget
-     */
-    /*  private suspend fun parseResponse(
-          response: Response<TCSResponse>, requestMode: Boolean,
-          appWidgetManager: AppWidgetManager?,
-          appWidgetID: Int?
-      ) {
-          val tcsResponse: TCSResponse? = response.body()
-          val tcsPayload: TCSPayload? = tcsResponse?.payload
-          val tcsRates: List<TCSRates>? = tcsPayload?.rates
-          val tcsLastUpdate: TCSLastUpdate? = tcsPayload?.lastUpdate
-          val flagUSD = R.drawable.usd
-          val nameUSD = tcsRates?.get(15)?.fromCurrency?.name
-          val buyUSD = tcsRates?.get(15)?.buy
-          val sellUSD = tcsRates?.get(15)?.sell
-          val dt = tcsLastUpdate?.milliseconds
-          val flagEUR = R.drawable.eur
-          val nameEUR = tcsRates?.get(18)?.fromCurrency?.name
-          val buyEUR = tcsRates?.get(18)?.buy
-          val sellEUR = tcsRates?.get(18)?.sell
-          val flagGBP = R.drawable.gbp
-          val nameGBP = tcsRates?.get(21)?.fromCurrency?.name
-          val buyGBP = tcsRates?.get(21)?.buy
-          val sellGBP = tcsRates?.get(21)?.sell
-          if (buyUSD == 0.0 || buyEUR == 0.0 || buyGBP == 0.0) {
-              getCurrentTCS(requestMode, appWidgetManager, appWidgetID)
-          } else {
-              if (!requestMode) {
-                  val usdTCS = CurrencyTCS(flagUSD, dt, sellUSD, buyUSD, nameUSD)
-                  val eurTCS = CurrencyTCS(flagEUR, dt, sellEUR, buyEUR, nameEUR)
-                  val gbpTCS = CurrencyTCS(flagGBP, dt, sellGBP, buyGBP, nameGBP)
-
-                  val currentTCS: List<CurrencyTCS> = listOf(usdTCS, eurTCS, gbpTCS)
-                  NowViewModel.setDataTCs(currentTCS)
-                  withContext(Dispatchers.Main) { NowViewModel.onRefreshRatesActions() }
-
-              } else {
-                  currenciesRepository.insertCurrencies(
-                      Currencies(
-                          usdBuy = buyUSD!!,
-                          usdSell = sellUSD!!,
-                          eurBuy = buyEUR!!,
-                          eurSell = sellEUR!!,
-                          gbpBuy = buyGBP!!,
-                          gbpSell = sellGBP!!,
-                          dt = DateConverter.longToDateWithTime(dt!!)
-                      )
-                  )
-                  withContext(Dispatchers.Main) {
-                      val views = RemoteViews(context.packageName, R.layout.main_widget)
-                      views.setTextViewText(
-                          R.id.usd_buy, String.format(
-                              Locale.US, "%.2f",
-                              buyUSD
-                          ) + "₽"
-                      )
-                      views.setTextViewText(
-                          R.id.usd_sell, String.format(
-                              Locale.US, "%.2f",
-                              sellUSD
-                          ) + "₽"
-                      )
-                      views.setTextViewText(
-                          R.id.eur_buy, String.format(
-                              Locale.US, "%.2f",
-                              buyEUR
-                          ) + "₽"
-                      )
-                      views.setTextViewText(
-                          R.id.eur_sell, String.format(
-                              Locale.US, "%.2f",
-                              sellEUR
-                          ) + "₽"
-                      )
-                      views.setTextViewText(
-                          R.id.dt,
-                          "${context.resources.getString(R.string.tcsfrom)} " + " "
-                                  + DateConverter.longToDateWithTime(dt)
-                      )
-                      if (appWidgetID != null) {
-                          appWidgetManager?.updateAppWidget(appWidgetID, views)
-                      }
-                  }
-              }
-          }
-      }
-
-
-      private suspend fun parseResponse2(
-          response: Response<TCSResponse>
-      ): List<CurrencyTCS> {
-          var currentTCS: List<CurrencyTCS> = listOf()
-          val tcsResponse: TCSResponse? = response.body()
-          val tcsPayload: TCSPayload? = tcsResponse?.payload
-          val tcsRates: List<TCSRates>? = tcsPayload?.rates
-          val tcsLastUpdate: TCSLastUpdate? = tcsPayload?.lastUpdate
-          val flagUSD = R.drawable.usd
-          val nameUSD = tcsRates?.get(15)?.fromCurrency?.name
-          val buyUSD = tcsRates?.get(15)?.buy
-          val sellUSD = tcsRates?.get(15)?.sell
-          val dt = tcsLastUpdate?.milliseconds
-          val flagEUR = R.drawable.eur
-          val nameEUR = tcsRates?.get(18)?.fromCurrency?.name
-          val buyEUR = tcsRates?.get(18)?.buy
-          val sellEUR = tcsRates?.get(18)?.sell
-          val flagGBP = R.drawable.gbp
-          val nameGBP = tcsRates?.get(21)?.fromCurrency?.name
-          val buyGBP = tcsRates?.get(21)?.buy
-          val sellGBP = tcsRates?.get(21)?.sell
-          val usdTCS = CurrencyTCS(flagUSD, dt, sellUSD, buyUSD, nameUSD)
-          val eurTCS = CurrencyTCS(flagEUR, dt, sellEUR, buyEUR, nameEUR)
-          val gbpTCS = CurrencyTCS(flagGBP, dt, sellGBP, buyGBP, nameGBP)
-          currentTCS = listOf(usdTCS, eurTCS, gbpTCS)
-          return currentTCS
-      }*/
 }
 

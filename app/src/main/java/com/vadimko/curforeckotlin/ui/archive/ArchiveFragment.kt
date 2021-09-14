@@ -172,8 +172,6 @@ class ArchiveFragment : Fragment() {
         fromTv.text = DateConverter.dateWithOutTimeFormat(fromDate)
         c.time = tillDate
         tillTv.text = DateConverter.dateWithOutTimeFormat(tillDate)
-        //linearCbrf = binding.chartcbrf
-        //linearChartForec = binding.linearforec
 
         return root
     }
@@ -206,30 +204,6 @@ class ArchiveFragment : Fragment() {
             }
 
 
-        /*    var dontShowCB = true
-            var dontShowMOEX = true
-            lifecycleScope.launchWhenStarted {
-                archiveViewModel.getDataCB().collect {
-                    if (it.size > 2)
-                        redrawCB(it)
-                    else {
-                        if (!dontShowCB) archiveViewModel.showToast(requireContext().getString(R.string.wrongcountCB))
-                        dontShowCB = false
-                    }
-                }
-            }
-
-
-            lifecycleScope.launchWhenStarted {
-                archiveViewModel.getDataMOEX().collect {
-                    if (it.size > 2)
-                        redrawMoex(it)
-                    else {
-                        if (!dontShowMOEX) archiveViewModel.showToast(requireContext().getString(R.string.wrongcountTK))
-                        dontShowMOEX = false
-                    }
-                }
-            }*/
         /**
          * subscribe to data from the Central Bank throught [ArchiveViewModel]
          */
@@ -312,19 +286,6 @@ class ArchiveFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-    /*override fun onDateSelected(date: Date, frommtill: Boolean) {
-        val c = Calendar.getInstance()
-        c.time = date
-        if (!frommtill) {
-            fromTv.text = longToDate(date)
-            fromDate = date
-        }
-        if (frommtill) {
-            tillTv.text = longToDate(date)
-            tillDate = date
-        }
-    }*/
 
 }
 

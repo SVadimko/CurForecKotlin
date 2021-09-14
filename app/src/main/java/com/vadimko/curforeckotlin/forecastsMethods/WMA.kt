@@ -39,15 +39,6 @@ class WMA(inp: MutableList<Float>, a: Int) {
         averageError = err / outputLenght
     }
 
-/*
-    fun getWMA(): MutableList<Float> {
-        return output
-    }
-
-    fun getInputWForecast(): MutableList<Float> {
-        return input
-    }
-    */
 
     /**
      * @return calculated forecast
