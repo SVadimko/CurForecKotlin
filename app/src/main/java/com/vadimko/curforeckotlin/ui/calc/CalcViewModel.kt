@@ -107,44 +107,51 @@ class CalcViewModel : ViewModel(), KoinComponent {
         currValue: String
     ) {
         if (dataList.size == 3) {
+
             val usdBuy = dataList[0].buy!!
             val usdSell = dataList[0].sell!!
             val eurBuy = dataList[1].buy!!
             val eurSell = dataList[1].sell!!
             val gbpBuy = dataList[2].buy!!
             val gbpSell = dataList[2].sell!!
-            var result: Double
-            var convertValue: Double
-            var buyValue = 0.0
-            var sellValue = 0.0
-            try {
-                when (currSpinnerPos) {
-                    0 -> {
-                        buyValue = usdBuy
-                        sellValue = usdSell
+            val listToCheck = listOf(usdBuy,usdSell,eurBuy,eurSell,gbpBuy,gbpSell)
+            if(listToCheck.count { it==0.0 } >0){
+                Toast.makeText(context, R.string.needrefresh, Toast.LENGTH_SHORT).show()
+            }
+            else {
+                var result: Double
+                var convertValue: Double
+                var buyValue = 0.0
+                var sellValue = 0.0
+                try {
+                    when (currSpinnerPos) {
+                        0 -> {
+                            buyValue = usdBuy
+                            sellValue = usdSell
+                        }
+                        1 -> {
+                            buyValue = eurBuy
+                            sellValue = eurSell
+                        }
+                        2 -> {
+                            buyValue = gbpBuy
+                            sellValue = gbpSell
+                        }
                     }
-                    1 -> {
-                        buyValue = eurBuy
-                        sellValue = eurSell
+                    if (toBuy) {
+                        convertValue = currValue.toDouble()
+                        result = convertValue * sellValue
+                        rubValue.value = String.format(Locale.US, "%.2f", result)
                     }
-                    2 -> {
-                        buyValue = gbpBuy
-                        sellValue = gbpSell
+                    if (toSell) {
+                        convertValue = currValue.toDouble()
+                        result = convertValue * buyValue
+                        rubValue.value = String.format(Locale.US, "%.2f", result)
                     }
+                } catch (ex: NumberFormatException) {
+                    Toast.makeText(context, R.string.incorrect_number, Toast.LENGTH_SHORT).show()
+                    //currValue.requestFocus()
                 }
-                if (toBuy) {
-                    convertValue = currValue.toDouble()
-                    result = convertValue * sellValue
-                    rubValue.value = String.format(Locale.US, "%.2f", result)
-                }
-                if (toSell) {
-                    convertValue = currValue.toDouble()
-                    result = convertValue * buyValue
-                    rubValue.value = String.format(Locale.US, "%.2f", result)
-                }
-            } catch (ex: NumberFormatException) {
-                Toast.makeText(context, R.string.incorrect_number, Toast.LENGTH_SHORT).show()
-                //currValue.requestFocus()
             }
         } else Toast.makeText(context, R.string.needrefresh, Toast.LENGTH_SHORT).show()
 

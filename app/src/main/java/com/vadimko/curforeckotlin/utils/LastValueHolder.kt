@@ -8,5 +8,5 @@ import com.vadimko.curforeckotlin.utils.LastValueHolder.lastValueList
  * @property lastValueList list of last updated values [CurrencyTCS] from Tinkov bank
  */
 object LastValueHolder {
-    lateinit var lastValueList: List<CurrencyTCS>
+    var lastValueList: List<CurrencyTCS> = listOf(CurrencyTCS(), CurrencyTCS(), CurrencyTCS())
 }
